@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>daw music</title>
+<meta name="description" content="Songs written as code and rendered by daw, a headless DAW.">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #121214; --panel: #1b1b1f; --line: #2c2c33; --ink: #e6e6e9; --dim: #9a9aa3; --accent: #7fd1b9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 1000px; margin: 0 auto; padding: 40px 16px 64px; }
+  h1 { font-size: 28px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .lede { color: var(--dim); margin: 0 0 32px; }
+  .song { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px; margin: 0 0 24px; }
+  .song header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  h2 { font-size: 21px; margin: 0; }
+  h2 a { color: inherit; text-decoration: none; }
+  time, .facts, .links { color: var(--dim); font-size: 14px; }
+  .facts { margin: 4px 0 10px; font-variant-numeric: tabular-nums; }
+  .about { margin: 0 0 16px; }
+  .spectro {
+    position: relative; overflow: hidden; aspect-ratio: var(--ratio); border-radius: 6px; cursor: pointer;
+    background: #121214;
+  }
+  /* the picture's title line is cut off: the page says it better */
+  .spectro img { display: block; width: 100%; height: auto; margin-top: calc(-100% * var(--crop)); }
+  .playhead {
+    position: absolute; top: 0; width: 2px; margin-left: -1px; height: calc(100% * var(--ph));
+    left: calc(100% * (var(--x0) + var(--xw) * var(--t, 0)));
+    background: var(--accent); box-shadow: 0 0 6px var(--accent); pointer-events: none;
+  }
+  audio { display: block; width: 100%; margin: 14px 0 6px; }
+  .links { margin: 0; }
+  .eval { margin: 12px 0 0; padding-top: 12px; border-top: 1px solid var(--line); font-size: 14px; color: var(--dim); }
+  .eval b { color: var(--ink); font-weight: 600; }
+  a { color: var(--accent); }
+  footer { color: var(--dim); font-size: 14px; margin-top: 40px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>daw music</h1>
+  <p class="lede">Songs written as code, as text files of notes and settings, and rendered by daw, a headless DAW
+  in Rust, on its own synthesisers and effects. The same file gives the same audio every time. Each one has a
+  page that measures it against the records it was after, says what it gets right and wrong, and lists what the
+  next one should do better.</p>
+
+  <article class="song" id="haustorium-sculpted">
+    <header>
+      <h2><a href="#haustorium-sculpted">Haustorium (Sculpted)</a></h2>
+      <time datetime="2026-10-31">2026-10-31</time>
+    </header>
+    <p class="facts">145 BPM · 8:10 · 280 bars · −9.3 LUFS · peak 0.1 dB</p>
+    <p class="about">&quot;Haustorium (Sculpted)&quot;: Haustorium&#x27;s journey and bass lines, every sound above them engineered and placed in depth. &quot;Haustorium&quot;: the thread a parasitic fungus pushes through a host&#x27;s wall, to feed from inside it.</p>
+    <div class="spectro" style="--x0:0.037994;--xw:0.911854;--crop:0.016717;--ratio:1316/402;--ph:0.945274" data-secs="489.931">
+      <img src="haustorium-sculpted.png" width="1316" height="424" alt="Spectrogram and waveform of Haustorium (Sculpted)" loading="lazy">
+      <div class="playhead" hidden></div>
+    </div>
+    <audio controls preload="metadata" src="haustorium-sculpted.mp3"></audio>
+    <p class="links"><a href="haustorium-sculpted.mp3" download>MP3</a> · <a href="haustorium-sculpted.toml">song file</a></p>
+  </article>
+
+  <article class="song" id="haustorium">
+    <header>
+      <h2><a href="#haustorium">Haustorium</a></h2>
+      <time datetime="2026-10-31">2026-10-31</time>
+    </header>
+    <p class="facts">145 BPM · 8:10 · 280 bars · −10.3 LUFS · peak −0.2 dB</p>
+    <p class="about">&quot;Haustorium&quot;: the thread a parasitic fungus pushes through a host&#x27;s wall, to feed from inside it.</p>
+    <div class="spectro" style="--x0:0.037994;--xw:0.911854;--crop:0.016717;--ratio:1316/402;--ph:0.945274" data-secs="489.931">
+      <img src="haustorium.png" width="1316" height="424" alt="Spectrogram and waveform of Haustorium" loading="lazy">
+      <div class="playhead" hidden></div>
+    </div>
+    <audio controls preload="metadata" src="haustorium.mp3"></audio>
+    <p class="links"><a href="haustorium.mp3" download>MP3</a> · <a href="haustorium.toml">song file</a> · <a href="haustorium.html">evaluation</a></p>
+    <p class="eval">Against Deviant Species (14 tracks): <b>24 of 28</b> measures inside their
+    range. Outside it where it matters: Micro-dynamics (flatter) · Onsets (busier) · Decay (longer).</p>
+  </article>
+
+  <article class="song" id="sclerotium">
+    <header>
+      <h2><a href="#sclerotium">Sclerotium</a></h2>
+      <time datetime="2026-10-30">2026-10-30</time>
+    </header>
+    <p class="facts">145 BPM · 5:08 · 168 bars · −10.7 LUFS · peak 0.7 dB</p>
+    <p class="about">&quot;Sclerotium&quot;: a hard knot of fungus that sits dormant under the ground, then fruits.</p>
+    <div class="spectro" style="--x0:0.037994;--xw:0.911854;--crop:0.016717;--ratio:1316/402;--ph:0.945274" data-secs="308.129">
+      <img src="sclerotium.png" width="1316" height="424" alt="Spectrogram and waveform of Sclerotium" loading="lazy">
+      <div class="playhead" hidden></div>
+    </div>
+    <audio controls preload="metadata" src="sclerotium.mp3"></audio>
+    <p class="links"><a href="sclerotium.mp3" download>MP3</a> · <a href="sclerotium.toml">song file</a> · <a href="sclerotium.html">evaluation</a></p>
+    <p class="eval">Against Scorb, 2004–2026 (19 tracks): <b>24 of 27</b> measures inside their
+    range. Outside it where it matters: Micro-dynamics (flatter) · Upper mids, 1.1–3.5 kHz (harsher) · Tilt (brighter).</p>
+  </article>
+
+  <article class="song" id="rhizomorph">
+    <header>
+      <h2><a href="#rhizomorph">Rhizomorph</a></h2>
+      <time datetime="2026-10-30">2026-10-30</time>
+    </header>
+    <p class="facts">145 BPM · 4:02 · 128 bars · −9.9 LUFS · peak 1.7 dB</p>
+    <p class="about">Three and a half minutes of dark full-on psytrance, the first track made after Sporadic&#x27;s verdict, on the DAW&#x27;s newer parts: every sound but the ride, the clap and the crash programmed with the synth (F33), a sidechain keyed by the kick&#x27;s sound (F32), automation moving the sounds themselves (F34), an atmosphere made for the space (F25: wind, a granular cloud, reversed crashes) and spaces of the DAW&#x27;s own (F26: halls whose tails move, a shimmer, a freeze, a reverse reverb before each call, a tape echo). 145 BPM, on F.</p>
+    <div class="spectro" style="--x0:0.037994;--xw:0.911854;--crop:0.016717;--ratio:1316/402;--ph:0.945274" data-secs="241.922">
+      <img src="rhizomorph.png" width="1316" height="424" alt="Spectrogram and waveform of Rhizomorph" loading="lazy">
+      <div class="playhead" hidden></div>
+    </div>
+    <audio controls preload="metadata" src="rhizomorph.mp3"></audio>
+    <p class="links"><a href="rhizomorph.mp3" download>MP3</a> · <a href="rhizomorph.toml">song file</a> · <a href="rhizomorph.html">evaluation</a></p>
+    <p class="eval">Against Scorb, 2004–2026 (19 tracks): <b>25 of 28</b> measures inside their
+    range. Outside it where it matters: Peak to loudness (more open) · Micro-dynamics (flatter) · Lows, 45–112 Hz (less low end).</p>
+  </article>
+
+  <article class="song" id="sporadic">
+    <header>
+      <h2><a href="#sporadic">Sporadic</a></h2>
+      <time datetime="2026-10-29">2026-10-29</time>
+    </header>
+    <p class="facts">145 BPM · 2:36 · 80 bars · −10.1 LUFS · peak 0.3 dB</p>
+    <p class="about">Two and a quarter minutes of twisted full-on psytrance, the fourth track measured against references and the first against Scorb&#x27;s: loud, dense, bright on top, its lows in the middle, little changing from bar to bar but the sounds. 145 BPM, on G: the bass rolling on G, the hook in G minor with its flat second and flat fifth (Ab, Db) as colours, the break turning to the major.</p>
+    <div class="spectro" style="--x0:0.037994;--xw:0.911854;--crop:0.016717;--ratio:1316/402;--ph:0.945274" data-secs="156.257">
+      <img src="sporadic.png" width="1316" height="424" alt="Spectrogram and waveform of Sporadic" loading="lazy">
+      <div class="playhead" hidden></div>
+    </div>
+    <audio controls preload="metadata" src="sporadic.mp3"></audio>
+    <p class="links"><a href="sporadic.mp3" download>MP3</a> · <a href="sporadic.toml">song file</a> · <a href="sporadic.html">evaluation</a></p>
+    <p class="eval">Against Scorb, 2004–2026 (19 tracks): <b>26 of 28</b> measures inside their
+    range. Outside it where it matters: Onsets (busier) · Tonal focus (more focused).</p>
+  </article>
+
+  <article class="song" id="cathedral">
+    <header>
+      <h2><a href="#cathedral">Mycelium Cathedral</a></h2>
+      <time datetime="2026-10-29">2026-10-29</time>
+    </header>
+    <p class="facts">145 BPM · 2:26 · 80 bars · −14.5 LUFS · peak −1.0 dB</p>
+    <p class="about">Two and a quarter minutes of dark psytrance after Infected Mushroom&#x27;s &quot;Classical Mushroom&quot; (2000) and &quot;B.P. Empire&quot; (2001), the third track measured against them and the first written from the improvements its two before were given. 145 BPM, on F#: the rolling bass on F# with its flat second (G), the leads in F# Phrygian dominant (F# G A# B C# D E), and the break on the Andalusian cadence down to it (Bm, A, G, F#).</p>
+    <div class="spectro" style="--x0:0.037994;--xw:0.911854;--crop:0.016717;--ratio:1316/402;--ph:0.945274" data-secs="145.757">
+      <img src="cathedral.png" width="1316" height="424" alt="Spectrogram and waveform of Mycelium Cathedral" loading="lazy">
+      <div class="playhead" hidden></div>
+    </div>
+    <audio controls preload="metadata" src="cathedral.mp3"></audio>
+    <p class="links"><a href="cathedral.mp3" download>MP3</a> · <a href="cathedral.toml">song file</a> · <a href="cathedral.html">evaluation</a></p>
+    <p class="eval">Against Infected Mushroom, 2000–2001 (14 tracks): <b>27 of 28</b> measures inside their
+    range.</p>
+  </article>
+
+  <article class="song" id="fugue">
+    <header>
+      <h2><a href="#fugue">Black Spore Fugue</a></h2>
+      <time datetime="2026-10-28">2026-10-28</time>
+    </header>
+    <p class="facts">145 BPM · 0:35 · 18 bars · −8.9 LUFS · peak −1.3 dB</p>
+    <p class="about">30 seconds of dark psytrance after Infected Mushroom&#x27;s first records, &quot;Classical Mushroom&quot; (2000) and &quot;B.P. Empire&quot; (2001). 145 BPM, in A: the bass on A with its flat second (Bb) as their drops have it, and A minor&#x27;s classical cadence (Am, Dm, E, a diminished seventh) for the harpsichord. Built on the DAW&#x27;s own sounds.</p>
+    <div class="spectro" style="--x0:0.037994;--xw:0.911854;--crop:0.016717;--ratio:1316/402;--ph:0.945274" data-secs="35.090">
+      <img src="fugue.png" width="1316" height="424" alt="Spectrogram and waveform of Black Spore Fugue" loading="lazy">
+      <div class="playhead" hidden></div>
+    </div>
+    <audio controls preload="metadata" src="fugue.mp3"></audio>
+    <p class="links"><a href="fugue.mp3" download>MP3</a> · <a href="fugue.toml">song file</a> · <a href="fugue.html">evaluation</a></p>
+    <p class="eval">Against Infected Mushroom, 2000–2001 (14 tracks): <b>23 of 28</b> measures inside their
+    range. Outside it where it matters: Loudness (louder) · Peak to loudness (more squashed) · Correlation (narrower) · Width, mids (narrower).</p>
+  </article>
+
+  <article class="song" id="psy">
+    <header>
+      <h2><a href="#psy">Fungal Logic</a></h2>
+      <time datetime="2026-10-28">2026-10-28</time>
+    </header>
+    <p class="facts">145 BPM · 0:31 · 17 bars · −10.4 LUFS · peak −0.7 dB</p>
+    <p class="about">30 seconds of psytrance after Infected Mushroom. 145 BPM (as &quot;Becoming Insane&quot; and &quot;Cities of the Future&quot; are), in A Phrygian dominant (A Bb C# D E F G, the Hijaz colour of their leads). Built on the DAW&#x27;s own sounds.</p>
+    <div class="spectro" style="--x0:0.037994;--xw:0.911854;--crop:0.016717;--ratio:1316/402;--ph:0.945274" data-secs="31.055">
+      <img src="psy.png" width="1316" height="424" alt="Spectrogram and waveform of Fungal Logic" loading="lazy">
+      <div class="playhead" hidden></div>
+    </div>
+    <audio controls preload="metadata" src="psy.mp3"></audio>
+    <p class="links"><a href="psy.mp3" download>MP3</a> · <a href="psy.toml">song file</a> · <a href="psy.html">evaluation</a></p>
+    <p class="eval">Against Infected Mushroom, eight tracks (8 tracks): <b>26 of 28</b> measures inside their
+    range. Outside it where it matters: Bar to bar (more repetitive).</p>
+  </article>
+  <footer>Rendered from the song files on 2026-10-31.</footer>
+</main>
+<script>
+  for (const song of document.querySelectorAll(".song")) {
+    const audio = song.querySelector("audio");
+    const view = song.querySelector(".spectro");
+    const head = view.querySelector(".playhead");
+    const secs = () => (isFinite(audio.duration) && audio.duration) || +view.dataset.secs;
+    let frame = 0;
+    const draw = () => {
+      head.hidden = audio.currentTime === 0 && audio.paused;
+      view.style.setProperty("--t", Math.min(1, audio.currentTime / secs()));
+      frame = audio.paused ? 0 : requestAnimationFrame(draw);
+    };
+    audio.addEventListener("play", () => {
+      for (const other of document.querySelectorAll("audio")) if (other !== audio) other.pause();
+      cancelAnimationFrame(frame);
+      draw();
+    });
+    for (const ev of ["pause", "seeked", "timeupdate", "ended"]) audio.addEventListener(ev, () => frame || draw());
+    // a click on the picture plays from that point
+    view.addEventListener("click", (e) => {
+      const r = view.getBoundingClientRect();
+      const x0 = +getComputedStyle(view).getPropertyValue("--x0"), xw = +getComputedStyle(view).getPropertyValue("--xw");
+      const t = ((e.clientX - r.left) / r.width - x0) / xw;
+      if (t < 0 || t > 1) return;
+      audio.currentTime = t * secs();
+      audio.play();
+    });
+  }
+</script>
+</body>
+</html>

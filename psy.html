@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fungal Logic: evaluation</title>
+<meta name="description" content="Fungal Logic, measured against Infected Mushroom, eight tracks, with a self-assessment and what to improve next.">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #121214; --panel: #1b1b1f; --line: #2c2c33; --ink: #e6e6e9; --dim: #9a9aa3; --accent: #7fd1b9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 1000px; margin: 0 auto; padding: 40px 16px 64px; }
+  h1 { font-size: 28px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .lede { color: var(--dim); margin: 0 0 32px; }
+  .song { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px; margin: 0 0 24px; }
+  .song header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  h2 { font-size: 21px; margin: 0; }
+  h2 a { color: inherit; text-decoration: none; }
+  time, .facts, .links { color: var(--dim); font-size: 14px; }
+  .facts { margin: 4px 0 10px; font-variant-numeric: tabular-nums; }
+  .about { margin: 0 0 16px; }
+  .spectro {
+    position: relative; overflow: hidden; aspect-ratio: var(--ratio); border-radius: 6px; cursor: pointer;
+    background: #121214;
+  }
+  /* the picture's title line is cut off: the page says it better */
+  .spectro img { display: block; width: 100%; height: auto; margin-top: calc(-100% * var(--crop)); }
+  .playhead {
+    position: absolute; top: 0; width: 2px; margin-left: -1px; height: calc(100% * var(--ph));
+    left: calc(100% * (var(--x0) + var(--xw) * var(--t, 0)));
+    background: var(--accent); box-shadow: 0 0 6px var(--accent); pointer-events: none;
+  }
+  audio { display: block; width: 100%; margin: 14px 0 6px; }
+  .links { margin: 0; }
+  .eval { margin: 12px 0 0; padding-top: 12px; border-top: 1px solid var(--line); font-size: 14px; color: var(--dim); }
+  .eval b { color: var(--ink); font-weight: 600; }
+  a { color: var(--accent); }
+  footer { color: var(--dim); font-size: 14px; margin-top: 40px; }
+
+  /* the data's colours: this track in blue, the references in greys; a measure outside them on a side that
+     matters in the status colour "serious", always with its mark and its words */
+  :root { --track: #3987e5; --concern: #ec835a; --ref: #c3c2b7; --mute: #898781; --range: #34343b; --iqr: #5a5a63; }
+  nav { font-size: 14px; margin: 0 0 20px; }
+  .song h1 { margin: 0; }
+  .spectro .window {
+    position: absolute; top: 0; height: calc(100% * var(--ph)); pointer-events: none;
+    left: calc(100% * (var(--x0) + var(--xw) * var(--w0))); width: calc(100% * var(--xw) * var(--ww));
+    background: rgba(255, 255, 255, 0.07); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  }
+  .spectro .window span {
+    position: absolute; top: 4px; left: 4px; font-size: 11px; line-height: 1; padding: 3px 5px;
+    background: rgba(0, 0, 0, 0.6); color: var(--ink); border-radius: 3px;
+  }
+  details.cast { margin: 10px 0 0; font-size: 14px; color: var(--dim); }
+  details.cast summary { cursor: pointer; }
+  details.cast ul { columns: 3 180px; margin: 8px 0 0; padding: 0 0 0 18px; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px; margin: 0 0 24px; }
+  .panel > h2 { margin: 0 0 6px; }
+  h3 { font-size: 16px; margin: 22px 0 8px; }
+  .meta { color: var(--dim); font-size: 14px; margin: 0 0 14px; }
+  .meta b { color: var(--ink); font-weight: 600; }
+  .stale { border-left: 3px solid var(--concern); padding: 6px 10px; margin: 0 0 14px; font-size: 14px; background: #24201f; }
+  .summary { margin: 0 0 18px; max-width: 75ch; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 0; }
+  .tile { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  .tile .k { color: var(--dim); font-size: 13px; }
+  .tile .v { font-size: 24px; font-weight: 600; line-height: 1.3; }
+  .tile .d { color: var(--dim); font-size: 13px; }
+  .tile.near .v { font-size: 16px; padding-top: 6px; }
+  .areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 4px 28px; }
+  .areas h3 { margin-top: 14px; }
+  ol.improve { margin: 0; padding: 0 0 0 20px; }
+  #daw ol.improve { margin-top: 12px; max-width: 80ch; }
+  ol.improve li { margin: 0 0 12px; }
+  ol.improve .why { display: block; color: var(--dim); font-size: 14px; margin-top: 2px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .chip {
+    font-size: 12px; text-decoration: none; color: var(--ink); border: 1px solid var(--line); border-radius: 999px;
+    padding: 1px 8px;
+  }
+  .chip.concern::before, .flag.concern::before { content: "▲ "; color: var(--concern); }
+  .key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--dim); margin: 0 0 8px; }
+  .key span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { display: inline-block; }
+  .sw.line { width: 16px; height: 2px; border-radius: 1px; }
+  .sw.box { width: 14px; height: 10px; border-radius: 2px; }
+  .sw.dot { width: 10px; height: 10px; border-radius: 50%; }
+  .sw.tick { width: 1px; height: 8px; background: var(--mute); }
+  #tonal { position: relative; height: 260px; margin: 0 0 4px; }
+  #tonal svg { display: block; overflow: visible; }
+  details.table { font-size: 14px; color: var(--dim); margin: 4px 0 0; }
+  details.table summary { cursor: pointer; }
+  details.table table { border-collapse: collapse; margin-top: 8px; font-variant-numeric: tabular-nums; }
+  details.table th, details.table td { padding: 2px 12px 2px 0; text-align: right; }
+  table.metrics { width: 100%; border-collapse: collapse; }
+  table.metrics th, table.metrics td { padding: 8px 10px 8px 0; border-top: 1px solid var(--line); vertical-align: middle; }
+  table.metrics thead th { border-top: 0; color: var(--dim); font-size: 13px; font-weight: 400; text-align: left; padding-bottom: 4px; }
+  table.metrics tbody th { text-align: left; font-weight: 500; width: 26%; }
+  table.metrics tr:target { background: #23232a; }
+  .term { border-bottom: 1px dotted var(--mute); cursor: help; }
+  td.val { width: 15%; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.where { width: 33%; padding-left: 10px; }
+  td.where .v { display: block; }
+  td.where .r { display: block; color: var(--dim); font-size: 13px; font-variant-numeric: tabular-nums; }
+  table.sections th .r { display: block; color: var(--dim); font-size: 13px; font-weight: 400; }
+  .fine { color: var(--dim); }
+  .strip { position: relative; height: 30px; min-width: 120px; }
+  .strip > * { position: absolute; }
+  .strip .axis { left: 0; right: 0; top: 12px; height: 1px; background: var(--line); }
+  .strip .rng { top: 10px; height: 5px; border-radius: 2px; background: var(--range); }
+  .strip .iqr { top: 7px; height: 11px; border-radius: 2px; background: var(--iqr); }
+  .strip .med { top: 4px; width: 2px; height: 17px; margin-left: -1px; background: var(--ref); }
+  .strip .rug { top: 22px; width: 9px; height: 8px; margin-left: -4px; }
+  .strip .rug::after { content: ""; position: absolute; left: 4px; top: 0; width: 1px; height: 8px; background: var(--mute); }
+  .strip .me {
+    top: 7px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--track);
+    box-shadow: 0 0 0 2px var(--panel);
+  }
+  .strip .me.concern { background: var(--concern); }
+  #tip {
+    position: fixed; z-index: 10; max-width: 320px; pointer-events: none; font-size: 13px; line-height: 1.4;
+    background: #0b0b0d; border: 1px solid var(--line); border-radius: 6px; padding: 6px 9px; color: var(--ink);
+  }
+  #tip .d { color: var(--dim); }
+  @media (max-width: 680px) {
+    table.metrics thead { display: none; }
+    table.metrics, table.metrics tbody, table.metrics tr { display: block; }
+    table.metrics tr { border-top: 1px solid var(--line); padding: 8px 0; }
+    table.metrics th, table.metrics td { display: block; border: 0; padding: 2px 0; width: auto !important; }
+    table.metrics tbody th { display: inline-block; margin-right: 10px; }
+    td.val { display: inline-block !important; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <nav><a href="./">← daw music</a></nav>
+  <article class="song" id="psy">
+    <header>
+      <h1>Fungal Logic</h1>
+      <time datetime="2026-10-28">2026-10-28</time>
+    </header>
+    <p class="facts">145 BPM · 0:31 · 17 bars · −10.4 LUFS · peak −0.7 dB</p>
+    <p class="about">30 seconds of psytrance after Infected Mushroom. 145 BPM (as &quot;Becoming Insane&quot; and &quot;Cities of the Future&quot; are), in A Phrygian dominant (A Bb C# D E F G, the Hijaz colour of their leads). Built on the DAW&#x27;s own sounds.</p>
+    <div class="spectro" style="--x0:0.037994;--xw:0.911854;--crop:0.016717;--ratio:1316/402;--ph:0.945274" data-secs="31.055">
+      <img src="psy.png" width="1316" height="424" alt="Spectrogram and waveform of Fungal Logic" loading="lazy">
+      <div class="window" style="--w0:0.479794;--ww:0.386411"><span>measured</span></div>
+      <div class="playhead" hidden></div>
+    </div>
+    <audio controls preload="metadata" src="psy.mp3"></audio>
+    <p class="links"><a href="psy.mp3" download>MP3</a> · <a href="psy.toml">song file</a> ·
+    <a href="psy.assess.json">measurements (JSON)</a></p>
+    <details class="cast"><summary>18 instruments, 705 notes</summary><ul><li>acid <span>(squelch, 147)</span></li><li>acid_acc <span>(squelcha, 28)</span></li><li>bass <span>(psybass, 122)</span></li><li>chat <span>(chat, 89)</span></li><li>chords <span>(psylead, 30)</span></li><li>clap <span>(clap, 23)</span></li><li>downlift <span>(downlift, 3)</span></li><li>gurgle <span>(gurgle, 2)</span></li><li>impact <span>(impact, 3)</span></li><li>kick <span>(psykick, 48)</span></li><li>lead <span>(psylead, 55)</span></li><li>lead8 <span>(psylead, 35)</span></li><li>ohat <span>(ohat, 47)</span></li><li>snare <span>(snare, 24)</span></li><li>uplift <span>(uplift, 2)</span></li><li>vox <span>(vox, 23)</span></li><li>yoy <span>(yoy, 9)</span></li><li>zap <span>(zap, 15)</span></li></ul></details>
+  </article>
+
+  <section class="panel" id="assessment">
+    <h2>Self-assessment</h2>
+    <p class="meta">Written 2026-10-29, against <b>Infected Mushroom, eight tracks</b>: 30 s previews of eight tracks from their records after 2001.</p>
+    <p class="summary">Fungal Logic sits inside the eight later Infected Mushroom references on 26 of 28 measures, nearest to Cities of the Future and Becoming Insane: its loudness, its balance below 3.5 kHz, how busy it is and how long its hits ring are all theirs. What sets it apart points where listening did. Its loudest 12 s change less from bar to bar than any of the eight (2.0 dB, against 2.2 to 7.6), and more of its pitch sits on three notes than in six of them: a riff circling its root, the old-school goa its melody was heard as, not their mutating lines. It is also duller, narrower and fuller up top than most of them (6.7 dB less in the highs, mids 5.4 dB narrower, holes in 19% of the highs&#x27; frames against their 38%), and more squashed than seven of the eight.</p>
+    <div class="tiles"><div class="tile"><div class="k">Typical</div><div class="v">10</div><div class="d">in the references' middle half</div></div><div class="tile"><div class="k">In range</div><div class="v">16</div><div class="d">outside the middle half, inside the range</div></div><div class="tile"><div class="k">Outside</div><div class="v">2</div><div class="d">1 on a side that matters</div></div><div class="tile near"><div class="k">Nearest reference</div><div class="v">Cities of the Future</div><div class="d">then Becoming Insane, Spitfire</div></div></div>
+  </section>
+  
+
+  <section class="panel" id="next"><h2>For the next track</h2><div class="areas"><div><h3>Composition</h3><ol class="improve"><li>Write after their lines rather than goa&#x27;s: short motifs that mutate every bar or two (a note, a rhythm, a register changed), chromatic turns, two leads in call and response, rather than one riff over its root.<span class="why">On listening the melody is old-school goa; its pitch is more focused on three notes than six of the eight references.</span><span class="chips"><a class="chip" href="#m-focus">Tonal focus</a><a class="chip" href="#m-harmony">Harmonic motion</a></span></li></ol></div><div><h3>Arrangement</h3><ol class="improve"><li>Vary the loop inside each phrase: fills, a dropped beat, a bass pattern that turns in the fourth bar, a layer added or taken away every 8 bars.<span class="why">2.0 dB of change from bar to bar, against the references&#x27; 2.2 to 7.6 (median 4.5): it repeats more than all eight.</span><span class="chips"><a class="chip concern" href="#m-evolution">Bar to bar</a></span></li><li>A longer form with contrast: a breakdown down to one element, builds that change the groove, a second drop that differs from the first.<span class="why">17 bars hold one groove; there is no section for anything to contrast with.</span></li></ol></div><div><h3>Sound design</h3><ol class="improve"><li>Brighten the top and leave holes in it: gated hats and noise, short closed hats, a ride, crashes on the phrases&#x27; first beats, so that the highs come and go.<span class="why">The highs are 6.7 dB and the air 5.6 dB under the references&#x27; medians, and only 19% of the highs&#x27; 5 ms frames are holes, against their median 38%.</span><span class="chips"><a class="chip" href="#m-high">Highs, 3.5–8.9 kHz</a><a class="chip" href="#m-air">Air, 8.9–18 kHz</a><a class="chip" href="#m-gaps_high">Holes, highs</a></span></li><li>Leads that move inside a note, as their talking and screaming leads do: filter and FM envelopes per note, formant and wavetable sweeps, layers resampled through effects.<span class="why">Its palette is the bank&#x27;s psytrance set, one patch for each role.</span><span class="chips"><a class="chip" href="#m-motion">Motion</a></span></li></ol></div><div><h3>Mix</h3><ol class="improve"><li>Widen the mids and the highs: stereo returns for the leads, a wide texture under the chords, doubled and panned top layers, the kick and bass alone in the middle.<span class="why">The mids&#x27; side is 5.4 dB and the highs&#x27; 3.2 dB under the references&#x27; medians; left and right correlate at 0.959, against their median 0.804.</span><span class="chips"><a class="chip" href="#m-width_mid">Width, mids</a><a class="chip" href="#m-width_high">Width, highs</a><a class="chip" href="#m-correlation">Correlation</a></span></li></ol></div><div><h3>Mastering</h3><ol class="improve"><li>Limit less: 11 to 13 dB from peak to loudness at around −11 LUFS.<span class="why">8.5 dB from peak to loudness and 9.9 dB of micro-dynamics: more squashed and flatter than seven of the eight references (their medians 12.3 dB, 12.7 dB, −11.3 LUFS).</span><span class="chips"><a class="chip" href="#m-plr">Peak to loudness</a><a class="chip" href="#m-micro_dyn">Micro-dynamics</a><a class="chip" href="#m-loudness">Loudness</a></span></li></ol></div></div></section><section class="panel" id="daw"><h2>For the DAW</h2><div><ol class="improve"><li>Variations in patterns: a pattern that plays a variant on its 4th or 8th repeat, and notes with a chance or a mutation, so that a loop changes without every bar written out (F20).<span class="why">A pattern repeats unchanged over its range today; bar-to-bar change is what this track lacks most.</span><span class="chips"><a class="chip concern" href="#m-evolution">Bar to bar</a></span></li><li>Automation of any effect setting, not only filter cutoffs: wet, feedback, drive, gate depth, width (F18).<span class="why">Bar-to-bar change comes from mix moves as much as from new notes, and only a filter can move today.</span><span class="chips"><a class="chip concern" href="#m-evolution">Bar to bar</a><a class="chip" href="#m-motion">Motion</a></span></li><li>Return buses with automated sends, and a master the song sets (compressor, limiter, loudness target) in place of the fixed chain (F15, F19).<span class="why">Width and space need shared stereo returns; the fixed master holds both published songs to 7 to 8.5 dB from peak to loudness.</span><span class="chips"><a class="chip" href="#m-width_mid">Width, mids</a><a class="chip" href="#m-plr">Peak to loudness</a></span></li></ol></div></section>
+
+  <section class="panel" id="measures">
+    <h2>Measurements</h2>
+    <p class="meta">28 measures of the loudest 12 s (0:15 to 0:27, shaded on the
+    spectrogram), each against the loudest 12 s of the 8 references. Hover a mark for its value, or a measure's
+    name for what it means.</p>
+    <details class="table"><summary>The 8 references</summary><ul><li>Artillery <span>(Infected Mushroom)</span></li><li>Becoming Insane <span>(Infected Mushroom)</span></li><li>Cities of the Future <span>(Infected Mushroom)</span></li><li>Converting Vegetarians <span>(Infected Mushroom)</span></li><li>Deeply Disturbed <span>(Infected Mushroom)</span></li><li>Heavyweight <span>(Infected Mushroom)</span></li><li>Kababies <span>(Infected Mushroom)</span></li><li>Spitfire <span>(Infected Mushroom)</span></li></ul></details>
+
+    <h3>Tonal balance</h3>
+    <div class="key"><span><i class="sw line" style="background:var(--track)"></i>This track</span><span><i class="sw line" style="background:var(--ref)"></i>The references' median</span>
+      <span><i class="sw box" style="background:rgba(195,194,183,0.22)"></i>Their middle half</span><span><i class="sw box" style="background:rgba(195,194,183,0.09)"></i>Their range</span></div>
+    <div id="tonal"></div>
+    <script type="application/json" id="tonal-data">{"label": "Tonal balance of Fungal Logic against the references, 20 Hz to 16 kHz", "hz": [20.0, 25.1, 31.6, 39.8, 50.1, 63.1, 79.4, 100.0, 125.9, 158.5, 199.5, 251.2, 316.2, 398.1, 501.2, 631.0, 794.3, 1000.0, 1258.9, 1584.9, 1995.3, 2511.9, 3162.3, 3981.1, 5011.9, 6309.6, 7943.3, 10000.0, 12589.3, 15848.9], "names": ["20", "25", "31.5", "40", "50", "63", "80", "100", "125", "160", "200", "250", "315", "400", "500", "630", "800", "1k", "1.25k", "1.6k", "2k", "2.5k", "3.15k", "4k", "5k", "6.3k", "8k", "10k", "12.5k", "16k"], "me": [-33.6, -30.1, -20.7, -11.8, -4.4, -8.4, -12.4, -12.3, -15.2, -16.7, -13.8, -13.9, -14.3, -15.1, -17.6, -16.0, -18.1, -18.3, -19.4, -22.5, -24.9, -24.5, -27.6, -30.8, -31.8, -34.0, -34.2, -33.2, -32.4, -35.0], "min": [-58.1, -51.6, -29.4, -14.1, -16.8, -9.1, -15.3, -17.1, -16.3, -15.7, -16.9, -18.2, -20.8, -21.4, -23.2, -22.3, -24.0, -25.1, -26.9, -27.7, -29.3, -31.8, -33.6, -36.4, -38.1, -39.4, -39.0, -40.8, -42.6, -43.4], "q1": [-39.5, -36.6, -26.2, -13.5, -9.7, -8.6, -10.8, -13.4, -13.9, -14.3, -15.2, -16.5, -16.4, -17.9, -18.7, -20.9, -22.3, -24.7, -24.8, -24.8, -26.3, -27.6, -28.6, -28.3, -30.4, -28.8, -29.4, -28.4, -30.2, -34.6], "med": [-31.8, -31.0, -23.3, -12.2, -6.2, -7.8, -10.2, -12.0, -13.4, -13.6, -14.6, -16.1, -15.6, -16.1, -18.0, -19.3, -19.4, -19.9, -20.9, -21.3, -21.6, -22.6, -23.8, -24.4, -25.7, -26.9, -27.0, -26.3, -28.2, -30.0], "q3": [-30.0, -27.0, -13.0, -10.1, -5.9, -7.1, -9.4, -11.4, -12.2, -12.8, -13.8, -15.3, -14.4, -14.7, -16.6, -16.3, -15.2, -17.9, -18.1, -19.7, -19.6, -20.5, -21.3, -22.1, -23.3, -24.2, -24.1, -25.5, -26.9, -27.5], "max": [-19.2, -17.2, -8.3, -7.0, -5.5, -6.6, -7.0, -10.7, -9.4, -8.3, -12.8, -14.0, -13.6, -11.3, -14.6, -14.5, -11.9, -16.1, -17.1, -17.8, -18.0, -19.9, -18.6, -17.1, -18.0, -20.8, -22.5, -23.0, -23.3, -26.4], "lo": 17.78279410038923, "hi": 17782.79410038923, "zones": [["Sub", 44.6683592150963], ["Lows", 112.20184543019636], ["Low mids", 354.8133892335755], ["Mids", 1122.0184543019634], ["Upper mids", 3548.1338923357553], ["Highs", 8912.509381337453], ["Air", 17782.79410038923]]}</script>
+    <details class="table"><summary>The curve as a table</summary><table><thead><tr><th>Hz</th><th>This track (dB)</th><th>Median</th><th>Middle half</th><th>Range</th></tr></thead><tbody><tr><th>20</th><td>−33.6</td><td>−31.8</td><td>−39.5 to −30</td><td>−58.1 to −19.2</td></tr><tr><th>25</th><td>−30.1</td><td>−31</td><td>−36.6 to −27</td><td>−51.6 to −17.2</td></tr><tr><th>31.5</th><td>−20.7</td><td>−23.3</td><td>−26.2 to −13</td><td>−29.4 to −8.3</td></tr><tr><th>40</th><td>−11.8</td><td>−12.2</td><td>−13.5 to −10.1</td><td>−14.1 to −7</td></tr><tr><th>50</th><td>−4.4</td><td>−6.2</td><td>−9.7 to −5.9</td><td>−16.8 to −5.5</td></tr><tr><th>63</th><td>−8.4</td><td>−7.8</td><td>−8.6 to −7.1</td><td>−9.1 to −6.6</td></tr><tr><th>80</th><td>−12.4</td><td>−10.2</td><td>−10.8 to −9.4</td><td>−15.3 to −7</td></tr><tr><th>100</th><td>−12.3</td><td>−12</td><td>−13.4 to −11.4</td><td>−17.1 to −10.7</td></tr><tr><th>125</th><td>−15.2</td><td>−13.4</td><td>−13.9 to −12.2</td><td>−16.3 to −9.4</td></tr><tr><th>160</th><td>−16.7</td><td>−13.6</td><td>−14.3 to −12.8</td><td>−15.7 to −8.3</td></tr><tr><th>200</th><td>−13.8</td><td>−14.6</td><td>−15.2 to −13.8</td><td>−16.9 to −12.8</td></tr><tr><th>250</th><td>−13.9</td><td>−16.1</td><td>−16.5 to −15.3</td><td>−18.2 to −14</td></tr><tr><th>315</th><td>−14.3</td><td>−15.6</td><td>−16.4 to −14.4</td><td>−20.8 to −13.6</td></tr><tr><th>400</th><td>−15.1</td><td>−16.1</td><td>−17.9 to −14.7</td><td>−21.4 to −11.3</td></tr><tr><th>500</th><td>−17.6</td><td>−18</td><td>−18.7 to −16.6</td><td>−23.2 to −14.6</td></tr><tr><th>630</th><td>−16</td><td>−19.3</td><td>−20.9 to −16.3</td><td>−22.3 to −14.5</td></tr><tr><th>800</th><td>−18.1</td><td>−19.4</td><td>−22.3 to −15.2</td><td>−24 to −11.9</td></tr><tr><th>1k</th><td>−18.3</td><td>−19.9</td><td>−24.7 to −17.9</td><td>−25.1 to −16.1</td></tr><tr><th>1.25k</th><td>−19.4</td><td>−20.9</td><td>−24.8 to −18.1</td><td>−26.9 to −17.1</td></tr><tr><th>1.6k</th><td>−22.5</td><td>−21.3</td><td>−24.8 to −19.7</td><td>−27.7 to −17.8</td></tr><tr><th>2k</th><td>−24.9</td><td>−21.6</td><td>−26.3 to −19.6</td><td>−29.3 to −18</td></tr><tr><th>2.5k</th><td>−24.5</td><td>−22.6</td><td>−27.6 to −20.5</td><td>−31.8 to −19.9</td></tr><tr><th>3.15k</th><td>−27.6</td><td>−23.8</td><td>−28.6 to −21.3</td><td>−33.6 to −18.6</td></tr><tr><th>4k</th><td>−30.8</td><td>−24.4</td><td>−28.3 to −22.1</td><td>−36.4 to −17.1</td></tr><tr><th>5k</th><td>−31.8</td><td>−25.7</td><td>−30.4 to −23.3</td><td>−38.1 to −18</td></tr><tr><th>6.3k</th><td>−34</td><td>−26.9</td><td>−28.8 to −24.2</td><td>−39.4 to −20.8</td></tr><tr><th>8k</th><td>−34.2</td><td>−27</td><td>−29.4 to −24.1</td><td>−39 to −22.5</td></tr><tr><th>10k</th><td>−33.2</td><td>−26.3</td><td>−28.4 to −25.5</td><td>−40.8 to −23</td></tr><tr><th>12.5k</th><td>−32.4</td><td>−28.2</td><td>−30.2 to −26.9</td><td>−42.6 to −23.3</td></tr><tr><th>16k</th><td>−35</td><td>−30</td><td>−34.6 to −27.5</td><td>−43.4 to −26.4</td></tr></tbody></table></details>
+    <div class="key" style="margin-top:22px"><span><i class="sw dot" style="background:var(--track)"></i>This track</span>
+      <span><i class="sw dot" style="background:var(--concern)"></i>Outside them, on a side that matters (▲)</span>
+      <span><i class="sw box" style="background:var(--iqr)"></i>The references' middle half</span><span><i class="sw box" style="background:var(--range)"></i>Their range</span>
+      <span><i class="sw line" style="background:var(--ref)"></i>Their median</span><span><i class="sw tick"></i>Each reference</span></div>
+    
+      <h3>Loudness and dynamics</h3>
+      <table class="metrics">
+        <thead><tr><th>Measure</th><th>This track</th><th>Against the references</th><th></th></tr></thead>
+        <tbody>
+        <tr id="m-loudness"><th scope="row"><span class="term" tabindex="0" data-tip="The integrated loudness (BS.1770) of the main section: set by the master&#x27;s gain into its limiter.">Loudness</span></th><td class="val">−9.3 LUFS</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −19 LUFS to −7.7 LUFS"></span><span class="iqr" style="left:45.65%;width:calc(78.05% - 45.65%)" data-tip="Their middle half: −13.9 LUFS to −9.8 LUFS"></span><span class="med" style="left:66.20%" data-tip="Their median: −11.3 LUFS"></span><span class="rug" style="left:62.25%" data-tip="Artillery: −11.8 LUFS"></span><span class="rug" style="left:82.00%" data-tip="Becoming Insane: −9.3 LUFS"></span><span class="rug" style="left:77.26%" data-tip="Cities of the Future: −9.9 LUFS"></span><span class="rug" style="left:15.63%" data-tip="Converting Vegetarians: −17.7 LUFS"></span><span class="rug" style="left:55.93%" data-tip="Deeply Disturbed: −12.6 LUFS"></span><span class="rug" style="left:70.15%" data-tip="Heavyweight: −10.8 LUFS"></span><span class="rug" style="left:5.36%" data-tip="Kababies: −19 LUFS"></span><span class="rug" style="left:94.64%" data-tip="Spitfire: −7.7 LUFS"></span><span class="me" style="left:82.00%" data-tip="This track: −9.3 LUFS"></span></div></td>
+          <td class="where"><span class="v">louder than most</span><span class="r">median −11.3 LUFS · range −19 to −7.7 LUFS</span></td></tr>
+        <tr id="m-true_peak"><th scope="row"><span class="term" tabindex="0" data-tip="The highest peak between samples over the whole track. Over −1 dBTP can clip once encoded.">True peak</span></th><td class="val">−0.7 dBTP</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −4 dBTP to 2 dBTP"></span><span class="iqr" style="left:67.86%;width:calc(78.27% - 67.86%)" data-tip="Their middle half: 0.2 dBTP to 0.9 dBTP"></span><span class="med" style="left:73.81%" data-tip="Their median: 0.6 dBTP"></span><span class="rug" style="left:76.79%" data-tip="Artillery: 0.8 dBTP"></span><span class="rug" style="left:84.23%" data-tip="Becoming Insane: 1.3 dBTP"></span><span class="rug" style="left:94.64%" data-tip="Cities of the Future: 2 dBTP"></span><span class="rug" style="left:61.90%" data-tip="Converting Vegetarians: −0.2 dBTP"></span><span class="rug" style="left:69.35%" data-tip="Deeply Disturbed: 0.3 dBTP"></span><span class="rug" style="left:73.81%" data-tip="Heavyweight: 0.6 dBTP"></span><span class="rug" style="left:5.36%" data-tip="Kababies: −4 dBTP"></span><span class="rug" style="left:73.81%" data-tip="Spitfire: 0.6 dBTP"></span><span class="me" style="left:54.46%" data-tip="This track: −0.7 dBTP"></span></div></td>
+          <td class="where"><span class="v">lower peaks than most</span><span class="r">median 0.6 dBTP · range −4 to 2 dBTP</span></td></tr>
+        <tr id="m-plr"><th scope="row"><span class="term" tabindex="0" data-tip="The main section&#x27;s true peak less its loudness: how hard the limiter and compressors hold the peaks down. Low is dense and squashed, high is open.">Peak to loudness</span></th><td class="val">8.5 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 7.9 dB to 17.6 dB"></span><span class="iqr" style="left:34.81%;width:calc(55.98% - 34.81%)" data-tip="Their middle half: 11.1 dB to 13.4 dB"></span><span class="med" style="left:45.86%" data-tip="Their median: 12.3 dB"></span><span class="rug" style="left:48.62%" data-tip="Artillery: 12.6 dB"></span><span class="rug" style="left:29.29%" data-tip="Becoming Insane: 10.5 dB"></span><span class="rug" style="left:42.18%" data-tip="Cities of the Future: 11.9 dB"></span><span class="rug" style="left:94.64%" data-tip="Converting Vegetarians: 17.6 dB"></span><span class="rug" style="left:51.38%" data-tip="Deeply Disturbed: 12.9 dB"></span><span class="rug" style="left:36.65%" data-tip="Heavyweight: 11.3 dB"></span><span class="rug" style="left:70.71%" data-tip="Kababies: 15 dB"></span><span class="rug" style="left:5.36%" data-tip="Spitfire: 7.9 dB"></span><span class="me" style="left:10.88%" data-tip="This track: 8.5 dB"></span></div></td>
+          <td class="where"><span class="v">more squashed than most</span><span class="r">median 12.3 dB · range 7.9 to 17.6 dB</span></td></tr>
+        <tr id="m-micro_dyn"><th scope="row"><span class="term" tabindex="0" data-tip="How far the level moves within a beat: the spread (10th to 90th percentile) of 25 ms K-weighted levels. Gates, ducking and short envelopes raise it; a hard limiter, pads and long tails lower it.">Micro-dynamics</span></th><td class="val">9.9 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 5.5 dB to 32.2 dB"></span><span class="iqr" style="left:23.75%;width:calc(44.15% - 23.75%)" data-tip="Their middle half: 11 dB to 17.1 dB"></span><span class="med" style="left:29.43%" data-tip="Their median: 12.7 dB"></span><span class="rug" style="left:21.07%" data-tip="Artillery: 10.2 dB"></span><span class="rug" style="left:25.09%" data-tip="Becoming Insane: 11.4 dB"></span><span class="rug" style="left:33.78%" data-tip="Cities of the Future: 14 dB"></span><span class="rug" style="left:74.58%" data-tip="Converting Vegetarians: 26.2 dB"></span><span class="rug" style="left:94.64%" data-tip="Deeply Disturbed: 32.2 dB"></span><span class="rug" style="left:5.36%" data-tip="Heavyweight: 5.5 dB"></span><span class="rug" style="left:33.78%" data-tip="Kababies: 14 dB"></span><span class="rug" style="left:24.42%" data-tip="Spitfire: 11.2 dB"></span><span class="me" style="left:20.07%" data-tip="This track: 9.9 dB"></span></div></td>
+          <td class="where"><span class="v">flatter than most</span><span class="r">median 12.7 dB · range 5.5 to 32.2 dB</span></td></tr>
+        </tbody>
+      </table>
+      <h3>Tonal balance</h3>
+      <table class="metrics">
+        <thead><tr><th>Measure</th><th>This track</th><th>Against the references</th><th></th></tr></thead>
+        <tbody>
+        <tr id="m-sub"><th scope="row"><span class="term" tabindex="0" data-tip="The band&#x27;s share of the main section&#x27;s power (mid and side together), in dB: set by the level and EQ of what plays there.">Sub, 18–45 Hz</span></th><td class="val">−11.2 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −13.8 dB to −4.5 dB"></span><span class="iqr" style="left:12.08%;width:calc(52.40% - 12.08%)" data-tip="Their middle half: −13.1 dB to −8.9 dB"></span><span class="med" style="left:31.28%" data-tip="Their median: −11.1 dB"></span><span class="rug" style="left:40.88%" data-tip="Artillery: −10.1 dB"></span><span class="rug" style="left:5.36%" data-tip="Becoming Insane: −13.8 dB"></span><span class="rug" style="left:13.04%" data-tip="Cities of the Future: −13 dB"></span><span class="rug" style="left:10.16%" data-tip="Converting Vegetarians: −13.3 dB"></span><span class="rug" style="left:20.72%" data-tip="Deeply Disturbed: −12.2 dB"></span><span class="rug" style="left:75.44%" data-tip="Heavyweight: −6.5 dB"></span><span class="rug" style="left:44.72%" data-tip="Kababies: −9.7 dB"></span><span class="rug" style="left:94.64%" data-tip="Spitfire: −4.5 dB"></span><span class="me" style="left:30.32%" data-tip="This track: −11.2 dB"></span></div></td>
+          <td class="where"><span class="v">typical</span><span class="r">median −11.1 dB · range −13.8 to −4.5 dB</span></td></tr>
+        <tr id="m-low"><th scope="row"><span class="term" tabindex="0" data-tip="The band&#x27;s share of the main section&#x27;s power (mid and side together), in dB: set by the level and EQ of what plays there.">Lows, 45–112 Hz</span></th><td class="val">−2.1 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −5.1 dB to −1.7 dB"></span><span class="iqr" style="left:47.37%;width:calc(78.89% - 47.37%)" data-tip="Their middle half: −3.5 dB to −2.3 dB"></span><span class="med" style="left:65.76%" data-tip="Their median: −2.8 dB"></span><span class="rug" style="left:47.37%" data-tip="Artillery: −3.5 dB"></span><span class="rug" style="left:84.14%" data-tip="Becoming Insane: −2.1 dB"></span><span class="rug" style="left:78.89%" data-tip="Cities of the Future: −2.3 dB"></span><span class="rug" style="left:76.26%" data-tip="Converting Vegetarians: −2.4 dB"></span><span class="rug" style="left:94.64%" data-tip="Deeply Disturbed: −1.7 dB"></span><span class="rug" style="left:5.36%" data-tip="Heavyweight: −5.1 dB"></span><span class="rug" style="left:47.37%" data-tip="Kababies: −3.5 dB"></span><span class="rug" style="left:55.25%" data-tip="Spitfire: −3.2 dB"></span><span class="me" style="left:84.14%" data-tip="This track: −2.1 dB"></span></div></td>
+          <td class="where"><span class="v">more low end than most</span><span class="r">median −2.8 dB · range −5.1 to −1.7 dB</span></td></tr>
+        <tr id="m-lowmid"><th scope="row"><span class="term" tabindex="0" data-tip="The band&#x27;s share of the main section&#x27;s power (mid and side together), in dB: set by the level and EQ of what plays there.">Low mids, 112–355 Hz</span></th><td class="val">−7.7 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −9.2 dB to −4.1 dB"></span><span class="iqr" style="left:28.12%;width:calc(45.62% - 28.12%)" data-tip="Their middle half: −7.9 dB to −6.9 dB"></span><span class="med" style="left:38.62%" data-tip="Their median: −7.3 dB"></span><span class="rug" style="left:24.61%" data-tip="Artillery: −8.1 dB"></span><span class="rug" style="left:35.12%" data-tip="Becoming Insane: −7.5 dB"></span><span class="rug" style="left:29.87%" data-tip="Cities of the Future: −7.8 dB"></span><span class="rug" style="left:45.62%" data-tip="Converting Vegetarians: −6.9 dB"></span><span class="rug" style="left:43.87%" data-tip="Deeply Disturbed: −7 dB"></span><span class="rug" style="left:47.37%" data-tip="Heavyweight: −6.8 dB"></span><span class="rug" style="left:94.64%" data-tip="Kababies: −4.1 dB"></span><span class="rug" style="left:5.36%" data-tip="Spitfire: −9.2 dB"></span><span class="me" style="left:31.62%" data-tip="This track: −7.7 dB"></span></div></td>
+          <td class="where"><span class="v">typical</span><span class="r">median −7.3 dB · range −9.2 to −4.1 dB</span></td></tr>
+        <tr id="m-mid"><th scope="row"><span class="term" tabindex="0" data-tip="The band&#x27;s share of the main section&#x27;s power (mid and side together), in dB: set by the level and EQ of what plays there.">Mids, 355 Hz–1.1 kHz</span></th><td class="val">−9.8 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −16 dB to −7.2 dB"></span><span class="iqr" style="left:36.81%;width:calc(85.51% - 36.81%)" data-tip="Their middle half: −12.9 dB to −8.1 dB"></span><span class="med" style="left:55.07%" data-tip="Their median: −11.1 dB"></span><span class="rug" style="left:94.64%" data-tip="Artillery: −7.2 dB"></span><span class="rug" style="left:61.16%" data-tip="Becoming Insane: −10.5 dB"></span><span class="rug" style="left:83.48%" data-tip="Cities of the Future: −8.3 dB"></span><span class="rug" style="left:48.99%" data-tip="Converting Vegetarians: −11.7 dB"></span><span class="rug" style="left:32.75%" data-tip="Deeply Disturbed: −13.3 dB"></span><span class="rug" style="left:91.60%" data-tip="Heavyweight: −7.5 dB"></span><span class="rug" style="left:37.82%" data-tip="Kababies: −12.8 dB"></span><span class="rug" style="left:5.36%" data-tip="Spitfire: −16 dB"></span><span class="me" style="left:68.26%" data-tip="This track: −9.8 dB"></span></div></td>
+          <td class="where"><span class="v">typical</span><span class="r">median −11.1 dB · range −16 to −7.2 dB</span></td></tr>
+        <tr id="m-himid"><th scope="row"><span class="term" tabindex="0" data-tip="The band&#x27;s share of the main section&#x27;s power (mid and side together), in dB: set by the level and EQ of what plays there.">Upper mids, 1.1–3.5 kHz</span></th><td class="val">−15.9 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −21.4 dB to −11.6 dB"></span><span class="iqr" style="left:24.49%;width:calc(85.53% - 24.49%)" data-tip="Their middle half: −19.3 dB to −12.6 dB"></span><span class="med" style="left:68.22%" data-tip="Their median: −14.5 dB"></span><span class="rug" style="left:94.64%" data-tip="Artillery: −11.6 dB"></span><span class="rug" style="left:81.89%" data-tip="Becoming Insane: −13 dB"></span><span class="rug" style="left:54.56%" data-tip="Cities of the Future: −16 dB"></span><span class="rug" style="left:85.53%" data-tip="Converting Vegetarians: −12.6 dB"></span><span class="rug" style="left:6.27%" data-tip="Deeply Disturbed: −21.3 dB"></span><span class="rug" style="left:86.44%" data-tip="Heavyweight: −12.5 dB"></span><span class="rug" style="left:5.36%" data-tip="Kababies: −21.4 dB"></span><span class="rug" style="left:30.87%" data-tip="Spitfire: −18.6 dB"></span><span class="me" style="left:55.47%" data-tip="This track: −15.9 dB"></span></div></td>
+          <td class="where"><span class="v">typical</span><span class="r">median −14.5 dB · range −21.4 to −11.6 dB</span></td></tr>
+        <tr id="m-high"><th scope="row"><span class="term" tabindex="0" data-tip="The band&#x27;s share of the main section&#x27;s power (mid and side together), in dB: set by the level and EQ of what plays there.">Highs, 3.5–8.9 kHz</span></th><td class="val">−26.4 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −32 dB to −13.1 dB"></span><span class="iqr" style="left:47.87%;width:calc(73.38% - 47.87%)" data-tip="Their middle half: −23 dB to −17.6 dB"></span><span class="med" style="left:63.46%" data-tip="Their median: −19.7 dB"></span><span class="rug" style="left:80.94%" data-tip="Artillery: −16 dB"></span><span class="rug" style="left:70.55%" data-tip="Becoming Insane: −18.2 dB"></span><span class="rug" style="left:56.85%" data-tip="Cities of the Future: −21.1 dB"></span><span class="rug" style="left:94.64%" data-tip="Converting Vegetarians: −13.1 dB"></span><span class="rug" style="left:48.82%" data-tip="Deeply Disturbed: −22.8 dB"></span><span class="rug" style="left:71.02%" data-tip="Heavyweight: −18.1 dB"></span><span class="rug" style="left:5.36%" data-tip="Kababies: −32 dB"></span><span class="rug" style="left:44.57%" data-tip="Spitfire: −23.7 dB"></span><span class="me" style="left:31.81%" data-tip="This track: −26.4 dB"></span></div></td>
+          <td class="where"><span class="v">duller than most</span><span class="r">median −19.7 dB · range −32 to −13.1 dB</span></td></tr>
+        <tr id="m-air"><th scope="row"><span class="term" tabindex="0" data-tip="The band&#x27;s share of the main section&#x27;s power (mid and side together), in dB: set by the level and EQ of what plays there.">Air, 8.9–18 kHz</span></th><td class="val">−28.6 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −37.4 dB to −19.2 dB"></span><span class="iqr" style="left:68.15%;width:calc(80.91% - 68.15%)" data-tip="Their middle half: −24.6 dB to −22 dB"></span><span class="med" style="left:76.00%" data-tip="Their median: −23 dB"></span><span class="rug" style="left:94.64%" data-tip="Artillery: −19.2 dB"></span><span class="rug" style="left:85.32%" data-tip="Becoming Insane: −21.1 dB"></span><span class="rug" style="left:77.47%" data-tip="Cities of the Future: −22.7 dB"></span><span class="rug" style="left:70.60%" data-tip="Converting Vegetarians: −24.1 dB"></span><span class="rug" style="left:79.43%" data-tip="Deeply Disturbed: −22.3 dB"></span><span class="rug" style="left:74.04%" data-tip="Heavyweight: −23.4 dB"></span><span class="rug" style="left:5.36%" data-tip="Kababies: −37.4 dB"></span><span class="rug" style="left:60.30%" data-tip="Spitfire: −26.2 dB"></span><span class="me" style="left:48.53%" data-tip="This track: −28.6 dB"></span></div></td>
+          <td class="where"><span class="v">less air than most</span><span class="r">median −23 dB · range −37.4 to −19.2 dB</span></td></tr>
+        <tr id="m-tilt"><th scope="row"><span class="term" tabindex="0" data-tip="The slope of a line through the third-octave spectrum from 50 Hz to 10 kHz: how dark or bright the whole balance is.">Tilt</span></th><td class="val">−3.43 dB/oct</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −4.57 dB/oct to −1.65 dB/oct"></span><span class="iqr" style="left:51.83%;width:calc(86.69% - 51.83%)" data-tip="Their middle half: −3.05 dB/oct to −1.91 dB/oct"></span><span class="med" style="left:69.26%" data-tip="Their median: −2.48 dB/oct"></span><span class="rug" style="left:94.64%" data-tip="Artillery: −1.65 dB/oct"></span><span class="rug" style="left:77.52%" data-tip="Becoming Insane: −2.21 dB/oct"></span><span class="rug" style="left:61.01%" data-tip="Cities of the Future: −2.75 dB/oct"></span><span class="rug" style="left:89.44%" data-tip="Converting Vegetarians: −1.82 dB/oct"></span><span class="rug" style="left:44.80%" data-tip="Deeply Disturbed: −3.28 dB/oct"></span><span class="rug" style="left:85.78%" data-tip="Heavyweight: −1.94 dB/oct"></span><span class="rug" style="left:5.36%" data-tip="Kababies: −4.57 dB/oct"></span><span class="rug" style="left:54.28%" data-tip="Spitfire: −2.97 dB/oct"></span><span class="me" style="left:40.22%" data-tip="This track: −3.43 dB/oct"></span></div></td>
+          <td class="where"><span class="v">darker than most</span><span class="r">median −2.48 dB/oct · range −4.57 to −1.65 dB/oct</span></td></tr>
+        </tbody>
+      </table>
+      <h3>Stereo image</h3>
+      <table class="metrics">
+        <thead><tr><th>Measure</th><th>This track</th><th>Against the references</th><th></th></tr></thead>
+        <tbody>
+        <tr id="m-correlation"><th scope="row"><span class="term" tabindex="0" data-tip="Left against right over the main section: 1 is mono, 0 unrelated, below 0 out of phase.">Correlation</span></th><td class="val">0.959</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 0.529 to 0.986"></span><span class="iqr" style="left:32.12%;width:calc(72.76% - 32.12%)" data-tip="Their middle half: 0.666 to 0.874"></span><span class="med" style="left:59.08%" data-tip="Their median: 0.804"></span><span class="rug" style="left:71.59%" data-tip="Artillery: 0.868"></span><span class="rug" style="left:69.64%" data-tip="Becoming Insane: 0.858"></span><span class="rug" style="left:76.28%" data-tip="Cities of the Future: 0.892"></span><span class="rug" style="left:17.47%" data-tip="Converting Vegetarians: 0.591"></span><span class="rug" style="left:48.53%" data-tip="Deeply Disturbed: 0.75"></span><span class="rug" style="left:37.01%" data-tip="Heavyweight: 0.691"></span><span class="rug" style="left:5.36%" data-tip="Kababies: 0.529"></span><span class="rug" style="left:94.64%" data-tip="Spitfire: 0.986"></span><span class="me" style="left:89.37%" data-tip="This track: 0.959"></span></div></td>
+          <td class="where"><span class="v">narrower than most</span><span class="r">median 0.804 · range 0.529 to 0.986</span></td></tr>
+        <tr id="m-width_low"><th scope="row"><span class="term" tabindex="0" data-tip="Side less mid below 112 Hz. The kick and bass belong in the middle, so this should be far down.">Width, lows</span></th><td class="val">−39.9 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:20.54%;width:calc(94.64% - 20.54%)" data-tip="The references' range: −34 dB to −5.2 dB"></span><span class="iqr" style="left:40.35%;width:calc(85.12% - 40.35%)" data-tip="Their middle half: −26.3 dB to −8.9 dB"></span><span class="med" style="left:62.48%" data-tip="Their median: −17.7 dB"></span><span class="rug" style="left:41.89%" data-tip="Artillery: −25.7 dB"></span><span class="rug" style="left:46.78%" data-tip="Becoming Insane: −23.8 dB"></span><span class="rug" style="left:36.23%" data-tip="Cities of the Future: −27.9 dB"></span><span class="rug" style="left:93.10%" data-tip="Converting Vegetarians: −5.8 dB"></span><span class="rug" style="left:82.55%" data-tip="Deeply Disturbed: −9.9 dB"></span><span class="rug" style="left:78.18%" data-tip="Heavyweight: −11.6 dB"></span><span class="rug" style="left:94.64%" data-tip="Kababies: −5.2 dB"></span><span class="rug" style="left:20.54%" data-tip="Spitfire: −34 dB"></span><span class="me" style="left:5.36%" data-tip="This track: −39.9 dB"></span></div></td>
+          <td class="where"><span class="v">narrower than all 8 <span class="fine">· no fault</span></span><span class="r">median −17.7 dB · range −34 to −5.2 dB</span></td></tr>
+        <tr id="m-width_mid"><th scope="row"><span class="term" tabindex="0" data-tip="Side less mid from 112 Hz to 1.8 kHz: chords, leads and their reverb.">Width, mids</span></th><td class="val">−11.8 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −13.7 dB to −4.5 dB"></span><span class="iqr" style="left:61.65%;width:calc(86.88% - 61.65%)" data-tip="Their middle half: −7.9 dB to −5.3 dB"></span><span class="med" style="left:76.20%" data-tip="Their median: −6.4 dB"></span><span class="rug" style="left:62.62%" data-tip="Artillery: −7.8 dB"></span><span class="rug" style="left:74.26%" data-tip="Becoming Insane: −6.6 dB"></span><span class="rug" style="left:59.70%" data-tip="Cities of the Future: −8.1 dB"></span><span class="rug" style="left:78.14%" data-tip="Converting Vegetarians: −6.2 dB"></span><span class="rug" style="left:84.94%" data-tip="Deeply Disturbed: −5.5 dB"></span><span class="rug" style="left:94.64%" data-tip="Heavyweight: −4.5 dB"></span><span class="rug" style="left:92.70%" data-tip="Kababies: −4.7 dB"></span><span class="rug" style="left:5.36%" data-tip="Spitfire: −13.7 dB"></span><span class="me" style="left:23.80%" data-tip="This track: −11.8 dB"></span></div></td>
+          <td class="where"><span class="v">narrower than most</span><span class="r">median −6.4 dB · range −13.7 to −4.5 dB</span></td></tr>
+        <tr id="m-width_high"><th scope="row"><span class="term" tabindex="0" data-tip="Side less mid from 1.8 to 18 kHz: hats, air, reverb and delay returns, wideners.">Width, highs</span></th><td class="val">−7.5 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −15.4 dB to −1.9 dB"></span><span class="iqr" style="left:69.51%;width:calc(84.72% - 69.51%)" data-tip="Their middle half: −5.7 dB to −3.4 dB"></span><span class="med" style="left:78.77%" data-tip="Their median: −4.3 dB"></span><span class="rug" style="left:56.94%" data-tip="Artillery: −7.6 dB"></span><span class="rug" style="left:86.71%" data-tip="Becoming Insane: −3.1 dB"></span><span class="rug" style="left:83.40%" data-tip="Cities of the Future: −3.6 dB"></span><span class="rug" style="left:74.14%" data-tip="Converting Vegetarians: −5 dB"></span><span class="rug" style="left:84.06%" data-tip="Deeply Disturbed: −3.5 dB"></span><span class="rug" style="left:73.48%" data-tip="Heavyweight: −5.1 dB"></span><span class="rug" style="left:94.64%" data-tip="Kababies: −1.9 dB"></span><span class="rug" style="left:5.36%" data-tip="Spitfire: −15.4 dB"></span><span class="me" style="left:57.61%" data-tip="This track: −7.5 dB"></span></div></td>
+          <td class="where"><span class="v">narrower than most</span><span class="r">median −4.3 dB · range −15.4 to −1.9 dB</span></td></tr>
+        </tbody>
+      </table>
+      <h3>Groove</h3>
+      <table class="metrics">
+        <thead><tr><th>Measure</th><th>This track</th><th>Against the references</th><th></th></tr></thead>
+        <tbody>
+        <tr id="m-tempo"><th scope="row"><span class="term" tabindex="0" data-tip="The beat the bar-wise numbers use: a song&#x27;s own, or for a recording its kick&#x27;s (95 to 190 BPM, from how its rises in the lows line up a beat, two and four apart).">Tempo</span></th><td class="val">145 BPM</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 99.8 BPM to 160.6 BPM"></span><span class="iqr" style="left:61.75%;width:calc(71.29% - 61.75%)" data-tip="Their middle half: 138.2 BPM to 144.7 BPM"></span><span class="med" style="left:67.92%" data-tip="Their median: 142.4 BPM"></span><span class="rug" style="left:5.36%" data-tip="Artillery: 99.8 BPM"></span><span class="rug" style="left:71.29%" data-tip="Becoming Insane: 144.7 BPM"></span><span class="rug" style="left:71.29%" data-tip="Cities of the Future: 144.7 BPM"></span><span class="rug" style="left:94.64%" data-tip="Converting Vegetarians: 160.6 BPM"></span><span class="rug" style="left:71.29%" data-tip="Deeply Disturbed: 144.7 BPM"></span><span class="rug" style="left:64.54%" data-tip="Heavyweight: 140.1 BPM"></span><span class="rug" style="left:61.31%" data-tip="Kababies: 137.9 BPM"></span><span class="rug" style="left:61.89%" data-tip="Spitfire: 138.3 BPM"></span><span class="me" style="left:71.73%" data-tip="This track: 145 BPM"></span></div></td>
+          <td class="where"><span class="v">faster than most</span><span class="r">median 142.4 BPM · range 99.8 to 160.6 BPM</span></td></tr>
+        <tr id="m-onsets"><th scope="row"><span class="term" tabindex="0" data-tip="Attacks a second in the main section (peaks of the spectral flux): how busy the rhythm is.">Onsets</span></th><td class="val">8.33/s</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 5.17/s to 9.5/s"></span><span class="iqr" style="left:18.55%;width:calc(66.19% - 18.55%)" data-tip="Their middle half: 5.81/s to 8.12/s"></span><span class="med" style="left:25.98%" data-tip="Their median: 6.17/s"></span><span class="rug" style="left:5.36%" data-tip="Artillery: 5.17/s"></span><span class="rug" style="left:7.01%" data-tip="Becoming Insane: 5.25/s"></span><span class="rug" style="left:94.64%" data-tip="Cities of the Future: 9.5/s"></span><span class="rug" style="left:62.06%" data-tip="Converting Vegetarians: 7.92/s"></span><span class="rug" style="left:78.56%" data-tip="Deeply Disturbed: 8.72/s"></span><span class="rug" style="left:27.63%" data-tip="Heavyweight: 6.25/s"></span><span class="rug" style="left:24.12%" data-tip="Kababies: 6.08/s"></span><span class="rug" style="left:22.47%" data-tip="Spitfire: 6/s"></span><span class="me" style="left:70.52%" data-tip="This track: 8.33/s"></span></div></td>
+          <td class="where"><span class="v">busier than most</span><span class="r">median 6.17/s · range 5.17 to 9.5/s</span></td></tr>
+        <tr id="m-gaps_low"><th scope="row"><span class="term" tabindex="0" data-tip="The share of 5 ms frames whose 30–200 Hz level (mid) is over 20 dB under its loud level (95th percentile): the room the kick and bass leave each other.">Holes, lows</span></th><td class="val">17%</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 10.6% to 56.9%"></span><span class="iqr" style="left:9.41%;width:calc(50.10% - 9.41%)" data-tip="Their middle half: 12.7% to 33.8%"></span><span class="med" style="left:31.78%" data-tip="Their median: 24.3%"></span><span class="rug" style="left:24.26%" data-tip="Artillery: 20.4%"></span><span class="rug" style="left:39.30%" data-tip="Becoming Insane: 28.2%"></span><span class="rug" style="left:40.45%" data-tip="Cities of the Future: 28.8%"></span><span class="rug" style="left:79.22%" data-tip="Converting Vegetarians: 48.9%"></span><span class="rug" style="left:94.64%" data-tip="Deeply Disturbed: 56.9%"></span><span class="rug" style="left:8.44%" data-tip="Heavyweight: 12.2%"></span><span class="rug" style="left:9.60%" data-tip="Kababies: 12.8%"></span><span class="rug" style="left:5.36%" data-tip="Spitfire: 10.6%"></span><span class="me" style="left:17.70%" data-tip="This track: 17%"></span></div></td>
+          <td class="where"><span class="v">typical</span><span class="r">median 24.3% · range 10.6 to 56.9%</span></td></tr>
+        <tr id="m-gaps_mid"><th scope="row"><span class="term" tabindex="0" data-tip="The same for 300 Hz–3 kHz: gates and short notes open holes; pads, reverb and delay fill them.">Holes, mids</span></th><td class="val">12.8%</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 1.3% to 48.3%"></span><span class="iqr" style="left:18.28%;width:calc(46.39% - 18.28%)" data-tip="Their middle half: 8.1% to 22.9%"></span><span class="med" style="left:26.63%" data-tip="Their median: 12.5%"></span><span class="rug" style="left:18.47%" data-tip="Artillery: 8.2%"></span><span class="rug" style="left:22.64%" data-tip="Becoming Insane: 10.4%"></span><span class="rug" style="left:30.43%" data-tip="Cities of the Future: 14.5%"></span><span class="rug" style="left:65.77%" data-tip="Converting Vegetarians: 33.1%"></span><span class="rug" style="left:94.64%" data-tip="Deeply Disturbed: 48.3%"></span><span class="rug" style="left:5.36%" data-tip="Heavyweight: 1.3%"></span><span class="rug" style="left:17.90%" data-tip="Kababies: 7.9%"></span><span class="rug" style="left:39.93%" data-tip="Spitfire: 19.5%"></span><span class="me" style="left:27.20%" data-tip="This track: 12.8%"></span></div></td>
+          <td class="where"><span class="v">typical</span><span class="r">median 12.5% · range 1.3 to 48.3%</span></td></tr>
+        <tr id="m-gaps_high"><th scope="row"><span class="term" tabindex="0" data-tip="The same for 5–16 kHz: hats and noise against silence.">Holes, highs</span></th><td class="val">18.6%</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 15.7% to 79.1%"></span><span class="iqr" style="left:29.30%;width:calc(69.01% - 29.30%)" data-tip="Their middle half: 32.7% to 60.9%"></span><span class="med" style="left:37.04%" data-tip="Their median: 38.2%"></span><span class="rug" style="left:27.75%" data-tip="Artillery: 31.6%"></span><span class="rug" style="left:40.85%" data-tip="Becoming Insane: 40.9%"></span><span class="rug" style="left:69.01%" data-tip="Cities of the Future: 60.9%"></span><span class="rug" style="left:29.86%" data-tip="Converting Vegetarians: 33.1%"></span><span class="rug" style="left:69.15%" data-tip="Deeply Disturbed: 61%"></span><span class="rug" style="left:5.36%" data-tip="Heavyweight: 15.7%"></span><span class="rug" style="left:33.10%" data-tip="Kababies: 35.4%"></span><span class="rug" style="left:94.64%" data-tip="Spitfire: 79.1%"></span><span class="me" style="left:9.44%" data-tip="This track: 18.6%"></span></div></td>
+          <td class="where"><span class="v">fewer holes than most</span><span class="r">median 38.2% · range 15.7 to 79.1%</span></td></tr>
+        </tbody>
+      </table>
+      <h3>Sound design</h3>
+      <table class="metrics">
+        <thead><tr><th>Measure</th><th>This track</th><th>Against the references</th><th></th></tr></thead>
+        <tbody>
+        <tr id="m-decay"><th scope="row"><span class="term" tabindex="0" data-tip="How long 1–6 kHz takes to fall 20 dB after a hit, from the slope of each fall before the next hit, the median: the most frequent hits&#x27; envelopes and whatever rings after them.">Decay</span></th><td class="val">64 ms</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 30 ms to 99 ms"></span><span class="iqr" style="left:42.88%;width:calc(81.70% - 42.88%)" data-tip="Their middle half: 59 ms to 89 ms"></span><span class="med" style="left:67.47%" data-tip="Their median: 78 ms"></span><span class="rug" style="left:90.76%" data-tip="Artillery: 96 ms"></span><span class="rug" style="left:77.82%" data-tip="Becoming Insane: 86 ms"></span><span class="rug" style="left:50.65%" data-tip="Cities of the Future: 65 ms"></span><span class="rug" style="left:58.41%" data-tip="Converting Vegetarians: 71 ms"></span><span class="rug" style="left:18.30%" data-tip="Deeply Disturbed: 40 ms"></span><span class="rug" style="left:94.64%" data-tip="Heavyweight: 99 ms"></span><span class="rug" style="left:75.23%" data-tip="Kababies: 84 ms"></span><span class="rug" style="left:5.36%" data-tip="Spitfire: 30 ms"></span><span class="me" style="left:49.35%" data-tip="This track: 64 ms"></span></div></td>
+          <td class="where"><span class="v">typical</span><span class="r">median 78 ms · range 30 to 99 ms</span></td></tr>
+        <tr id="m-ambience"><th scope="row"><span class="term" tabindex="0" data-tip="The side&#x27;s quiet level in 1–6 kHz (its 25th percentile over 5 ms frames) under the mid&#x27;s loud level (95th): the diffuse sound that stays between the hits, from reverb, stereo delays and wide pads. Low is dry.">Ambience</span></th><td class="val">−20.2 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: −33.3 dB to −15.1 dB"></span><span class="iqr" style="left:26.94%;width:calc(86.30% - 26.94%)" data-tip="Their middle half: −28.9 dB to −16.8 dB"></span><span class="med" style="left:73.55%" data-tip="Their median: −19.4 dB"></span><span class="rug" style="left:69.62%" data-tip="Artillery: −20.2 dB"></span><span class="rug" style="left:94.64%" data-tip="Becoming Insane: −15.1 dB"></span><span class="rug" style="left:77.96%" data-tip="Cities of the Future: −18.5 dB"></span><span class="rug" style="left:19.58%" data-tip="Converting Vegetarians: −30.4 dB"></span><span class="rug" style="left:29.40%" data-tip="Deeply Disturbed: −28.4 dB"></span><span class="rug" style="left:91.70%" data-tip="Heavyweight: −15.7 dB"></span><span class="rug" style="left:84.34%" data-tip="Kababies: −17.2 dB"></span><span class="rug" style="left:5.36%" data-tip="Spitfire: −33.3 dB"></span><span class="me" style="left:69.62%" data-tip="This track: −20.2 dB"></span></div></td>
+          <td class="where"><span class="v">typical</span><span class="r">median −19.4 dB · range −33.3 to −15.1 dB</span></td></tr>
+        <tr id="m-motion"><th scope="row"><span class="term" tabindex="0" data-tip="How much the spectrum changes in 20 ms: the mean change of six octave bands from 250 Hz to 16 kHz, the median over loud frames. Filter movement, modulation and cuts raise it.">Motion</span></th><td class="val">4.37 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 2.85 dB to 5.62 dB"></span><span class="iqr" style="left:21.80%;width:calc(67.57% - 21.80%)" data-tip="Their middle half: 3.36 dB to 4.78 dB"></span><span class="med" style="left:44.36%" data-tip="Their median: 4.06 dB"></span><span class="rug" style="left:39.85%" data-tip="Artillery: 3.92 dB"></span><span class="rug" style="left:19.22%" data-tip="Becoming Insane: 3.28 dB"></span><span class="rug" style="left:61.12%" data-tip="Cities of the Future: 4.58 dB"></span><span class="rug" style="left:48.87%" data-tip="Converting Vegetarians: 4.2 dB"></span><span class="rug" style="left:94.64%" data-tip="Deeply Disturbed: 5.62 dB"></span><span class="rug" style="left:5.36%" data-tip="Heavyweight: 2.85 dB"></span><span class="rug" style="left:22.76%" data-tip="Kababies: 3.39 dB"></span><span class="rug" style="left:87.23%" data-tip="Spitfire: 5.39 dB"></span><span class="me" style="left:54.35%" data-tip="This track: 4.37 dB"></span></div></td>
+          <td class="where"><span class="v">typical</span><span class="r">median 4.06 dB · range 2.85 to 5.62 dB</span></td></tr>
+        <tr id="m-hf_noise"><th scope="row"><span class="term" tabindex="0" data-tip="The flatness of 4–16 kHz (the median of 50 ms frames): 1 for noise, near 0 for tones. Hats, cymbals and noise sweeps raise it; bright synths lower it.">Noise in the highs</span></th><td class="val">0.59</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 0.159 to 0.625"></span><span class="iqr" style="left:49.23%;width:calc(86.02% - 49.23%)" data-tip="Their middle half: 0.388 to 0.58"></span><span class="med" style="left:75.87%" data-tip="Their median: 0.527"></span><span class="rug" style="left:91.19%" data-tip="Artillery: 0.607"></span><span class="rug" style="left:75.87%" data-tip="Becoming Insane: 0.527"></span><span class="rug" style="left:94.64%" data-tip="Cities of the Future: 0.625"></span><span class="rug" style="left:7.46%" data-tip="Converting Vegetarians: 0.17"></span><span class="rug" style="left:84.30%" data-tip="Deeply Disturbed: 0.571"></span><span class="rug" style="left:75.67%" data-tip="Heavyweight: 0.526"></span><span class="rug" style="left:63.22%" data-tip="Kababies: 0.461"></span><span class="rug" style="left:5.36%" data-tip="Spitfire: 0.159"></span><span class="me" style="left:87.94%" data-tip="This track: 0.59"></span></div></td>
+          <td class="where"><span class="v">noisier than most</span><span class="r">median 0.527 · range 0.159 to 0.625</span></td></tr>
+        </tbody>
+      </table>
+      <h3>Composition</h3>
+      <table class="metrics">
+        <thead><tr><th>Measure</th><th>This track</th><th>Against the references</th><th></th></tr></thead>
+        <tbody>
+        <tr id="m-evolution"><th scope="row"><span class="term" tabindex="0" data-tip="How much each bar differs from the one before, 16th by 16th and octave by octave: the mean change of the loud cells, against an exact loop&#x27;s 0. Automation, variations, fills and new parts raise it.">Bar to bar</span></th><td class="val">2.01 dB</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:8.24%;width:calc(94.64% - 8.24%)" data-tip="The references' range: 2.19 dB to 7.59 dB"></span><span class="iqr" style="left:28.08%;width:calc(55.44% - 28.08%)" data-tip="Their middle half: 3.43 dB to 5.14 dB"></span><span class="med" style="left:44.72%" data-tip="Their median: 4.47 dB"></span><span class="rug" style="left:30.00%" data-tip="Artillery: 3.55 dB"></span><span class="rug" style="left:52.88%" data-tip="Becoming Insane: 4.98 dB"></span><span class="rug" style="left:8.24%" data-tip="Cities of the Future: 2.19 dB"></span><span class="rug" style="left:94.64%" data-tip="Converting Vegetarians: 7.59 dB"></span><span class="rug" style="left:62.80%" data-tip="Deeply Disturbed: 5.6 dB"></span><span class="rug" style="left:38.64%" data-tip="Heavyweight: 4.09 dB"></span><span class="rug" style="left:50.96%" data-tip="Kababies: 4.86 dB"></span><span class="rug" style="left:22.00%" data-tip="Spitfire: 3.05 dB"></span><span class="me concern" style="left:5.36%" data-tip="This track: 2.01 dB"></span></div></td>
+          <td class="where"><span class="v"><span class="flag concern">more repetitive than all 8</span></span><span class="r">median 4.47 dB · range 2.19 to 7.59 dB</span></td></tr>
+        <tr id="m-harmony"><th scope="row"><span class="term" tabindex="0" data-tip="How far the chroma moves from bar to bar (1 less the cosine of consecutive bars&#x27; chroma): 0 for a pedal on one note.">Harmonic motion</span></th><td class="val">0.024</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 0.005 to 0.18"></span><span class="iqr" style="left:9.95%;width:calc(26.28% - 9.95%)" data-tip="Their middle half: 0.014 to 0.046"></span><span class="med" style="left:17.09%" data-tip="Their median: 0.028"></span><span class="rug" style="left:16.07%" data-tip="Artillery: 0.026"></span><span class="rug" style="left:11.48%" data-tip="Becoming Insane: 0.017"></span><span class="rug" style="left:5.36%" data-tip="Cities of the Future: 0.005"></span><span class="rug" style="left:18.11%" data-tip="Converting Vegetarians: 0.03"></span><span class="rug" style="left:23.21%" data-tip="Deeply Disturbed: 0.04"></span><span class="rug" style="left:94.64%" data-tip="Heavyweight: 0.18"></span><span class="rug" style="left:35.97%" data-tip="Kababies: 0.065"></span><span class="rug" style="left:5.36%" data-tip="Spitfire: 0.005"></span><span class="me" style="left:15.05%" data-tip="This track: 0.024"></span></div></td>
+          <td class="where"><span class="v">typical</span><span class="r">median 0.028 · range 0.005 to 0.18</span></td></tr>
+        <tr id="m-focus"><th scope="row"><span class="term" tabindex="0" data-tip="The share of the main section&#x27;s chroma on its three strongest pitch classes: high for a riff on a few notes over a root, lower for chromatic or noisy material.">Tonal focus</span></th><td class="val">0.458</td>
+          <td><div class="strip"><span class="axis"></span><span class="rng" style="left:5.36%;width:calc(94.64% - 5.36%)" data-tip="The references' range: 0.369 to 0.575"></span><span class="iqr" style="left:7.96%;width:calc(40.90% - 7.96%)" data-tip="Their middle half: 0.375 to 0.451"></span><span class="med" style="left:16.19%" data-tip="Their median: 0.394"></span><span class="rug" style="left:20.09%" data-tip="Artillery: 0.403"></span><span class="rug" style="left:47.83%" data-tip="Becoming Insane: 0.467"></span><span class="rug" style="left:5.36%" data-tip="Cities of the Future: 0.369"></span><span class="rug" style="left:7.96%" data-tip="Converting Vegetarians: 0.375"></span><span class="rug" style="left:12.29%" data-tip="Deeply Disturbed: 0.385"></span><span class="rug" style="left:7.52%" data-tip="Heavyweight: 0.374"></span><span class="rug" style="left:94.64%" data-tip="Kababies: 0.575"></span><span class="rug" style="left:38.73%" data-tip="Spitfire: 0.446"></span><span class="me" style="left:43.93%" data-tip="This track: 0.458"></span></div></td>
+          <td class="where"><span class="v">more focused than most</span><span class="r">median 0.394 · range 0.369 to 0.575</span></td></tr>
+        </tbody>
+      </table>
+  </section>
+
+  <footer>How it is measured: <code>daw assess</code>, from <code>daw-analyse</code>'s <code>profile</code>. The
+  references are 30 s previews, measured once; only their numbers are kept. Built from the song file on 2026-10-31.</footer>
+</main>
+<div id="tip" role="tooltip" hidden></div>
+<script>
+  for (const song of document.querySelectorAll(".song")) {
+    const audio = song.querySelector("audio");
+    const view = song.querySelector(".spectro");
+    const head = view.querySelector(".playhead");
+    const secs = () => (isFinite(audio.duration) && audio.duration) || +view.dataset.secs;
+    let frame = 0;
+    const draw = () => {
+      head.hidden = audio.currentTime === 0 && audio.paused;
+      view.style.setProperty("--t", Math.min(1, audio.currentTime / secs()));
+      frame = audio.paused ? 0 : requestAnimationFrame(draw);
+    };
+    audio.addEventListener("play", () => {
+      for (const other of document.querySelectorAll("audio")) if (other !== audio) other.pause();
+      cancelAnimationFrame(frame);
+      draw();
+    });
+    for (const ev of ["pause", "seeked", "timeupdate", "ended"]) audio.addEventListener(ev, () => frame || draw());
+    // a click on the picture plays from that point
+    view.addEventListener("click", (e) => {
+      const r = view.getBoundingClientRect();
+      const x0 = +getComputedStyle(view).getPropertyValue("--x0"), xw = +getComputedStyle(view).getPropertyValue("--xw");
+      const t = ((e.clientX - r.left) / r.width - x0) / xw;
+      if (t < 0 || t > 1) return;
+      audio.currentTime = t * secs();
+      audio.play();
+    });
+  }
+
+  // one tooltip for everything with data-tip, on hover and on focus; it adds to what the page says, never gates it
+  const tip = document.getElementById("tip");
+  const place = (x, y) => {
+    const r = tip.getBoundingClientRect();
+    let left = x + 14, top = y + 16;
+    if (left + r.width > innerWidth - 8) left = Math.max(8, x - r.width - 14);
+    if (top + r.height > innerHeight - 8) top = y - r.height - 12;
+    tip.style.left = left + "px"; tip.style.top = top + "px";
+  };
+  const show = (text, x, y) => { tip.textContent = text; tip.hidden = false; place(x, y); };
+  document.addEventListener("pointerover", (e) => {
+    const el = e.target.closest("[data-tip]");
+    if (el) show(el.dataset.tip, e.clientX, e.clientY);
+    else if (!e.target.closest("#tonal")) tip.hidden = true;
+  });
+  document.addEventListener("pointermove", (e) => { if (!tip.hidden) place(e.clientX, e.clientY); });
+  document.addEventListener("focusin", (e) => {
+    const el = e.target.closest("[data-tip]");
+    if (el) { const r = el.getBoundingClientRect(); show(el.dataset.tip, r.left, r.bottom); }
+  });
+  document.addEventListener("focusout", () => { tip.hidden = true; });
+
+  // the tonal balance: this track's third-octave curve over the references' range, middle half and median
+  const box = document.getElementById("tonal");
+  const T = JSON.parse(document.getElementById("tonal-data").textContent);
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (name, attrs, parent) => {
+    const n = document.createElementNS(NS, name);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  };
+  const dB = (v) => (v == null ? "–" : (Math.round(v * 10) / 10).toString().replace("-", "\u2212") + " dB");
+  function drawTonal() {
+    const W = box.clientWidth, H = box.clientHeight, m = { l: 34, r: 8, t: 20, b: 24 };
+    const lx = Math.log10(T.lo), span = Math.log10(T.hi) - lx;
+    const x = (hz) => m.l + ((Math.log10(hz) - lx) / span) * (W - m.l - m.r);
+    const vals = [...T.me, ...T.min, ...T.max].filter((v) => v != null);
+    const lo = Math.max(-70, Math.floor(Math.min(...vals) / 10) * 10), hi = Math.ceil(Math.max(...vals) / 10) * 10;
+    const y = (v) => m.t + ((hi - Math.max(lo, v)) / (hi - lo)) * (H - m.t - m.b);
+    box.replaceChildren();
+    const svg = el("svg", { width: W, height: H, role: "img", "aria-label": T.label }, box);
+    for (let v = hi; v >= lo; v -= 10) {
+      el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: "#2c2c33" }, svg);
+      el("text", { x: m.l - 6, y: y(v) + 4, "text-anchor": "end", fill: "#898781", "font-size": 11 }, svg)
+        .textContent = String(v).replace("-", "\u2212");
+    }
+    el("text", { x: m.l - 6, y: m.t - 8, "text-anchor": "end", fill: "#898781", "font-size": 11 }, svg).textContent = "dB";
+    // the zones the tonal metrics sum, and their names when there is room
+    let from = T.lo;
+    for (const [name, edge] of T.zones) {
+      if (edge < T.hi) el("line", { x1: x(edge), x2: x(edge), y1: m.t, y2: H - m.b, stroke: "#2c2c33" }, svg);
+      if (W >= 560)
+        el("text", { x: (x(from) + x(Math.min(edge, T.hi))) / 2, y: m.t - 8, "text-anchor": "middle", fill: "#898781", "font-size": 11 }, svg)
+          .textContent = name;
+      from = edge;
+    }
+    for (const [hz, text] of [[50, "50"], [100, "100"], [200, "200"], [500, "500"], [1000, "1k"], [2000, "2k"], [5000, "5k"], [10000, "10k"]])
+      el("text", { x: x(hz), y: H - m.b + 16, "text-anchor": "middle", fill: "#898781", "font-size": 11 }, svg).textContent = text;
+    el("text", { x: W - m.r, y: H - m.b + 16, "text-anchor": "end", fill: "#898781", "font-size": 11 }, svg).textContent = "Hz";
+    const idx = T.hz.map((_, i) => i).filter((i) => T.min[i] != null && T.max[i] != null);
+    const pts = (key, list) => list.map((i) => `${x(T.hz[i]).toFixed(1)},${y(T[key][i]).toFixed(1)}`);
+    const area = (top, bot) => "M" + pts(top, idx).join("L") + "L" + pts(bot, [...idx].reverse()).join("L") + "Z";
+    el("path", { d: area("max", "min"), fill: "rgba(195,194,183,0.09)" }, svg);
+    el("path", { d: area("q3", "q1"), fill: "rgba(195,194,183,0.22)" }, svg);
+    el("polyline", { points: pts("med", idx).join(" "), fill: "none", stroke: "var(--ref)", "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round", opacity: 0.8 }, svg);
+    const mine = T.hz.map((_, i) => i).filter((i) => T.me[i] != null);
+    el("polyline", { points: pts("me", mine).join(" "), fill: "none", stroke: "var(--track)", "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }, svg);
+    // hover: the nearest band
+    const guide = el("line", { y1: m.t, y2: H - m.b, stroke: "#5a5a63", visibility: "hidden" }, svg);
+    const dotR = el("circle", { r: 4, fill: "var(--ref)", stroke: "var(--panel)", "stroke-width": 2, visibility: "hidden" }, svg);
+    const dotM = el("circle", { r: 5, fill: "var(--track)", stroke: "var(--panel)", "stroke-width": 2, visibility: "hidden" }, svg);
+    const hit = el("rect", { x: m.l, y: 0, width: W - m.l - m.r, height: H, fill: "transparent" }, svg);
+    const hide = () => { for (const n of [guide, dotR, dotM]) n.setAttribute("visibility", "hidden"); tip.hidden = true; };
+    hit.addEventListener("pointermove", (e) => {
+      const r = svg.getBoundingClientRect(), px = e.clientX - r.left;
+      let best = 0;
+      T.hz.forEach((hz, i) => { if (Math.abs(x(hz) - px) < Math.abs(x(T.hz[best]) - px)) best = i; });
+      const i = best, gx = x(T.hz[i]);
+      guide.setAttribute("x1", gx); guide.setAttribute("x2", gx); guide.setAttribute("visibility", "visible");
+      for (const [dot, key] of [[dotR, "med"], [dotM, "me"]]) {
+        if (T[key][i] == null) { dot.setAttribute("visibility", "hidden"); continue; }
+        dot.setAttribute("cx", gx); dot.setAttribute("cy", y(T[key][i])); dot.setAttribute("visibility", "visible");
+      }
+      tip.innerHTML = "";
+      const line = (text, cls) => { const d = document.createElement("div"); d.textContent = text; if (cls) d.className = cls; tip.appendChild(d); };
+      line(T.names[i] + " Hz");
+      line("This track " + dB(T.me[i]));
+      line("References: median " + dB(T.med[i]) + ", middle half " + dB(T.q1[i]) + " to " + dB(T.q3[i]), "d");
+      tip.hidden = false;
+      place(e.clientX, e.clientY);
+    });
+    hit.addEventListener("pointerleave", hide);
+  }
+  drawTonal();
+  new ResizeObserver(() => drawTonal()).observe(box);
+</script>
+</body>
+</html>
