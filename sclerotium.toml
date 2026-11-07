@@ -1,0 +1,715 @@
+# "Sclerotium": a hard knot of fungus that sits dormant under the ground, then fruits.
+#
+# Written against Rhizomorph's verdict: its kick and bass lacked Scorb's round warmth and punch, and it lacked
+# licks, rhythmic sequences and sampling. So the kick and bass are measured against Scorb's, hit by hit: a clean
+# sine that falls slowly through 100 Hz and holds on its note, the bass on a rest-then-two gallop, 6 dB under it.
+#
+#   1-16    the bed: wind, chords, a voice; the hook far off from 9
+#   17-40   the groove: the kick, the 7-step sequence over it, hats, the bass opening, claps and the 5-step metal
+#   41-56   the first build: the hook under a closing filter, "listen" chopped, a roll, a freeze, a silence
+#   57-88   the first drop: hook; talk answers; the acid lick and ride; stripped to the bass and sequence; all of it
+#   89-104  the break: no kick, chords, the voice and the hook chopped as samples
+#   105-120 the second build, ending on "do not wake it" alone
+#   121-152 the second drop: the harmony moves A, Bb, A, F, E; the sync lick over it, then everything
+#   153-168 pared away, to a tape stop
+format = "daw-song 1"
+title = "Sclerotium"
+publish = true
+tempo = 145
+meter = "4/4"
+seed = 77
+
+[instruments]
+kick = { synth = "kick", base = "G1", bus = "punch" }
+bass = { synth = "bass", bus = "bass" }
+hat = { synth = "hat", base = "F6", gain = 0, pan = 0.2, bus = "drums" }
+ohat = { synth = "ohat", base = "F6", gain = 1, pan = -0.1, bus = "drums" }
+ride = { sound = "ride", gain = -16, pan = 0.3, bus = "drums", cut = true, release = 0.3 }
+clap = { sound = "clap", gain = -9, bus = "drums" }
+snare = { synth = "snare", base = "D3", gain = -5, bus = "drums" }
+roller = { synth = "snare", base = "D3", bus = "roll" }
+tom = { sound = "tom", gain = -9, bus = "drums" }
+crash = { sound = "crash", gain = -15, bus = "drums" }
+rcrash = { sound = "crash", gain = -13, bus = "drums", reverse = true }
+impact = { sound = "impact", gain = -10 }
+hook = { synth = "hook", gain = -1, bus = "lick", glide = 0.04 }
+far = { synth = "hook", bus = "far", octave = -1, glide = 0.04 }
+talk = { synth = "talk", gain = -1, bus = "talk", glide = 0.05 }
+acid = { synth = "acid", gain = -4, bus = "acid", glide = 0.06 }
+rip = { synth = "rip", gain = -6, bus = "rip", glide = 0.05 }
+seq = { synth = "seq", gain = -2, bus = "seq" }
+metal = { sound = "metal", gain = -18, bus = "metal" }
+clang = { sample = "samples/sclerotium/clang.flac", base = "A3", gain = -10, bus = "perc", cut = true, release = 0.2 }
+rattle = { sample = "samples/sclerotium/rattle.flac", base = "C4", gain = -11, bus = "perc" }
+voice1 = { sample = "samples/sclerotium/voice1.flac", gain = -3, bus = "voice" }
+voice2 = { sample = "samples/sclerotium/voice2.flac", gain = -3, bus = "voice" }
+voice3 = { sample = "samples/sclerotium/voice3.flac", gain = -3, bus = "voice" }
+voice4 = { sample = "samples/sclerotium/voice4.flac", gain = -2, bus = "voice", cut = true, release = 0.02 }
+whisper = { sample = "samples/sclerotium/whisper.flac", gain = -6, bus = "voice" }
+breath = { sample = "samples/sclerotium/breath.flac", gain = -8, bus = "voice" }
+chop1 = { sample = "samples/sclerotium/chop1.flac", base = "A3", gain = -4, bus = "chop", cut = true, release = 0.03 }
+chop2 = { sample = "samples/sclerotium/chop2.flac", base = "A3", gain = -4, bus = "chop", cut = true, release = 0.03 }
+pad = { synth = "pad", gain = -10, bus = "pads" }
+haze = { synth = "haze", gain = -3, bus = "pads" }
+whistle = { synth = "whistle", gain = -8, bus = "whistle", glide = 0.2, vibrato = { depth = 0.25, rate = 5, delay = 0.4 } }
+wind = { synth = "wind", gain = 4, bus = "air" }
+air = { synth = "air", bus = "air", gain = -13 }
+riser = { synth = "riser", bus = "build" }
+fall = { synth = "fall", bus = "build" }
+
+# --- the low end, measured against Scorb's ----------------------------------------------------------------
+
+# round: a clean sine falling slowly through 100 Hz (75 ms) and holding on its note, a tick on top; 200 ms long
+[synths.kick]
+osc = [{ wave = "sine", to = "dry" }, { wave = "noise", level = -70 }]
+filter = { type = "band12", cutoff = 3500, resonance = 0.2 }
+shape = { drive = 1.5, asym = 0.05 }
+level = -1
+env = [
+  { attack = 0.0005, hold = 0.1, decay = 0.09, curve = 1, release = 0.005 },  # env1: the amp
+  { decay = 0.009, curve = 5 },                                               # env2: the attack's sweep
+  { decay = 0.075, curve = 3 },                                               # env3: the body's
+  { decay = 0.004 },                                                          # env4: the tick
+]
+mod = [["env2", "pitch", 26], ["env3", "pitch", 22], ["env4", "osc2.level", 62]]
+
+# warm: a sine and a triangle for the body, one saw through a soft lowpass, saturated; it speaks and falls away
+# by the next 16th, so the line has gaps
+[synths.bass]
+osc = [
+  { wave = "sine", level = -1, to = "dry" },
+  { wave = "triangle", level = -8, to = "dry" },
+  { wave = "saw", level = -3 },
+]
+filter = { type = "low24", cutoff = 650, resonance = 0.15 }
+shape = { drive = 6, asym = 0.2 }
+level = -6
+env = [
+  { attack = 0.002, hold = 0.018, decay = 0.07, curve = -1, release = 0.008 },
+  { decay = 0.05, curve = 3 },
+]
+mod = [["env2", "filter.cutoff", 1.6], ["velocity", "filter.cutoff", 0.6], ["env2", "pitch", 0.15]]
+
+# --- the licks ---------------------------------------------------------------------------------------------
+
+# the hook: a pulse moved by a sine two octaves up, and a saw, through a driven lowpass; each note a bark of FM
+[synths.hook]
+osc = [
+  { wave = "sine", octave = 2, mute = true },
+  { wave = "pulse", width = 0.3, fm = 1.2, fm_by = 1 },
+  { wave = "saw", detune = 8, level = -4 },
+  { wave = "sine", octave = -1, level = -10, to = "dry" },
+]
+filter = { type = "low24", cutoff = 1000, resonance = 0.45, drive = 6 }
+shape = { fold = 3, mix = 0.45 }
+level = -8
+env = [
+  { attack = 0.002, decay = 0.18, sustain = 0.35, release = 0.05 },
+  { decay = 0.09, curve = 3 },
+]
+mod = [["env2", "filter.cutoff", 3], ["env2", "osc2.fm", 6], ["env2", "pitch", 0.5], ["velocity", "filter.cutoff", 0.8]]
+
+# the talking answer: saws through a vowel that opens and closes in each note
+[synths.talk]
+osc = [
+  { wave = "saw", detune = 7 },
+  { wave = "saw", detune = -7, phase = 0.4 },
+  { wave = "pulse", width = 0.25, octave = 1, level = -8 },
+]
+filter = { type = "formant", vowel = 3.6, resonance = 0.5 }
+filter2 = { type = "low12", cutoff = 4500, resonance = 0.1 }
+shape = { drive = 6, fold = 2, mix = 0.4 }
+level = -5
+env = [
+  { attack = 0.003, decay = 0.3, sustain = 0.7, release = 0.06 },
+  { attack = 0.04, decay = 0.2, curve = 2 },
+]
+lfo = [{ shape = "triangle", rate = "s", delay = 0.12, fade = 0.15 }]
+mod = [["env2", "filter.vowel", -3.6], ["lfo1", "filter.vowel", 0.5]]
+
+# the 7-step sequence: a saw and a pulse snapping through a resonant lowpass; the accents open it
+[synths.seq]
+osc = [{ wave = "saw" }, { wave = "pulse", width = 0.4, level = -6, detune = 6 }]
+filter = { type = "low24", cutoff = 500, resonance = 0.62, drive = 8 }
+shape = { drive = 4, asym = 0.2 }
+level = -9
+env = [{ attack = 0.001, decay = 0.1, curve = 2, release = 0.012 }, { decay = 0.07, curve = 3 }]
+mod = [["env2", "filter.cutoff", 2.5], ["velocity", "filter.cutoff", 2]]
+
+[synths.hat]
+osc = [
+  { wave = "noise", level = -5 },
+  { wave = "pulse", width = 0.4, level = -6 },
+  { wave = "pulse", width = 0.4, semi = 6, detune = 31, level = -8 },
+  { wave = "pulse", width = 0.5, semi = 15, detune = -17, level = -9, fm = 1.5, fm_by = 2 },
+]
+filter = { type = "high24", cutoff = 7500, resonance = 0.25 }
+level = -12
+env = [{ attack = 0.0005, decay = 0.05, curve = 4, release = 0.01 }]
+mod = [["random", "filter.cutoff", 0.25], ["random", "level", 1.5], ["velocity", "level", 6]]
+
+[synths.ohat]
+osc = [
+  { wave = "noise", level = -5 },
+  { wave = "pulse", width = 0.4, level = -6 },
+  { wave = "pulse", width = 0.4, semi = 6, detune = 31, level = -8 },
+  { wave = "pulse", width = 0.5, semi = 15, detune = -17, level = -9, fm = 1.5, fm_by = 2 },
+]
+filter = { type = "high24", cutoff = 6500, resonance = 0.3 }
+level = -12
+env = [{ attack = 0.002, decay = 0.2, curve = 3, release = 0.02 }]
+mod = [["random", "filter.cutoff", 0.2], ["velocity", "level", 6]]
+
+[synths.snare]
+osc = [
+  { wave = "triangle", level = -4, to = "dry" },
+  { wave = "noise" },
+]
+filter = { type = "band12", cutoff = 3500, resonance = 0.3 }
+level = -8
+env = [
+  { attack = 0.0005, decay = 0.13, curve = 4, release = 0.02 },
+  { decay = 0.025, curve = 4 },
+]
+mod = [["env2", "pitch", 10], ["velocity", "level", 8], ["velocity", "filter.cutoff", 1]]
+
+[synths.acid]
+osc = [{ wave = "saw" }, { wave = "pulse", width = 0.5, level = -8, detune = 4 }]
+filter = { type = "low24", cutoff = 320, resonance = 0.72, drive = 8 }
+shape = { drive = 6, asym = 0.25 }
+level = -8
+env = [
+  { attack = 0.002, decay = 0.25, sustain = 0.6, release = 0.02 },
+  { decay = 0.14, curve = 3 },
+]
+mod = [
+  ["env2", "filter.cutoff", 3.2],
+  ["velocity", "filter.cutoff", 1.4],
+  ["note", "filter.cutoff", 0.4],
+  ["velocity", "filter.resonance", 0.12],
+]
+
+[synths.rip]
+osc = [
+  { wave = "saw", mute = true },
+  { wave = "saw", sync = true, semi = 12 },
+  { wave = "saw", detune = 9, level = -6 },
+]
+filter = { type = "low24", cutoff = 2500, resonance = 0.35, drive = 6 }
+shape = { drive = 4 }
+level = -10
+env = [
+  { attack = 0.004, decay = 0.3, sustain = 0.7, release = 0.05 },
+  { decay = 0.3, curve = 2 },
+]
+lfo = [{ shape = "sine", rate = 5.5, delay = 0.2, fade = 0.2 }]
+mod = [
+  ["env2", "osc2.pitch", 14],
+  ["lfo1", "osc2.pitch", 3],
+  ["env2", "filter.cutoff", 1.5],
+  ["note", "filter.cutoff", 0.5],
+]
+
+[synths.pad]
+osc = [
+  { wave = "saw", unison = { voices = 5, detune = 16, spread = 0.9 } },
+  { wave = "pulse", width = 0.35, octave = 1, level = -10, unison = { voices = 3, detune = 10, spread = 0.9 } },
+  { wave = "sine", octave = -1, level = -10 },
+]
+filter = { type = "low12", cutoff = 1100, resonance = 0.15 }
+level = -12
+env = [{ attack = 1.5, release = 3 }]
+lfo = [{ shape = "smooth", rate = "4w", free = true }]
+mod = [["lfo1", "filter.cutoff", 0.7]]
+
+[synths.haze]
+osc = [
+  { wave = "saw", unison = { voices = 4, detune = 22, spread = 0.5 } },
+  { wave = "noise", level = -14 },
+]
+filter = { type = "band12", cutoff = 900, resonance = 0.45 }
+level = -10
+env = [{ attack = 0.8, release = 1.5 }]
+lfo = [
+  { shape = "smooth", rate = "w", free = true },
+  { shape = "triangle", rate = "2w", free = true },
+]
+mod = [["lfo1", "filter.cutoff", 1.2], ["lfo2", "filter.resonance", 0.2], ["lfo2", "pan", 0.3]]
+
+[synths.whistle]
+osc = [
+  { wave = "sine", to = "dry" },
+  { wave = "triangle", octave = 1, level = -16, to = "dry" },
+  { wave = "noise", level = -8 },
+]
+filter = { type = "band12", cutoff = 262, resonance = 0.7 }
+level = -8
+env = [{ attack = 0.08, decay = 0.4, sustain = 0.8, release = 0.4 }]
+mod = [["note", "filter.cutoff", 1]]
+
+[synths.wind]
+osc = [{ wave = "noise" }]
+filter = { type = "band12", cutoff = 450, resonance = 0.75 }
+filter2 = { type = "band12", cutoff = 1300, resonance = 0.6 }
+filters = "parallel"
+level = -8
+env = [{ attack = 3, release = 4 }]
+lfo = [
+  { shape = "smooth", rate = "w", free = true },
+  { shape = "smooth", rate = "h.", free = true },
+]
+mod = [
+  ["lfo1", "filter.cutoff", 1.3],
+  ["lfo2", "filter2.cutoff", 1.1],
+  ["lfo1", "pan", 0.5],
+  ["lfo2", "level", 4],
+]
+
+[synths.air]
+osc = [{ wave = "noise" }]
+filter = { type = "high12", cutoff = 7000 }
+level = -20
+env = [{ attack = 2, release = 4 }]
+lfo = [{ shape = "smooth", rate = "2w", free = true }]
+mod = [["lfo1", "level", 6]]
+
+[synths.riser]
+osc = [
+  { wave = "noise" },
+  { wave = "saw", octave = -1, level = -10, unison = { voices = 5, detune = 30, spread = 0.8 } },
+]
+filter = { type = "band12", cutoff = 300, resonance = 0.5 }
+level = -10
+env = [
+  { attack = "note", attack_curve = -3, release = 0.05 },
+  { attack = "note", attack_curve = -2 },
+]
+mod = [["env2", "filter.cutoff", 5], ["env2", "pitch", 12]]
+
+[synths.fall]
+osc = [
+  { wave = "noise" },
+  { wave = "saw", level = -12, unison = { voices = 5, detune = 30, spread = 0.8 } },
+]
+filter = { type = "band12", cutoff = 300, resonance = 0.5 }
+level = -12
+env = [
+  { decay = "note", curve = 3 },
+  { decay = "note", curve = 2 },
+]
+mod = [["env2", "filter.cutoff", 5], ["env2", "pitch", 12]]
+
+# --- the returns -------------------------------------------------------------------------------------------
+
+[buses.room]
+hall = { size = 0.6, decay = 0.8, damp = 0.45, predelay = 0.004, early = 0.9, highpass = 300, width = 0.5, wet = 1, dry = 0 }
+eq = [{ hz = 450, gain = -3, q = 0.8 }, { type = "highshelf", hz = 6000, gain = -3 }]
+sidechain = { by = "kick", threshold = -10, ratio = 2, release = 0.1 }
+
+[buses.hall]
+hall = { size = 1.8, decay = 3.5, damp = 0.5, predelay = 0.025, mod = 0.4, highpass = 400, width = 0.8, wet = 1, dry = 0 }
+eq = [{ hz = 2800, gain = -2.5, q = 0.9 }, { type = "highshelf", hz = 5000, gain = -4 }]
+stereo = { cross = [400], width = [0, 1.15] }
+sidechain = { by = "kick", threshold = -12, ratio = 3, release = 0.15 }
+
+[buses.space]
+hall = { size = 3.5, decay = 9, damp = 0.35, predelay = 0.05, early = 0.3, mod = 0.6, highpass = 450, shimmer = 0.25, width = 0.8, wet = 1, dry = 0 }
+eq = [{ hz = 2800, gain = -3, q = 0.8 }, { type = "highshelf", hz = 4500, gain = -4 }]
+stereo = { cross = [450], width = [0, 1.25] }
+sidechain = { by = "kick", threshold = -15, ratio = 2, release = 0.25 }
+
+[buses.echo]
+tape = { time = "e.", feedback = 0.45, wow = 0.35, flutter = 0.12, drive = 6, tone = 3000, lowcut = 300, wet = 1, dry = 0 }
+stereo = { cross = [400], width = [0, 1.2] }
+sidechain = { by = "kick", threshold = -12, ratio = 3, release = 0.12 }
+send = { hall = 0.25 }
+
+[buses.cloud]
+filter = { highpass = 300 }
+grains = { size = 0.09, density = 24, spread = 1.5, intervals = [0, 0, 12, 7, -12], pitch = 0.05, reverse = 0.35, feedback = 0.45, wet = 1 }
+send = { space = 0.5 }
+
+# --- the low end -------------------------------------------------------------------------------------------
+
+[buses.punch]
+drive = { type = "tape", gain = 1.5, level = -1.5 }
+
+[buses.bass]
+drive = { type = "tape", gain = 4, level = -4, asym = 0.15 }
+width = { steps = [0] }
+sidechain = { by = "kick", threshold = -24, ratio = 6, knee = 6, attack = 0.001, release = 0.04 }
+
+# --- the rest ----------------------------------------------------------------------------------------------
+
+[buses.drums]
+transient = { attack = 4, sustain = -2, length = 0.008 }
+filter = { highpass = 180 }
+eq = [{ hz = 500, gain = -3, q = 1 }, { type = "highshelf", hz = 7000, gain = -2 }]
+sidechain = { by = "kick", threshold = -8, ratio = 2, release = 0.08 }
+send = { room = 0.25, hall = 0.06 }
+
+[buses.roll]
+filter = { highpass = 200 }
+send = { hall = 0.35, echo = 0.2 }
+
+[buses.perc]                    # the struck metal and the rattle, off to the side, thrown into the echoes
+filter = { highpass = 350 }
+drive = { type = "tape", gain = 4, level = -3 }
+autopan = { steps = [-0.45, 0.35, 0.1, -0.2, 0.5], step = "e" }
+sidechain = { by = "kick", threshold = -10, ratio = 2.5, release = 0.09 }
+send = { room = 0.3, echo = 0.3 }
+
+# the hook: up front, dry, clear of the low mids, its bark lifted
+[buses.lick]
+transient = { attack = 4, length = 0.012 }
+filter = { highpass = 220, lowpass = 8000, q = 0 }
+eq = [{ hz = 420, gain = -3, q = 1 }, { hz = 2200, gain = 1.5, q = 1 }, { hz = 4200, gain = -3, q = 1 }]
+compressor = { threshold = -18, ratio = 3, attack = 0.003, release = 0.08 }
+doubler = { delay = 0.009, depth = 0.001, rate = 0.3, wet = 0.2 }
+sidechain = { by = "kick", threshold = -10, ratio = 2.5, release = 0.09 }
+send = { echo = 0.22, hall = 0.2, cloud = 0.08 }
+
+[buses.far]
+filter = { highpass = 200, lowpass = 1400, q = 0 }
+hall = { size = 3, decay = 6, damp = 0.5, predelay = 0.06, mod = 0.6, wet = 1, dry = 0.25 }
+send = { cloud = 0.6, echo = 0.2 }
+
+[buses.talk]                    # to the left of the hook, in the hall
+filter = { highpass = 300 }
+eq = [{ hz = 2200, gain = -1, q = 1.2 }]
+autopan = { steps = [-0.3] }
+sidechain = { by = "kick", threshold = -10, ratio = 2.5, release = 0.09 }
+send = { echo = 0.35, hall = 0.35 }
+
+[buses.rip]                     # the second drop's lick: on top, wide, a reverse swell leading into each note
+filter = { highpass = 350, lowpass = 5000, q = 0 }
+doubler = { delay = 0.012, depth = 0.0015, rate = 0.25, wet = 0.25 }
+swell = { size = 1.2, decay = 0.8, wet = 0.3 }
+sidechain = { by = "kick", threshold = -10, ratio = 2.5, release = 0.09 }
+send = { echo = 0.3, hall = 0.3 }
+
+[buses.acid]
+drive = { type = "clip", gain = 8, level = -8, asym = 0.2 }
+filter = { highpass = 140 }
+eq = [{ hz = 280, gain = -3, q = 0.8 }, { hz = 2200, gain = -2, q = 1.2 }]
+autopan = { steps = [-0.25, 0.2], step = "e", smooth = 0.02 }
+sidechain = { by = "kick", threshold = -12, ratio = 3, release = 0.08 }
+send = { echo = 0.3, hall = 0.12 }
+
+# the sequence: a second filter stepping in fives against its sevens, so it never comes round the same over a
+# bar; right of centre, under the hook's band
+[buses.seq]
+filter = { highpass = 180 }
+autofilter = { steps = [600, 1900, 900, 3000, 1200], step = "s", q = 2.5, smooth = 0.008, wet = 0.8 }
+eq = [{ hz = 2200, gain = -3, q = 0.9 }, { hz = 4000, gain = -3, q = 0.8 }]
+autopan = { steps = [0.3, 0.15, 0.4] }
+sidechain = { by = "kick", threshold = -14, ratio = 4, release = 0.07 }
+send = { echo = 0.18, hall = 0.08 }
+
+[buses.metal]                   # fives, thrown about in threes
+filter = { highpass = 1200 }
+autopan = { steps = [-0.7, 0.7, 0.1], step = "s" }
+sidechain = { by = "kick", threshold = -10, ratio = 2.5, release = 0.08 }
+send = { echo = 0.4, hall = 0.25 }
+
+# the voice: as if off an old radio; into the hall, and at the ends into the cloud
+[buses.voice]
+filter = { highpass = 260, lowpass = 3800, q = 2 }
+drive = { type = "tape", gain = 6, level = -4 }
+crush = { rate = 16000, bits = 9, wet = 0.3 }
+eq = [{ hz = 1500, gain = 3, q = 0.9 }]
+send = { hall = 0.35, echo = 0.3, cloud = 0.25 }
+
+[buses.chop]                    # the hook sampled and played again: narrower and grittier than the real one
+filter = { highpass = 300, lowpass = 7000, q = 0 }
+crush = { rate = 22000, bits = 10, wet = 0.4 }
+autopan = { steps = [-0.4, 0.4], step = "e" }
+sidechain = { by = "kick", threshold = -10, ratio = 2.5, release = 0.09 }
+send = { echo = 0.35, hall = 0.2 }
+
+[buses.pads]
+filter = { highpass = 170 }
+eq = [{ hz = 320, gain = -3, q = 0.8 }, { hz = 2300, gain = -5, q = 0.7 }, { type = "highshelf", hz = 7000, gain = -3 }]
+stereo = { cross = [300], width = [0.3, 1.3] }
+chorus = { delay = 0.018, depth = 0.004, rate = 0.15, wet = 0.3 }
+sidechain = { by = "kick", threshold = -15, ratio = 3, release = 0.18 }
+send = { space = 0.5 }
+
+[buses.whistle]
+doubler = { delay = 0.013, depth = 0.002, rate = 0.2, wet = 0.5 }
+send = { space = 0.8, echo = 0.35, cloud = 0.3 }
+
+[buses.air]
+filter = { highpass = 150 }
+send = { space = 0.35 }
+
+[buses.build]
+pitch = {}
+filter = { highpass = 150 }
+send = { hall = 0.4, echo = 0.15 }
+
+[master]
+drive = { gain = 1.5, level = -1.5 }
+eq = [{ hz = 3500, gain = -2.5, q = 0.7 }, { type = "highshelf", hz = 6000, gain = -1.5 }]
+filter = { highpass = 25 }
+stereo = { cross = [110], width = [0, 1] }
+compressor = { threshold = -12, knee = 8, ratio = 1.5, attack = 0.03, release = 0.2 }
+limiter = { ceiling = -0.3, release = 0.1 }
+loudness = -8.6
+
+[master.stutter.bars]
+"32" = "xxxx xxxx xxxx rrRR"
+"48" = "xxxx xxxx xxxx <<<<"
+"56" = "xxxx xxxx xxxx xxx."
+"64" = "xxxx xxxx xxxx rrRR"
+"72" = "xxxx xxxx xx<< <<<<"
+"80" = "xxxx xxxx xxxx rrrr"
+"88" = "xxxx xxxx vvvv vvvv"
+"120" = "xxxx xxxx xxxx xxx."
+"128" = "xxxx xxxx xxxx rrRR"
+"136" = "xxxx xxxx xx<< <<<<"
+"144" = "xxxx xxxx xxxx rrRR"
+"152" = "xx.. xx.. x.x. rrRR"
+"168" = "xxxx xxxx vvvv vvvv"
+
+[automation]
+# the drops the loudest of it: the bed, the groove and the builds under them
+"punch.level" = [[1, -3], [40, -2], [41, -2], [56, -1], [57, 0, "step"], [152.99, 0], [153, -2, "step"]]
+"pads.level" = [[1, -2], [55.9, 0], [56, -40], [56.95, -40], [57, 0], [119.9, 0], [120, -40], [120.95, -40], [121, 0]]
+"seq.level" = [[1, -4], [40, -2], [57, 0, "step"], [153, -2, "step"]]
+"drums.level" = [[1, -2], [56, -1], [57, 0, "step"]]
+"bass.level" = [[1, -3], [56, -1], [57, 0, "step"], [120.99, 0], [121, 1.5, "step"], [152.99, 1.5], [153, -2, "step"]]
+# the builds
+"master.filter.highpass" = [[49, 25], [55.9, 450, "exp"], [56, 25, "step"], [113, 25], [119.9, 500, "exp"], [120, 25, "step"]]
+"build.pitch.shift" = [[51, 0], [55.95, 12, "exp"], [56, 0, "step"], [115, 0], [119.95, 12, "exp"], [120, 0, "step"]]
+"instruments.roller.level" = [[49, -26], [55.9, -8], [113, -26], [119.9, -8]]
+"instruments.roller.pitch" = [[49, 0], [56, 7], [56.01, 0, "step"], [113, 0], [120, 7]]
+"echo.tape.feedback" = [
+  [1, 0.5], [17, 0.45], [49, 0.45], [55.95, 1.1, "exp"], [56, 0.3, "step"], [57, 0.45],
+  [84, 0.45], [88, 0.85], [89, 0.55, "step"], [113, 0.55], [119.95, 1.1, "exp"], [120, 0.3, "step"], [121, 0.45],
+  [148, 0.45], [152, 0.85], [153, 0.45, "step"], [166, 0.45], [168.95, 0.9],
+]
+"echo.tape.time" = [[166, 0.3103], [168.95, 0.9, "s"]]
+"space.hall.freeze" = [[55.99, 0], [56, 1], [56.99, 1], [57, 0], [119.99, 0], [120, 1], [120.99, 1], [121, 0]]
+"hall.hall.freeze" = [[55.99, 0], [56, 1], [56.99, 1], [57, 0], [119.99, 0], [120, 1], [120.99, 1], [121, 0]]
+"hall.hall.decay" = [[1, 3.5], [56.9, 3.5], [57, 2.4], [88.9, 2.4], [89, 5], [120.9, 5], [121, 2.4], [152.9, 2.4], [153, 3.5]]
+"space.hall.shimmer" = [[1, 0.25], [89, 0.25], [97, 0.6], [119, 0.6], [121, 0.25, "step"]]
+"air.level" = [[1, 0], [17, -3], [56, 0], [57, -7, "step"], [88, -7], [89, 0, "step"], [120, 0], [121, -7, "step"], [152, -7], [153, -3, "step"], [168, 0]]
+# the hook closed in the first build's tease, opening into the drop
+"lick.filter.lowpass" = [[33, 500], [41, 800], [48, 2000], [49, 700, "step"], [55.9, 8000, "exp"], [56, 8000, "step"], [104.99, 8000], [105, 600, "step"], [119.9, 8000, "exp"], [120, 8000, "step"]]
+# the bass opening as it comes in
+"instruments.bass.filter.cutoff" = [[25, 180], [41, 450, "s"], [49, 650], [57, 650]]
+# the sequence opening over the groove, closing and opening again over each drop's halves
+"instruments.seq.filter.cutoff" = [[21, 200], [41, 600, "s"], [49, 450, "step"], [56, 1400, "exp"], [57, 450, "step"], [72, 900], [73, 500, "step"], [88, 1200], [121, 500, "step"], [136, 900], [137, 600, "step"], [152, 1400], [153, 500, "step"], [168, 200]]
+"instruments.seq.filter.resonance" = [[21, 0.5], [56, 0.75], [57, 0.62, "step"], [88, 0.8], [121, 0.62, "step"], [152, 0.8], [153, 0.6, "step"]]
+# the acid opening under each of its turns
+"instruments.acid.filter.cutoff" = [[73, 300], [81, 1600, "s"], [85, 500, "step"], [88, 1800], [145, 400, "step"], [152, 1800]]
+"instruments.acid.filter.resonance" = [[73, 0.65], [88, 0.88], [145, 0.7, "step"], [152, 0.88]]
+"instruments.haze.filter.cutoff" = [[56.9, 900], [57, 1800, "step"], [88.9, 1800], [89, 900, "step"]]
+"instruments.pad.filter.cutoff" = [[1, 500], [16, 1600, "s"], [49, 400, "step"], [55.9, 3000, "exp"], [89, 600, "step"], [104, 2200, "s"], [105, 900, "step"], [119.9, 3500, "exp"], [153, 700, "step"], [168, 1400]]
+# the second drop's harmony, moving the lines written on A
+"instruments.hook.pitch" = [[1, 0], [121, 0, "step"], [122, 0, "step"], [123, 1, "step"], [124, 1, "step"], [125, 0, "step"], [126, 0, "step"], [127, -4, "step"], [128, -5, "step"], [129, 0, "step"], [130, 0, "step"], [131, 1, "step"], [132, 1, "step"], [133, 0, "step"], [134, 0, "step"], [135, -4, "step"], [136, -5, "step"], [137, 0, "step"], [138, 0, "step"], [139, 1, "step"], [140, 1, "step"], [141, 0, "step"], [142, 0, "step"], [143, -4, "step"], [144, -5, "step"], [145, 0, "step"], [146, 0, "step"], [147, 1, "step"], [148, 1, "step"], [149, 0, "step"], [150, 0, "step"], [151, -4, "step"], [152, -5, "step"], [153, 0, "step"]]
+"instruments.seq.pitch" = [[1, 0], [121, 0, "step"], [122, 0, "step"], [123, 1, "step"], [124, 1, "step"], [125, 0, "step"], [126, 0, "step"], [127, -4, "step"], [128, -5, "step"], [129, 0, "step"], [130, 0, "step"], [131, 1, "step"], [132, 1, "step"], [133, 0, "step"], [134, 0, "step"], [135, -4, "step"], [136, -5, "step"], [137, 0, "step"], [138, 0, "step"], [139, 1, "step"], [140, 1, "step"], [141, 0, "step"], [142, 0, "step"], [143, -4, "step"], [144, -5, "step"], [145, 0, "step"], [146, 0, "step"], [147, 1, "step"], [148, 1, "step"], [149, 0, "step"], [150, 0, "step"], [151, -4, "step"], [152, -5, "step"], [153, 0, "step"]]
+"instruments.talk.pitch" = [[1, 0], [121, 0, "step"], [122, 0, "step"], [123, 1, "step"], [124, 1, "step"], [125, 0, "step"], [126, 0, "step"], [127, -4, "step"], [128, -5, "step"], [129, 0, "step"], [130, 0, "step"], [131, 1, "step"], [132, 1, "step"], [133, 0, "step"], [134, 0, "step"], [135, -4, "step"], [136, -5, "step"], [137, 0, "step"], [138, 0, "step"], [139, 1, "step"], [140, 1, "step"], [141, 0, "step"], [142, 0, "step"], [143, -4, "step"], [144, -5, "step"], [145, 0, "step"], [146, 0, "step"], [147, 1, "step"], [148, 1, "step"], [149, 0, "step"], [150, 0, "step"], [151, -4, "step"], [152, -5, "step"], [153, 0, "step"]]
+# throws
+"talk.send.echo" = [[1, 0.35], [127.9, 0.35], [128, 0.9], [128.9, 0.9], [129, 0.35]]
+"voice.send.cloud" = [[1, 0.25], [89, 0.25], [104, 0.7], [105, 0.25, "step"]]
+
+[patterns.bed]
+wind = ["F4 w", "F4~ w", "F4~ w", "F4~ w", "F4~ w", "F4~ w", "F4~ w", "F4~ w"]
+air = ["F4 w", "F4~ w", "F4~ w", "F4~ w", "F4~ w", "F4~ w", "F4~ w", "F4~ w"]
+
+[patterns.intropad]
+pad = ["A2+C3+E3+B3 w", "A2+C3+E3+B3~ w", "F2+A2+E3+C4 w", "F2+A2+E3+C4~ w", "A2+C3+E3+B3 w", "A2+C3+E3+B3~ w", "Eb3+G3+Bb3+D4 w", "Eb3+G3+Bb3+D4~ w"]
+
+[patterns.breakpad]
+pad = ["F2+A2+E3+C4 w", "F2+A2+E3+C4~ w", "D3+F3+A3+E4 w", "D3+F3+A3+E4~ w", "Bb2+D3+F3+A3 w", "Bb2+D3+F3+A3~ w", "Eb3+G3+Bb3+D4 w", "Eb3+G3+Bb3+D4~ w"]
+whistle = ["r w", "r w", "A4 h C5 h", "A4~ h. r q", "r w", "r w", "Eb5 h D5 h", "C5~ h. r q"]
+
+[patterns.v1]
+voice1 = "C4 w"
+
+[patterns.v2]
+voice2 = "C4 w"
+
+[patterns.v3]
+voice3 = "C4 w"
+
+[patterns.whisp]
+whisper = "C4 w"
+
+[patterns.breathin]
+breath = "C4 w"
+
+[patterns.vchop]
+voice4 = ["C4@0.8 s r C4@0.5 s r r e C4@0.8 s r r e C4 e. r s r e", "C4@0.8 s C4@0.5 C4@0.6 C4@0.7 C4@0.8 s C4 s C4@0.9 s C4 s C4 q r q"]
+
+[patterns.kick]
+kick = "G1 q G1 G1 G1"
+
+[patterns.hats]
+hat = "x.xx x.xx x.xx x.x?"
+
+[patterns.ohats]
+ohat = "r e F6 e r e F6 e r e F6 e r e F6 e"
+
+[patterns.claps]
+clap = "....x.......x..."
+"clap@4" = "....x.......x..x"
+
+[patterns.ride]
+ride = "r e C4 e r e C4 e r e C4 e r e C4 e"
+
+[patterns.lite]
+bass = "r e A1@0.6 e r e A1@0.6 e r e A1@0.6 e r e A1@0.6 e"
+
+[patterns.gal8]
+bass = ["r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s A1", "r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s A1", "r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s A1", "r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s C2@0.9 r e Bb1@0.8 s G1@0.9", "r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s A1", "r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s A1", "r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s A1", "r e A1@0.7 s A1 r e C2@0.9 s Eb2@0.9 r e D2@0.8 s C2 r e Bb1@0.9 s A1@0.9"]
+
+[patterns.gal2]
+bass = ["r e A1@0.7 s A1@0.8 r e A1@0.7 s A1@0.8 r e A1@0.7 s A1@0.8 r e A1@0.7 s A1@0.8", "r e A1@0.7 s A1@0.8 r e A1@0.7 s A1@0.8 r e A1@0.7 s A1@0.8 r e A1@0.7 s A1@0.8", "r e Bb1@0.7 s Bb1@0.8 r e Bb1@0.7 s Bb1@0.8 r e Bb1@0.7 s Bb1@0.8 r e Bb1@0.7 s Bb1@0.8", "r e Bb1@0.7 s Bb1@0.8 r e Bb1@0.7 s Bb1@0.8 r e Bb1@0.7 s Bb1@0.8 r e Bb1@0.7 s Bb1@0.8", "r e A1@0.7 s A1@0.8 r e A1@0.7 s A1@0.8 r e A1@0.7 s A1@0.8 r e A1@0.7 s A1@0.8", "r e A1@0.7 s A1 r e A1@0.7 s A1 r e A1@0.7 s C2@0.9 r e Bb1@0.8 s G1@0.9", "r e F1@0.7 s F1@0.85 r e F1@0.7 s F1@0.85 r e F1@0.7 s F1@0.85 r e F1@0.7 s F1@0.85", "r e E1@0.7 s E1@0.9 r e E1@0.7 s E1@0.9 r e E1@0.7 s E1@0.9 r e E1@0.7 s E1@0.9"]
+
+[patterns.seq]
+seq = ["A2@0.95 s A2@0.5 s r s C3@0.8 s A2@0.5 s Eb3@0.9 s r s A2@0.95 s A2@0.5 s r s C3@0.8 s A2@0.5 s Eb3@0.9 s r s A2@0.95 s A2@0.5 s", "r s C3@0.8 s A2@0.5 s Eb3@0.9 s r s A2@0.95 s A2@0.5 s r s C3@0.8 s A2@0.5 s Eb3@0.9 s r s A2@0.95 s A2@0.5 s r s C3@0.8 s", "A2@0.5 s Eb3@0.9 s r s A2@0.95 s A2@0.5 s r s C3@0.8 s A2@0.5 s Eb3@0.9 s r s A2@0.95 s A2@0.5 s r s C3@0.8 s A2@0.5 s Eb3@0.9 s", "r s A2@0.95 s A2@0.5 s r s C3@0.8 s A2@0.5 s Eb3@0.9 s r s A2@0.95 s A2@0.5 s r s C3@0.8 s A2@0.5 s Eb3@0.9 s r s A2@0.95 s", "A2@0.5 s r s C3@0.8 s A2@0.5 s Eb3@0.9 s r s A2@0.95 s A2@0.5 s r s C3@0.8 s A2@0.5 s Eb3@0.9 s r s A2@0.95 s A2@0.5 s r s", "C3@0.8 s A2@0.5 s Eb3@0.9 s r s A2@0.95 s A2@0.5 s r s C3@0.8 s A2@0.5 s Eb3@0.9 s r s A2@0.95 s A2@0.5 s r s C3@0.8 s A2@0.5 s", "Eb3@0.9 s r s A2@0.95 s A2@0.5 s r s C3@0.8 s A2@0.5 s Eb3@0.9 s r s A2@0.95 s A2@0.5 s r s C3@0.8 s A2@0.5 s Eb3@0.9 s r s"]
+
+[patterns.metal]
+metal = ["E5@0.8 s r s A5@0.6 s r s r s E5@0.8 s r s A5@0.6 s r s r s E5@0.8 s r s A5@0.6 s r s r s E5@0.8 s", "r s A5@0.6 s r s r s E5@0.8 s r s A5@0.6 s r s r s E5@0.8 s r s A5@0.6 s r s r s E5@0.8 s r s", "A5@0.6 s r s r s E5@0.8 s r s A5@0.6 s r s r s E5@0.8 s r s A5@0.6 s r s r s E5@0.8 s r s A5@0.6 s", "r s r s E5@0.8 s r s A5@0.6 s r s r s E5@0.8 s r s A5@0.6 s r s r s E5@0.8 s r s A5@0.6 s r s", "r s E5@0.8 s r s A5@0.6 s r s r s E5@0.8 s r s A5@0.6 s r s r s E5@0.8 s r s A5@0.6 s r s r s"]
+
+[patterns.clangs]
+clang = ["r s A3@0.9 s r e r s Eb4@0.7 s r e r e. A3@0.8 s r q", "r e. A3@0.7 s r e Bb3@0.9 s r s r q r s A3@0.9 s r e"]
+
+[patterns.rattles]
+"rattle@4" = ["r w", "r h. C4 q"]
+rattle = ["r w", "r w"]
+
+[patterns.tease]
+hook = ["A3@0.95 e. C4 s r e Eb4@0.9 s r s D4 e A3 e r q", "r w", "A3@0.95 e. C4 s r e Eb4@0.9 s r s D4 e A3 e r q", "r w"]
+
+[patterns.hookA]
+hook = ["A3@0.95 e. C4 s r e Eb4@0.9 s r s D4 e A3 e r q", "r s A3 s Bb3~@0.7 e A3 s r s C4@0.9 e. r s G3>-5 e r q", "A3@0.95 e. C4 s r e Eb4@0.9 s r s D4 e A3 e r q", "A3@0.95 e. C4 s r e Eb4@0.9 s r s F4 e Eb4~ s D4 s r e C4 e"]
+
+[patterns.hookB]
+hook = ["A3@0.95 e. C4 s r e Eb4@0.9 s r s D4 e A3 e r q", "r s A3 s Bb3~@0.7 e A3 s r s C4@0.9 e. r s G3>-5 e r q", "A3@0.95 e. C4 s r e Eb4@0.9 s r s F4 e Eb4~ s D4 s r e C4 e", "r s A3 s Bb3~@0.7 e A3 s r s C4@0.9 e. r s Eb4 s D4 s C4 s A3>-7@0.9 e r s"]
+
+[patterns.hookS]
+hook = ["A3@0.95 e. C4 s r e A3@0.95 e. C4 s r e A3 e Eb4 e", "r w", "A3@0.95 e. C4 s r e A3@0.95 e. C4 s r e A3 e Eb4 e", "r w"]
+
+[patterns.talkA]
+talk = ["r h. C4@0.8 e Bb3~ e", "r h. Eb4<-2@0.9 q", "r h. C4@0.8 e D4~ e", "r h. F4<-3@0.9 e Eb4~ e"]
+
+[patterns.talk2]
+talk = ["r h. C4@0.8 e Bb3~ e", "r h. Eb4<-2@0.9 q", "r h. C4@0.8 e D4~ e", "r h. Eb4<-2@0.9 q"]
+
+[patterns.farhook]
+far = ["A3@0.95 e. C4 s r e Eb4@0.9 s r s D4 e A3 e r q", "r s A3 s Bb3~@0.7 e A3 s r s C4@0.9 e. r s G3>-5 e r q", "r w", "r w"]
+
+[patterns.acidA]
+acid = ["A2 s A2@0.5 A3~@0.9 r s C3 s r s A2 s Eb3~@0.9 e r e A2 s Bb2@0.9 s r e.", "A2 s r s A3~@0.9 s A2@0.5 s r s C3 s Eb3~@0.9 s D3~ s C3 s r s A2@0.5 s r s G2@0.9 e r e"]
+
+[patterns.lickC]
+rip = ["A4@0.95 e. r s C5 s r s Eb5@0.95 e. r s D5 s C5 s r e A4 e", "r w", "Bb4@0.95 e. r s Db5 s r s F5@0.95 e. r s E5~ e D5 e r e", "r w", "A4@0.95 e. r s C5 s r s Eb5@0.95 e. r s D5 s C5 s r e A4 e", "r w", "F4@0.95 e. r s A4 s r s C5 e B4 s Bb4 s A4 s G4 s E4>-2@0.9 q", "r w"]
+
+[patterns.lickC2]
+rip = ["A4@0.95 e. r s C5 s r s Eb5@0.95 e. r s D5 s C5 s r e A4 e", "A4@0.95 e. r s C5 s r s Eb5@0.95 e. r s D5 s C5 s r e A4 e", "Bb4@0.95 e. r s Db5 s r s F5@0.95 e. r s E5~ e D5 e r e", "Bb4@0.95 e. r s Db5 s r s F5@0.95 e. r s E5~ e D5 e r e", "A4@0.95 e. r s C5 s r s Eb5@0.95 e. r s D5 s C5 s r e A4 e", "A4@0.95 e. r s C5 s r s Eb5@0.95 e. r s D5 s C5 s r e A4 e", "F4@0.95 e. r s A4 s r s C5 e B4 s Bb4 s A4 s G4 s E4>-2@0.9 q", "F4@0.95 e. r s A4 s r s C5 e B4 s Bb4 s A4 s G4 s E4>-2@0.9 q"]
+
+[patterns.roll]
+roller = ["D3 s D3 D3 D3 D3 D3 D3 D3 D3 D3 D3 D3 D3 D3 D3 D3"]
+
+[patterns.rollq]
+roller = ["D3 q D3 D3 D3"]
+
+[patterns.rolle]
+roller = ["D3 e D3 D3 D3 D3 D3 D3 D3"]
+
+[patterns.riser8]
+riser = ["A3 w", "A3~ w", "A3~ w", "A3~ w", "A3~ w", "A3~ w", "A3~ w", "A3~ w"]
+
+[patterns.fall2]
+fall = ["A3 w", "A3~ w"]
+
+[patterns.hit]
+impact = "x..............."
+
+[patterns.crash]
+crash = "C4 w"
+
+[patterns.rc]
+rcrash = "r h C4 h"
+
+[patterns.fill]
+snare = "r h. D3@0.7 s D3@0.8 D3@0.9 D3"
+tom = "r h. r e. A2 s"
+
+[patterns.hazeA]
+haze = ["A3+E4 w", "A3+E4~ w", "A3+E4~ w", "A3+E4~ w"]
+
+[patterns.choprhythm]
+chop1 = ["A3@0.9 e. r s A3 e r s C4 s r e A3 e. r s r e", "r s A3@0.8 s r e C4 e r e A3 e. Eb4 s r e r e"]
+chop2 = ["r w", "r h. A3 q"]
+
+[patterns.chopbreak]
+chop1 = ["A3 q r q A3 e r e C4 q", "r w", "Eb4 q r q D4 e r e A3 q", "r w"]
+
+[arrangement]
+"1-168" = ["bed"]
+"1-16" = ["intropad"]
+"5" = ["v1"]
+"9-16" = ["farhook"]
+"13" = ["whisp"]
+"15" = ["breathin"]
+"16" = ["rc"]
+"17-52" = ["kick"]
+"21-53" = ["seq"]
+"25-48" = ["hats", "ohats", "lite"]
+"33-48" = ["claps", "tease", "metal", "clangs"]
+"41-56" = ["intropad", "hazeA"]
+"41" = ["v3"]
+"47-48" = ["vchop"]
+"49-52" = ["rollq", "lite"]
+"53-54" = ["rolle"]
+"55-56" = ["roll"]
+"49-56" = ["riser8", "tease"]
+"53-56" = ["vchop"]
+"56" = ["rc", "breathin"]
+"57-88" = ["kick", "claps", "gal8", "hazeA"]
+"57" = ["hit"]
+"73" = ["crash"]
+"81" = ["crash"]
+"57-72" = ["hookA", "hats", "ohats", "seq"]
+"65-72" = ["talkA", "clangs"]
+"73-80" = ["choprhythm", "hookB", "acidA", "hats", "ride", "seq", "rattles"]
+"81-84" = ["seq", "hats", "acidA", "hookS"]
+"83-84" = ["vchop"]
+"85-88" = ["hookB", "talk2", "ride", "hats", "seq", "metal", "clangs"]
+"88" = ["fill"]
+"89-90" = ["fall2"]
+"89-104" = ["breakpad"]
+"89" = ["v3"]
+"93-94" = ["farhook"]
+"97" = ["v1"]
+"97-100" = ["chopbreak"]
+"101-104" = ["farhook"]
+"105-120" = ["intropad", "tease", "metal"]
+"105-112" = ["hats", "lite", "kick"]
+"113-116" = ["rollq", "kick"]
+"113-120" = ["riser8"]
+"117-118" = ["rolle"]
+"119-120" = ["roll", "vchop"]
+"116" = ["v3"]
+"118" = ["v2"]
+"120" = ["rc"]
+"121-152" = ["kick", "claps", "gal2", "hazeA", "hats", "ohats", "seq"]
+"121" = ["hit"]
+"129" = ["crash"]
+"137" = ["crash"]
+"145" = ["crash"]
+"121-136" = ["hookA"]
+"129-144" = ["lickC"]
+"137-144" = ["talk2", "metal", "ride"]
+"145-152" = ["lickC2", "hookB", "acidA", "ride", "clangs", "metal"]
+"151-152" = ["vchop"]
+"152" = ["fill"]
+"153-168" = ["kick", "lite", "hats", "seq"]
+"153-160" = ["intropad", "farhook"]
+"161-168" = ["intropad"]
+"161" = ["whisp"]

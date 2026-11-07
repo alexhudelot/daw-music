@@ -1,0 +1,246 @@
+# Fungal Logic: 30 seconds of psytrance after Infected Mushroom. 145 BPM (as "Becoming Insane" and "Cities of the
+# Future" are), in A Phrygian dominant (A Bb C# D E F G, the Hijaz colour of their leads). Built on the DAW's own
+# sounds (crates/daw-engine/src/psy.rs).
+#
+# What makes it theirs rather than generic goa, from their drops' spectrograms (out/psy/style): the groove is made
+# of silence as much as sound (the bass rolls kick, bass, bass, gap, and gates cut the lead, acid, chords and hats
+# on the same 16ths, so the gap is silent; hats are clicks; layers cut out for a beat),
+# the mids are chords chopped by a trance gate and thrown left and right step by step, the leads glide between
+# notes and dive at the ends of phrases, a talking lead answers the main one, and there is no pad and little
+# reverb in the drops, so the gaps stay silent.
+#
+#   1-2   intro: the acid behind a highpass that opens, sliding and panning; zaps, an uplifter, a snare roll
+#   3-6   groove: kick and bass, clicky hats, claps, the acid; the last beat of bar 6 drops out
+#   7-8   break: no kick or bass; the talking lead over gated chords that open up; a roll that stops a beat early
+#   9-12  drop: the hook, gliding, doubled an octave up; the gated chords; the acid
+#   13-16 drop 2: the hook an octave up, answered bar by bar by the talking lead; the bass moves to F and G
+#   17    the end: one last kick, an impact and the talking lead diving two octaves
+format = "daw-song 1"
+title = "Fungal Logic"
+publish = true
+tempo = 145
+meter = "4/4"
+seed = 7
+
+[instruments]
+kick = { sound = "psykick", gain = -2 }
+bass = { sound = "psybass", gain = 0, bus = "bass", dive = -1.5 }
+chat = { sound = "chat", gain = -10, pan = 0.25, bus = "hats" }
+ohat = { sound = "ohat", gain = -13, pan = -0.2, bus = "hats" }
+clap = { sound = "clap", gain = -11, bus = "drums" }
+snare = { sound = "snare", gain = -13, bus = "drums" }
+acid = { sound = "squelch", gain = -17, bus = "acid", cut = true, release = 0.02, glide = 0.04, filter = { lowpass = 1500, q = 2.5, env = 1.5, decay = 0.08 } }
+acid_acc = { sound = "squelcha", gain = -15, bus = "acid", cut = true, release = 0.04 }
+lead = { sound = "psylead", gain = -21, bus = "lead", cut = true, release = 0.03, glide = 0.05, unison = { voices = 3, detune = 8, spread = 0.5 } }
+lead8 = { sound = "psylead", gain = -29, octave = 1, bus = "lead", cut = true, release = 0.03, glide = 0.05, unison = { voices = 2, detune = 12, spread = 0.9 } }
+vox = { sound = "vox", gain = -17, bus = "vox", cut = true, release = 0.05, glide = 0.07 }
+chords = { sound = "psylead", gain = -27, bus = "gated", cut = true, release = 0.05, unison = { voices = 3, detune = 14, spread = 0.9 } }
+zap = { sound = "zap", gain = -17, bus = "fx" }
+yoy = { sound = "yoy", gain = -14, bus = "fx" }
+gurgle = { sound = "gurgle", gain = -16, bus = "fx" }
+uplift = { sound = "uplift", gain = -16, bus = "sweeps" }
+downlift = { sound = "downlift", gain = -16, bus = "sweeps" }
+impact = { sound = "impact", gain = -9 }
+
+# The bass stays mono and dry; it bends down a semitone and a half over each 16th (the instrument's dive).
+[buses.bass]
+drive = { gain = 4, level = -2 }
+filter = { lowpass = 500, q = 0 }
+width = { steps = [0] }
+duck = { by = "kick", depth = -14, release = 0.09 }
+
+[buses.hats]
+filter = { highpass = 500 }
+gate = { steps = "xxxx xxx. xxxx xxx." }
+width = { steps = [1.6, 0.6, 1.6, 1.0] }
+
+[buses.drums]
+reverb = { size = 0.6, decay = 4, damp = 0.5, wet = 0.08, dry = 1 }
+
+# The acid jumps between the sides on 16ths, centred on some steps.
+[buses.acid]
+drive = { gain = 6, level = -4 }
+filter = { highpass = 1200, lowpass = 700, q = 2 }
+delay = { time = 0.3103, feedback = 0.25, wet = 0.12, pingpong = true }
+gate = { steps = "xxxx xxx. xxxx xxx." }
+autopan = { steps = [-0.7, 0.7, -0.7, 0.7, 0, 0, -0.9, 0.9, 0.7, -0.7, 0.7, -0.7, 0, 0, 0.9, -0.9] }
+duck = { by = "kick", depth = -6, release = 0.15 }
+
+# The lead's gate leaves the groove's gaps silent, and stutters at the end of every fourth bar (the dive in bar 12).
+[buses.lead]
+filter = { lowpass = 6500, q = 0 }
+delay = { time = 0.3103, feedback = 0.25, wet = 0.14, pingpong = true }
+reverb = { size = 1.2, decay = 4, damp = 0.5, wet = 0.08, dry = 1 }
+gate = { steps = ["xxxx xxx. xxxx xxx.", "xxxx xxx. xxxx xxx.", "xxxx xxx. xxxx xxx.", "xxxx xxx. x.x. x.x."] }
+duck = { by = "kick", depth = -4, release = 0.12 }
+
+[buses.vox]
+doubler = { delay = 0.012, depth = 0.0015, rate = 0.25, wet = 0.6 }
+delay = { time = 0.2069, feedback = 0.3, wet = 0.15, pingpong = true }
+reverb = { size = 1.4, decay = 3, damp = 0.5, wet = 0.1, dry = 1 }
+gate = { steps = "xxxx xxx. xxxx xxx." }
+duck = { by = "kick", depth = -5, release = 0.12 }
+
+# Chords chopped by a trance gate, after the reverb so a shut step is silent, thrown across the field and
+# narrowed to mono on some steps.
+[buses.gated]
+filter = { lowpass = 5000, q = 0 }
+reverb = { size = 1.0, decay = 3, damp = 0.5, wet = 0.15, dry = 1 }
+gate = { steps = "x.xx .xx. x.xx .xx." }
+autopan = { steps = [-0.6, 0.6, -0.3, 0.6, -0.6, 0.3, 0.6, -0.6, -0.6, 0.6, -0.3, 0.6, -0.6, 0.6, 0.3, -0.6] }
+width = { steps = [1.8, 0, 1.8, 1.8, 0, 1.8, 1.8, 0, 1.8, 0, 1.8, 1.8, 0, 1.8, 0, 1.8] }
+duck = { by = "kick", depth = -10, release = 0.15 }
+
+[buses.fx]
+phaser = { rate = 0.5, low = 400, high = 5000, stages = 6, feedback = 0.5, wet = 0.5 }
+delay = { time = 0.2069, feedback = 0.3, wet = 0.2, pingpong = true }
+reverb = { size = 1.2, decay = 3, damp = 0.4, wet = 0.12, dry = 1 }
+autopan = { steps = [-0.9, 0.9], step = "e" }
+
+# The sweeps travel from left to right over two bars.
+[buses.sweeps]
+filter = { highpass = 150 }
+reverb = { size = 1.5, decay = 3, damp = 0.3, wet = 0.15, dry = 1 }
+autopan = { steps = [-1, -0.7, -0.4, -0.1, 0.1, 0.4, 0.7, 1], step = "q", smooth = 0.05 }
+
+[automation]
+"acid.filter.highpass" = [[1, 1200], [3, 60]]
+"acid.filter.lowpass" = [[1, 2500], [3, 700], [7, 5000], [9, 2200], [13, 3000], [16.5, 9000]]
+"bass.filter.lowpass" = [[3, 400], [5, 1600]]
+"gated.filter.lowpass" = [[7, 500], [9, 5000]]
+
+# --- drums ---------------------------------------------------------------------------------------------
+
+[patterns.beat]
+kick = "x... x... x... x..."
+chat = ".x.x .x.. .x.X .xx."
+ohat = "..x. ..x. ..x. ..x."
+clap = ".... x... .... x..."
+
+[patterns.beat_cut]             # the last beat drops out
+kick = "x... x... x... ...."
+chat = ".x.x .x.. .x.X ...."
+ohat = "..x. ..x. ..x. ...."
+clap = ".... x... .... ...."
+
+[patterns.hats_only]
+chat = ".x.x .x.. .x.x .xx."
+
+[patterns.roll]                 # three beats of 16ths rising in pitch and level, then a beat of silence
+snare = "C4@0.25 s C4@0.3 D4@0.34 D4@0.38 E4@0.44 E4@0.5 F4@0.56 G4@0.62 G4@0.7 A4@0.78 B4@0.88 C5@1 r q"
+
+# --- bass ----------------------------------------------------------------------------------------------
+
+[patterns.roll_a]               # kick, bass, bass, bass, then kick, bass, bass, gap
+bass = [
+  "r s A1 A1 A1 r A1 A1 r r A1 A1 A1 r A1 A1 r",
+  "r s A1 A1 A1 r A1 A1 r r A1 A1 A1 r A1 A2 r",
+  "r s A1 A1 A1 r A1 A1 r r A1 A1 A1 r A1 A1 r",
+  "r s A1 A1 A1 r A1 A1 r r A1 A1 A1 r Bb1 C2 r",
+]
+
+[patterns.roll_cut]             # bar 6: as roll_a's last bar, silent on the last beat
+bass = "r s A1 A1 A1 r A1 A1 r r A1 A1 A1 r q"
+
+[patterns.roll_move]            # drop 2: two bars on A, then F and G
+bass = [
+  "r s A1 A1 A1 r A1 A1 r r A1 A1 A1 r A1 A2 r",
+  "r s A1 A1 A1 r A1 A1 r r A1 A1 A1 r Bb1 C2 r",
+  "r s F1 F1 F1 r F1 F1 r r F1 F1 F1 r F1 F2 r",
+  "r s G1 G1 G1 r G1 G1 r r G1 G1 G1 r Bb1 C#2 E2",
+]
+
+# --- acid ----------------------------------------------------------------------------------------------
+
+[patterns.acid]                 # 16ths, a 303's slides (~) and each note's own cutoff (^); accents at steps 4 and 13
+acid = [
+  "A3^900 s A3^1500 r r Bb3^1100 r A3^800 C#4~^2200 r D4^2600 A3^900 r r F4^3500 E4~^2400 C#4^1400",
+  "A3^900 s A3^1500 r r Bb3^1100 r A3^800 C#4~^2200 r G4^4000 F4~^3000 E4~^2200 r C#4^1800 Bb3~^1200 A3^800",
+]
+acid_acc = [
+  "r s r r A4 r r r r r r r r E4 r r r",
+  "r s r r A4 r r r r r r r r D4 r r r",
+]
+
+# --- leads ---------------------------------------------------------------------------------------------
+
+[patterns.hook]                 # the hook, around A4, gliding (~) and diving (>) at the end; doubled an octave up
+lead = [
+  "A4 e Bb4~ s A4~ C#5 e D5~ s E5~ F5 e. E5~ s D5 e C#5~",
+  "Bb4 q A4~ e. r s A4 s A5~ G5~ F5~ E5 q",
+  "A4 e Bb4~ s A4~ C#5 e D5~ s E5~ G5 e. F5~ s E5 e D5~",
+  "E5 s F5 E5 D5 C#5 e Bb4~ s A4~ A4>-12 h",
+]
+lead8 = [
+  "A4 e Bb4~ s A4~ C#5 e D5~ s E5~ F5 e. E5~ s D5 e C#5~",
+  "Bb4 q A4~ e. r s A4 s A5~ G5~ F5~ E5 q",
+  "A4 e Bb4~ s A4~ C#5 e D5~ s E5~ G5 e. F5~ s E5 e D5~",
+  "E5 s F5 E5 D5 C#5 e Bb4~ s A4~ A4>-12 h",
+]
+
+[patterns.answer]               # drop 2: the hook an octave up, and the talking lead answering it
+lead = [
+  "A5 e G5~ s F5~ E5 e F5~ s G5~ A5 e. Bb5~ s A5 e G5~",
+  "r w",
+  "A5 e G5~ s F5~ E5 e F5~ s G5~ A5 e. C#6~ s D6 e E6~",
+  "r w",
+]
+vox = [
+  "r w",
+  "F5<-5 q E5~ e. r s D5 s D6~ C#6~ Bb5~ A5 q",
+  "r w",
+  "E5 s F5 E5 D5 C#5 e Bb4~ s A4~ A4>-12 h",
+]
+
+[patterns.talk]                 # the break: the talking lead, slowly
+vox = ["A4<-7 q. Bb4~ e C#5~ q D5~ q", "E5 h F5~ q E5>-5 q"]
+
+[patterns.chords]
+chords = ["A3+E4+C#5 w", "Bb3+F4+D5 w", "A3+E4+C#5 w", "G3+D4+Bb4 w"]
+
+[patterns.chords_move]
+chords = ["A3+E4+C#5 w", "Bb3+F4+D5 w", "F3+C4+A4 w", "G3+D4+Bb4 w"]
+
+[patterns.chords_break]
+chords = ["A3+E4+C#5 w", "Bb3+F4+D5 h. r q"]
+
+# --- effects -------------------------------------------------------------------------------------------
+
+[patterns.zaps]
+zap = ["x... .... .... ....", ".... .... .... ..xx"]
+
+[patterns.yoy]
+yoy = ["r w", "r h. A2 e3 C3 E3"]
+
+[patterns.gurgle]
+gurgle = "r h C4 q G3 q"
+
+[patterns.uplift]
+uplift = "x... .... .... ...."
+
+[patterns.impact]
+impact = "x... .... .... ...."
+downlift = "x... .... .... ...."
+
+[patterns.end]
+kick = "x... .... .... ...."
+bass = "r s A1 A1 A1 r h."
+vox = "A5>-24 w"
+
+# --- arrangement ---------------------------------------------------------------------------------------
+
+[arrangement]
+"1" = ["uplift"]
+"1-2" = ["acid", "zaps"]
+"2" = ["roll", "hats_only"]
+"3-5" = ["beat", "roll_a"]
+"3-6" = ["acid", "zaps"]
+"3" = ["impact"]
+"6" = ["beat_cut", "roll_cut", "gurgle"]
+"7" = ["uplift"]
+"7-8" = ["talk", "chords_break", "yoy"]
+"8" = ["roll"]
+"9-12" = ["beat", "roll_a", "hook", "chords", "acid", "yoy"]
+"9" = ["impact"]
+"13-16" = ["beat", "roll_move", "answer", "chords_move", "acid", "zaps"]
+"17" = ["end", "impact"]

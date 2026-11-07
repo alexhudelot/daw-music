@@ -1,0 +1,1089 @@
+# "Polynya": open water that stays open inside the sea ice. Atmospheric drum and bass, the DAW's second, 168 BPM, 348 bars,
+# G minor with one turn into E flat minor and back. The theme is one chord, struck in a rhythm, and an eight-bar bass line under it.
+# Written from the study in out/arcology-study: its structure and measures, none of the references' notes, loops or chords. Every
+# sound is made here. The strikes are rendered from samples/polynya/pads.toml; the textures are those strikes with the time taken out of
+# them; the drums are a break (samples/polynya/breaks.toml) cut into beats. Written out by samples/polynya/make.py.
+#
+#   1-16     the strikes alone, dark and low in level, and dust; the breath comes in at 9
+#   17-32    the bass melody under them, in its upper voice only, forward: the whole theme, sixteen bars, no drums
+#   33-46    the break's top comes up through a highpass; the high line, once. No sub yet
+#   47-48    the top gone: strikes and the bass melody only
+#   49-64    the sub, the kick and the whole break, all at once. 49-80 the theme under break A
+#   65-80    the upper half opens
+#   81-96    the strikes dark, low and narrow, the low pulse in; 81-84 the sub out too, the upper bass carrying the line
+#   97-112   the high line, with its floor
+#   113-128  half-time and bare: kick, a single snare, bass, the strikes low
+#   129-160  first opening: drums and sub gone, the strikes bright and falling. 145: the bass melody alone, then the high line
+#   161-176  the theme returns under the drums, said again two octaves up
+#   177-192  the rolling break, the upper half back
+#   193-208  strikes low again. 193-196 the sub out; 201-208 the upper bass out; the low pulse under both
+#   209-224  most of it: the open voicing, the high line, the cluster
+#   224      the mix stops like a tape, then two beats of nothing
+#   225-240  THE TURN, quiet and narrow: the chord bends down into E flat minor over no root at all. At 233 the new bass names it, upper voice only
+#   241-288  theme B under the drums: 241 half-time, and the sub at its most; 257 the rolling break, the upper half; 265 the high line; the open voicing from 259
+#   289-304  second opening, the widest and brightest: the chord bends back into G minor. The open strikes, the high line, then its bass
+#   305-328  the peak: the first theme, every strike, the widest, brightest pad, the line said high again, breaks A and B against each other
+#   329-336  narrow and dark: bass melody and strikes alone, as at the start
+#   337-348  the walk comes home to the root; the high line comes down to G; one last chord without its 7, 9 and 11, left to fall
+format = "daw-song 1"
+title = "Polynya"
+publish = true
+tempo = 168
+meter = "4/4"
+seed = 3301
+humanise = 1.4
+
+[instruments]
+a01 = { sample = "samples/polynya/a01.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a02 = { sample = "samples/polynya/a02.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a03 = { sample = "samples/polynya/a03.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a04 = { sample = "samples/polynya/a04.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a05 = { sample = "samples/polynya/a05.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a06 = { sample = "samples/polynya/a06.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a07 = { sample = "samples/polynya/a07.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a08 = { sample = "samples/polynya/a08.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a09 = { sample = "samples/polynya/a09.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a10 = { sample = "samples/polynya/a10.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a11 = { sample = "samples/polynya/a11.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a12 = { sample = "samples/polynya/a12.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a13 = { sample = "samples/polynya/a13.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a14 = { sample = "samples/polynya/a14.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a15 = { sample = "samples/polynya/a15.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+a16 = { sample = "samples/polynya/a16.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b01 = { sample = "samples/polynya/b01.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b02 = { sample = "samples/polynya/b02.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b03 = { sample = "samples/polynya/b03.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b04 = { sample = "samples/polynya/b04.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b05 = { sample = "samples/polynya/b05.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b06 = { sample = "samples/polynya/b06.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b07 = { sample = "samples/polynya/b07.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b08 = { sample = "samples/polynya/b08.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b09 = { sample = "samples/polynya/b09.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b10 = { sample = "samples/polynya/b10.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b11 = { sample = "samples/polynya/b11.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b12 = { sample = "samples/polynya/b12.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b13 = { sample = "samples/polynya/b13.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b14 = { sample = "samples/polynya/b14.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b15 = { sample = "samples/polynya/b15.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+b16 = { sample = "samples/polynya/b16.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c01 = { sample = "samples/polynya/c01.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c02 = { sample = "samples/polynya/c02.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c03 = { sample = "samples/polynya/c03.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c04 = { sample = "samples/polynya/c04.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c05 = { sample = "samples/polynya/c05.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c06 = { sample = "samples/polynya/c06.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c07 = { sample = "samples/polynya/c07.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c08 = { sample = "samples/polynya/c08.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c09 = { sample = "samples/polynya/c09.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c10 = { sample = "samples/polynya/c10.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c11 = { sample = "samples/polynya/c11.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c12 = { sample = "samples/polynya/c12.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c13 = { sample = "samples/polynya/c13.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c14 = { sample = "samples/polynya/c14.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c15 = { sample = "samples/polynya/c15.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+c16 = { sample = "samples/polynya/c16.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.006 }
+sn = { sample = "samples/polynya/sn.flac", base = "C4", gain = -2, bus = "brk", cut = true, release = 0.01 }
+rvs = { sample = "samples/polynya/sx.flac", base = "C4", gain = -3, bus = "brk", reverse = true, cut = true, release = 0.005 }
+tom = { sound = "tom", gain = -5, bus = "crack" }
+kick = { synth = "kick", gain = -1.5, bus = "punch" }
+snare = { synth = "snare", gain = -2, bus = "crack" }
+sub = { synth = "sub", gain = -9, bus = "sub", glide = 0.14 }
+bm = { synth = "bm", gain = -4, bus = "bmid", glide = 0.15 }
+voc = { synth = "voc", gain = -10, bus = "bmid", glide = 0.12 }
+morph = { synth = "morph", gain = -3, bus = "pad", glide = 1.3 }
+hi = { synth = "high", gain = -6, bus = "high", glide = 0.3, vibrato = { depth = 0.13, rate = 4.4, delay = 0.5 } }
+chirp = { synth = "chirp", gain = -7, bus = "high", glide = 1.5 }
+bleep = { synth = "bleep", gain = -5, bus = "spark" }
+bloom = { synth = "bloom", gain = -6, bus = "spark" }
+pulse = { synth = "pulse", gain = -6, bus = "pulse" }
+sA = { sample = "samples/polynya/sA.flac", base = "C4", gain = -3, bus = "pad", cut = true, release = 0.3 }
+wA = { sample = "samples/polynya/wA.flac", base = "C4", gain = -3, bus = "pad", cut = true, release = 0.3 }
+aA = { sample = "samples/polynya/aA.flac", base = "C4", gain = -3, bus = "pad", cut = true, release = 0.2 }
+oA = { sample = "samples/polynya/oA.flac", base = "C4", gain = -3, bus = "pad", cut = true, release = 0.3 }
+dA = { sample = "samples/polynya/dA.flac", base = "C4", gain = -3, bus = "pad", cut = true, release = 0.3 }
+uA = { sample = "samples/polynya/uA.flac", base = "C4", gain = -6, bus = "up", cut = true, release = 0.4 }
+tA = { sample = "samples/polynya/tA.flac", base = "C4", gain = -6, bus = "tex", cut = true, release = 0.3 }
+rA = { sample = "samples/polynya/rA.flac", base = "C4", gain = -8, bus = "air", cut = true, release = 0.3 }
+sB = { sample = "samples/polynya/sB.flac", base = "C4", gain = -3, bus = "pad", cut = true, release = 0.3 }
+wB = { sample = "samples/polynya/wB.flac", base = "C4", gain = -3, bus = "pad", cut = true, release = 0.3 }
+aB = { sample = "samples/polynya/aB.flac", base = "C4", gain = -3, bus = "pad", cut = true, release = 0.2 }
+oB = { sample = "samples/polynya/oB.flac", base = "C4", gain = -3, bus = "pad", cut = true, release = 0.3 }
+uB = { sample = "samples/polynya/uB.flac", base = "C4", gain = -6, bus = "up", cut = true, release = 0.4 }
+tB = { sample = "samples/polynya/tB.flac", base = "C4", gain = -6, bus = "tex", cut = true, release = 0.3 }
+rB = { sample = "samples/polynya/rB.flac", base = "C4", gain = -8, bus = "air", cut = true, release = 0.3 }
+eA = { sample = "samples/polynya/eA.flac", base = "C4", gain = -3, bus = "pad", cut = true, release = 0.5 }
+
+# --- the drums on top of the chopped break ------------------------------------------------------------------------------------
+
+[synths.kick]
+osc = [{ wave = "sine", to = "dry" }, { wave = "noise", level = -62 }]
+filter = { type = "band12", cutoff = 3400, resonance = 0.2 }
+shape = { drive = 3, asym = 0.08 }
+env = [{ attack = 0.0004, hold = 0.035, decay = 0.1, curve = 3, release = 0.006 }, { decay = 0.005 }, { decay = 0.05, curve = 6 }, { decay = 0.005 }]
+mod = [["env2", "pitch", 14], ["env3", "pitch", 24], ["env4", "osc2.level", 52], ["random", "pitch", 0.25], ["velocity", "level", 3]]
+
+[synths.snare]
+osc = [{ wave = "triangle", to = "dry", level = -9 }, { wave = "sine", octave = 1, semi = 2, to = "dry", level = -9 }, { wave = "noise", level = 0 }]
+filter = { type = "band12", cutoff = 2800, resonance = 0.1 }
+filter2 = { type = "high12", cutoff = 600 }
+shape = { drive = 7, asym = 0.1 }
+env = [{ attack = 0.0003, decay = 0.2, curve = 4, release = 0.008 }, { decay = 0.05, curve = 3 }, { decay = 0.016 }]
+mod = [["env2", "osc1.level", 9], ["env3", "pitch", 6], ["random", "filter.cutoff", 0.25], ["random", "pitch", 0.35], ["random", "level", 1], ["velocity", "filter.cutoff", 0.6]]
+
+# --- the low end ---------------------------------------------------------------------------------------------------------------
+
+# the sub: it carries the line and never moves in timbre
+[synths.sub]
+osc = [{ wave = "sine" }, { wave = "sine", octave = 1, level = -20 }, { wave = "triangle", level = -22 }]
+shape = { drive = 2.5, asym = 0.12 }
+env = [{ attack = 0.007, release = 0.05 }]
+
+# the same line an octave's worth of harmonics up: saws through a lowpass that plucks at each new note, then a vowel that
+# moves across the eight bars of the loop, so the line says the same thing in the same place each time round
+[synths.bm]
+osc = [{ wave = "saw", level = -3, unison = { voices = 2, detune = 7, spread = 0.3 } }, { wave = "pulse", width = 0.3, octave = 1, level = -13 }, { wave = "triangle", level = -4 }]
+filter = { type = "low24", cutoff = 340, resonance = 0.28, drive = 8 }
+filter2 = { type = "formant", vowel = 2 }
+shape = { drive = 3, asym = 0.12 }
+env = [{ attack = 0.008, release = 0.08 }, { attack = 0.02, decay = 0.7, curve = 2 }]
+lfo = [{ shape = "triangle", rate = "8w", free = true }]
+mod = [["env2", "filter.cutoff", 1.3], ["velocity", "filter.cutoff", 0.6], ["lfo1", "filter2.vowel", 1.6]]
+level = -6
+
+# the line said higher up, at the returns: not a lead, a thin reed behind the strikes
+[synths.voc]
+osc = [{ wave = "saw", level = -6 }, { wave = "triangle" }]
+filter = { type = "low24", cutoff = 800, resonance = 0.1, drive = 2 }
+env = [{ attack = 0.012, release = 0.09 }, { attack = 0.02, decay = 0.5, curve = 2 }]
+mod = [["env2", "filter.cutoff", 0.8]]
+level = -6
+
+# --- the chord bending: the only time the pad is live ------------------------------------------------------------------------
+
+[synths.morph]
+osc = [{ wave = "saw", detune = -9, unison = { voices = 3, detune = 9, spread = 0.5 } }, { wave = "saw", detune = 8, phase = 0.4, unison = { voices = 3, detune = 13, spread = 0.8 } }, { wave = "triangle", octave = -1, level = -8 }, { wave = "noise", level = -27 }]
+filter = { type = "low24", cutoff = 900, resonance = 0.12, drive = 4 }
+filter2 = { type = "notch12", cutoff = 340, resonance = 0.15 }
+env = [{ attack = 0.25, release = 1.0 }]
+level = -17
+
+# --- what happens rarely ---------------------------------------------------------------------------------------------------------
+
+# a long note, nearly a sine
+[synths.high]
+osc = [{ wave = "sine" }, { wave = "triangle", level = -14, detune = 4 }, { wave = "noise", level = -44 }]
+filter = { type = "low12", cutoff = 4000, resonance = 0.05 }
+env = [{ attack = 0.05, attack_curve = -1, release = 0.6 }]
+mod = [["velocity", "level", 4]]
+level = -16
+
+[synths.chirp]
+osc = [{ wave = "sine" }, { wave = "sine", octave = 1, level = -22 }]
+env = [{ attack = 0.01, decay = 2.6, sustain = 0.1, curve = 2, release = 0.8 }]
+level = -16
+
+[synths.bleep]
+osc = [{ wave = "sine", mute = true, octave = 2 }, { wave = "sine", fm = 0.5, fm_by = 1 }, { wave = "triangle", level = -10 }]
+env = [{ attack = 0.002, decay = 0.42, curve = 4, release = 0.18 }, { decay = 0.08, curve = 3 }]
+mod = [["env2", "osc2.fm", 1.6], ["random", "pan", 0.3], ["velocity", "level", 8]]
+level = -19
+
+[synths.bloom]
+osc = [{ wave = "noise" }, { wave = "sine", level = -22 }]
+filter = { type = "band12", cutoff = 1664, resonance = 0.72 }
+filter2 = { type = "high12", cutoff = 700 }
+env = [{ attack = 2.6, attack_curve = 2, decay = 3, sustain = 0.1, curve = 2, release = 2 }]
+lfo = [{ shape = "smooth", rate = 0.5 }, { shape = "sine", rate = 0.13 }]
+mod = [["lfo1", "filter.cutoff", 0.35], ["lfo2", "pan", 0.7], ["lfo1", "level", 4]]
+level = -20
+
+[synths.pulse]
+osc = [{ wave = "saw", detune = -6 }, { wave = "saw", detune = 6 }, { wave = "pulse", width = 0.4, octave = 1, level = -12 }]
+filter = { type = "low24", cutoff = 420, resonance = 0.25, drive = 6 }
+env = [{ attack = 0.003, decay = 0.16, sustain = 0.04, curve = 3, release = 0.06 }, { decay = 0.1, curve = 3 }]
+lfo = [{ shape = "triangle", rate = "8w", free = true }]
+mod = [["env2", "filter.cutoff", 1.1], ["lfo1", "filter.cutoff", 0.5], ["velocity", "level", 8]]
+level = -14
+
+# --- the one room ------------------------------------------------------------------------------------------------------------
+
+[buses.vast]
+hall = { size = 2.6, decay = 3.2, damp = 0.45, predelay = 0.05, early = 0.25, mod = 0.6, highpass = 180, width = 1, wet = 1, dry = 0 }
+eq = [{ hz = 320, gain = -2, q = 0.8 }, { type = "highshelf", hz = 7000, gain = -1 }]
+stereo = { cross = [350], width = [0.5, 1.3] }
+duck = { by = "kick", depth = -3, hold = 0.01, release = 0.2 }
+
+# --- drums ---------------------------------------------------------------------------------------------------------------------
+
+[buses.brk]
+filter = { highpass = 150, q = 0 }
+eq = [{ type = "highshelf", hz = 7000, gain = 2 }]
+transient = { attack = 4, sustain = -6, length = 0.012 }
+stereo = { cross = [3500], width = [0.9, 1.25] }
+hall = { size = 0.55, decay = 0.7, damp = 0.3, predelay = 0.004, early = 0.8, highpass = 1500, width = 1, wet = 0.07, dry = 1 }
+stutter = { bars = { "96" = "xxxx xxxx <<<< <<<<", "200" = "xxxx xxxx rrrr RRRR", "216" = "xxxx xxxx <<<< <<<<", "264" = "xxxx xxxx rrrr RRRR" } }
+
+[buses.punch]
+transient = { attack = 3, sustain = 0, length = 0.006 }
+drive = { type = "tape", gain = 2.5, level = -2, oversample = 2 }
+width = { steps = [0] }
+
+[buses.crack]
+transient = { attack = 5, sustain = -5, length = 0.01 }
+filter = { highpass = 150 }
+eq = [{ hz = 210, gain = 1.5, q = 1.4 }, { hz = 2600, gain = 5, q = 0.8 }, { type = "highshelf", hz = 6000, gain = 2 }]
+hall = { size = 0.55, decay = 0.7, damp = 0.3, predelay = 0.004, early = 0.8, highpass = 1500, width = 1, wet = 0.1, dry = 1 }
+send = { vast = 0.02 }
+
+# --- the low end -----------------------------------------------------------------------------------------------------------------
+
+[buses.sub]
+drive = { type = "tape", gain = 2.5, level = -2, asym = 0.15, oversample = 2 }
+filter = { lowpass = 700, highpass = 28, q = 0 }
+width = { steps = [0] }
+duck = { by = "kick", depth = -12, hold = 0.03, release = 0.1 }
+
+[buses.bmid]
+filter = { highpass = 110, lowpass = 1500, q = 0 }
+drive = { type = "tape", gain = 3, level = -2, asym = 0.15, oversample = 2 }
+stereo = { cross = [240], width = [0, 0.8] }
+duck = { by = "kick", depth = -8, hold = 0.02, release = 0.09 }
+
+# --- the pads ----------------------------------------------------------------------------------------------------------------------
+
+[buses.pad]
+filter = { highpass = 150, lowpass = 1300, q = 0 }
+eq = [{ hz = 230, gain = 1.5, q = 0.9 }, { type = "highshelf", hz = 800, gain = 0 }]
+stereo = { cross = [320], width = [0.45, 1.0] }
+duck = { by = "kick", depth = -3, hold = 0.01, release = 0.16 }
+send = { vast = 0.3, padw = 0 }
+
+# the pad again, nearly all side: how wide the song is at any point is how much goes through here
+[buses.padw]
+stereo = { cross = [320], width = [0, 3] }
+
+[buses.up]
+filter = { highpass = 320, q = 0 }
+stereo = { cross = [800], width = [0.7, 1.1] }
+duck = { by = "kick", depth = -3, hold = 0.01, release = 0.16 }
+send = { vast = 0.35 }
+
+[buses.tex]
+filter = { highpass = 170, lowpass = 2600, q = 0 }
+stereo = { cross = [400], width = [0.5, 1.1] }
+send = { vast = 0.12 }
+
+[buses.air]
+filter = { highpass = 1300, q = 0 }
+autopan = { steps = [-0.3, -0.2, 0, 0.2, 0.3, 0.2, 0, -0.2], step = "w", smooth = 0.1 }
+send = { vast = 0.1 }
+
+[buses.pulse]
+filter = { highpass = 85, q = 0 }
+stereo = { cross = [200], width = [0.5, 1.1] }
+duck = { by = "kick", depth = -3, hold = 0.01, release = 0.08 }
+send = { vast = 0.1 }
+
+# --- the rare things: short echoes rather than long halls --------------------------------------------------------------------------
+
+[buses.high]
+tape = { time = "e.", feedback = 0.3, tone = 2600, lowcut = 400, wow = 0.3, flutter = 0.05, wet = 0.34, dry = 1 }
+stereo = { cross = [1800], width = [0.7, 1.2] }
+send = { vast = 0.45 }
+
+[buses.spark]
+flanger = { delay = 0.004, depth = 0.003, rate = 0.11, feedback = 0.45, wet = 0.35 }
+tape = { time = "e.", feedback = 0.3, tone = 3200, lowcut = 450, wow = 0.1, flutter = 0.05, wet = 0.3, dry = 1 }
+stereo = { cross = [1100], width = [0.8, 1.3] }
+send = { vast = 0.35 }
+
+[master]
+eq = [{ hz = 340, gain = -0.8, q = 0.7 }, { type = "highshelf", hz = 8000, gain = 1 }]
+filter = { highpass = 24 }
+stereo = { cross = [110], width = [0, 1] }
+compressor = { threshold = -7, knee = 8, ratio = 1.2, attack = 0.03, release = 0.16 }
+stutter = { bars = { "224" = "xxxx vvvv .... ...." } }
+limiter = { ceiling = -2, release = 0.08 }
+loudness = -14
+
+[automation]
+"pad.filter.lowpass" = [[1, 2100], [4.5, 420, 3], [7.5, 420], [8.98, 1995, -3], [9, 2250], [12.5, 450, 3], [15.5, 450], [16.98, 2137.5, -3], [17, 2400], [20.5, 480, 3], [23.5, 480], [24.98, 2280, -3], [25, 2400], [28.5, 480, 3], [31.5, 480], [32.98, 2280, -3], [33, 2600], [36.5, 520, 3], [39.5, 520], [40.98, 2470, -3], [41, 2600], [44.5, 520, 3], [47.5, 520], [48.98, 2470, -3], [49, 1560], [52.5, 650, 3], [55.5, 650], [56.98, 1482, -3], [57, 1560], [60.5, 650, 3], [63.5, 650], [64.98, 1482, -3], [65, 1920], [68.5, 800, 3], [71.5, 800], [72.98, 1824, -3], [73, 1920], [76.5, 800, 3], [79.5, 800], [80.98, 1824, -3], [81, 1200], [84.5, 500, 3], [87.5, 500], [88.98, 1140, -3], [89, 1200], [92.5, 500, 3], [95.5, 500], [96.98, 1140, -3], [97, 1920], [100.5, 800, 3], [103.5, 800], [104.98, 1824, -3], [105, 1920], [108.5, 800, 3], [111.5, 800], [112.98, 1824, -3], [113, 1320], [116.5, 550, 3], [119.5, 550], [120.98, 1254, -3], [121, 1320], [124.5, 550, 3], [127.5, 550], [128.98, 1254, -3], [129, 3250], [132.5, 650, 3], [135.5, 650], [136.98, 3087.5, -3], [137, 3250], [140.5, 650, 3], [143.5, 650], [144.98, 3087.5, -3], [145, 3250], [148.5, 650, 3], [151.5, 650], [152.98, 3087.5, -3], [153, 3250], [156.5, 650, 3], [159.5, 650], [160.98, 3087.5, -3], [161, 1680], [164.5, 700, 3], [167.5, 700], [168.98, 1596, -3], [169, 1680], [172.5, 700, 3], [175.5, 700], [176.98, 1596, -3], [177, 1920], [180.5, 800, 3], [183.5, 800], [184.98, 1824, -3], [185, 1920], [188.5, 800, 3], [191.5, 800], [192.98, 1824, -3], [193, 1200], [196.5, 500, 3], [199.5, 500], [200.98, 1140, -3], [201, 1200], [204.5, 500, 3], [207.5, 500], [208.98, 1140, -3], [209, 2160], [212.5, 900, 3], [215.5, 900], [216.98, 2052, -3], [217, 2160], [220.5, 900, 3], [225.5, 900], [226.98, 2052, -3], [227, 2100], [230.5, 420, 3], [233.5, 420], [234.98, 1995, -3], [235, 2400], [238.5, 480, 3], [241.5, 480], [242.98, 2280, -3], [243, 1440], [246.5, 600, 3], [249.5, 600], [250.98, 1368, -3], [251, 1440], [254.5, 600, 3], [257.5, 600], [258.98, 1368, -3], [259, 1920], [262.5, 800, 3], [265.5, 800], [266.98, 1824, -3], [267, 1920], [270.5, 800, 3], [273.5, 800], [274.98, 1824, -3], [275, 2160], [278.5, 900, 3], [281.5, 900], [282.98, 2052, -3], [283, 2160], [286.5, 900, 3], [287.5, 900], [288.98, 2052, -3], [289, 3500], [292.5, 700, 3], [295.5, 700], [296.98, 3325, -3], [297, 3500], [300.5, 700, 3], [303.5, 700], [304.98, 3325, -3], [305, 2340], [308.5, 1300, 3], [311.5, 1300], [312.98, 2223, -3], [313, 2340], [316.5, 1300, 3], [319.5, 1300], [320.98, 2223, -3], [321, 2340], [324.5, 1300, 3], [327.5, 1300], [328.98, 2223, -3], [329, 2500], [332.5, 500, 3], [335.5, 500], [336.98, 2375, -3], [337, 2250], [340.5, 450, 3], [343.5, 450], [344.98, 2137.5, -3], [345, 2000], [348.5, 400, 3], [351.5, 400], [352.98, 1900, -3]]
+"pad.eq.1.gain" = [[1, 5], [4.5, -12, 3], [7.5, -12], [8.98, 4, -3], [9, 5], [12.5, -12, 3], [15.5, -12], [16.98, 4, -3], [17, 5], [20.5, -12, 3], [23.5, -12], [24.98, 4, -3], [25, 5], [28.5, -12, 3], [31.5, -12], [32.98, 4, -3], [33, 5], [36.5, -12, 3], [39.5, -12], [40.98, 4, -3], [41, 5], [44.5, -12, 3], [47.5, -12], [48.98, 4, -3], [49, 2], [52.5, -5, 3], [55.5, -5], [56.98, 1, -3], [57, 2], [60.5, -5, 3], [63.5, -5], [64.98, 1, -3], [65, 2], [68.5, -5, 3], [71.5, -5], [72.98, 1, -3], [73, 2], [76.5, -5, 3], [79.5, -5], [80.98, 1, -3], [81, 2], [84.5, -5, 3], [87.5, -5], [88.98, 1, -3], [89, 2], [92.5, -5, 3], [95.5, -5], [96.98, 1, -3], [97, 2], [100.5, -5, 3], [103.5, -5], [104.98, 1, -3], [105, 2], [108.5, -5, 3], [111.5, -5], [112.98, 1, -3], [113, 2], [116.5, -5, 3], [119.5, -5], [120.98, 1, -3], [121, 2], [124.5, -5, 3], [127.5, -5], [128.98, 1, -3], [129, 5], [132.5, -12, 3], [135.5, -12], [136.98, 4, -3], [137, 5], [140.5, -12, 3], [143.5, -12], [144.98, 4, -3], [145, 5], [148.5, -12, 3], [151.5, -12], [152.98, 4, -3], [153, 5], [156.5, -12, 3], [159.5, -12], [160.98, 4, -3], [161, 2], [164.5, -5, 3], [167.5, -5], [168.98, 1, -3], [169, 2], [172.5, -5, 3], [175.5, -5], [176.98, 1, -3], [177, 2], [180.5, -5, 3], [183.5, -5], [184.98, 1, -3], [185, 2], [188.5, -5, 3], [191.5, -5], [192.98, 1, -3], [193, 2], [196.5, -5, 3], [199.5, -5], [200.98, 1, -3], [201, 2], [204.5, -5, 3], [207.5, -5], [208.98, 1, -3], [209, 2], [212.5, -5, 3], [215.5, -5], [216.98, 1, -3], [217, 2], [220.5, -5, 3], [225.5, -5], [226.98, 1, -3], [227, 5], [230.5, -12, 3], [233.5, -12], [234.98, 4, -3], [235, 5], [238.5, -12, 3], [241.5, -12], [242.98, 4, -3], [243, 2], [246.5, -5, 3], [249.5, -5], [250.98, 1, -3], [251, 2], [254.5, -5, 3], [257.5, -5], [258.98, 1, -3], [259, 2], [262.5, -5, 3], [265.5, -5], [266.98, 1, -3], [267, 2], [270.5, -5, 3], [273.5, -5], [274.98, 1, -3], [275, 2], [278.5, -5, 3], [281.5, -5], [282.98, 1, -3], [283, 2], [286.5, -5, 3], [287.5, -5], [288.98, 1, -3], [289, 5], [292.5, -12, 3], [295.5, -12], [296.98, 4, -3], [297, 5], [300.5, -12, 3], [303.5, -12], [304.98, 4, -3], [305, 2], [308.5, 0, 3], [311.5, 0], [312.98, 1, -3], [313, 2], [316.5, 0, 3], [319.5, 0], [320.98, 1, -3], [321, 2], [324.5, 0, 3], [327.5, 0], [328.98, 1, -3], [329, 5], [332.5, -12, 3], [335.5, -12], [336.98, 4, -3], [337, 5], [340.5, -12, 3], [343.5, -12], [344.98, 4, -3], [345, 5], [348.5, -12, 3], [351.5, -12], [352.98, 4, -3]]
+"tex.filter.lowpass" = [[1, 2310], [4.5, 462, 3], [7.5, 462], [8.98, 2194.5, -3], [9, 2475], [12.5, 495, 3], [15.5, 495], [16.98, 2351.25, -3], [17, 2640], [20.5, 528, 3], [23.5, 528], [24.98, 2508, -3], [25, 2640], [28.5, 528, 3], [31.5, 528], [32.98, 2508, -3], [33, 2860], [36.5, 572, 3], [39.5, 572], [40.98, 2717, -3], [41, 2860], [44.5, 572, 3], [47.5, 572], [48.98, 2717, -3], [49, 1716], [52.5, 715, 3], [55.5, 715], [56.98, 1630.2, -3], [57, 1716], [60.5, 715, 3], [63.5, 715], [64.98, 1630.2, -3], [65, 2112], [68.5, 880, 3], [71.5, 880], [72.98, 2006.4, -3], [73, 2112], [76.5, 880, 3], [79.5, 880], [80.98, 2006.4, -3], [81, 1320], [84.5, 550, 3], [87.5, 550], [88.98, 1254, -3], [89, 1320], [92.5, 550, 3], [95.5, 550], [96.98, 1254, -3], [97, 2112], [100.5, 880, 3], [103.5, 880], [104.98, 2006.4, -3], [105, 2112], [108.5, 880, 3], [111.5, 880], [112.98, 2006.4, -3], [113, 1452], [116.5, 605, 3], [119.5, 605], [120.98, 1379.4, -3], [121, 1452], [124.5, 605, 3], [127.5, 605], [128.98, 1379.4, -3], [129, 3200], [132.5, 715, 3], [135.5, 715], [136.98, 3200, -3], [137, 3200], [140.5, 715, 3], [143.5, 715], [144.98, 3200, -3], [145, 3200], [148.5, 715, 3], [151.5, 715], [152.98, 3200, -3], [153, 3200], [156.5, 715, 3], [159.5, 715], [160.98, 3200, -3], [161, 1848], [164.5, 770, 3], [167.5, 770], [168.98, 1755.6, -3], [169, 1848], [172.5, 770, 3], [175.5, 770], [176.98, 1755.6, -3], [177, 2112], [180.5, 880, 3], [183.5, 880], [184.98, 2006.4, -3], [185, 2112], [188.5, 880, 3], [191.5, 880], [192.98, 2006.4, -3], [193, 1320], [196.5, 550, 3], [199.5, 550], [200.98, 1254, -3], [201, 1320], [204.5, 550, 3], [207.5, 550], [208.98, 1254, -3], [209, 2376], [212.5, 990, 3], [215.5, 990], [216.98, 2257.2, -3], [217, 2376], [220.5, 990, 3], [225.5, 990], [226.98, 2257.2, -3], [227, 2310], [230.5, 462, 3], [233.5, 462], [234.98, 2194.5, -3], [235, 2640], [238.5, 528, 3], [241.5, 528], [242.98, 2508, -3], [243, 1584], [246.5, 660, 3], [249.5, 660], [250.98, 1504.8, -3], [251, 1584], [254.5, 660, 3], [257.5, 660], [258.98, 1504.8, -3], [259, 2112], [262.5, 880, 3], [265.5, 880], [266.98, 2006.4, -3], [267, 2112], [270.5, 880, 3], [273.5, 880], [274.98, 2006.4, -3], [275, 2376], [278.5, 990, 3], [281.5, 990], [282.98, 2257.2, -3], [283, 2376], [286.5, 990, 3], [287.5, 990], [288.98, 2257.2, -3], [289, 3200], [292.5, 770, 3], [295.5, 770], [296.98, 3200, -3], [297, 3200], [300.5, 770, 3], [303.5, 770], [304.98, 3200, -3], [305, 2574], [308.5, 1430, 3], [311.5, 1430], [312.98, 2445.3, -3], [313, 2574], [316.5, 1430, 3], [319.5, 1430], [320.98, 2445.3, -3], [321, 2574], [324.5, 1430, 3], [327.5, 1430], [328.98, 2445.3, -3], [329, 2750], [332.5, 550, 3], [335.5, 550], [336.98, 2612.5, -3], [337, 2475], [340.5, 495, 3], [343.5, 495], [344.98, 2351.25, -3], [345, 2200], [348.5, 440, 3], [351.5, 440], [352.98, 2090, -3]]
+"pad.level" = [[1, -6], [9, -5, "step"], [17, -7, "step"], [33, -4, "step"], [45, -4.5, "step"], [49, -5, "step"], [52.865, -5], [52.875, -15], [52.99, -15], [53, -5], [56.49, -5], [56.5, -15], [56.99, -15], [57, -5], [60.865, -5], [60.875, -15], [60.99, -15], [61, -5], [64.49, -5], [64.5, -15], [64.99, -15], [65, -4], [68.865, -4], [68.875, -14], [68.99, -14], [69, -4], [72.49, -4], [72.5, -14], [72.99, -14], [73, -4], [76.865, -4], [76.875, -14], [76.99, -14], [77, -4], [80.49, -4], [80.5, -14], [80.99, -14], [81, -8], [84.865, -8], [84.875, -18], [84.99, -18], [85, -8], [88.49, -8], [88.5, -18], [88.99, -18], [89, -8], [92.865, -8], [92.875, -18], [92.99, -18], [93, -8], [96.49, -8], [96.5, -18], [96.99, -18], [97, -3.5], [100.865, -3.5], [100.875, -13.5], [100.99, -13.5], [101, -3.5], [104.49, -3.5], [104.5, -13.5], [104.99, -13.5], [105, -3.5], [108.865, -3.5], [108.875, -13.5], [108.99, -13.5], [109, -3.5], [112.49, -3.5], [112.5, -13.5], [112.99, -13.5], [113, -6], [116.865, -6], [116.875, -16], [116.99, -16], [117, -6], [120.49, -6], [120.5, -16], [120.99, -16], [121, -6], [124.865, -6], [124.875, -16], [124.99, -16], [125, -6], [128.49, -6], [128.5, -16], [128.99, -16], [129, 0], [161, -6, "step"], [164.865, -6], [164.875, -16], [164.99, -16], [165, -6], [168.49, -6], [168.5, -16], [168.99, -16], [169, -6], [172.865, -6], [172.875, -16], [172.99, -16], [173, -6], [176.49, -6], [176.5, -16], [176.99, -16], [177, -4.5], [180.865, -4.5], [180.875, -14.5], [180.99, -14.5], [181, -4.5], [184.49, -4.5], [184.5, -14.5], [184.99, -14.5], [185, -4.5], [188.865, -4.5], [188.875, -14.5], [188.99, -14.5], [189, -4.5], [192.49, -4.5], [192.5, -14.5], [192.99, -14.5], [193, -8], [196.865, -8], [196.875, -18], [196.99, -18], [197, -8], [200.49, -8], [200.5, -18], [200.99, -18], [201, -8], [204.865, -8], [204.875, -18], [204.99, -18], [205, -8], [208.49, -8], [208.5, -18], [208.99, -18], [209, -3.5], [212.865, -3.5], [212.875, -13.5], [212.99, -13.5], [213, -3.5], [216.49, -3.5], [216.5, -13.5], [216.99, -13.5], [217, -3.5], [220.865, -3.5], [220.875, -13.5], [220.99, -13.5], [221, -3.5], [224.49, -3.5], [224.5, -13.5], [224.99, -13.5], [225, -5], [233, -7, "step"], [241, -6, "step"], [244.865, -6], [244.875, -16], [244.99, -16], [245, -6], [248.49, -6], [248.5, -16], [248.99, -16], [249, -6], [252.865, -6], [252.875, -16], [252.99, -16], [253, -6], [256.49, -6], [256.5, -16], [256.99, -16], [257, -5], [260.865, -5], [260.875, -15], [260.99, -15], [261, -5], [264.49, -5], [264.5, -15], [264.99, -15], [265, -5], [268.865, -5], [268.875, -15], [268.99, -15], [269, -5], [272.49, -5], [272.5, -15], [272.99, -15], [273, -4], [276.865, -4], [276.875, -14], [276.99, -14], [277, -4], [280.49, -4], [280.5, -14], [280.99, -14], [281, -4], [284.865, -4], [284.875, -14], [284.99, -14], [285, -4], [288.49, -4], [288.5, -14], [288.99, -14], [289, 1], [305, -2.5, "step"], [308.865, -2.5], [308.875, -12.5], [308.99, -12.5], [309, -2.5], [312.49, -2.5], [312.5, -12.5], [312.99, -12.5], [313, -2.5], [316.865, -2.5], [316.875, -12.5], [316.99, -12.5], [317, -2.5], [320.49, -2.5], [320.5, -12.5], [320.99, -12.5], [321, -2.5], [324.865, -2.5], [324.875, -12.5], [324.99, -12.5], [325, -2.5], [328.49, -2.5], [328.5, -12.5], [328.99, -12.5], [329, -5], [341, -4, "step"], [348, -10]]
+"pad.send.padw" = [[1, 0], [65, 0.05, "step"], [81, 0, "step"], [97, 0.05, "step"], [113, 0, "step"], [129, 0.15, "step"], [161, 0, "step"], [177, 0.05, "step"], [193, 0, "step"], [209, 0.1, "step"], [225, 0, "step"], [257, 0.05, "step"], [273, 0.1, "step"], [289, 0.25, "step"], [305, 0.1, "step"], [329, 0, "step"]]
+"up.level" = [[1, -3], [52.865, -3], [52.875, -13], [52.99, -13], [53, -3], [56.49, -3], [56.5, -13], [56.99, -13], [57, -3], [60.865, -3], [60.875, -13], [60.99, -13], [61, -3], [64.49, -3], [64.5, -13], [64.99, -13], [65, -3], [68.865, -3], [68.875, -13], [68.99, -13], [69, -3], [72.49, -3], [72.5, -13], [72.99, -13], [73, -3], [76.865, -3], [76.875, -13], [76.99, -13], [77, -3], [80.49, -3], [80.5, -13], [80.99, -13], [81, -3], [84.865, -3], [84.875, -13], [84.99, -13], [85, -3], [88.49, -3], [88.5, -13], [88.99, -13], [89, -3], [92.865, -3], [92.875, -13], [92.99, -13], [93, -3], [96.49, -3], [96.5, -13], [96.99, -13], [97, -3], [100.865, -3], [100.875, -13], [100.99, -13], [101, -3], [104.49, -3], [104.5, -13], [104.99, -13], [105, -3], [108.865, -3], [108.875, -13], [108.99, -13], [109, -3], [112.49, -3], [112.5, -13], [112.99, -13], [113, -3], [116.865, -3], [116.875, -13], [116.99, -13], [117, -3], [120.49, -3], [120.5, -13], [120.99, -13], [121, -3], [124.865, -3], [124.875, -13], [124.99, -13], [125, -3], [128.49, -3], [128.5, -13], [128.99, -13], [129, -3], [145, -2, "step"], [164.865, -2], [164.875, -12], [164.99, -12], [165, -2], [168.49, -2], [168.5, -12], [168.99, -12], [169, -2], [172.865, -2], [172.875, -12], [172.99, -12], [173, -2], [176.49, -2], [176.5, -12], [176.99, -12], [177, -3], [180.865, -3], [180.875, -13], [180.99, -13], [181, -3], [184.49, -3], [184.5, -13], [184.99, -13], [185, -3], [188.865, -3], [188.875, -13], [188.99, -13], [189, -3], [192.49, -3], [192.5, -13], [192.99, -13], [193, -3], [196.865, -3], [196.875, -13], [196.99, -13], [197, -3], [200.49, -3], [200.5, -13], [200.99, -13], [201, -3], [204.865, -3], [204.875, -13], [204.99, -13], [205, -3], [208.49, -3], [208.5, -13], [208.99, -13], [209, -2], [212.865, -2], [212.875, -12], [212.99, -12], [213, -2], [216.49, -2], [216.5, -12], [216.99, -12], [217, -2], [220.865, -2], [220.875, -12], [220.99, -12], [221, -2], [224.49, -2], [224.5, -12], [224.99, -12], [225, -2], [244.865, -2], [244.875, -12], [244.99, -12], [245, -2], [248.49, -2], [248.5, -12], [248.99, -12], [249, -2], [252.865, -2], [252.875, -12], [252.99, -12], [253, -2], [256.49, -2], [256.5, -12], [256.99, -12], [257, -3], [260.865, -3], [260.875, -13], [260.99, -13], [261, -3], [264.49, -3], [264.5, -13], [264.99, -13], [265, -3], [268.865, -3], [268.875, -13], [268.99, -13], [269, -3], [272.49, -3], [272.5, -13], [272.99, -13], [273, -3], [276.865, -3], [276.875, -13], [276.99, -13], [277, -3], [280.49, -3], [280.5, -13], [280.99, -13], [281, -3], [284.865, -3], [284.875, -13], [284.99, -13], [285, -3], [288.49, -3], [288.5, -13], [288.99, -13], [289, -3], [305, -2, "step"], [308.865, -2], [308.875, -12], [308.99, -12], [309, -2], [312.49, -2], [312.5, -12], [312.99, -12], [313, -2], [316.865, -2], [316.875, -12], [316.99, -12], [317, -2], [320.49, -2], [320.5, -12], [320.99, -12], [321, -2], [324.865, -2], [324.875, -12], [324.99, -12], [325, -2], [328.49, -2], [328.5, -12], [328.99, -12], [329, -3]]
+"sub.level" = [[1, 0], [81, -16, "step"], [85, 0, "step"], [113, -4.5, "step"], [129, 0, "step"], [161, -1, "step"], [177, 0, "step"], [193, -16, "step"], [197, 0, "step"], [209, -1, "step"], [241, 1, "step"], [257, -1, "step"], [305, 0, "step"], [337, -2, "step"], [341, -4], [343, -8], [345, -30]]
+"brk.filter.highpass" = [[1, 4500], [33, 4500], [46.9, 1300, "exp"], [49, 150, "step"]]
+"brk.level" = [[1, -10], [33, -10], [46, -3], [49, 0, "step"], [305, 1, "step"], [329, 0, "step"]]
+"tex.level" = [[1, -12], [9, -10, "step"], [17, -7, "step"], [45, -9, "step"], [129, -2, "step"], [161, -8, "step"], [225, -7, "step"], [241, -8, "step"], [289, -1, "step"], [305, -7, "step"], [329, -3, "step"], [344, -5], [348, -14]]
+"air.level" = [[1, -14], [33, -6, "step"], [97, -6, "step"], [129, -4, "step"], [161, -8, "step"], [209, -5, "step"], [225, -10, "step"], [265, -6, "step"], [289, -2, "step"], [305, -5, "step"], [329, -5, "step"], [337, -3, "step"]]
+"bmid.level" = [[1, 0], [17, 2, "step"], [33, 1, "step"], [49, -1, "step"], [52.865, -1], [52.875, -11], [52.99, -11], [53, -1], [56.49, -1], [56.5, -11], [56.99, -11], [57, -1], [60.865, -1], [60.875, -11], [60.99, -11], [61, -1], [64.49, -1], [64.5, -11], [64.99, -11], [65, -1], [68.865, -1], [68.875, -11], [68.99, -11], [69, -1], [72.49, -1], [72.5, -11], [72.99, -11], [73, -1], [76.865, -1], [76.875, -11], [76.99, -11], [77, -1], [80.49, -1], [80.5, -11], [80.99, -11], [81, -1], [84.865, -1], [84.875, -11], [84.99, -11], [85, -1], [88.49, -1], [88.5, -11], [88.99, -11], [89, -1], [92.865, -1], [92.875, -11], [92.99, -11], [93, -1], [96.49, -1], [96.5, -11], [96.99, -11], [97, -1], [100.865, -1], [100.875, -11], [100.99, -11], [101, -1], [104.49, -1], [104.5, -11], [104.99, -11], [105, -1], [108.865, -1], [108.875, -11], [108.99, -11], [109, -1], [112.49, -1], [112.5, -11], [112.99, -11], [113, -1], [116.865, -1], [116.875, -11], [116.99, -11], [117, -1], [120.49, -1], [120.5, -11], [120.99, -11], [121, -1], [124.865, -1], [124.875, -11], [124.99, -11], [125, -1], [128.49, -1], [128.5, -11], [128.99, -11], [129, -1], [161, 1, "step"], [164.865, 1], [164.875, -9], [164.99, -9], [165, 1], [168.49, 1], [168.5, -9], [168.99, -9], [169, 1], [172.865, 1], [172.875, -9], [172.99, -9], [173, 1], [176.49, 1], [176.5, -9], [176.99, -9], [177, -1], [180.865, -1], [180.875, -11], [180.99, -11], [181, -1], [184.49, -1], [184.5, -11], [184.99, -11], [185, -1], [188.865, -1], [188.875, -11], [188.99, -11], [189, -1], [192.49, -1], [192.5, -11], [192.99, -11], [193, -1], [196.865, -1], [196.875, -11], [196.99, -11], [197, -1], [200.49, -1], [200.5, -11], [200.99, -11], [201, -1], [204.865, -1], [204.875, -11], [204.99, -11], [205, -1], [208.49, -1], [208.5, -11], [208.99, -11], [209, -1], [212.865, -1], [212.875, -11], [212.99, -11], [213, -1], [216.49, -1], [216.5, -11], [216.99, -11], [217, -1], [220.865, -1], [220.875, -11], [220.99, -11], [221, -1], [224.49, -1], [224.5, -11], [224.99, -11], [225, -1], [233, 0, "step"], [244.865, 0], [244.875, -10], [244.99, -10], [245, 0], [248.49, 0], [248.5, -10], [248.99, -10], [249, 0], [252.865, 0], [252.875, -10], [252.99, -10], [253, 0], [256.49, 0], [256.5, -10], [256.99, -10], [257, -1], [260.865, -1], [260.875, -11], [260.99, -11], [261, -1], [264.49, -1], [264.5, -11], [264.99, -11], [265, -1], [268.865, -1], [268.875, -11], [268.99, -11], [269, -1], [272.49, -1], [272.5, -11], [272.99, -11], [273, -1], [276.865, -1], [276.875, -11], [276.99, -11], [277, -1], [280.49, -1], [280.5, -11], [280.99, -11], [281, -1], [284.865, -1], [284.875, -11], [284.99, -11], [285, -1], [288.49, -1], [288.5, -11], [288.99, -11], [289, -1], [305, 0, "step"], [308.865, 0], [308.875, -10], [308.99, -10], [309, 0], [312.49, 0], [312.5, -10], [312.99, -10], [313, 0], [316.865, 0], [316.875, -10], [316.99, -10], [317, 0], [320.49, 0], [320.5, -10], [320.99, -10], [321, 0], [324.865, 0], [324.875, -10], [324.99, -10], [325, 0], [328.49, 0], [328.5, -10], [328.99, -10], [329, -1], [337, -1, "step"], [344, -8], [345, -30]]
+"instruments.bm.filter.cutoff" = { lfo = "smooth", rate = "4w", depth = 0.3, points = [[1, 420], [33, 400], [49, 340], [97, 460, "s"], [113, 300, "step"], [145, 340, "step"], [161, 560, "step"], [209, 620, "s"], [225, 300, "step"], [241, 340], [288, 700, "s"], [297, 340, "step"], [305, 700, "step"], [328, 800, "s"], [329, 340, "step"], [344, 180, "s"]] }
+"vast.level" = [[1, -6], [17, -5, "step"], [49, -8, "step"], [81, -10, "step"], [97, -8, "step"], [129, -3, "step"], [161, -9, "step"], [177, -8, "step"], [193, -10, "step"], [209, -7, "step"], [224.5, -60, "step"], [225, -60, "step"], [227, -6], [241, -9, "step"], [257, -8, "step"], [289, -2, "step"], [305, -5, "step"]]
+"high.level" = [[1, -3], [97, -1, "step"], [129, -3, "step"], [209, -1, "step"], [224.5, -60, "step"], [225.2, -3, "step"], [241, -1, "step"], [289, -3, "step"], [305, 0, "step"], [337, -3, "step"]]
+"punch.level" = [[1, 0], [305, 1, "step"], [329, 0, "step"]]
+"crack.level" = [[1, 0], [305, 2, "step"], [329, 0, "step"]]
+"spark.level" = [[1, 0], [224.5, -60, "step"], [225.2, 0, "step"]]
+
+[patterns.strA]
+sA = ["C4@0.8 w", "C4~@0.8 w", "r w", "r w", "r w", "r q C4@0.8 h.", "C4~@0.8 w", "r w"]
+wA = ["r w", "r w", "C4@0.8 w", "C4~@0.8 h C4~ e r q.", "C4@0.8 w", "C4~@0.8 q r h.", "r w", "r w"]
+aA = ["r w", "r w", "r w", "r h r e C4@0.8 q.", "r w", "r w", "r w", "r q. C4@0.8 q. C4@0.8 q"]
+
+[patterns.strB]
+sB = ["C4@0.8 w", "C4~@0.8 h r h", "r w", "r w", "C4@0.8 w", "C4~@0.8 h r h", "r w", "r w"]
+wB = ["r w", "r h C4@0.8 h", "C4~@0.8 w", "r h C4@0.8 h", "r w", "r h C4@0.8 h", "C4~@0.8 h. C4~ e r e", "r w"]
+aB = ["r w", "r w", "r w", "C4@0.8 h r h", "r w", "r w", "r h. r e C4@0.8 e", "C4~@0.8 w"]
+
+[patterns.strI]
+wA = ["r w", "r w", "C4@0.8 w", "C4~@0.8 h C4~ e r q.", "C4@0.8 w", "C4~@0.8 q r h.", "r w", "r w"]
+aA = ["r w", "r w", "r w", "r h r e C4@0.8 q.", "r w", "r w", "r w", "r q. C4@0.8 q. C4@0.8 q"]
+dA = ["C4@0.8 w", "C4~@0.8 w", "r w", "r w", "r w", "r q C4@0.8 h.", "C4~@0.8 w", "r w"]
+
+[patterns.strH]
+aA = ["r w", "r w", "r w", "r h r e C4@0.8 q.", "r w", "r w", "r w", "r q. C4@0.8 q. C4@0.8 q"]
+dA = ["C4@0.8 w", "C4~@0.8 w", "C4@0.8 w", "C4~@0.8 h C4~ e r q.", "C4@0.8 w", "C4~@0.8 q C4@0.8 h.", "C4~@0.8 w", "r w"]
+
+[patterns.strO]
+wA = ["r w", "r w", "C4@0.8 w", "C4~@0.8 h C4~ e r q.", "C4@0.8 w", "C4~@0.8 q r h.", "r w", "r w"]
+aA = ["r w", "r w", "r w", "r h r e C4@0.8 q.", "r w", "r w", "r w", "r q. C4@0.8 q. C4@0.8 q"]
+oA = ["C4@0.8 w", "C4~@0.8 w", "r w", "r w", "r w", "r q C4@0.8 h.", "C4~@0.8 w", "r w"]
+
+[patterns.strR]
+sA = ["r w", "r w", "r w", "r w", "r w", "r q C4@0.8 h.", "C4~@0.8 w", "r w"]
+wA = ["r w", "r w", "C4@0.8 w", "C4~@0.8 h C4~ e r q.", "r w", "r w", "r w", "r w"]
+aA = ["r w", "r w", "r w", "r h r e C4@0.8 q.", "r w", "r w", "r w", "r q. C4@0.8 q. C4@0.8 q"]
+oA = ["C4@0.8 w", "C4~@0.8 w", "r w", "r w", "C4@0.8 w", "C4~@0.8 q r h.", "r w", "r w"]
+
+[patterns.strK]
+sA = ["r w", "r w", "C4@0.8 w", "C4~@0.8 h C4~ e r q.", "r w", "r w", "r w", "r w"]
+aA = ["r w", "r h. C4@0.8 q", "r w", "r h r e C4@0.8 q.", "r w", "r w", "r h r e C4@0.8 q.", "r q. C4@0.8 q. r q"]
+oA = ["C4@0.8 w", "C4~@0.8 h. r q", "r w", "r w", "C4@0.8 w", "C4~@0.8 q C4@0.8 h.", "C4~@0.8 h C4~ e r q.", "r h. C4@0.8 q"]
+
+[patterns.strL]
+wA = ["r w", "r w", "C4@0.8 w", "C4~@0.8 h C4~ e r q.", "r w", "r w", "r w", "r w"]
+aA = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r q. C4@0.8 q. C4@0.8 q"]
+dA = ["C4@0.8 w", "C4~@0.8 w", "r w", "r w", "C4@0.8 w", "C4~@0.8 q C4@0.8 h.", "C4~@0.8 w", "r w"]
+
+[patterns.strBo]
+sB = ["r w", "r w", "r w", "r w", "C4@0.8 w", "C4~@0.8 h r h", "r w", "r w"]
+wB = ["r w", "r h C4@0.8 h", "C4~@0.8 w", "r h C4@0.8 h", "r w", "r w", "r w", "r w"]
+aB = ["r w", "r w", "r w", "C4@0.8 h r h", "r w", "r w", "r h. r e C4@0.8 e", "C4~@0.8 w"]
+oB = ["C4@0.8 w", "C4~@0.8 h r h", "r w", "r w", "r w", "r h C4@0.8 h", "C4~@0.8 h. C4~ e r e", "r w"]
+
+[patterns.upAfirst]
+uA = ["r w", "r w", "r w", "r w", "r w", "r w", "r h C4@0.8 h", "C4~@0.8 w"]
+
+[patterns.upA]
+uA = ["C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 h r h", "r w", "r w", "r w", "r h C4@0.8 h", "C4~@0.8 w"]
+
+[patterns.upAring]
+uA = ["C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 h r h", "r w", "r w", "r w", "r w", "r w"]
+
+[patterns.upBfirst]
+uB = ["r w", "r w", "r w", "r w", "r w", "r w", "r h C4@0.8 h", "C4~@0.8 w"]
+
+[patterns.upB]
+uB = ["C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 h r h", "r w", "r w", "r w", "r h C4@0.8 h", "C4~@0.8 w"]
+
+[patterns.texA]
+tA = ["C4@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w"]
+
+[patterns.texB]
+tB = ["C4@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w"]
+
+[patterns.airA]
+rA = ["C4@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w"]
+
+[patterns.airB]
+rB = ["C4@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w"]
+
+[patterns.midA]
+bm = ["G1@0.95 h. r e G1@0.7 e", "F2@0.9 q. Eb2~ e D2~ h", "Bb1@0.9 h. C2~ q", "C2~ h G1@0.75 e r e Bb1@0.7 e A1~ e", "G1@0.95 h. r e G1@0.7 e", "F2@0.9 q. Eb2~ e D2~ q C2~ q", "Eb2@0.9 h. D2~ q", "D2~ q Bb1~ q A1~ q F1~ q"]
+
+[patterns.subA]
+sub = ["G1@0.95 h. r e G1@0.7 e", "F2@0.9 q. Eb2~ e D2~ h", "Bb1@0.9 h. C2~ q", "C2~ h G1@0.75 e r e Bb1@0.7 e A1~ e", "G1@0.95 h. r e G1@0.7 e", "F2@0.9 q. Eb2~ e D2~ q C2~ q", "Eb2@0.9 h. D2~ q", "D2~ q Bb1~ q A1~ q F1~ q"]
+
+[patterns.midB]
+bm = ["Eb2@0.95 h r e Db2~ e Bb1~ q", "Bb1~ h r e Gb1@0.8 e Ab1~ q", "Ab1~ h. Bb1~ q", "Bb1~ q Db2@0.85 h Eb2~ q", "Eb2@0.95 h r e Db2~ e Bb1~ q", "Bb1~ h r e Gb1@0.8 e Ab1~ q", "Gb1@0.9 h. F1~ q", "F1~ h Ab1@0.8 q Bb1~ e Db2~ e"]
+
+[patterns.subB]
+sub = ["Eb2@0.95 h r e Db2~ e Bb1~ q", "Bb1~ h r e Gb1@0.8 e Ab1~ q", "Ab1~ h. Bb1~ q", "Bb1~ q Db2@0.85 h Eb2~ q", "Eb2@0.95 h r e Db2~ e Bb1~ q", "Bb1~ h r e Gb1@0.8 e Ab1~ q", "Gb1@0.9 h. F1~ q", "F1~ h Ab1@0.8 q Bb1~ e Db2~ e"]
+
+[patterns.midE]
+bm = ["G1@0.95 h. r e G1@0.7 e", "F2@0.85 q. Eb2~ e D2~ q C2~ q", "Bb1@0.8 h. A1~ q", "A1~ h. F1~ q", "G1@0.9 w", "G1~@0.85 w", "G1~@0.8 w", "G1~@0.75 w"]
+
+[patterns.subE]
+sub = ["G1@0.95 h. r e G1@0.7 e", "F2@0.85 q. Eb2~ e D2~ q C2~ q", "Bb1@0.8 h. A1~ q", "A1~ h. F1~ q", "G1@0.9 w", "G1~@0.85 w", "G1~@0.8 w", "G1~@0.75 w"]
+
+[patterns.vocA]
+voc = ["G3@0.95 h. r e G3@0.7 e", "F4@0.9 q. Eb4~ e D4~ h", "Bb3@0.9 h. C4~ q", "C4~ h G3@0.75 e r e Bb3@0.7 e A3~ e", "G3@0.95 h. r e G3@0.7 e", "F4@0.9 q. Eb4~ e D4~ q C4~ q", "Eb4@0.9 h. D4~ q", "D4~ q Bb3~ q A3~ q F3~ q"]
+
+[patterns.hiA]
+hi = ["r h D6@0.8 h", "D6~ h A5~ h", "A5~ w", "r w", "r h F5@0.7 h", "D6~@0.8 w", "D6~ h C6~ h", "C6~ w"]
+
+[patterns.hiB]
+hi = ["Bb5@0.8 w", "Bb5~ h Db6~ h", "Db6~ w", "r w", "r h Ab5@0.7 q Gb5~ q", "F5~ w", "F5~ h Bb5~ h", "Bb5~ w"]
+
+[patterns.hiE]
+hi = ["r h D6@0.8 h", "D6~ h A5~ h", "A5~ h C6~ q Bb5~ q", "Bb5~ h A5~ h", "G5@0.8 w", "G5~ w", "G5~ h r h", "r w"]
+
+[patterns.chirpA]
+chirp = ["D6<14@0.9 w", "r w", "r w", "r w", "r h A5<12@0.7 h", "r w", "r w", "r w"]
+
+[patterns.chirpA2]
+chirp = ["r w", "r w", "r w", "F6<14@0.85 w", "r w", "r w", "C6<12@0.7 h r h", "r w"]
+
+[patterns.chirpB]
+chirp = ["Db6<14@0.9 w", "r w", "r w", "r w", "r h Ab5<12@0.7 h", "r w", "r w", "r w"]
+
+[patterns.bloomA]
+bloom = ["r w", "r w", "r w", "r w", "A6@0.9 w", "A6~ w", "r w", "r w"]
+
+[patterns.bloomB]
+bloom = ["r w", "r w", "r w", "r w", "Bb6@0.9 w", "Bb6~ w", "r w", "r w"]
+
+[patterns.bleepA]
+bleep = ["r w", "r w", "r w", "D5@0.7 e F5@0.3 A5@0.55 C5@0.28 Bb5@0.65 A5@0.3 F5@0.5 D5@0.3", "r w", "r w", "C5@0.65 e D5@0.3 F5@0.5 A5@0.3 G5@0.6 F5@0.3 D5@0.5 Bb4@0.3", "r w"]
+
+[patterns.bleepB]
+bleep = ["r w", "r w", "r w", "Bb4@0.7 e Db5@0.3 F5@0.55 Ab4@0.28 Gb5@0.65 F5@0.3 Db5@0.5 Bb4@0.3", "r w", "r w", "Db5@0.65 e F5@0.3 Ab5@0.5 F5@0.3 Bb5@0.6 Ab5@0.3 F5@0.5 Db5@0.3", "r w"]
+
+[patterns.pulseA]
+pulse = ["G3+D4+F4@0.9 e G3+D4+F4@0.35 r G3+D4+F4@0.6 r G3+D4+F4@0.45 G3+D4+F4@0.8 r", "G3+D4+F4@0.9 e r G3+D4+F4@0.4 G3+D4+F4@0.65 r G3+D4+F4@0.5 G3+D4+F4@0.75 G3+D4+F4@0.3"]
+
+[patterns.pulseB]
+pulse = ["Gb3+Db4+F4@0.9 e Gb3+Db4+F4@0.35 r Gb3+Db4+F4@0.6 r Gb3+Db4+F4@0.45 Gb3+Db4+F4@0.8 r", "Gb3+Db4+F4@0.9 e r Gb3+Db4+F4@0.4 Gb3+Db4+F4@0.65 r Gb3+Db4+F4@0.5 Gb3+Db4+F4@0.75 Gb3+Db4+F4@0.3"]
+
+[patterns.morphAB]
+morph = ["G3+Bb3+F4+A4+C5+D5@0.85 h Gb3+Bb3+F4+Ab4+Bb4+Db5~@0.85 h", "Gb3+Bb3+F4+Ab4+Bb4+Db5~@0.85 w"]
+
+[patterns.morphBA]
+morph = ["Gb3+Bb3+F4+Ab4+Bb4+Db5@0.8 w", "G3+Bb3+F4+A4+C5+D5~@0.9 w"]
+
+[patterns.endstrike]
+eA = ["C4@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w", "C4~@0.8 w"]
+
+[patterns.d_t_None_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+a09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+a10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+a11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+a12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+a13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+a14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+a15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q"]
+a16 = ["r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q"]
+
+[patterns.d_t_None_6]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q"]
+a09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+a10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+a11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a16 = ["r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+
+[patterns.d_a1_drag_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h. r e"]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+a09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+a10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+a11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+a12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+a16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+a13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+a14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+a15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C3@0.85 q r q"]
+rvs = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h. C4@0.9 q"]
+
+[patterns.d_a1_ratchet_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r q. A1@0.9 e r q."]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+a09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+a10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+a11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+a12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+a16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+a13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+a14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+a15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+sn = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h C4@0.36 s r s C#4@0.44 s D4@0.52 s Eb4@0.60 s E4@0.68 s F4@0.76 t F4@0.84 t F4@0.92 t F4@1.00 t"]
+
+[patterns.d_a1_toms_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r q. A1@0.8 e r q."]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+a09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+a10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+a11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+a12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+a16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+a13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+a14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+a15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+tom = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h D4@0.9 s r s Bb3@0.55 s A3@0.8 s F3@0.95 s D3@0.5 s C3@0.85 s A2@1 s"]
+
+[patterns.d_a1_stop_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h. r s A1@0.95 s"]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h G3@0.9 s"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+a09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+a10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+a11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+a12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+a16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+a13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+a14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+a15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+
+[patterns.d_a1_chop_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h. r e"]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h G3@0.8 t G3@1 t"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+a09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+a10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+a11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+a12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+a16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+a13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+a14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q C4@0.85 e C4@0.5 s C4@0.7 s C4@0.4 s C4@0.75 s C4@0.45 t C4@0.6 t C4@0.8 t C4@1 t"]
+a15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+
+[patterns.d_a1_rev_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h A1@0.85 e r q"]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r q r s G3@0.93 e. r s"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+a09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+a10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+a11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+a12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+a16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r h. C4@0.83 q"]
+a13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+a14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+a15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q"]
+
+[patterns.d_c1_stop_8]
+c01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h A1@0.75 e r q", "A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h. r s A1@0.95 s"]
+c02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+c03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+snare = ["r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h. r e. G3@0.9 s"]
+c04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+c05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+c06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+c07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+c08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+c09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+c10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+c11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+c12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+c16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+c13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+c14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+c15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+
+[patterns.d_c1_toms_8]
+c01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h A1@0.75 e r q", "A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r q. A1@0.8 e r q."]
+c02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+c03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+snare = ["r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r w"]
+c04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+c05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+c06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+c07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+c08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+c09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+c10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+c11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+c12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+c16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+c13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+c14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+c15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+tom = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h D4@0.9 s r s Bb3@0.55 s A3@0.8 s F3@0.95 s D3@0.5 s C3@0.85 s A2@1 s"]
+
+[patterns.d_a2_ratchet_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r q. A1@0.9 e r q."]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+a09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+a10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+a11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+a12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+a16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+a13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+a14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+a15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+sn = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h C4@0.36 s r s C#4@0.44 s D4@0.52 s Eb4@0.60 s E4@0.68 s F4@0.76 t F4@0.84 t F4@0.92 t F4@1.00 t"]
+
+[patterns.d_a2_drag_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@0.95 e r h. r e"]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q r s G3@0.87 e. r s", "r q G3@0.95 e. r h r s"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+a09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+a10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+a11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+a12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+a16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+a13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+a14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+a15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C3@0.85 q r q"]
+rvs = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h. C4@0.9 q"]
+
+[patterns.d_b1_chop_8]
+b01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h. r e"]
+b02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h G3@0.8 t G3@1 t"]
+b03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+b04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+b05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+b06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+b07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+b08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q C4@0.85 e C4@0.5 s C4@0.7 s C4@0.4 s C4@0.75 s C4@0.45 t C4@0.6 t C4@0.8 t C4@1 t"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+
+[patterns.d_b1_toms_8]
+b01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r q. A1@0.8 e r q."]
+b02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s"]
+b03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+b04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+b05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+b06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+b07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+b08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+tom = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h D4@0.9 s r s Bb3@0.55 s A3@0.8 s F3@0.95 s D3@0.5 s C3@0.85 s A2@1 s"]
+
+[patterns.d_b1_stutter_8]
+b01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q"]
+b02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r q r s G3@0.95 e G3@0.85 s G3@1 s"]
+b03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+b04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+b05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+b06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+b07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+b08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r h. C4@0.83 q"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q"]
+
+[patterns.d_b1_ratchet_8]
+b01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r q. A1@0.9 e r q."]
+b02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s"]
+b03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+b04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+b05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+b06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+b07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+b08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+sn = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h C4@0.36 s r s C#4@0.44 s D4@0.52 s Eb4@0.60 s E4@0.68 s F4@0.76 t F4@0.84 t F4@0.92 t F4@1.00 t"]
+
+[patterns.d_x1_rev_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q"]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r q r s G3@0.95 e. r s"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r h. C4@0.83 q"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q"]
+
+[patterns.d_x1_stop_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h. r s A1@0.95 s"]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h G3@0.9 s"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+
+[patterns.d_c2_toms_8]
+c01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h A1@0.75 e r q", "A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r q. A1@0.8 e r q."]
+c02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+c03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+snare = ["r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r w"]
+c04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+c05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+c06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+c07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+c08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+c09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+c10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+c11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+c12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+c16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+c13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+c14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+c15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+tom = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h D4@0.9 s r s Bb3@0.55 s A3@0.8 s F3@0.95 s D3@0.5 s C3@0.85 s A2@1 s"]
+
+[patterns.d_c2_drag_8]
+c01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h A1@0.75 e r q", "A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h. r e", "A1@1 e r h. r e"]
+c02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+c03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+snare = ["r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r h G3@0.95 e. r q r s", "r w"]
+c04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+c05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+c06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+c07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+c08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+c09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+c10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+c11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+c12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+c16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+c13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+c14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+c15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C3@0.85 q r q"]
+rvs = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h. C4@0.9 q"]
+
+[patterns.d_b2_stutter_8]
+b01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q"]
+b02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r q r s G3@0.95 e G3@0.85 s G3@1 s"]
+b03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+b04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+b05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+b06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+b07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+b08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r h. C4@0.83 q"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q"]
+
+[patterns.d_b2_chop_8]
+b01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h. r e"]
+b02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h G3@0.8 t G3@1 t"]
+b03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+b04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+b05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+b06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+b07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+b08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q C4@0.85 e C4@0.5 s C4@0.7 s C4@0.4 s C4@0.75 s C4@0.45 t C4@0.6 t C4@0.8 t C4@1 t"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+
+[patterns.d_b2_toms_8]
+b01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r q. A1@0.8 e r q."]
+b02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s"]
+b03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+b04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+b05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+b06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+b07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+b08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+tom = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h D4@0.9 s r s Bb3@0.55 s A3@0.8 s F3@0.95 s D3@0.5 s C3@0.85 s A2@1 s"]
+
+[patterns.d_b2_stop_8]
+b01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.8 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h. r s A1@0.95 s"]
+b02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.95 e. r s", "r q G3@0.92 e. r q. r s G3@0.95 e", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h G3@0.9 s"]
+b03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+b04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+b05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+b06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+b07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+b08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+
+[patterns.d_x2_ratchet_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r q. A1@0.9 e r q."]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+sn = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h C4@0.36 s r s C#4@0.44 s D4@0.52 s Eb4@0.60 s E4@0.68 s F4@0.76 t F4@0.84 t F4@0.92 t F4@1.00 t"]
+
+[patterns.d_x2_chop_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h. r e"]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h G3@0.8 t G3@1 t"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q C4@0.85 e C4@0.5 s C4@0.7 s C4@0.4 s C4@0.75 s C4@0.45 t C4@0.6 t C4@0.8 t C4@1 t"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+
+[patterns.d_x2_toms_8]
+a01 = ["C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w"]
+kick = ["A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h A1@0.9 e r q", "A1@1 e r h A1@0.85 e r q", "A1@1 e r h r s A1@0.8 e r e.", "A1@1 e r q. A1@0.8 e r q."]
+a02 = ["r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w"]
+snare = ["r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s", "r q G3@0.95 e. r q r s G3@0.92 e. r s", "r q G3@0.90 e. r q r s G3@0.95 e. r s", "r q G3@0.95 e. r q. G3@0.90 e.", "r q G3@0.95 e. r h r s"]
+a03 = ["r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w"]
+a04 = ["r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w"]
+a05 = ["r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w"]
+a06 = ["r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w"]
+a07 = ["r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w"]
+a08 = ["r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w", "r w"]
+b09 = ["r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h.", "r w"]
+b10 = ["r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h", "r w"]
+b11 = ["r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r h C4@0.78 q r q", "r w"]
+b12 = ["r w", "r w", "r h. C4@0.83 q", "r w", "r w", "r w", "r h. C4@0.83 q", "r w"]
+b16 = ["r w", "r w", "r w", "r h. C4@0.8 e r e", "r w", "r w", "r w", "r w"]
+b13 = ["r w", "r w", "r w", "C4@0.78 q r h.", "r w", "r w", "r w", "C4@0.78 q r h."]
+b14 = ["r w", "r w", "r w", "r q C4@0.83 q r h", "r w", "r w", "r w", "r q C4@0.83 q r h"]
+b15 = ["r w", "r w", "r w", "r h C4@0.78 q r q", "r w", "r w", "r w", "r w"]
+tom = ["r w", "r w", "r w", "r w", "r w", "r w", "r w", "r h D4@0.9 s r s Bb3@0.55 s A3@0.8 s F3@0.95 s D3@0.5 s C3@0.85 s A2@1 s"]
+
+[arrangement]
+"1-8" = ["strI", "airA"]
+"9-16" = ["bloomA"]
+"9-48" = ["texA"]
+"9-80" = ["strA"]
+"17-128" = ["midA"]
+"33-40" = ["d_t_None_8"]
+"33-48" = ["airA"]
+"37-44" = ["hiA"]
+"41-46" = ["d_t_None_6"]
+"49-56" = ["d_a1_drag_8"]
+"49-128" = ["subA"]
+"57-64" = ["d_a1_ratchet_8"]
+"65-72" = ["upAfirst", "d_a1_toms_8"]
+"73-80" = ["upA", "d_a1_stop_8"]
+"81-88" = ["upAring", "d_a1_chop_8"]
+"81-96" = ["strH", "pulseA"]
+"89-96" = ["d_a1_rev_8"]
+"97-104" = ["hiA", "d_a1_ratchet_8"]
+"97-112" = ["airA"]
+"97-192" = ["strA"]
+"105-112" = ["d_a1_drag_8"]
+"113-120" = ["d_c1_stop_8"]
+"121-128" = ["bloomA", "d_c1_toms_8"]
+"129-136" = ["chirpA2"]
+"129-160" = ["texA", "airA"]
+"137-144" = ["chirpA"]
+"145-152" = ["upAfirst", "bloomA"]
+"145-192" = ["midA"]
+"153-160" = ["upA", "hiA"]
+"161-168" = ["upAring", "d_a2_ratchet_8"]
+"161-176" = ["vocA"]
+"161-192" = ["subA"]
+"169-176" = ["d_a2_drag_8"]
+"177-184" = ["upAfirst", "d_b1_chop_8"]
+"185-192" = ["upA", "d_b1_toms_8"]
+"193-200" = ["midA", "upAring", "d_b1_stutter_8"]
+"193-208" = ["strH", "pulseA"]
+"193-224" = ["subA"]
+"201-208" = ["d_b1_ratchet_8"]
+"209-216" = ["upAfirst", "hiA", "d_x1_rev_8"]
+"209-224" = ["strO", "midA", "airA"]
+"217-224" = ["upA", "bleepA", "d_x1_stop_8"]
+"225-226" = ["morphAB"]
+"225-240" = ["texB", "airB"]
+"227-258" = ["strB"]
+"233-240" = ["chirpB"]
+"233-288" = ["midB"]
+"241-248" = ["d_c2_toms_8"]
+"241-288" = ["subB"]
+"249-256" = ["bloomB", "d_c2_drag_8"]
+"257-264" = ["upBfirst", "pulseB", "d_b2_stutter_8"]
+"259-286" = ["strBo"]
+"265-272" = ["hiB", "d_b2_chop_8"]
+"265-288" = ["upB", "airB"]
+"273-280" = ["bleepB", "d_b2_toms_8"]
+"281-288" = ["d_b2_stop_8"]
+"287-288" = ["morphBA"]
+"289-296" = ["bloomA"]
+"289-304" = ["strR", "texA"]
+"289-328" = ["airA"]
+"293-300" = ["hiA"]
+"297-328" = ["midA"]
+"305-312" = ["upAfirst", "d_x2_ratchet_8"]
+"305-320" = ["vocA"]
+"305-328" = ["strK", "subA"]
+"313-320" = ["hiA", "d_x2_chop_8"]
+"313-328" = ["upA"]
+"321-328" = ["bleepA", "d_x2_toms_8"]
+"329-336" = ["strL", "midA", "upAring"]
+"329-348" = ["texA"]
+"337-344" = ["midE", "subE", "airA", "hiE"]
+"341-348" = ["endstrike"]

@@ -1,0 +1,571 @@
+# Sporadic: two and a quarter minutes of twisted full-on psytrance, the fourth track measured against
+# references (docs/evaluation.md) and the first against Scorb's (refs/scorb.json): loud, dense, bright on top, its
+# lows in the middle, little changing from bar to bar but the sounds. 145 BPM, on G: the bass rolling on G, the
+# hook in G minor with its flat second and flat fifth (Ab, Db) as colours, the break turning to the major.
+#
+# What it does that the cathedral didn't (songs/reviews/cathedral.toml):
+# - the melody is a riff, not a run: a call of five notes with rests between them, an octave leap that dives
+#   back, a scoop, a bend down from the flat fifth; and the motif passed from sound to sound, its rhythm new each
+#   time (the acid, then four squeaks in a hocket, then the talking lead)
+# - the sounds are made, not picked: the call is three layers (detuned saws whose filter opens and closes in each
+#   note, an accented acid for bite, a scream an octave up for air) saturated together; the squeaks and the
+#   atmosphere are painted on blank canvases with the spectral editor (songs/samples/*.edits)
+# - an atmosphere always there under it: 28 s of wind through wandering bands, a whistle riding one, a Gm7
+#   shimmer, two ghosts gliding and dust, played six times, overlapping
+# - the second drop changes the groove: the bass gallops rather than rolls, through Eb and F, with a half-time
+#   bar every 8; the acid and the FM sequence go, the talking lead and the squeaks come
+# - the master in stages: saturation, a slow compressor gluing the mix, then the limiter
+#
+#   1-8    the bed: the atmosphere, the drone on G, squeaks far off in the hall; the kick from 5, the hats from 7
+#   9-24   the groove: the rolling bass (turning every 4th and 8th bar), an FM sequence with gaps, claps from 13,
+#          the squeaks from 13, the acid trying the answer from 17, the call's first bar under a closed filter
+#          from 21
+#   25-28  the build: a snare roll, the echoes climbing, the mix highpassed
+#   29-44  the first drop: the call and the acid's answer over G, G, Bb, C; from 37 the call climbing to D and
+#          diving two octaves, answered by the squeaks, and a ride
+#   45-52  the break: no kick, the atmosphere up, the call slowed down on the wail over Ebmaj7, Cm9, Ebmaj7 and
+#          Dsus4 turning to D major
+#   53-56  the second build
+#   57-72  the second drop: the bass galloping through G, G, Eb, F; the call answered by the talking lead, which
+#          turns to F major; a half-time bar every 8th
+#   73-80  the groove again, thinning out, and a tape stop
+format = "daw-song 1"
+title = "Sporadic"
+publish = true
+tempo = 145
+meter = "4/4"
+seed = 31
+
+[instruments]
+kick = { sound = "psykick", gain = 0 }
+bass = { sound = "psybass", gain = 0.5, bus = "bass", dive = -1 }
+chat = { sound = "chat", gain = -6.5, pan = 0.2, bus = "hats" }
+ohat = { sound = "ohat", gain = -9.5, pan = -0.15, bus = "hats", cut = true, release = 0.08 }
+shaker = { sound = "shaker", gain = -13.5, pan = -0.3, bus = "hats" }
+ride = { sound = "ride", gain = -12, pan = 0.3, bus = "top", cut = true, release = 0.2 }
+crash = { sound = "crash", gain = -13, bus = "top" }
+clap = { sound = "clap", gain = -14, bus = "drums" }
+tom = { sound = "tom", gain = -10, bus = "drums" }
+snare = { sound = "snare", gain = -12, bus = "roll" }
+# the atmosphere, painted on a blank canvas (songs/samples/atmos.edits): 28 s, a little over 16 bars
+atmos = { sample = "samples/atmos.flac", base = "G3", gain = -2, bus = "atmos" }
+drone = { sound = "drone", gain = -15, bus = "pads", cut = true, release = 0.8 }
+pad = { sound = "pad", gain = -19, bus = "pads", cut = true, release = 0.6 }
+# the call, in three layers on one bus: a body whose filter opens and closes in each note, an accented acid for
+# bite, and a scream an octave up for air
+lead = { sound = "psylead", gain = -21, bus = "lead", cut = true, release = 0.09, glide = 0.05, unison = { voices = 3, detune = 9, spread = 0.6 }, filter = { lowpass = 1600, q = 2.5, env = 1.8, decay = 0.18 } }
+grit = { sound = "squelcha", gain = -27, bus = "lead", cut = true, release = 0.02, glide = 0.05, filter = { lowpass = 1800, q = 4, env = 1.4, decay = 0.05 } }
+bite = { sound = "scream", gain = -25, octave = 1, bus = "lead", cut = true, release = 0.04, glide = 0.05 }
+talk = { sound = "vox", gain = -20, octave = -1, bus = "talk", cut = true, release = 0.05, glide = 0.06 }
+acid = { sound = "squelch", gain = -22, bus = "acid", cut = true, release = 0.02, glide = 0.05, filter = { lowpass = 700, q = 3, env = 1.6, decay = 0.07 } }
+metal = { sound = "metal", gain = -24, bus = "metal", cut = true, release = 0.06, filter = { lowpass = 1500, q = 3, env = 1.2, decay = 0.07 } }
+# FM squeaks, painted on a blank canvas (songs/samples/squeaks.edits), each at G5
+chirp = { sample = "samples/sq-chirp.flac", base = "G5", gain = -16, bus = "squeak" }
+boing = { sample = "samples/sq-boing.flac", base = "G5", gain = -16, bus = "squeak" }
+squiggle = { sample = "samples/sq-squiggle.flac", base = "G5", gain = -18, bus = "squeak" }
+zip = { sample = "samples/sq-zip.flac", base = "G5", gain = -17, bus = "squeak" }
+eerie = { sound = "eerie", gain = -19, bus = "wail", cut = true, release = 0.1, glide = 0.25, vibrato = { depth = 0.3, rate = 5.5, delay = 0.4 } }
+bubbles = { sound = "bubbles", gain = -20, bus = "fx" }
+laser = { sound = "laser", gain = -21, bus = "fx" }
+zap = { sound = "zap", gain = -20, bus = "fx" }
+uplift = { sound = "uplift", gain = -17, bus = "sweeps" }
+downlift = { sound = "downlift", gain = -17, bus = "sweeps" }
+impact = { sound = "impact", gain = -9 }
+
+# --- the returns -----------------------------------------------------------------------------------------
+
+[buses.echo]                    # dotted 8ths, left and right, each darker and thinner; all wet
+filter = { highpass = 300, lowpass = 3800, q = 0 }
+delay = { time = 0.3103, feedback = 0.45, wet = 1, dry = 0, pingpong = true, lowpass = 3200, highpass = 350 }
+width = { steps = [1.5] }
+duck = { by = "kick", depth = -7, release = 0.15 }
+send = { hall = 0.35 }
+
+[buses.hall]                    # a long, dark hall, pumping under the kick
+filter = { highpass = 250, lowpass = 5000, q = 0 }
+reverb = { size = 3.8, decay = 2.0, damp = 0.5, wet = 1, dry = 0, predelay = 0.02 }
+width = { steps = [1.5] }
+duck = { by = "kick", depth = -7, release = 0.22 }
+
+[buses.space]                   # a small room for the drums
+filter = { highpass = 400, lowpass = 9000, q = 0 }
+reverb = { size = 1.1, decay = 3, damp = 0.45, wet = 1, dry = 0 }
+width = { steps = [1.6] }
+duck = { by = "kick", depth = -6, release = 0.12 }
+
+# --- the low end: in the middle, dry ---------------------------------------------------------------------
+
+[buses.bass]
+drive = { gain = 4, level = -1.5 }
+filter = { lowpass = 420, q = 0 }
+# a gate half shut on the second half of each 16th: the notes clipped, not cut off
+gate = { steps = "x.x.x.x. x.x.x.x. x.x.x.x. x.x.x.x.", step = "t", depth = -10, release = 0.01 }
+width = { steps = [0] }
+duck = { by = "kick", depth = -11, release = 0.08 }
+
+# --- drums -----------------------------------------------------------------------------------------------
+
+[buses.hats]
+filter = { highpass = 600 }
+width = { steps = [1.0, 0.6, 1.0, 0.8] }
+send = { space = 0.3 }
+
+[buses.top]
+filter = { highpass = 300 }
+doubler = { delay = 0.008, depth = 0.001, rate = 0.3, wet = 0.5 }
+width = { steps = [1.2] }
+send = { hall = 0.06, space = 0.1 }
+
+[buses.drums]
+send = { space = 0.3, hall = 0.1 }
+
+[buses.roll]
+filter = { highpass = 150 }
+send = { hall = 0.3, echo = 0.2 }
+
+# --- the bed ---------------------------------------------------------------------------------------------
+
+[buses.atmos]                   # out of the bass's way, wide, some of it into the hall; louder where the parts thin
+filter = { highpass = 200, lowpass = 15000, q = 0 }
+# painted on (docs/spectral.md): the bed's shimmer retuned to the break's chords (Eb over Ebmaj7, C and Eb over
+# Cm9, F# and A over D, its F and Bb taken out there); and cut by 5 dB from 500 Hz to 3.2 kHz in the drops,
+# where the call and its answers sit
+spectral = "edits/sporadic/atmos/edits.toml"
+width = { steps = [1.6] }
+duck = { by = "kick", depth = -4, release = 0.3 }
+send = { hall = 0.2 }
+
+[buses.pads]
+filter = { highpass = 90, lowpass = 6000, q = 0 }
+chorus = { delay = 0.018, depth = 0.004, rate = 0.15, wet = 0.6 }
+autopan = { steps = [-0.4, 0.4], step = "w", smooth = 0.1 }
+width = { steps = [1.6] }
+duck = { by = "kick", depth = -12, release = 0.25 }
+send = { hall = 0.5 }
+
+# --- the mids --------------------------------------------------------------------------------------------
+
+# The call: its three layers saturated together, compressed, slowly flanged and doubled. The lowpass opens
+# over the builds, where the call's first bar is heard through it.
+[buses.lead]
+drive = { gain = 7, level = -6 }
+filter = { highpass = 230, lowpass = 18000, q = 0 }
+# painted on: each call swelling in backwards out of a reverb over the beats before it (longer into each drop);
+# and the call heard far off, an octave down, darker and smeared, before it comes (13-16) and as the track
+# thins out (75-78)
+spectral = "edits/sporadic/lead/edits.toml"
+compressor = { threshold = -18, ratio = 3, attack = 0.005, release = 0.12 }
+flanger = { delay = 0.003, depth = 0.002, rate = 0.07, feedback = 0.3, wet = 0.2 }
+doubler = { delay = 0.012, depth = 0.002, rate = 0.25, wet = 0.8 }
+width = { steps = [1.6] }
+duck = { by = "kick", depth = -6, release = 0.13 }
+send = { echo = 0.25, hall = 0.4 }
+
+[buses.talk]                    # the talking lead, to the right of the call, phased
+drive = { gain = 5, level = -4 }
+filter = { highpass = 180, lowpass = 7000, q = 0 }
+phaser = { rate = 0.2, low = 400, high = 3000, stages = 4, feedback = 0.4, wet = 0.3 }
+autopan = { steps = [0.35] }
+doubler = { delay = 0.01, depth = 0.0015, rate = 0.3, wet = 0.6 }
+width = { steps = [1.5] }
+duck = { by = "kick", depth = -8, release = 0.13 }
+send = { echo = 0.35, hall = 0.2 }
+
+[buses.acid]                    # to the left, its 16ths thrown across
+drive = { gain = 8, level = -5 }
+filter = { highpass = 200, lowpass = 3000, q = 1 }
+autopan = { steps = [-0.7, 0.3, -0.5, 0.5], step = "s" }
+width = { steps = [1.8] }
+duck = { by = "kick", depth = -6, release = 0.12 }
+send = { echo = 0.25, hall = 0.2 }
+
+[buses.metal]                   # the FM sequence: ring-modulated, crushed, wide
+ring = { hz = 196, wet = 0.25 }
+crush = { bits = 6, rate = 12000, wet = 0.3 }
+filter = { highpass = 250, lowpass = 3500, q = 0 }
+doubler = { delay = 0.009, depth = 0.0015, rate = 0.4, wet = 0.7 }
+autopan = { steps = [-0.8, 0.5, -0.3, 0.8, -0.5, 0.3, 0.8, -0.8] }
+width = { steps = [1.8] }
+duck = { by = "kick", depth = -8, release = 0.12 }
+send = { echo = 0.3, hall = 0.3 }
+
+[buses.squeak]                  # the squeaks: a little crushed, thrown about each 16th, into the echoes
+crush = { bits = 8, rate = 22000, wet = 0.25 }
+filter = { highpass = 300 }
+autopan = { steps = [-0.7, 0.6, -0.3, 0.8, -0.8, 0.3], step = "s" }
+width = { steps = [1.4] }
+duck = { by = "kick", depth = -8, release = 0.12 }
+send = { echo = 0.4, hall = 0.25 }
+
+[buses.wail]
+doubler = { delay = 0.013, depth = 0.002, rate = 0.2, wet = 0.6 }
+width = { steps = [1.5] }
+send = { echo = 0.4, hall = 0.6 }
+
+[buses.fx]
+phaser = { rate = 0.5, low = 400, high = 5000, stages = 6, feedback = 0.5, wet = 0.5 }
+# painted on: church bells at the sections' starts, their third minor, over G (9, 29 an octave down, 57, 73)
+# and C (47, the break's Cm9), and with the third major over Eb (45, Ebmaj7) and D (51, the turn to D major)
+spectral = "edits/sporadic/fx/edits.toml"
+autopan = { steps = [-0.9, 0.6, -0.3, 0.9, -0.6, 0.3], step = "e" }
+send = { echo = 0.45, hall = 0.4 }
+
+[buses.sweeps]
+filter = { highpass = 150 }
+# painted on: a resonant riser through each build, over G and D partials whose root climbs an octave to the
+# drop's G, noise at its cutoff; and a fall out of the second drop into the outro
+spectral = "edits/sporadic/sweeps/edits.toml"
+autopan = { steps = [-1, -0.7, -0.4, -0.1, 0.1, 0.4, 0.7, 1], step = "q", smooth = 0.05 }
+send = { hall = 0.5 }
+
+# --- the master, in stages: a little saturation, a slow compressor to glue, then the limiter --------------
+
+[master]
+drive = { gain = 3, level = -3 }
+filter = { highpass = 20 }
+compressor = { threshold = -14, knee = 8, ratio = 2, attack = 0.03, release = 0.2 }
+# EQ, as spectral regions (docs/spectral.md): an air shelf and presence, the mud taken out, the mids widened
+# and the highs narrowed on the side alone
+spectral = "edits/sporadic/master.toml"
+limiter = { ceiling = -1, release = 0.1 }
+loudness = -9
+
+[master.stutter.bars]
+"16" = "xxxx xxxx xxxx rrRR"
+"24" = "xxxx xxxx xx<< <<rr"
+"32" = "xxxx xxxx xxxx ...."
+"36" = "xxxx xxxx xxxx xxRR"
+"40" = "xxxx xxxx xx.. rrrr"
+"44" = "xxxx xxxx vvvv vvvv"
+"60" = "xxxx xxxx xxxx rrrr"
+"68" = "xxxx xxxx xx<< RRRR"
+"76" = "xxxx xxxx xxxx rrRR"
+"80" = "xxxx xxxx vvvv vvvv"
+
+[automation]
+"atmos.level" = [[1, 0], [8, 0], [9, -2], [28, 0], [29, -4], [44.9, -4], [45, 2], [52, 2], [56.9, 0], [57, -4], [72.9, -4], [73, -2], [80, 0], [82, -40]]
+"lead.filter.lowpass" = [[21, 500], [24.9, 900], [25, 700], [28.95, 4000], [29, 18000], [52.9, 18000], [53, 500], [56.95, 4000], [57, 18000]]
+"acid.filter.lowpass" = [[17, 900], [25, 2000], [29, 1400], [37, 3000]]
+"echo.delay.feedback" = [[1, 0.55], [9, 0.45], [25, 0.45], [28.9, 0.8], [29, 0.45], [45, 0.6], [53, 0.6], [56.9, 0.85], [57, 0.45], [77, 0.45], [80, 0.75]]
+"master.filter.highpass" = [[25, 20], [28.95, 500], [29, 20], [53, 20], [56.95, 700], [57, 20]]
+"roll.level" = [[25, -20], [28.95, 0], [29, -20], [53, -20], [56.95, 0]]
+"squeak.send.hall" = [[1, 1.2], [8, 1.2], [9, 0.25], [44, 0.25], [45, 0.8], [56, 0.8], [57, 0.25]]
+"pads.send.hall" = [[1, 0.6], [9, 0.4], [44, 0.4], [45, 0.8], [56, 0.8], [57, 0.4]]
+# echo throws: the call's last beat into the echoes
+"lead.send.echo" = [
+  [29, 0.25], [30.7, 0.25], [30.75, 1], [31.2, 1], [31.25, 0.25],
+  [34.7, 0.25], [34.75, 1], [35.2, 1], [35.25, 0.25],
+  [38.7, 0.25], [38.75, 1], [39.2, 1], [39.25, 0.25],
+  [42.7, 0.25], [42.75, 1], [43.2, 1], [43.25, 0.25],
+  [58.7, 0.25], [58.75, 1], [59.2, 1], [59.25, 0.25],
+  [62.7, 0.25], [62.75, 1], [63.2, 1], [63.25, 0.25],
+  [66.7, 0.25], [66.75, 1], [67.2, 1], [67.25, 0.25],
+  [70.7, 0.25], [70.75, 1], [71.2, 1], [71.25, 0.25],
+]
+
+# --- drums -----------------------------------------------------------------------------------------------
+
+[patterns.kick]                 # four on the floor on G; the 8th bar leaves its last beat for a fill
+kick = "G1 q G1 G1 G1"
+"kick@8" = "G1 q G1 G1 r"
+
+[patterns.kick2]                # the second drop: every 8th bar in half time
+kick = "G1 q G1 G1 G1"
+"kick@8" = "G1 h G1"
+
+[patterns.hats]                 # 16ths partly left to chance
+chat = ".xx? .x?x .xx? .x?X"
+ohat = "..x. ..x. ..x. ..x."
+shaker = "x?x? x?x? x?x? x?xx"
+"chat@8" = ".xxx .xxx .xxx XXXX"
+
+[patterns.ride]                 # the drops' second halves: a ride off the beat in place of the open hat
+ride = "..X. ..x. ..X. ..x."
+chat = ".xx? .x?x .xx? .x?X"
+shaker = "x?x? x?x? x?x? x?xx"
+"chat@8" = ".xxx .xxx .xxx XXXX"
+
+[patterns.hats2]                # the second drop: the hats on a new grid, the shaker out, the ride now and then
+chat = "x.xx .xx. x.xx .x?X"
+ohat = "..x. ..x. ..x. ..x."
+"ride@2" = "..x. .... ..X. ...."
+
+[patterns.claps]
+clap = ".... x... .... x..."
+"clap@4" = ".... x... .... x.xx"
+
+[patterns.crash]                # a crash on the first bar of every 8
+"crash@1/8" = "x... .... .... ...."
+"impact@1/8" = "x... .... .... ...."
+
+[patterns.roll]                 # a snare roll over four bars, its bus fading up (automation)
+snare = ["x... x... x... x...", "x.x. x.x. x.x. x.x.", "xxxx xxxx xxxx xxxx", "xxxx xxxx XXXX XXXX"]
+tom = ["r w", "r w", "r w", "r h G3 s Eb3 D3 Bb2 G2 e Db2"]
+uplift = ["r w", "r w", "x... .... .... ....", "r w"]
+
+[patterns.fill]                 # toms at the end of a phrase
+tom = ["r w", "r w", "r w", "r h. D3 s Bb2 G2 Db2"]
+
+# --- the bass --------------------------------------------------------------------------------------------
+
+[patterns.roll8]                # kick, bass, bass, bass on G: an octave pop every 4th bar, a turn every 8th
+bass = "r s G1 G1 G1 r G1 G1 G1 r G1 G1 G1 r G1 G1 G1"
+"bass@4" = "r s G1 G1 G1 r G1 G1 G1 r G1 G1 G1 r G1 G2 G1"
+"bass@8" = "r s G1 G1 G1 r G1 G1 G1 r Bb1 Bb1 Bb1 r C2 Bb1 Ab1"
+
+[patterns.drop1]                # the first drop: G, G, Bb, C; every 2nd time a beat's stop, every 4th a turn back down
+bass = [
+  "r s G1 G1 G1 r G1 G1 G1 r G1 G1 G1 r G1 G1 G1",
+  "r s G1 G1 G1 r G1 G1 G1 r G1 G1 G1 r G1 G2 G1",
+  "r s Bb1 Bb1 Bb1 r Bb1 Bb1 Bb1 r Bb1 Bb1 Bb1 r Bb1 Bb1 Bb1",
+  "r s C2 C2 C2 r C2 C2 C2 r C2 C2 C2 r C2 Db2 C2",
+]
+"bass@2" = [
+  "r s G1 G1 G1 r G1 G1 G1 r G1 G1 G1 r G1 G1 G1",
+  "r s G1 G1 G1 r G1 G1 G1 r G1 G1 G1 r G1 G2 G1",
+  "r s Bb1 Bb1 Bb1 r Bb1 Bb1 Bb1 r Bb1 Bb1 Bb1 r Bb1 Bb1 Bb1",
+  "r s C2 C2 C2 r C2 C2 C2 r C2 C2 C2 r q",
+]
+"bass@4" = [
+  "r s G1 G1 G1 r G1 G1 G1 r G1 G1 G1 r G1 G1 G1",
+  "r s G1 G1 G1 r G1 G1 G1 r G1 G1 G1 r G1 G2 G1",
+  "r s Bb1 Bb1 Bb1 r Bb1 Bb1 Bb1 r Bb1 Bb1 Bb1 r Bb1 Bb1 Bb1",
+  "r s C2 C2 C2 r C2 C2 C2 r Db2 Db2 Db2 r C2 Bb1 Ab1",
+]
+
+[patterns.drop2]                # the second drop: a gallop (kick, rest, bass, bass) through G, G, Eb, F, the 8th bar half time
+bass = [
+  "r e G1 s G1 r e G1 s G1 r e G1 s G1 r e G1 s G1",
+  "r e G1 s G1 r e G1 s G1 r e G1 s G1 r e G2 s G1",
+  "r e Eb2 s Eb2 r e Eb2 s Eb2 r e Eb2 s Eb2 r e Eb2 s Eb2",
+  "r e F2 s F2 r e F2 s F2 r e F2 s F2 r e F2 s F#2",
+]
+"bass@2" = [
+  "r e G1 s G1 r e G1 s G1 r e G1 s G1 r e G1 s G1",
+  "r e G1 s G1 r e G1 s G1 r e G1 s G1 r e G2 s G1",
+  "r e Eb2 s Eb2 r e Eb2 s Eb2 r e Eb2 s Eb2 r e Eb2 s Eb2",
+  "r e F2 s F2 r q r e F2 s F2 r q",
+]
+
+# --- the call and its answers ----------------------------------------------------------------------------
+# The call: G, the octave leap diving back, Bb scooped up into, C, and the flat fifth bent down; then G twice,
+# the octave leap falling a fourth, and down F, Eb, D to the flat fifth, diving an octave.
+
+[patterns.call]                 # the call and the acid's answer, the motif in a new rhythm, over G, G, Bb, C
+lead = [
+  "G4^1800 e. G5>-12^3500 s r e Bb4<-3^1200 e r s C5^1500 s Db5>-1^2600 e. r e.",
+  "G4^1400 s G4^900 r G5>-5^3000 e r s F5^2200 s r Eb5^1800 e. D5^1300 s Db5>-12^2400 q",
+  "r w",
+  "r w",
+]
+grit = [
+  "G4^2400 e. G5>-12^3000 s r e Bb4<-3^1600 e r s C5^1800 s Db5>-1^2800 e. r e.",
+  "G4^2000 s G4^1200 r G5>-5^3000 e r s F5^2400 s r Eb5^2000 e. D5^1600 s Db5>-12^2600 q",
+  "r w",
+  "r w",
+]
+bite = [
+  "G4 e. G5>-12 s r e Bb4<-3 e r s C5 s Db5>-1 e. r e.",
+  "G4 s G4 r G5>-5 e r s F5 s r Eb5 e. D5 s Db5>-12 q",
+  "r w",
+  "r w",
+]
+acid = [
+  "r w",
+  "r w",
+  "r e G3^500 s G3^800 Bb3~^1600 e r s C4^700 e. Db4~^1900 e C4^900 s r e.",
+  "G4^2200 s r G3^600 e r s F3^500 s G3^900 e Bb3^1400 s r e C4~^2000 e Bb3^1100 e r s",
+]
+
+[patterns.call2]                # the call climbing to D and diving two octaves; the squeaks answer, one note each
+lead = [
+  "G4^1800 e. G5>-12^3500 s r e Bb4<-3^1200 e r s C5^1500 s Db5>-1^2600 e. r e.",
+  "G4^1400 s G4^900 r G5>-5^3000 e r s Bb5^2600 s r C6^3000 e. Db6^3400 s D6>-24^3600 q",
+  "r w",
+  "r w",
+]
+grit = [
+  "G4^2400 e. G5>-12^3000 s r e Bb4<-3^1600 e r s C5^1800 s Db5>-1^2800 e. r e.",
+  "G4^2000 s G4^1200 r G5>-5^3000 e r s Bb5^2800 s r C6^3000 e. Db6^3400 s D6>-24^3600 q",
+  "r w",
+  "r w",
+]
+bite = [
+  "G4 e. G5>-12 s r e Bb4<-3 e r s C5 s Db5>-1 e. r e.",
+  "G4 s G4 r G5>-5 e r s Bb5 s r C6 e. Db6 s D6>-24 q",
+  "r w",
+  "r w",
+]
+chirp = ["r w", "r w", "r e G5 s r q r s C6 s r e. r q", "F5 s r s r s r s Bb5 s r e. r h"]
+boing = ["r w", "r w", "r q r s Bb5 s r h r e", "r s G5 s r h r s Bb5 s r q"]
+squiggle = ["r w", "r w", "r h r e Db6 e. r e.", "r q r e C6 q r q r e"]
+zip = ["r w", "r w", "r h r q r e G6 s r s", "r h r q G6 s r e."]
+
+[patterns.talkcall]             # the second drop: the call answered by the talking lead over Eb, then F major
+lead = [
+  "G4^1800 e. G5>-12^3500 s r e Bb4<-3^1200 e r s C5^1500 s Db5>-1^2600 e. r e.",
+  "G4^1400 s G4^900 r G5>-5^3000 e r s F5^2200 s r Eb5^1800 e. D5^1300 s Db5>-12^2400 q",
+  "r w",
+  "r w",
+]
+grit = [
+  "G4^2400 e. G5>-12^3000 s r e Bb4<-3^1600 e r s C5^1800 s Db5>-1^2800 e. r e.",
+  "G4^2000 s G4^1200 r G5>-5^3000 e r s F5^2400 s r Eb5^2000 e. D5^1600 s Db5>-12^2600 q",
+  "r w",
+  "r w",
+]
+bite = [
+  "G4 e. G5>-12 s r e Bb4<-3 e r s C5 s Db5>-1 e. r e.",
+  "G4 s G4 r G5>-5 e r s F5 s r Eb5 e. D5 s Db5>-12 q",
+  "r w",
+  "r w",
+]
+talk = [
+  "r w",
+  "r w",
+  "G4 e. r s Bb4 s Eb5 e r s D5~ e. C5 s r q",
+  "r s F4 s A4 e r s C5 e. Eb5>-2 q r q",
+]
+
+[patterns.talkcall2]            # and its second half: the call climbing to D, the talking lead an octave up at the end
+lead = [
+  "G4^1800 e. G5>-12^3500 s r e Bb4<-3^1200 e r s C5^1500 s Db5>-1^2600 e. r e.",
+  "G4^1400 s G4^900 r G5>-5^3000 e r s Bb5^2600 s r C6^3000 e. Db6^3400 s D6>-24^3600 q",
+  "r w",
+  "r w",
+]
+grit = [
+  "G4^2400 e. G5>-12^3000 s r e Bb4<-3^1600 e r s C5^1800 s Db5>-1^2800 e. r e.",
+  "G4^2000 s G4^1200 r G5>-5^3000 e r s Bb5^2800 s r C6^3000 e. Db6^3400 s D6>-24^3600 q",
+  "r w",
+  "r w",
+]
+bite = [
+  "G4 e. G5>-12 s r e Bb4<-3 e r s C5 s Db5>-1 e. r e.",
+  "G4 s G4 r G5>-5 e r s Bb5 s r C6 e. Db6 s D6>-24 q",
+  "r w",
+  "r w",
+]
+talk = [
+  "r w",
+  "r w",
+  "G4 e. r s Bb4 s Eb5 e r s D5~ e. C5 s r q",
+  "r s F4 s A4 e r s C5 e. F5<-12 q r q",
+]
+
+[patterns.tease]                # the call's first bar alone, under the lead's closed filter
+lead = ["G4^1800 e. G5>-12^3500 s r e Bb4<-3^1200 e r s C5^1500 s Db5>-1^2600 e. r e.", "r w"]
+grit = ["G4^2400 e. G5>-12^3000 s r e Bb4<-3^1600 e r s C5^1800 s Db5>-1^2800 e. r e.", "r w"]
+
+[patterns.acidtease]            # the acid trying the answer in the groove
+acid = [
+  "r w",
+  "r e G3^500 s G3^800 Bb3~^1600 e r s C4^700 e. Db4~^1900 e C4^900 s r e.",
+  "r w",
+  "G4^2200 s r G3^600 e r s F3^500 s G3^900 e Bb3^1400 s r e C4~^2000 e Bb3^1100 e r s",
+]
+
+# --- the FM sequence and the squeaks ---------------------------------------------------------------------
+
+[patterns.metal]                # G and its octave with gaps, the flat fifth or the fourth at the end; the cutoff never twice the same
+metal = [
+  "r s G3^800 r G3^2600 r e Bb3^1400 s r r G3^900 G4^3200 r e Db4^1800 s r e",
+  "r s G3^700 r G3^2000 r e C4^1600 s r r G3^1100 Bb3^3600 r e G3^600 s r e",
+]
+
+[patterns.metalroll]            # the drops: G and its octave on the twelve 16ths between the kicks, the cutoff on a cycle of five
+metal = [
+  "r s G3^600 G3^2400 G4^1100 r G3^3600 G3^900 G4^600 r G3^2400 G3^1100 Bb3^3600 r G3^900 G3^600 G4^2400",
+  "r s G3^1100 G3^3600 G4^900 r G3^600 G3^2400 G4^1100 r G3^3600 G3^900 Db4^600 r G3^2400 G3^1100 G4^3600",
+]
+
+[patterns.squeaks]              # the squeaks now and then on the call's notes, each its own sound
+chirp = ["r e. G5 s r h.", "r w", "r q r s G5?0.6 s Bb5 e r h", "r w"]
+boing = ["r w", "r h r e. Db6 s r q", "r w", "r h. r e G5 e"]
+squiggle = ["r w", "r w", "r w", "r h r q. C6?0.5 e"]
+zip = ["r h r s G6 s r e r q", "r w", "r w", "r w"]
+
+[patterns.sqfar]                # the opening: squeaks far off in the hall, sparse
+chirp = ["r h G5?0.7 q r q", "r w", "r w", "r q. Bb5 e r h"]
+boing = ["r w", "r h. Db6 q", "r w", "r w"]
+squiggle = ["r w", "r w", "G5 h r h", "r w"]
+
+# --- the bed and the break -------------------------------------------------------------------------------
+
+[patterns.atmos]                # the painted bed, 28 s (nearly 17 bars): each starts before the last fades, where the
+atmos = "G3 w"                  # fades are hidden (in the groove, the drops, the tape stop into the break)
+
+[patterns.drone]                # the drone on G, held
+drone = ["G2 w", "G2~ w", "G2~ w", "G2~ w"]
+
+[patterns.break]                # Ebmaj7, Cm9, Ebmaj7, Dsus4 turning to D; the call slowed down on the wail, ending on F#
+pad = [
+  "Eb3+G3+Bb3+D4 w", "Eb3+G3+Bb3+D4~ w", "C3+Eb3+G3+D4 w", "C3+Eb3+G3+D4~ w",
+  "Eb3+G3+Bb3+D4 w", "Eb3+G3+Bb3+D4~ w", "D3+G3+A3+D4 w", "D3+F#3+A3+D4 w",
+]
+drone = ["Eb2 w", "Eb2~ w", "C2 w", "C2~ w", "Eb2 w", "Eb2~ w", "D2 w", "D2~ w"]
+eerie = [
+  "G4 h. G5>-12 q",
+  "r q Bb4<-3 q C5 e Db5>-1 q.",
+  "G4 h G4 q G5>-5 q",
+  "F5 q Eb5 q. D5 e Db5>-12 q",
+  "G4 h. G5>-12 q",
+  "r q Bb4<-3 q C5 e D5 q.",
+  "G4 h A4 q Bb4 q",
+  "A4 h F#4~ h",
+]
+bubbles = ["G5 h r h", "r w", "r h D6 h", "r w", "r w", "r h Bb5 h", "r w", "r w"]
+
+[patterns.build2]               # D, then G, under the second build
+drone = ["D2 w", "D2~ w", "G2 w", "G2~ w"]
+
+# --- effects ---------------------------------------------------------------------------------------------
+
+[patterns.zaps]
+zap = ["x... .... .... ....", ".... .... ..x. ...."]
+
+[patterns.lasers]               # lasers on the answer's last beat
+"laser@4" = "r h. Db6 s G5 r e"
+
+[patterns.uplift]
+uplift = "x... .... .... ...."
+
+[patterns.down]
+downlift = "x... .... .... ...."
+
+[patterns.end]
+kick = "G1 q G1 G1 r"
+bass = "r s G1 G1 G1 r G1 G1 G1 r G1 G1 G1 r q"
+eerie = "G6>-36 w"
+
+# --- arrangement -----------------------------------------------------------------------------------------
+
+[arrangement]
+"1" = ["atmos"]
+"16" = ["atmos"]
+"30" = ["atmos"]
+"44" = ["atmos"]
+"59" = ["atmos"]
+"72" = ["atmos"]
+"1-8" = ["drone", "sqfar"]
+"5-8" = ["kick"]
+"7-8" = ["hats", "uplift"]
+"9" = ["crash"]
+"9-24" = ["kick", "roll8", "hats", "metal", "zaps"]
+"13-24" = ["claps", "squeaks"]
+"17" = ["crash"]
+"17-24" = ["acidtease"]
+"21-24" = ["tease"]
+"25-28" = ["kick", "roll", "hats", "metal", "tease"]
+"29-44" = ["kick", "drop1", "claps", "crash", "metalroll", "lasers", "fill"]
+"29-36" = ["call", "hats"]
+"37-44" = ["call2", "ride"]
+"45" = ["down"]
+"45-52" = ["break"]
+"53-56" = ["build2", "roll", "tease"]
+"57-72" = ["kick2", "drop2", "claps", "crash", "squeaks", "zaps", "fill"]
+"57-64" = ["talkcall", "hats2"]
+"65-72" = ["talkcall2", "ride"]
+"73-76" = ["kick", "roll8", "hats", "metal", "squeaks"]
+"77-79" = ["kick", "roll8", "squeaks"]
+"80" = ["end"]

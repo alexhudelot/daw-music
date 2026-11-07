@@ -1,0 +1,2610 @@
+# "Sastrugi": the hard ridges the wind carves in snow, all leaning one way. Drum and bass, the DAW's fourth, 174 BPM, 176
+# bars, about four minutes. A liquid roller that leans neuro in its drops: one chord field (F minor 9) struck in a rhythm,
+# an eight-bar bass loop that re-colours it, and one six-note motif developed by rule, a leap up and a falling line,
+# every lead phrase a named transformation of it, answered from above by a squelch that plays it turned over. Every sound
+# is made here; the glitches are our own sounds resampled and cut in the spectral editor.
+#
+# Written out by songs/samples/sastrugi/make.py, which holds the motif, its transformations and the three candidates.
+#
+#   1-8      the field alone, dark, struck in the motif's rhythm; wind far off, coming nearer
+#   9-16     the hint: the motif's leap alone, two notes (TRUNCATION), quiet and filtered; the break's top
+#   17-24    half-time; the bass loop's upper voice, no sub; 24 the tail reversed
+#   25-32    the head DISPLACED BY AN 8TH, the filter opening; 16th hats, snare 8ths, 16ths, 32nds; 32 the master stutter
+#   33-48    DROP 1: the sub at last; the motif STATED, EXACT REPETITION; at 42 and 46 the zap's two-note hint of its
+#            answer; the tail's stuttered echo at 48. In every drop the fourth cell of each eight bars is varied
+#            (EXTENSION, DIMINUTION of the head, straight 8ths, the contour lifted), so a phrase runs eight bars
+#   49-56    CALL AND ANSWER: glint the head, zap (the squelch) the motif's MIRROR an octave above; the shaker
+#   57-64    RHYTHMIC DISPLACEMENT BY A 16TH, the answer with it; shuffled 16th hats, the ride
+#   65-72    EXACT REPETITION, zap the mirror's climb (TRUNCATION); 71-72 SEGUE 1: the bold fill, toms crossing, the glitch
+#   73-80    BREAKDOWN: no drums, no sub. The epic pad; its top voice the motif's AUGMENTATION, four times as long
+#   81-88    CALL AND ANSWER, augmented by two
+#   89-96    half-time, the bass loop's upper voice back; zap's syncopated head, DISPLACED BY AN 8TH
+#   97-104   the build: the head once a bar, then the sequence's head; 103-104 SEGUE 2: the fill, the glitch, zap alone
+#   105-120  DROP 2: the SEQUENCE TO C with its contour changed, higher; zap's syncopated answers; the drums lean, then up
+#            at 113 with the bass's drive
+#   121-128  CALL AND ANSWER on the sequence; the ride; two bars of half-time at 125
+#   129-136  INVERSION OF THE LAST INTERVAL: the call ends open, the answer closes; the most ghosts, ratchets; the last
+#            two beats of 136 a drop-out, no drums, sub or growl
+#   137-144  THE CLIMAX: the SEQUENCE TO E FLAT three times, B flat 5 its high point, then lifted to C6; zap above it;
+#            the epic pad back, its top voice holding the high point; the second kick; the leads drier
+#   145-152  HOME: the motif as stated, the answers; 152 the tape stop
+#   153-168  no sub; the drums leave by layers; the hint again, closing
+#   169-176  the field alone, softer each time; the last chord without its 9, the wind going far away
+format = "daw-song 1"
+title = "Sastrugi"
+publish = true
+tempo = 174
+meter = "4/4"
+seed = 1741
+humanise = 1.2
+
+[instruments]
+kbody = { synth = "kbody", base = "Ab1", bus = "kick" }
+kclick = { synth = "kclick", base = "Ab1", bus = "kick" }
+sbody = { synth = "sbody", base = "G3", bus = "snare" }
+snoise = { synth = "snoise", base = "G3", bus = "snare" }
+sclap = { sound = "clap", gain = -19, bus = "snare" }
+ghost = { synth = "ghost", base = "G3", bus = "brk" }
+rim = { synth = "rim", base = "C5", bus = "brk", pan = 0.18 }
+hat = { synth = "hat", base = "C6", bus = "hats", pan = -0.15 }
+hatl = { synth = "hat", base = "C6", bus = "late", pan = 0.2 }
+ohat = { synth = "ohat", base = "C6", bus = "hats", pan = -0.1 }
+shk = { synth = "shk", base = "C6", bus = "shkb" }
+ride = { sound = "ride", gain = -24, pan = 0.25, bus = "hats", cut = true, release = 0.3 }
+tom = { sound = "tom", gain = -9, bus = "toms" }
+sub = { synth = "sub", bus = "sub", glide = 0.1, glide_curve = 3 }
+growl = { synth = "growl", bus = "mid", glide = 0.09, glide_curve = 2 }
+field = { synth = "field", bus = "field" }
+aurora = { synth = "aurora", bus = "aurora" }
+auratop = { synth = "aurora", bus = "aurora", gain = 8, glide = 0.2, glide_curve = 3, legato = true }
+wind = { synth = "wind", bus = "atmos" }
+riser = { synth = "riser", bus = "rise" }
+rcrash = { sound = "crash", gain = -14, bus = "fx", reverse = true, cut = true, release = 0.01 }
+crash = { sound = "crash", gain = -17, bus = "fx" }
+impact = { sound = "impact", gain = -12, bus = "fx" }
+glint = { synth = "glint", bus = "l1", glide = 0.05, glide_curve = 3 }
+zap = { synth = "zap", bus = "l2", glide = 0.04, glide_curve = 3 }
+chC = { sample = "samples/sastrugi/tailc.flac", base = "C4", bus = "chop", cut = true, release = 0.004, gain = -3 }
+chR = { sample = "samples/sastrugi/tail.flac", base = "C4", bus = "chop", reverse = true, cut = true, release = 0.01, gain = -4 }
+chF = { sample = "samples/sastrugi/fillb.flac", base = "C4", bus = "chop", cut = true, release = 0.004, gain = -4 }
+chP = { sample = "samples/sastrugi/padc.flac", base = "C4", bus = "chop", cut = true, release = 0.006, gain = -4 }
+chPr = { sample = "samples/sastrugi/padc.flac", base = "C4", bus = "aurora", reverse = true, cut = true, release = 0.01, gain = -2 }
+
+# --- drums: every hit is two or three layers -------------------------------------------------------------------------
+
+# the kick's body: a sine falling from two and a half octaves up onto A flat 1 in 30 ms, a second, slower fall of 9
+# semitones under it (the knock), held 50 ms, gone in 0.25 s
+[synths.kbody]
+osc = [{ wave = "sine", to = "dry" }, { wave = "sine", octave = 1, level = -20, to = "dry" }]
+shape = { drive = 4, asym = 0.1 }
+env = [{ attack = 0.0005, hold = 0.05, decay = 0.2, curve = 2.5, release = 0.01 }, { decay = 0.028, curve = 5 }, { decay = 0.11, curve = 2 }]
+mod = [["env2", "pitch", 30], ["env3", "pitch", 9], ["velocity", "level", 4], ["random", "pitch", 0.2]]
+level = -1
+
+# its click: noise and a high triangle through a band-pass, 14 ms
+[synths.kclick]
+osc = [{ wave = "noise" }, { wave = "triangle", octave = 3, level = -6 }]
+filter = { type = "band12", cutoff = 3600, resonance = 0.3 }
+filter2 = { type = "high12", cutoff = 1200 }
+env = [{ attack = 0.0002, decay = 0.014, curve = 4, release = 0.003 }]
+mod = [["velocity", "level", 6], ["random", "filter.cutoff", 0.2]]
+level = -13
+
+# the snare's body: a triangle and a fifth over it, tuned to G 3, knocked down 9 semitones in 25 ms
+[synths.sbody]
+osc = [{ wave = "triangle", to = "dry" }, { wave = "sine", semi = 7, level = -9, to = "dry" }]
+shape = { drive = 5, asym = 0.1 }
+env = [{ attack = 0.0003, decay = 0.11, curve = 4, release = 0.01 }, { decay = 0.025, curve = 3 }]
+mod = [["env2", "pitch", 9], ["velocity", "level", 6], ["random", "pitch", 0.3]]
+level = -14
+
+# its crack: noise through a band-pass at 3 kHz, opening at the hit, 0.2 s
+[synths.snoise]
+osc = [{ wave = "noise" }]
+filter = { type = "band12", cutoff = 3000, resonance = 0.12 }
+filter2 = { type = "high12", cutoff = 800 }
+shape = { drive = 4 }
+env = [{ attack = 0.0004, decay = 0.2, curve = 4, release = 0.02 }, { decay = 0.04, curve = 3 }]
+mod = [["env2", "filter.cutoff", 0.8], ["random", "filter.cutoff", 0.2], ["random", "level", 1], ["velocity", "level", 8]]
+level = -12
+
+# the ghost: the snare touched, darker, shorter, falling away fast as the touch lightens (14 dB of velocity)
+[synths.ghost]
+osc = [{ wave = "noise" }, { wave = "triangle", octave = 1, level = -14, to = "dry" }]
+filter = { type = "band12", cutoff = 3400, resonance = 0.2 }
+filter2 = { type = "high12", cutoff = 1000 }
+env = [{ attack = 0.0008, decay = 0.07, curve = 4, release = 0.01 }, { decay = 0.02 }]
+mod = [["env2", "pitch", 5], ["random", "filter.cutoff", 0.35], ["random", "level", 2], ["velocity", "filter.cutoff", 1], ["velocity", "level", 14]]
+level = -8
+
+[synths.rim]
+osc = [{ wave = "triangle" }, { wave = "pulse", semi = 7, level = -8 }]
+filter = { type = "band12", cutoff = 1800, resonance = 0.55 }
+env = [{ attack = 0.0003, decay = 0.035, curve = 4, release = 0.005 }]
+mod = [["random", "filter.cutoff", 0.15], ["random", "level", 3], ["velocity", "level", 8]]
+level = -14
+
+[synths.hat]
+osc = [{ wave = "noise", level = -5 }, { wave = "pulse", width = 0.4, level = -6 }, { wave = "pulse", width = 0.4, semi = 6, detune = 31, level = -8 }, { wave = "pulse", width = 0.5, semi = 15, detune = -17, level = -9, fm = 1.5, fm_by = 2 }]
+filter = { type = "high24", cutoff = 7600, resonance = 0.22 }
+env = [{ attack = 0.0005, decay = 0.042, curve = 4, release = 0.01 }]
+mod = [["random", "filter.cutoff", 0.25], ["random", "level", 1.5], ["velocity", "level", 9], ["velocity", "filter.cutoff", -0.4]]
+level = -14
+
+[synths.ohat]
+osc = [{ wave = "noise", level = -5 }, { wave = "pulse", width = 0.4, level = -6 }, { wave = "pulse", width = 0.4, semi = 6, detune = 31, level = -8 }, { wave = "pulse", width = 0.5, semi = 15, detune = -17, level = -9, fm = 1.5, fm_by = 2 }]
+filter = { type = "high24", cutoff = 6300, resonance = 0.28 }
+env = [{ attack = 0.002, decay = 0.19, curve = 3, release = 0.02 }]
+mod = [["random", "filter.cutoff", 0.2], ["velocity", "level", 6]]
+level = -17
+
+[synths.shk]
+osc = [{ wave = "noise" }]
+filter = { type = "band12", cutoff = 8500, resonance = 0.4 }
+env = [{ attack = 0.006, attack_curve = -2, decay = 0.03, curve = 3, release = 0.006 }]
+mod = [["random", "filter.cutoff", 0.3], ["velocity", "level", 9]]
+level = -19
+
+
+# --- the low end ------------------------------------------------------------------------------------------------------
+
+# the sub: two sines, a little drive; it carries the loop and never moves in timbre
+[synths.sub]
+osc = [{ wave = "sine" }, { wave = "sine", octave = 1, level = -18 }]
+shape = { drive = 3, asym = 0.1 }
+env = [{ attack = 0.004, release = 0.04 }]
+level = -4.5
+
+# the growl, the loop an octave up: two saws and a pulse an octave under them, through a driven low-pass that plucks at
+# each note, then a formant. Its timbre is stepped: seq1 moves the cutoff and seq2 the vowel on every 16th, counted from
+# the song's start, so each step of the bar has its own colour, the same each time round. Drift on the oscillators and
+# the cutoff, a fold in the shaper; the fold grows over the song by automation.
+[synths.growl]
+osc = [{ wave = "saw", detune = -7 }, { wave = "saw", detune = 7, phase = 0.3 }, { wave = "pulse", width = 0.35, octave = -1, level = -6 }]
+drift = { pitch = 5, rate = 0.4, cutoff = 0.12 }
+filter = { type = "low24", cutoff = 420, resonance = 0.36, drive = 10 }
+filter2 = { type = "formant", vowel = 0.5, resonance = 0.4 }
+shape = { drive = 6, fold = 2, asym = 0.15, mix = 0.6 }
+env = [{ attack = 0.003, release = 0.03 }, { attack = 0.002, decay = 0.13, curve = 3 }]
+seq = [{ steps = [0, 0.9, 0.3, 1.2, 0.1, 0.7, 1.4, 0.2, 0.5, 0, 1.0, 0.4, 0.8, 0.2, 1.3, 0.6], step = "s", glide = 0.012, free = true }, { steps = [0, 2.5, 1, 3.5, 0.5, 2, 3, 1.5], step = "s", glide = 0.02, free = true }]
+mod = [["env2", "filter.cutoff", 1.6], ["seq1", "filter.cutoff", 1.0], ["seq2", "filter2.vowel", 1], ["velocity", "filter.cutoff", 0.6], ["velocity", "level", 3]]
+level = -9
+
+
+# --- the field: the chord struck in a rhythm (on the motif's 1 and 11 and the next bar's 7), falling 10 dB in about
+# 1.5 s to a quarter. Pulses in spread voices, a quiet saw and a triangle under it, dark; weight at 150-550 Hz
+[synths.field]
+osc = [{ wave = "pulse", width = 0.45, unison = { voices = 3, detune = 9, spread = 0.6 } }, { wave = "saw", detune = 6, level = -11 }, { wave = "triangle", octave = -1, level = -9 }]
+drift = { pitch = 4, rate = 0.25, cutoff = 0.1 }
+filter = { type = "low24", cutoff = 650, resonance = 0.12, drive = 2 }
+env = [{ attack = 0.006, decay = 1.7, sustain = 0.28, curve = 2, release = 0.9 }, { attack = 0.01, decay = 1.0, curve = 2 }]
+mod = [["env2", "filter.cutoff", 1.1], ["velocity", "filter.cutoff", 0.7], ["velocity", "level", 4]]
+level = -17
+
+# the epic pad, for the breakdown only: hollow pulses in five wide voices and three saws, filtered at 1.5 kHz and
+# breathing on two bars, a sine under it; it swells in over 1.2 s. Its top voice sings the motif augmented.
+[synths.aurora]
+osc = [{ wave = "pulse", width = 0.38, unison = { voices = 5, detune = 16, spread = 0.8 } }, { wave = "saw", level = -10, unison = { voices = 3, detune = 11, spread = 0.8 } }, { wave = "sine", octave = -1, level = -11 }]
+drift = { pitch = 6, rate = 0.2, cutoff = 0.15 }
+filter = { type = "low24", cutoff = 3000, resonance = 0.12 }
+env = [{ attack = 1.2, attack_curve = -1, decay = 2, sustain = 0.8, release = 2.5 }]
+lfo = [{ shape = "smooth", rate = "2w", free = true }]
+mod = [["lfo1", "filter.cutoff", 0.35], ["note", "filter.cutoff", 0.3]]
+level = -32
+
+# wind: noise through two resonant band-passes side by side, each wandering
+[synths.wind]
+osc = [{ wave = "noise" }]
+filter = { type = "band12", cutoff = 450, resonance = 0.75 }
+filter2 = { type = "band12", cutoff = 1500, resonance = 0.6 }
+filters = "parallel"
+env = [{ attack = 3, release = 4 }]
+lfo = [{ shape = "smooth", rate = "w", free = true }, { shape = "smooth", rate = "h.", free = true }]
+mod = [["lfo1", "filter.cutoff", 1.3], ["lfo2", "filter2.cutoff", 1.1], ["lfo1", "pan", 0.5], ["lfo2", "level", 4]]
+level = -26
+
+# a riser: noise through a band-pass opening four octaves over its note
+[synths.riser]
+osc = [{ wave = "noise" }, { wave = "saw", unison = { voices = 3, detune = 20, spread = 0.9 }, level = -16 }]
+filter = { type = "band12", cutoff = 400, resonance = 0.45 }
+env = [{ attack = "note", attack_curve = -2, release = 0.25 }, { attack = "note", attack_curve = -2 }]
+mod = [["env2", "filter.cutoff", 4], ["env2", "pitch", 12]]
+level = -22
+
+
+# --- the leads ---------------------------------------------------------------------------------------------------------
+
+# glint, the theme's voice, in the approved "lead fixes" direction: a triangle, a narrow pulse in three voices barely
+# spread, and a sine past the filter; a dry core near mono, the width from the echoes and the hall. A keytracked
+# low-pass at about the 4th to 6th harmonic, its pluck shutting in 85 ms, no shaper after it, so nothing buzzes.
+# seq1 is its per-step timbre: counted from the song's start, the 16ths where the hook syncopates (4 and 7, and the
+# pickup at 12) open the filter more than the others. Drift on the pitch and the cutoff; a vibrato that waits. The
+# pluck's depth scaled by the velocity (a fourth element on the route): the soft notes open less, the accents more.
+[synths.glint]
+osc = [{ wave = "triangle" }, { wave = "pulse", width = 0.3, detune = 5, level = -5, unison = { voices = 3, detune = 8, spread = 0.15 } }, { wave = "sine", level = -6, to = "dry" }]
+drift = { pitch = 4, rate = 0.35, cutoff = 0.1 }
+filter = { type = "low24", cutoff = 1050, resonance = 0.3, drive = 2 }
+env = [{ attack = 0.004, decay = 0.45, sustain = 0.62, release = 0.28 }, { attack = 0.006, decay = 0.055, curve = 3 }]
+lfo = [{ shape = "sine", rate = 5.2, delay = 0.25, fade = 0.25 }]
+seq = [{ steps = [0.2, 0, 0, 0.7, 0, 0, 0.9, 0, 0.1, 0, 0.3, 0.6, 0.4, 0, 0.1, 0], step = "s", glide = 0.01, free = true }]
+mod = [["env2", "filter.cutoff", 0.6], ["env2", "filter.cutoff", 0.8, "velocity"], ["note", "filter.cutoff", 0.8], ["seq1", "filter.cutoff", 0.8], ["velocity", "filter.cutoff", 0.6], ["velocity", "level", 5], ["lfo1", "pitch", 0.12]]
+level = -15
+
+# zap, the answering voice: the tutorials' squelch. One saw (and a quiet triangle past the filter for the note's body)
+# through a 24 dB band-pass; env2 throws the pitch 17 semitones up and lets it fall onto the note in about 60 ms, and
+# the same envelope dips the cutoff 1.3 octaves the other way (inverted). Saturation in three stages: the filter's
+# drive before it, the shaper after it, a tanh on the bus; light downsampling on the bus. Its timbre is stepped:
+# seq1 the band-pass's centre and seq2 its resonance, a value a 16th; and each note's cutoff is shifted at random,
+# and the zap's length jumps every 16th (automation), so no two hits are the same. The pitch throw is 9 semitones
+# and up to 14 more, a height of its own each note (`random+`), so the swoop from above is never twice the same.
+[synths.zap]
+osc = [{ wave = "saw" }, { wave = "triangle", level = -9, to = "dry" }]
+drift = { pitch = 3, rate = 0.3, cutoff = 0.15 }
+filter = { type = "band24", cutoff = 1300, resonance = 0.28, drive = 8 }
+shape = { drive = 5, asym = 0.12, mix = 0.5 }
+env = [{ attack = 0.0015, hold = 0.05, decay = 0.14, sustain = 0.4, curve = 3, release = 0.06 }, { decay = 0.06, curve = 4 }]
+seq = [{ steps = [0, 0.5, -0.3, 0.8, 0.2, -0.2, 0.9, 0, 0.4, -0.4, 0.6, 0.1, 0.7, -0.1, 0.3, 0.5], step = "s", glide = 0.008, free = true }, { steps = [0, 0.15, 0.05, 0.22], step = "s", free = true }]
+mod = [["env2", "pitch", 9], ["env2", "pitch", 14, "random+"], ["env2", "filter.cutoff", -1.3], ["seq1", "filter.cutoff", 0.7], ["seq2", "filter.resonance", 1], ["random", "filter.cutoff", 0.3], ["note", "filter.cutoff", 0.5], ["velocity", "filter.cutoff", 0.5], ["velocity", "level", 5]]
+level = -7.5
+
+
+# --- drums -------------------------------------------------------------------------------------------------------------
+
+[buses.kick]
+transient = { attack = 4, sustain = -2, length = 0.008 }
+drive = { type = "clip", gain = 2.5, level = -2, oversample = 4 }
+eq = [{ hz = 60, gain = 1.5, q = 1 }, { hz = 300, gain = -2.5, q = 1.2 }, { hz = 3500, gain = 1.5, q = 1 }]
+width = { steps = [0] }
+
+[buses.snare]
+stutter = { bars = { "103" = "xxxx xxxx xxxx rrRR", "120" = "xxxx xxxx rrrr RRRR" } }
+filter = { highpass = 120 }
+transient = { attack = 3, sustain = -3, length = 0.01 }
+drive = { type = "clip", gain = 2, level = -1.5, oversample = 4 }
+eq = [{ hz = 200, gain = 1.5, q = 1.4 }, { hz = 2500, gain = 2, q = 0.8 }, { type = "highshelf", hz = 7000, gain = 1.5 }]
+hall = { size = 0.5, decay = 0.6, damp = 0.35, predelay = 0.004, early = 0.8, highpass = 1200, width = 1, wet = 0.1, dry = 1 }
+send = { room = 0.1 }
+
+[buses.brk]
+stutter = { bars = { "128" = "xxxx xxxx xxxx rrRR" } }
+filter = { highpass = 300 }
+eq = [{ type = "highshelf", hz = 6000, gain = 2 }]
+stereo = { cross = [2500], width = [0.9, 1.4] }
+send = { room = 0.16 }
+
+[buses.hats]
+filter = { highpass = 450 }
+eq = [{ type = "highshelf", hz = 11000, gain = -1 }]
+stereo = { cross = [3000], width = [1.1, 1.6] }
+send = { room = 0.06 }
+
+# the off 16ths, 11 ms late: the shuffle
+[buses.late]
+filter = { highpass = 450 }
+delay = { time = 0.011, feedback = 0, wet = 1, dry = 0 }
+stereo = { cross = [3000], width = [1.1, 1.6] }
+send = { room = 0.06 }
+
+[buses.shkb]
+filter = { highpass = 3000 }
+autopan = { steps = [-0.3, 0.55, -0.55, 0.3, -0.45, 0.45], step = "s" }
+send = { room = 0.1 }
+
+# the toms, placed: their azimuth swept across each bold fill (automation)
+[buses.toms]
+transient = { attack = 3, sustain = -2, length = 0.01 }
+filter = { highpass = 70 }
+place = { azimuth = 0, distance = 1.4, room = 0.3 }
+send = { room = 0.18 }
+
+# --- the low end -------------------------------------------------------------------------------------------------------
+
+[buses.sub]
+drive = { type = "tape", gain = 2.5, level = -2, asym = 0.12, oversample = 2 }
+filter = { lowpass = 180, highpass = 26, q = 0 }
+width = { steps = [0] }
+sidechain = { by = "kbody", threshold = -26, ratio = 8, knee = 4, attack = 0.001, release = 0.09 }
+
+[buses.mid]
+stutter = { bars = { "64" = "xxxx xxxx xxxx rrRR", "144" = "xxxx xxxx xxxx vvvv" } }
+filter = { highpass = 110, lowpass = 7000, q = 0 }
+drive = { type = "tape", gain = 4, level = -3, asym = 0.15, oversample = 2 }
+eq = [{ hz = 400, gain = -2, q = 1 }, { hz = 900, gain = -1.5, q = 1 }]
+multiband = { cross = [250, 2500], depth = 0.3 }
+stereo = { cross = [260], width = [0, 1.25] }
+sidechain = { by = "kbody", threshold = -24, ratio = 4, attack = 0.001, release = 0.07 }
+send = { room = 0.03 }
+
+# --- pads and air ------------------------------------------------------------------------------------------------------
+
+[buses.field]
+stutter = { bars = { "168" = "xxxx xxxx <<<< <<<<" } }
+filter = { highpass = 140, lowpass = 2600, q = 0 }
+eq = [{ hz = 240, gain = 1, q = 0.9 }]
+stereo = { cross = [320], width = [0.5, 1.15] }
+sidechain = { by = "kbody", threshold = -24, ratio = 2, release = 0.15 }
+send = { vast = 0.28, room = 0.05 }
+
+# the epic pad: led in by its own reverb backwards (swell), chorused, its top half widened, into the big hall
+[buses.aurora]
+filter = { highpass = 150, lowpass = 9000, q = 0 }
+eq = [{ hz = 350, gain = -1.5, q = 0.8 }, { type = "highshelf", hz = 5000, gain = -2 }]
+chorus = { delay = 0.018, depth = 0.003, rate = 0.4, wet = 0.2 }
+swell = { size = 1.8, decay = 3, damp = 0.4, wet = 0.7 }
+stereo = { cross = [400], width = [0.8, 1.2] }
+send = { vast = 0.45 }
+
+# the wind, placed far off and circling slowly; it comes nearer through the intro (automation)
+[buses.atmos]
+filter = { highpass = 250 }
+place = { azimuth = -40, elevation = 15, distance = 8, orbit = 0.03, radius = 3, room = 0.6 }
+send = { vast = 0.3 }
+
+[buses.rise]
+filter = { highpass = 300 }
+place = { azimuth = 0, distance = 0, orbit = 0.45, radius = 1.4, room = 0.3, doppler = 0.4 }
+send = { vast = 0.3 }
+
+[buses.fx]
+filter = { highpass = 180 }
+send = { vast = 0.25 }
+
+# --- the leads ---------------------------------------------------------------------------------------------------------
+
+# glint: a dry core near mono (width 0.7); its low-pass closes it in the intro and outro (automation); the width comes
+# from the echoes (dotted 8th left, quarter right) and the hall
+[buses.l1]
+stutter = { bars = { "151" = "xxxx xxrr rrRR ...." } }
+filter = { highpass = 280, lowpass = 9500, q = 0 }
+eq = [{ hz = 450, gain = -1.5, q = 0.9 }, { hz = 2200, gain = 1.5, q = 0.8 }, { type = "highshelf", hz = 7500, gain = -1.5 }]
+sidechain = { by = "kbody", threshold = -20, ratio = 1.6, release = 0.06 }
+# the core near the middle, 0.7; a little wider in drop 1 (bars 33-72), where the glint is the lead alone; a width a bar
+width = { steps = [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7], step = "w", smooth = 0.02 }
+send = { l1e = 0.36, lhall = 0.42, room = 0.06 }
+
+# zap: light downsampling first, then the second and third stages of saturation (the bus's tanh rounds the crushed
+# steps, then a fast compressor), the
+# tutorials' high-pass and low-pass; placed to the side and swaying round the listener (automation), so the answer comes
+# from somewhere else than the call
+[buses.l2]
+order = ["crush", "drive"]
+drive = { type = "tanh", gain = 9, level = -8 }
+crush = { rate = 11000, bits = 12, wet = 0.3 }
+filter = { highpass = 220, lowpass = 9500, q = 0 }
+eq = [{ hz = 450, gain = -2, q = 0.8 }, { hz = 2200, gain = 0.5, q = 0.8 }, { type = "highshelf", hz = 6000, gain = -2 }]
+compressor = { threshold = -16, ratio = 6, attack = 0.0005, release = 0.03, knee = 2 }
+place = { azimuth = 30, elevation = 8, distance = 1.2, room = 0.12 }
+sidechain = { by = "kbody", threshold = -20, ratio = 2, release = 0.05 }
+send = { l2e = 0.42, lhall = 0.28 }
+
+# the chops: placed, jumping from side to side (automation)
+[buses.chop]
+filter = { highpass = 250, lowpass = 12000, q = 0 }
+place = { azimuth = 0, distance = 1, room = 0.15 }
+send = { l2e = 0.2, room = 0.1 }
+
+# --- the returns -------------------------------------------------------------------------------------------------------
+
+[buses.room]
+hall = { size = 0.6, decay = 0.7, damp = 0.45, predelay = 0.004, early = 0.9, highpass = 400, width = 1, wet = 1, dry = 0 }
+stereo = { cross = [500], width = [0.6, 1.3] }
+
+# glint's echoes: diffused, the left a dotted 8th, the right a quarter, dark, wavering, smeared into a wash, then the hall;
+# the return widened above 600 Hz (the core stays near the middle, the echoes go out to the sides)
+[buses.l1e]
+echoes = { left = "e.", right = "q", cross = 0.15, lowpass = 3800, highpass = 400, diffusion = 0.2, depth = 1, rate = 0.3, feedback = 0.36, wet = 1, dry = 0 }
+stereo = { cross = [600], width = [0.8, 2.2] }
+sidechain = { by = "kbody", threshold = -22, ratio = 3, release = 0.08 }
+send = { lhall = 0.2 }
+
+# zap's echoes: the tutorials' dotted 8th, crossing side to side as a ping-pong does, band-passed in the loop
+[buses.l2e]
+echoes = { left = "e.", right = "q.", cross = 0.55, lowpass = 4500, highpass = 450, diffusion = 0.3, depth = 1.5, rate = 0.4, feedback = 0.4, wet = 1, dry = 0 }
+sidechain = { by = "kbody", threshold = -22, ratio = 3, release = 0.08 }
+send = { lhall = 0.3 }
+
+[buses.lhall]
+hall = { size = 2.4, decay = 3.8, damp = 0.5, predelay = 0.02, early = 0.3, mod = 0.5, highpass = 350, width = 1, wet = 1, dry = 0 }
+eq = [{ type = "highshelf", hz = 6000, gain = -3 }]
+stereo = { cross = [500], width = [0.8, 1.4] }
+
+[buses.vast]
+hall = { size = 3.4, decay = 6, damp = 0.42, predelay = 0.05, early = 0.25, mod = 0.6, highpass = 180, shimmer = 0.12, width = 1, wet = 1, dry = 0 }
+eq = [{ hz = 2800, gain = -2, q = 0.8 }, { type = "highshelf", hz = 6000, gain = -2 }]
+stereo = { cross = [300], width = [0.5, 1.4] }
+sidechain = { by = "kbody", threshold = -24, ratio = 2.5, release = 0.12 }
+
+[master]
+gain = -7
+drive = { type = "tanh", gain = 0, level = 0, oversample = 4 }
+eq = [{ hz = 350, gain = -0.8, q = 0.8 }, { type = "highshelf", hz = 9500, gain = 1.2 }]
+filter = { highpass = 25, lowpass = 17500 }
+crush = { rate = 6000, bits = 10, wet = 0 }
+stereo = { cross = [120], width = [0, 1] }
+stutter = { bars = { "32" = "xxxx xxxx xxxx rrRR", "136" = "xxxx xxxx xxxx rrRR", "152" = "xxxx xxxx vvvv vvvv" } }
+limiter = { ceiling = -2.0, release = 0.08 }
+
+[automation]
+"l1.filter.lowpass" = [[1, 700], [9, 700], [16.9, 1300, "s"], [17, 1200], [24.9, 2400, "s"], [25, 2200], [32.9, 5200, "exp"], [33, 9500, "step"], [81, 4500, "step"], [97, 2500, "step"], [102.9, 9500, "exp"], [153, 9500], [160, 2600, "s"], [168, 900, "s"]]
+"l2.place.azimuth" = { lfo = "sine", rate = "4w", depth = 40, points = [[1, 10], [104.4, 10], [104.5, 0, "step"], [105, 10, "step"]] }
+"l2.place.elevation" = { lfo = "smooth", rate = "8w", depth = 12, points = [[1, 10]] }
+"l2e.echoes.feedback" = [[1, 0.4], [104.5, 0.4], [104.55, 0.78, "step"], [105.2, 0.78], [106, 0.38, "s"]]
+"l2.send.lhall" = [[1, 0.28], [33, 0.15, "step"], [73, 0.28, "step"], [105, 0.15, "step"], [153, 0.28, "step"]]
+"l2.send.l2e" = [[1, 0.42], [104.5, 0.42], [104.55, 0.9, "step"], [105.5, 0.9], [106, 0.42, "s"], [137, 0.26, "step"], [145, 0.42, "step"]]
+"instruments.zap.env2.decay" = { lfo = "steps", rate = "s", depth = 0.018, points = [[1, 0.058], [105, 0.064], [137, 0.072]] }
+"instruments.glint.filter.cutoff" = { lfo = "smooth", rate = "8w", depth = 0.2, points = [[1, 950], [105, 1050], [137, 1150], [145, 950]] }
+"instruments.growl.shape.fold" = [[1, 2], [104, 2], [105, 4.5, "step"], [137, 6, "step"], [145, 3.5, "step"]]
+"mid.multiband.depth" = [[1, 0.3], [49, 0.2, "step"], [73, 0.3, "step"], [137, 0.55, "step"], [145, 0.35, "step"]]
+"mid.drive.gain" = [[1, 4], [33, 3, "step"], [73, 4, "step"], [105, 3, "step"], [113, 4, "step"], [145, 3, "step"], [153, 4, "step"]]
+"l2.drive.gain" = [[1, 9], [49, 7, "step"], [73, 9, "step"], [105, 7, "step"], [113, 8, "step"], [137, 9, "step"], [145, 7, "step"], [153, 9, "step"]]
+"instruments.growl.filter.cutoff" = { lfo = "smooth", rate = "4w", depth = 0.25, points = [[1, 360], [33, 420, "step"], [105, 470, "step"], [137, 520, "step"], [153, 380, "step"]] }
+"field.filter.lowpass" = [[1, 600], [17, 1100, "s"], [33, 1800, "step"], [81, 1300, "step"], [97, 1300], [104, 1800, "exp"], [161, 1800], [176, 700, "s"]]
+"field.level" = [[1, -7], [9, -8, "step"], [33, -1.5, "step"], [72.5, -60, "step"], [73, -11, "step"], [97, -8, "step"], [101, -9.5, "step"], [104.5, -60, "step"], [105, -3, "step"], [137, 1, "step"], [145, -0.5, "step"], [161, -4, "step"]]
+"hats.filter.highpass" = [[1, 2500], [16.9, 1200, "exp"], [17, 450, "step"]]
+"shkb.filter.highpass" = [[1, 6000], [16.9, 4000], [17, 3000, "step"]]
+"atmos.place.distance" = [[1, 9], [17, 3, "s"], [33, 5], [73, 1.6, "s"], [104, 3], [161, 3], [176, 14, "s"]]
+"toms.place.azimuth" = [[1, 0], [71.35, -75, "step"], [72, 75], [72.1, 0, "step"], [103.35, 75, "step"], [104, -75], [104.1, 0, "step"], [136.1, -60, "step"], [136.5, 60], [136.55, 0, "step"]]
+"chop.place.azimuth" = [[1, 0], [24.00, -55, "step"], [24.25, 50, "step"], [24.50, -35, "step"], [24.75, 65, "step"], [25.00, 0, "step"], [32.00, -55, "step"], [32.25, 50, "step"], [32.50, -35, "step"], [32.75, 65, "step"], [33.00, 0, "step"], [48.00, -55, "step"], [48.25, 50, "step"], [48.50, -35, "step"], [48.75, 65, "step"], [49.00, 0, "step"], [72.00, -55, "step"], [72.25, 50, "step"], [72.50, -35, "step"], [72.75, 65, "step"], [73.00, 0, "step"], [104.00, -55, "step"], [104.25, 50, "step"], [104.50, -35, "step"], [104.75, 65, "step"], [105.00, 0, "step"], [128.00, -55, "step"], [128.25, 50, "step"], [128.50, -35, "step"], [128.75, 65, "step"], [129.00, 0, "step"], [144.00, -55, "step"], [144.25, 50, "step"], [144.50, -35, "step"], [144.75, 65, "step"], [145.00, 0, "step"], [168.00, -55, "step"], [168.25, 50, "step"], [168.50, -35, "step"], [168.75, 65, "step"], [169.00, 0, "step"]]
+"aurora.level" = [[1, -2], [73, -2], [89, -4, "s"], [96, -8, "s"], [136.9, -8], [137, -6, "step"], [144.9, -6], [146, -16, "s"]]
+"aurora.swell.wet" = [[1, 0.7], [136.9, 0.7], [137, 0.35, "step"]]
+"master.crush.wet" = [[1, 0], [33, 0.45, "step"], [33.125, 0, "step"], [72.5, 0.2, "step"], [73, 0.6, "exp"], [73.02, 0, "step"], [104, 0.55, "step"], [104.5, 0, "step"], [105, 0.45, "step"], [105.125, 0, "step"], [137, 0.4, "step"], [137.125, 0, "step"]]
+"master.crush.rate" = [[1, 6000], [72.5, 9000, "step"], [73, 2500, "exp"], [73.02, 6000, "step"], [104, 3500, "step"], [104.5, 6000, "step"]]
+"master.filter.highpass" = [[1, 25], [97, 25], [102.95, 320, "exp"], [102.98, 320], [103, 25]]
+"kick.level" = [[1, -6.5], [25, -5.0, "step"], [33, 0, "step"], [153, -1.5, "step"], [161, -3.5, "step"]]
+"snare.level" = [[1, -6.5], [25, -5.0, "step"], [33, 0, "step"], [153, -1.5, "step"], [161, -3.5, "step"]]
+"brk.level" = [[1, -5], [25, -3.5, "step"], [33, 0, "step"], [153, -1.5, "step"], [161, -3.5, "step"]]
+"hats.level" = [[1, -5], [25, -3.5, "step"], [33, 0, "step"], [153, -1.5, "step"], [161, -3.5, "step"]]
+"late.level" = [[1, -5], [25, -3.5, "step"], [33, 0, "step"], [153, -1.5, "step"], [161, -3.5, "step"]]
+"shkb.level" = [[1, -5], [25, -3.5, "step"], [33, 0, "step"], [153, -1.5, "step"], [161, -3.5, "step"]]
+"sub.level" = [[1, 0], [136.5, -60, "step"], [137, 0, "step"]]
+"mid.level" = [[1, -9], [33, 0, "step"], [81, -9, "step"], [89, -6, "step"], [101, -7.5, "step"], [104.5, -60, "step"], [105, -1.5, "step"], [136.5, -60, "step"], [137, 0, "step"], [161, -5, "step"]]
+"vast.level" = [[1, -5], [73, -3, "step"], [97, -5, "step"], [104.5, -14, "step"], [105, -5, "step"], [169, -2, "s"]]
+"l1.level" = [[1, -6], [25, -5, "step"], [33, 1, "step"], [49, 0, "step"], [73, -6, "step"], [81, -8, "step"], [89, -6, "step"], [97, -5, "step"], [105, 0, "step"], [153, -6, "step"]]
+"chop.level" = [[1, 0], [104, 6, "step"], [105, 0, "step"]]
+"l2.level" = [[1, 0], [41, 2, "step"], [49, 0, "step"], [73, -8, "step"], [89, -3, "step"], [97, 0, "step"]]
+"l1.send.l1e" = [[1, 0.36], [33, 0.4, "step"], [73, 0.36, "step"], [137, 0.28, "step"], [145, 0.36, "step"]]
+"l1.send.lhall" = [[1, 0.42], [33, 0.28, "step"], [49, 0.22, "step"], [73, 0.6, "step"], [97, 0.36, "step"], [105, 0.18, "step"], [121, 0.25, "step"], [137, 0.12, "step"], [145, 0.25, "step"], [153, 0.55, "step"]]
+"field.send.vast" = [[1, 0.28], [33, 0.15, "step"], [73, 0.28, "step"], [105, 0.15, "step"], [153, 0.28, "step"]]
+
+# the break's top: quiet 8th hats and a shaker, under a high-pass (automation)
+[patterns.dr_top]
+hat = "r e C6@0.60 s r e. C6@0.60 s r e. C6@0.60 s r e. C6@0.60 s r s"
+shk = "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s"
+
+# half-time: a kick, one snare a bar on 3, a few ghosts; 8th hats; the bold fill at 24
+[patterns.dr_half]
+kbody = [
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+]
+kclick = [
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+]
+sbody = [
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r e. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+]
+snoise = [
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r e. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+]
+sclap = [
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r e. C4@1.00 s r e C4@0.85 s",
+]
+ghost = [
+  "r h.. G3@0.22 s r s",
+  "r q r s G3@0.16 s r h r s G3@0.30 s",
+  "r h.. G3@0.22 s r s",
+  "r q r s G3@0.16 s r h r s G3@0.30 s",
+  "r h.. G3@0.22 s r s",
+  "r q r s G3@0.16 s r h r s G3@0.30 s",
+  "r h.. G3@0.22 s r s",
+  "r q r s G3@0.16 s r q.. G3@0.35 t G3@0.25 s G3@0.40 t G3@0.30 t G3@0.50 t",
+]
+hat = "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s"
+ohat = [
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+]
+
+# half-time, the hats in 16ths; 29-30 the snare in 8ths, 31 in 16ths, 32 the 32nd roll
+[patterns.dr_build1]
+kbody = [
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r q.. Ab1@0.80 s r q..",
+  "Ab1@1.00 s r e. Ab1@0.70 s r e. Ab1@0.85 s r e. Ab1@0.90 s r e.",
+]
+kclick = [
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r q.. Ab1@0.80 s r q..",
+  "Ab1@1.00 s r e. Ab1@0.70 s r e. Ab1@0.85 s r e. Ab1@0.90 s r e.",
+]
+sbody = [
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "G3@0.30 s r s G3@0.37 s r s G3@0.44 s r s G3@0.51 s r s G3@0.58 s r s G3@0.65 s r s G3@0.72 s r s G3@0.79 s r s",
+  "G3@0.30 s r s G3@0.37 s r s G3@0.44 s r s G3@0.51 s r s G3@0.58 s r s G3@0.65 s r s G3@0.72 s r s G3@0.79 s r s",
+  "G3@0.35 s G3@0.39 s G3@0.43 s G3@0.47 s G3@0.51 s G3@0.55 s G3@0.59 s G3@0.63 s G3@0.67 s G3@0.71 s G3@0.75 s G3@0.79 s G3@0.83 s G3@0.87 s G3@0.91 s G3@0.95 s",
+  "G3@0.40 t G3@0.42 t G3@0.44 t G3@0.46 t G3@0.48 t G3@0.49 t G3@0.51 t G3@0.53 t G3@0.55 t G3@0.57 t G3@0.59 t G3@0.61 t G3@0.63 t G3@0.65 t G3@0.67 t G3@0.69 t G3@0.70 t G3@0.72 t G3@0.74 t G3@0.76 t G3@0.78 t G3@0.80 t G3@0.82 t G3@0.84 t G3@0.86 t G3@0.88 t G3@0.89 t G3@0.91 t G3@0.93 t G3@0.95 t G3@0.97 t G3@0.99 t",
+]
+snoise = [
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "G3@0.30 s r s G3@0.37 s r s G3@0.44 s r s G3@0.51 s r s G3@0.58 s r s G3@0.65 s r s G3@0.72 s r s G3@0.79 s r s",
+  "G3@0.30 s r s G3@0.37 s r s G3@0.44 s r s G3@0.51 s r s G3@0.58 s r s G3@0.65 s r s G3@0.72 s r s G3@0.79 s r s",
+  "G3@0.35 s G3@0.39 s G3@0.43 s G3@0.47 s G3@0.51 s G3@0.55 s G3@0.59 s G3@0.63 s G3@0.67 s G3@0.71 s G3@0.75 s G3@0.79 s G3@0.83 s G3@0.87 s G3@0.91 s G3@0.95 s",
+  "G3@0.40 t G3@0.42 t G3@0.44 t G3@0.46 t G3@0.48 t G3@0.49 t G3@0.51 t G3@0.53 t G3@0.55 t G3@0.57 t G3@0.59 t G3@0.61 t G3@0.63 t G3@0.65 t G3@0.67 t G3@0.69 t G3@0.70 t G3@0.72 t G3@0.74 t G3@0.76 t G3@0.78 t G3@0.80 t G3@0.82 t G3@0.84 t G3@0.86 t G3@0.88 t G3@0.89 t G3@0.91 t G3@0.93 t G3@0.95 t G3@0.97 t G3@0.99 t",
+]
+sclap = [
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h. C4@0.72 s r s C4@0.79 s r s",
+  "r h. C4@0.72 s r s C4@0.79 s r s",
+  "r h r s C4@0.71 s C4@0.75 s C4@0.79 s C4@0.83 s C4@0.87 s C4@0.91 s C4@0.95 s",
+  "r h C4@0.70 t C4@0.72 t C4@0.74 t C4@0.76 t C4@0.78 t C4@0.80 t C4@0.82 t C4@0.84 t C4@0.86 t C4@0.88 t C4@0.89 t C4@0.91 t C4@0.93 t C4@0.95 t C4@0.97 t C4@0.99 t",
+]
+ghost = [
+  "r h.. G3@0.22 s r s",
+  "r q r s G3@0.16 s r h r s G3@0.30 s",
+  "r h.. G3@0.22 s r s",
+  "r q r s G3@0.16 s r h r s G3@0.30 s",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+]
+hat = [
+  "C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s",
+  "C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s",
+  "C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s",
+  "C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.35 t C6@0.42 t C6@0.49 t C6@0.56 t C6@0.63 t C6@0.70 t C6@0.77 t C6@0.84 t",
+  "C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s",
+  "C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s",
+  "r w",
+  "r w",
+]
+ohat = [
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r w",
+  "r w",
+]
+
+# DROP 1: two-step, 8th hats and the open hat; a fill every 8 bars, the bold one at 16
+[patterns.dr_d1a]
+kbody = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s Ab1@0.90 s r q..",
+]
+kclick = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s Ab1@0.90 s r q..",
+]
+sbody = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r e. G3@1.00 s r e. G3@0.95 s r e G3@0.80 s",
+]
+snoise = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r e. G3@1.00 s r e. G3@0.95 s r e G3@0.80 s",
+]
+sclap = [
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e C4@0.85 s",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r e. C4@1.00 s r e. C4@0.95 s r e C4@0.80 s",
+]
+ghost = [
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r q G3@0.30 s r s",
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r q G3@0.30 s r s",
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r q G3@0.30 s r s",
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r e. G3@0.35 t G3@0.25 t G3@0.30 t G3@0.40 s G3@0.50 t",
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r q G3@0.30 s r s",
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r q G3@0.30 s r s",
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r q G3@0.30 s r s",
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r h r s",
+]
+hat = "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s"
+ohat = [
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+]
+tom = [
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r h r s Eb3@0.70 s Eb3@0.75 s C3@0.80 s r s Ab2@0.85 s Ab2@0.90 s r t F2@1.00 t",
+]
+
+# the shaker in 16ths; more ghosts; the 32nd roll at 56
+[patterns.dr_d1b]
+kbody = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+kclick = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+sbody = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r h r e r t G3@1.00 t",
+]
+snoise = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r h r e r t G3@1.00 t",
+]
+sclap = [
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r h r e r t C4@1.00 t",
+]
+ghost = [
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s G3@0.30 t G3@0.38 t G3@0.46 t G3@0.54 t G3@0.62 t G3@0.70 t G3@0.78 t G3@0.86 t",
+]
+rim = [
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+]
+hat = "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s"
+ohat = [
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+]
+shk = "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s"
+
+# the hats in shuffled 16ths (the off 16ths late); the ride; a ratchet at 60, the bold fill at 64
+[patterns.dr_d1c]
+kbody = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s Ab1@0.90 s r q..",
+]
+kclick = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s Ab1@0.90 s r q..",
+]
+sbody = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r e. G3@1.00 s r e. G3@0.95 s r e G3@0.80 s",
+]
+snoise = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r e. G3@1.00 s r e. G3@0.95 s r e G3@0.80 s",
+]
+sclap = [
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r e. C4@1.00 s r e. C4@0.95 s r e C4@0.80 s",
+]
+ghost = [
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r h r s",
+]
+rim = [
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+]
+hat = [
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.35 t C6@0.42 t C6@0.49 t C6@0.56 t C6@0.63 t C6@0.70 t C6@0.77 t C6@0.84 t",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+]
+hatl = [
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r q",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+]
+ohat = [
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+]
+ride = "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e"
+tom = [
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r h r s Eb3@0.70 s Eb3@0.75 s C3@0.80 s r s Ab2@0.85 s Ab2@0.90 s r t F2@1.00 t",
+]
+
+# everything; the most ghosts; a ratchet at 68
+[patterns.dr_d1d]
+kbody = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+kclick = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+sbody = "r q G3@1.00 s r q.. G3@1.00 s r e."
+snoise = "r q G3@1.00 s r q.. G3@1.00 s r e."
+sclap = "r q C4@1.00 s r q.. C4@1.00 s r e."
+ghost = [
+  "r e G3@0.12 s G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r s G3@0.16 s r s G3@0.32 s",
+  "r s G3@0.16 s r s G3@0.15 s r e G3@0.22 s r e G3@0.20 s r s G3@0.18 s r s G3@0.14 s G3@0.30 s G3@0.38 s",
+  "r e G3@0.12 s G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r s G3@0.16 s r s G3@0.32 s",
+  "r s G3@0.16 s r s G3@0.15 s r e G3@0.22 s r e G3@0.20 s r s G3@0.18 s r s G3@0.14 s G3@0.30 s G3@0.38 s",
+  "r e G3@0.12 s G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r s G3@0.16 s r s G3@0.32 s",
+  "r s G3@0.16 s r s G3@0.15 s r e G3@0.22 s r e G3@0.20 s r s G3@0.18 s r s G3@0.14 s G3@0.30 s G3@0.38 s",
+]
+rim = [
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+]
+hat = [
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.35 t C6@0.42 t C6@0.49 t C6@0.56 t C6@0.63 t C6@0.70 t C6@0.77 t C6@0.84 t",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+]
+hatl = [
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r q",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+]
+ohat = [
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+]
+shk = "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s"
+ride = "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e"
+
+# SEGUE 1: 71 the bold fill, toms crossing left to right; 72 one kick, then the drums stuttered
+[patterns.dr_seg1]
+kbody = [
+  "Ab1@1.00 s r q.. Ab1@0.95 s r e Ab1@0.80 s r q",
+  "Ab1@1.00 s r h.. r s",
+]
+kclick = [
+  "Ab1@1.00 s r q.. Ab1@0.95 s r e Ab1@0.80 s r q",
+  "Ab1@1.00 s r h.. r s",
+]
+sbody = [
+  "r q G3@1.00 s r q.. G3@0.90 s r e r t G3@1.00 t",
+  "r w",
+]
+snoise = [
+  "r q G3@1.00 s r q.. G3@0.90 s r e r t G3@1.00 t",
+  "r w",
+]
+sclap = [
+  "r q C4@1.00 s r q.. C4@0.90 s r e r t C4@1.00 t",
+  "r w",
+]
+ghost = [
+  "r e G3@0.12 s G3@0.14 s r h.",
+  "r w",
+]
+rim = [
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r w",
+]
+hat = [
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r h r e.",
+  "r w",
+]
+hatl = [
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r h r e",
+  "r w",
+]
+ohat = [
+  "r h r e C6@0.50 e r q",
+  "r w",
+]
+tom = [
+  "r q. Eb3@0.55 s Eb3@0.59 s C3@0.62 s C3@0.66 s Ab2@0.69 s Ab2@0.73 s F2@0.76 s F2@0.80 s Eb2@0.83 t Eb2@0.87 t F2@0.90 t Ab2@0.94 t",
+  "r w",
+]
+
+# half-time under the breakdown's last eight, 8th hats; a ratchet at 92, a fill at 96
+[patterns.dr_bdhalf]
+kbody = [
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+]
+kclick = [
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+]
+sbody = [
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r e. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+]
+snoise = [
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r e. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+]
+sclap = [
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r e. C4@1.00 s r e C4@0.85 s",
+]
+ghost = [
+  "r h.. G3@0.22 s r s",
+  "r q r s G3@0.16 s r h r s G3@0.30 s",
+  "r h.. G3@0.22 s r s",
+  "r q r s G3@0.16 s r h r s G3@0.30 s",
+  "r h.. G3@0.22 s r s",
+  "r q r s G3@0.16 s r h r s G3@0.30 s",
+  "r h.. G3@0.22 s r s",
+  "r q r s G3@0.16 s r q.. G3@0.35 t G3@0.25 s G3@0.40 t G3@0.30 t G3@0.50 t",
+]
+hat = [
+  "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s",
+  "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s",
+  "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s",
+  "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.35 t C6@0.42 t C6@0.49 t C6@0.56 t C6@0.63 t C6@0.70 t C6@0.77 t C6@0.84 t",
+  "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s",
+  "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s",
+  "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s",
+  "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s",
+]
+ohat = [
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+]
+
+# the build: 97-98 half-time 16ths, 99-100 snare 8ths, 101 16ths, 102 32nds
+[patterns.dr_build2]
+kbody = [
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r q.. Ab1@0.80 s r q..",
+  "Ab1@1.00 s r e. Ab1@0.70 s r e. Ab1@0.85 s r e. Ab1@0.90 s r e.",
+]
+kclick = [
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r q.. Ab1@0.80 s r q..",
+  "Ab1@1.00 s r e. Ab1@0.70 s r e. Ab1@0.85 s r e. Ab1@0.90 s r e.",
+]
+sbody = [
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "G3@0.30 s r s G3@0.37 s r s G3@0.44 s r s G3@0.51 s r s G3@0.58 s r s G3@0.65 s r s G3@0.72 s r s G3@0.79 s r s",
+  "G3@0.30 s r s G3@0.37 s r s G3@0.44 s r s G3@0.51 s r s G3@0.58 s r s G3@0.65 s r s G3@0.72 s r s G3@0.79 s r s",
+  "G3@0.35 s G3@0.39 s G3@0.43 s G3@0.47 s G3@0.51 s G3@0.55 s G3@0.59 s G3@0.63 s G3@0.67 s G3@0.71 s G3@0.75 s G3@0.79 s G3@0.83 s G3@0.87 s G3@0.91 s G3@0.95 s",
+  "G3@0.40 t G3@0.42 t G3@0.44 t G3@0.46 t G3@0.48 t G3@0.49 t G3@0.51 t G3@0.53 t G3@0.55 t G3@0.57 t G3@0.59 t G3@0.61 t G3@0.63 t G3@0.65 t G3@0.67 t G3@0.69 t G3@0.70 t G3@0.72 t G3@0.74 t G3@0.76 t G3@0.78 t G3@0.80 t G3@0.82 t G3@0.84 t G3@0.86 t G3@0.88 t G3@0.89 t G3@0.91 t G3@0.93 t G3@0.95 t G3@0.97 t G3@0.99 t",
+]
+snoise = [
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r q..",
+  "G3@0.30 s r s G3@0.37 s r s G3@0.44 s r s G3@0.51 s r s G3@0.58 s r s G3@0.65 s r s G3@0.72 s r s G3@0.79 s r s",
+  "G3@0.30 s r s G3@0.37 s r s G3@0.44 s r s G3@0.51 s r s G3@0.58 s r s G3@0.65 s r s G3@0.72 s r s G3@0.79 s r s",
+  "G3@0.35 s G3@0.39 s G3@0.43 s G3@0.47 s G3@0.51 s G3@0.55 s G3@0.59 s G3@0.63 s G3@0.67 s G3@0.71 s G3@0.75 s G3@0.79 s G3@0.83 s G3@0.87 s G3@0.91 s G3@0.95 s",
+  "G3@0.40 t G3@0.42 t G3@0.44 t G3@0.46 t G3@0.48 t G3@0.49 t G3@0.51 t G3@0.53 t G3@0.55 t G3@0.57 t G3@0.59 t G3@0.61 t G3@0.63 t G3@0.65 t G3@0.67 t G3@0.69 t G3@0.70 t G3@0.72 t G3@0.74 t G3@0.76 t G3@0.78 t G3@0.80 t G3@0.82 t G3@0.84 t G3@0.86 t G3@0.88 t G3@0.89 t G3@0.91 t G3@0.93 t G3@0.95 t G3@0.97 t G3@0.99 t",
+]
+sclap = [
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r q..",
+  "r h. C4@0.72 s r s C4@0.79 s r s",
+  "r h. C4@0.72 s r s C4@0.79 s r s",
+  "r h r s C4@0.71 s C4@0.75 s C4@0.79 s C4@0.83 s C4@0.87 s C4@0.91 s C4@0.95 s",
+  "r h C4@0.70 t C4@0.72 t C4@0.74 t C4@0.76 t C4@0.78 t C4@0.80 t C4@0.82 t C4@0.84 t C4@0.86 t C4@0.88 t C4@0.89 t C4@0.91 t C4@0.93 t C4@0.95 t C4@0.97 t C4@0.99 t",
+]
+ghost = [
+  "r h.. G3@0.22 s r s",
+  "r q r s G3@0.16 s r h r s G3@0.30 s",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+]
+hat = [
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s",
+  "C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s",
+  "C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s",
+  "r w",
+]
+hatl = [
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+]
+ohat = [
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r w",
+]
+
+# SEGUE 2: 103 the bold fill, toms crossing right to left; 104 one kick and the glitch
+[patterns.dr_seg2]
+kbody = [
+  "Ab1@1.00 s r q.. Ab1@0.95 s r e Ab1@0.80 s r q",
+  "Ab1@1.00 s r h.. r s",
+]
+kclick = [
+  "Ab1@1.00 s r q.. Ab1@0.95 s r e Ab1@0.80 s r q",
+  "Ab1@1.00 s r h.. r s",
+]
+sbody = [
+  "r q G3@1.00 s r q.. G3@0.90 s r e r t G3@1.00 t",
+  "r w",
+]
+snoise = [
+  "r q G3@1.00 s r q.. G3@0.90 s r e r t G3@1.00 t",
+  "r w",
+]
+sclap = [
+  "r q C4@1.00 s r q.. C4@0.90 s r e r t C4@1.00 t",
+  "r w",
+]
+ghost = [
+  "r e G3@0.12 s G3@0.14 s r h.",
+  "r w",
+]
+rim = [
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r w",
+]
+hat = [
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r h r e.",
+  "r w",
+]
+hatl = [
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r h r e",
+  "r w",
+]
+ohat = [
+  "r h r e C6@0.50 e r q",
+  "r w",
+]
+tom = [
+  "r q. Eb3@0.55 s Eb3@0.59 s C3@0.62 s C3@0.66 s Ab2@0.69 s Ab2@0.73 s F2@0.76 s F2@0.80 s Eb2@0.83 t Eb2@0.87 t F2@0.90 t Ab2@0.94 t",
+  "r w",
+]
+
+# DROP 2 starts lean: two-step, 8th hats, few ghosts, no ride, so it can speed up; a fill at 112
+[patterns.dr_d2a]
+kbody = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+kclick = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+sbody = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+]
+snoise = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+]
+sclap = [
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e C4@0.85 s",
+]
+ghost = [
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r q G3@0.30 s r s",
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r q G3@0.30 s r s",
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r q G3@0.30 s r s",
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r e. G3@0.35 t G3@0.25 t G3@0.30 t G3@0.40 s G3@0.50 t",
+]
+hat = "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s"
+ohat = [
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+]
+
+# the first step up: 16th hats, the shaker, more ghosts; the 32nd roll at 120
+[patterns.dr_d2a2]
+kbody = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+kclick = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+sbody = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r h r e r t G3@1.00 t",
+]
+snoise = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r h r e r t G3@1.00 t",
+]
+sclap = [
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r h r e r t C4@1.00 t",
+]
+ghost = [
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s G3@0.30 t G3@0.38 t G3@0.46 t G3@0.54 t G3@0.62 t G3@0.70 t G3@0.78 t G3@0.86 t",
+]
+rim = [
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+]
+hat = "C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s"
+ohat = [
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+]
+shk = "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s"
+
+# the second step: shuffled 16ths and the ride; a ratchet at 124
+[patterns.dr_d2b]
+kbody = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+kclick = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+sbody = "r q G3@1.00 s r q.. G3@1.00 s r e."
+snoise = "r q G3@1.00 s r q.. G3@1.00 s r e."
+sclap = "r q C4@1.00 s r q.. C4@1.00 s r e."
+ghost = [
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+]
+rim = [
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+]
+hat = [
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.35 t C6@0.42 t C6@0.49 t C6@0.56 t C6@0.63 t C6@0.70 t C6@0.77 t C6@0.84 t",
+]
+hatl = [
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r q",
+]
+ohat = [
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+]
+shk = "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s"
+ride = "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e"
+
+# two bars of half-time: the floor drops out under the call and answer
+[patterns.dr_d2half]
+kbody = [
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+]
+kclick = [
+  "Ab1@1.00 s r h.. r s",
+  "Ab1@1.00 s r h r s Ab1@0.75 s r q r s",
+]
+sbody = [
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r e. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+]
+snoise = [
+  "r h G3@1.00 s r q..",
+  "r h G3@1.00 s r e. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+]
+sclap = [
+  "r h C4@1.00 s r q..",
+  "r h C4@1.00 s r e. C4@1.00 s r e C4@0.85 s",
+]
+ghost = [
+  "r h.. G3@0.22 s r s",
+  "r q r s G3@0.16 s r q.. G3@0.35 t G3@0.25 s G3@0.40 t G3@0.30 t G3@0.50 t",
+]
+hat = "C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s C6@0.50 s C6@0.26 s C6@0.85 s C6@0.34 s"
+ohat = [
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+]
+
+# back to full, a 32nd roll into 129
+[patterns.dr_d2back]
+kbody = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+kclick = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+sbody = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r h r e r t G3@1.00 t",
+]
+snoise = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r h r e r t G3@1.00 t",
+]
+sclap = [
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r h r e r t C4@1.00 t",
+]
+ghost = [
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s G3@0.30 t G3@0.38 t G3@0.46 t G3@0.54 t G3@0.62 t G3@0.70 t G3@0.78 t G3@0.86 t",
+]
+rim = [
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+]
+hat = "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s"
+hatl = "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s"
+ohat = [
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+]
+shk = "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s"
+ride = "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e"
+
+# the third step: the most ghosts, a ratchet every two bars; at 136 the bold fill in its first half, then the drop-out
+[patterns.dr_d2c]
+kbody = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q r s Ab1@0.85 s r h r s",
+]
+kclick = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q r s Ab1@0.85 s r h r s",
+]
+sbody = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@0.90 s r e r t G3@1.00 s r q.. r t",
+]
+snoise = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@0.90 s r e r t G3@1.00 s r q.. r t",
+]
+sclap = [
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@0.90 s r e r t C4@1.00 s r q.. r t",
+]
+ghost = [
+  "r e G3@0.12 s G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r s G3@0.16 s r s G3@0.32 s",
+  "r s G3@0.16 s r s G3@0.15 s r e G3@0.22 s r e G3@0.20 s r s G3@0.18 s r s G3@0.14 s G3@0.30 s G3@0.38 s",
+  "r e G3@0.12 s G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r s G3@0.16 s r s G3@0.32 s",
+  "r s G3@0.16 s r s G3@0.15 s r e G3@0.22 s r e G3@0.20 s r s G3@0.18 s r s G3@0.14 s G3@0.30 s G3@0.38 s",
+  "r e G3@0.12 s G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r s G3@0.16 s r s G3@0.32 s",
+  "r s G3@0.16 s r s G3@0.15 s r e G3@0.22 s r e G3@0.20 s r s G3@0.18 s r s G3@0.14 s G3@0.30 s G3@0.38 s",
+  "r e G3@0.12 s G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r s G3@0.16 s r s G3@0.32 s",
+  "r s G3@0.16 s r h..",
+]
+rim = [
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r w",
+]
+hat = [
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.35 t C6@0.42 t C6@0.49 t C6@0.56 t C6@0.63 t C6@0.70 t C6@0.77 t C6@0.84 t",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.35 t C6@0.42 t C6@0.49 t C6@0.56 t C6@0.63 t C6@0.70 t C6@0.77 t C6@0.84 t",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.35 t C6@0.42 t C6@0.49 t C6@0.56 t C6@0.63 t C6@0.70 t C6@0.77 t C6@0.84 t",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r h.. r s",
+]
+hatl = [
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r q",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r q",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r q",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r h..",
+]
+ohat = [
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r w",
+]
+shk = [
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s r h..",
+]
+ride = [
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r w",
+]
+tom = [
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+  "r e Eb3@0.60 s Eb3@0.64 s C3@0.68 t C3@0.72 t Ab2@0.76 t Ab2@0.80 t F2@0.84 t F2@0.88 t Eb2@0.92 t F2@0.96 s r q.. r t",
+]
+
+# THE CLIMAX: everything, the second kick, ratchets; the last beat of 144 empty
+[patterns.dr_climax]
+kbody = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+kclick = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r e. Ab1@0.60 s r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+sbody = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r h r e.",
+]
+snoise = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r h r e.",
+]
+sclap = [
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r h r e.",
+]
+ghost = [
+  "r e G3@0.12 s G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r s G3@0.16 s r s G3@0.32 s",
+  "r s G3@0.16 s r s G3@0.15 s r e G3@0.22 s r e G3@0.20 s r s G3@0.18 s r s G3@0.14 s G3@0.30 s G3@0.38 s",
+  "r e G3@0.12 s G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r s G3@0.16 s r s G3@0.32 s",
+  "r s G3@0.16 s r s G3@0.15 s r e G3@0.22 s r e G3@0.20 s r s G3@0.18 s r s G3@0.14 s G3@0.30 s G3@0.38 s",
+  "r e G3@0.12 s G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r s G3@0.16 s r s G3@0.32 s",
+  "r s G3@0.16 s r s G3@0.15 s r e G3@0.22 s r e G3@0.20 s r s G3@0.18 s r s G3@0.14 s G3@0.30 s G3@0.38 s",
+  "r e G3@0.12 s G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r s G3@0.16 s r s G3@0.32 s",
+  "r s G3@0.16 s r s G3@0.15 s r e G3@0.22 s r e G3@0.20 s r s G3@0.18 s r q",
+]
+rim = [
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+]
+hat = [
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.35 t C6@0.42 t C6@0.49 t C6@0.56 t C6@0.63 t C6@0.70 t C6@0.77 t C6@0.84 t",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.35 t C6@0.42 t C6@0.49 t C6@0.56 t C6@0.63 t C6@0.70 t C6@0.77 t C6@0.84 t",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.35 t C6@0.42 t C6@0.49 t C6@0.56 t C6@0.63 t C6@0.70 t C6@0.77 t C6@0.84 t",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s",
+  "C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r s C6@0.50 s r s C6@0.85 s r q r s",
+]
+hatl = [
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r q",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r q",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r q",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s",
+  "r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r s C6@0.26 s r s C6@0.34 s r q",
+]
+ohat = [
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+  "r h r e C6@0.50 e r q",
+  "r e C6@0.50 e r h.",
+]
+shk = [
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s",
+  "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s r q",
+]
+ride = [
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e",
+  "r e C4@0.70 e r e C4@0.70 e r e C4@0.70 e r q",
+]
+
+# home: a step back, 8th hats and the shaker; the drums stop like a tape at 152 (master)
+[patterns.dr_home]
+kbody = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+kclick = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+]
+sbody = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+]
+snoise = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+]
+sclap = [
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e C4@0.85 s",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+]
+ghost = [
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r s G3@0.35 t G3@0.25 t G3@0.30 t G3@0.40 t G3@0.38 t G3@0.50 t",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+  "r e. G3@0.14 s r e. G3@0.28 s r s G3@0.18 s r s G3@0.20 s r e. G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r s G3@0.18 s r e G3@0.30 s G3@0.38 s",
+]
+rim = [
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+  "r q. C5@0.50 s r q.. C5@0.40 s r s",
+  "r e C5@0.45 s r q.. C5@0.50 s r q r s",
+]
+hat = "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s"
+ohat = [
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+]
+shk = "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s"
+
+# the outro: kick, hats and ghosts, no snare after 156
+[patterns.dr_out1]
+kbody = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.85 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.85 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.85 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.85 s r q r s",
+]
+kclick = [
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r q. Ab1@0.55 s r e Ab1@0.88 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.85 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.85 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.85 s r q r s",
+  "Ab1@1.00 s r h r s Ab1@0.85 s r q r s",
+]
+sbody = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+]
+snoise = [
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r e.",
+  "r q G3@1.00 s r q.. G3@1.00 s r s G3@0.60 s G3@0.85 s",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+]
+sclap = [
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e.",
+  "r q C4@1.00 s r q.. C4@1.00 s r e C4@0.85 s",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+]
+ghost = [
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r q G3@0.30 s r s",
+  "r q.. G3@0.28 s r s G3@0.18 s r q r s G3@0.32 s",
+  "r s G3@0.16 s r q G3@0.22 s r e G3@0.20 s r e. G3@0.35 t G3@0.25 t G3@0.30 t G3@0.40 s G3@0.50 t",
+  "r w",
+  "r w",
+  "r w",
+  "r w",
+]
+hat = "C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s C6@0.42 s r s C6@0.80 s r s"
+ohat = [
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+  "r e C6@0.55 e r h.",
+  "r h r e C6@0.55 e r q",
+]
+
+# only the top, as at the start
+[patterns.dr_out2]
+hat = "r e C6@0.60 s r e. C6@0.60 s r e. C6@0.60 s r e. C6@0.60 s r s"
+shk = "C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s C6@0.55 s C6@0.25 s C6@0.40 s C6@0.30 s"
+
+# the loop, sub and growl; every fourth time round (32 bars) bar 8 turns
+[patterns.bass]
+sub = [
+  "F1@1 e. F1@0.85 e. F1@0.9 q F1@0.9 q.",
+  "F1@1 h F1~ e F1@0.8 e Db2~%0.11!0.12@0.85 q",
+  "Db2@1 e. Db2@0.85 e. Db2@0.9 q Db2@0.9 q.",
+  "Db2@1 h Db2~ e Db2@0.8 e Bb1~%0.11!0.12@0.85 q",
+  "Bb1@1 e. Bb1@0.85 e. Bb1@0.9 q Bb1@0.9 q.",
+  "Bb1@1 h Bb1~ e Bb1@0.8 e Eb2~%0.11!0.12@0.85 q",
+  "Eb2@1 e. Eb2@0.85 e. Eb2@0.9 q Eb2@0.9 q.",
+  "Eb2@1 h Eb2~ e Eb2@0.8 e F1~%0.11!0.12@0.85 q",
+]
+growl = [
+  "F2@1 e. F2@0.8 e. F3@0.9 e r e F2@0.9 e. C3@0.8 e.",
+  "F2@0.95 q F2~ s r s F3@0.7 s Eb3@0.85 e r s C3@0.8 e Db3~%0.09!0.15@0.85 q",
+  "Db3@1 e. Db3@0.8 e. Db4@0.9 e r e Db3@0.9 e. Ab3@0.8 e.",
+  "Db3@0.95 q Db3~ s r s Db4@0.7 s C4@0.85 e r s Ab3@0.8 e Bb2~%0.09!0.15@0.85 q",
+  "Bb2@1 e. Bb2@0.8 e. Bb3@0.9 e r e Bb2@0.9 e. F3@0.8 e.",
+  "Bb2@0.95 q Bb2~ s r s Bb3@0.7 s Ab3@0.85 e r s F3@0.8 e Eb3~%0.09!0.15@0.85 q",
+  "Eb3@1 e. Eb3@0.8 e. Eb4@0.9 e r e Eb3@0.9 e. Bb3@0.8 e.",
+  "Eb3@0.95 q Eb3~ s r s Eb4@0.7 s Db4@0.85 e r s Bb3@0.8 e F2~%0.16!0.1@0.9 q",
+]
+"growl@4" = [
+  "F2@1 e. F2@0.8 e. F3@0.9 e r e F2@0.9 e. C3@0.8 e.",
+  "F2@0.95 q F2~ s r s F3@0.7 s Eb3@0.85 e r s C3@0.8 e Db3~%0.09!0.15@0.85 q",
+  "Db3@1 e. Db3@0.8 e. Db4@0.9 e r e Db3@0.9 e. Ab3@0.8 e.",
+  "Db3@0.95 q Db3~ s r s Db4@0.7 s C4@0.85 e r s Ab3@0.8 e Bb2~%0.09!0.15@0.85 q",
+  "Bb2@1 e. Bb2@0.8 e. Bb3@0.9 e r e Bb2@0.9 e. F3@0.8 e.",
+  "Bb2@0.95 q Bb2~ s r s Bb3@0.7 s Ab3@0.85 e r s F3@0.8 e Eb3~%0.09!0.15@0.85 q",
+  "Eb3@1 e. Eb3@0.8 e. Eb4@0.9 e r e Eb3@0.9 e. Bb3@0.8 e.",
+  "Eb3@0.95 e Eb3@0.7 s Eb4@0.8 s Db4@0.85 e Bb3@0.8 e Ab3@0.8 e Bb3@0.9 e F2~%0.16!0.1@0.9 q",
+]
+
+# the loop's upper voice alone, no sub
+[patterns.growl_only]
+growl = [
+  "F2@1 e. F2@0.8 e. F3@0.9 e r e F2@0.9 e. C3@0.8 e.",
+  "F2@0.95 q F2~ s r s F3@0.7 s Eb3@0.85 e r s C3@0.8 e Db3~%0.09!0.15@0.85 q",
+  "Db3@1 e. Db3@0.8 e. Db4@0.9 e r e Db3@0.9 e. Ab3@0.8 e.",
+  "Db3@0.95 q Db3~ s r s Db4@0.7 s C4@0.85 e r s Ab3@0.8 e Bb2~%0.09!0.15@0.85 q",
+  "Bb2@1 e. Bb2@0.8 e. Bb3@0.9 e r e Bb2@0.9 e. F3@0.8 e.",
+  "Bb2@0.95 q Bb2~ s r s Bb3@0.7 s Ab3@0.85 e r s F3@0.8 e Eb3~%0.09!0.15@0.85 q",
+  "Eb3@1 e. Eb3@0.8 e. Eb4@0.9 e r e Eb3@0.9 e. Bb3@0.8 e.",
+  "Eb3@0.95 q Eb3~ s r s Eb4@0.7 s Db4@0.85 e r s Bb3@0.8 e F2~%0.16!0.1@0.9 q",
+]
+"growl@4" = [
+  "F2@1 e. F2@0.8 e. F3@0.9 e r e F2@0.9 e. C3@0.8 e.",
+  "F2@0.95 q F2~ s r s F3@0.7 s Eb3@0.85 e r s C3@0.8 e Db3~%0.09!0.15@0.85 q",
+  "Db3@1 e. Db3@0.8 e. Db4@0.9 e r e Db3@0.9 e. Ab3@0.8 e.",
+  "Db3@0.95 q Db3~ s r s Db4@0.7 s C4@0.85 e r s Ab3@0.8 e Bb2~%0.09!0.15@0.85 q",
+  "Bb2@1 e. Bb2@0.8 e. Bb3@0.9 e r e Bb2@0.9 e. F3@0.8 e.",
+  "Bb2@0.95 q Bb2~ s r s Bb3@0.7 s Ab3@0.85 e r s F3@0.8 e Eb3~%0.09!0.15@0.85 q",
+  "Eb3@1 e. Eb3@0.8 e. Eb4@0.9 e r e Eb3@0.9 e. Bb3@0.8 e.",
+  "Eb3@0.95 e Eb3@0.7 s Eb4@0.8 s Db4@0.85 e Bb3@0.8 e Ab3@0.8 e Bb3@0.9 e F2~%0.16!0.1@0.9 q",
+]
+
+# the field, struck on the motif's 1 and 11 and the next bar's 7
+[patterns.field]
+field = [
+  "F3+Ab3+C4+Eb4+G4@0.80 h F3+Ab3+C4+Eb4+G4~ e F3+Ab3+C4+Eb4+G4@0.64 q.",
+  "r q. F3+Ab3+C4+Eb4+G4@0.72 h F3+Ab3+C4+Eb4+G4~ e",
+  "F3+Ab3+C4+Eb4+G4@0.80 h F3+Ab3+C4+Eb4+G4~ e F3+Ab3+C4+Eb4+G4@0.64 q.",
+  "r q. F3+Ab3+C4+Eb4+G4@0.72 h F3+Ab3+C4+Eb4+G4~ e",
+  "F3+Ab3+C4+Eb4+G4@0.80 h F3+Ab3+C4+Eb4+G4~ e F3+Ab3+C4+Eb4+G4@0.64 q.",
+  "r q. F3+Ab3+C4+Eb4+G4@0.72 h F3+Ab3+C4+Eb4+G4~ e",
+  "F3+Ab3+C4+Eb4+G4@0.80 h F3+Ab3+C4+Eb4+G4~ e F3+Ab3+C4+Eb4+G4@0.64 q.",
+  "r q. F3+Ab3+C4+Eb4+G4@0.72 h F3+Ab3+C4+Eb4+G4~ e",
+]
+
+# the field's lower four, softer
+[patterns.field_dark]
+field = [
+  "F3+Ab3+Eb4+G4@0.65 h F3+Ab3+Eb4+G4~ e F3+Ab3+Eb4+G4@0.52 q.",
+  "r q. F3+Ab3+Eb4+G4@0.59 h F3+Ab3+Eb4+G4~ e",
+  "F3+Ab3+Eb4+G4@0.65 h F3+Ab3+Eb4+G4~ e F3+Ab3+Eb4+G4@0.52 q.",
+  "r q. F3+Ab3+Eb4+G4@0.59 h F3+Ab3+Eb4+G4~ e",
+  "F3+Ab3+Eb4+G4@0.65 h F3+Ab3+Eb4+G4~ e F3+Ab3+Eb4+G4@0.52 q.",
+  "r q. F3+Ab3+Eb4+G4@0.59 h F3+Ab3+Eb4+G4~ e",
+  "F3+Ab3+Eb4+G4@0.65 h F3+Ab3+Eb4+G4~ e F3+Ab3+Eb4+G4@0.52 q.",
+  "r q. F3+Ab3+Eb4+G4@0.59 h F3+Ab3+Eb4+G4~ e",
+]
+
+# the last strikes; the last chord without its 9, left to fall
+[patterns.field_end]
+field = [
+  "F3+Ab3+Eb4+G4@0.7 h F3+Ab3+Eb4+G4~ e F3+Ab3+Eb4+G4@0.55 q.",
+  "r q. F3+Ab3+Eb4+G4@0.6 h F3+Ab3+Eb4+G4~ e",
+  "F3+Ab3+Eb4+G4@0.62 h F3+Ab3+Eb4+G4~ e F3+Ab3+Eb4+G4@0.5 q.",
+  "r q. F3+Ab3+Eb4+G4@0.55 h F3+Ab3+Eb4+G4~ e",
+  "F3+Ab3+C4+Eb4@0.6 w",
+  "F3+Ab3+C4+Eb4~ w",
+  "F3+Ab3+C4+Eb4~ w",
+  "F3+Ab3+C4+Eb4~ w",
+]
+
+# the epic pad, the field opened out with its 11, held, re-struck every four bars
+[patterns.aurora]
+aurora = [
+  "F3+C4+Eb4+G4+Bb4@0.8 w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4@0.8 w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4@0.8 w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4@0.8 w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4@0.8 w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4@0.8 w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+]
+
+# THE CLIMAX: the epic pad back, held and re-struck once
+[patterns.aurora_cl]
+aurora = [
+  "F3+C4+Eb4+G4+Bb4@0.85 w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4@0.85 w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+  "F3+C4+Eb4+G4+Bb4~ w",
+]
+
+# wind, one long breath every four bars
+[patterns.wind]
+wind = [
+  "F3@0.8 w",
+  "F3~ w",
+  "F3~ w",
+  "F3~ w",
+]
+
+# INTRO, the hint: TRUNCATION to two notes, the leap alone (A flat 4 up to F5), once each two bars, filtered
+[patterns.l1_hint]
+glint = [
+  "Ab4@0.56 e. F5@0.66 e. r h r e",
+  "r w",
+  "Ab4@0.56 e. F5@0.66 e. r h r e",
+  "r w",
+  "Ab4@0.56 e. F5@0.66 e. r h r e",
+  "r w",
+  "Ab4@0.56 e. F5@0.66 e. r h r e",
+  "r w",
+]
+
+# INTRO, the build: TRUNCATION (the leap and its step back), DISPLACED BY AN 8TH, each two bars
+[patterns.l1_hint2]
+glint = [
+  "r e Ab4@0.64 e. F5@0.76 e. Eb5@0.66 q Eb5~ s r e.",
+  "r w",
+  "r e Ab4@0.64 e. F5@0.76 e. Eb5@0.66 q Eb5~ s r e.",
+  "r w",
+  "r e Ab4@0.64 e. F5@0.76 e. Eb5@0.66 q Eb5~ s r e.",
+  "r w",
+  "r e Ab4@0.64 e. F5@0.76 e. Eb5@0.66 q Eb5~ s r e.",
+  "r w",
+]
+
+# DROP 1, stated: EXACT REPETITION of the motif, a two-bar cell, the second bar left for the answers; the fourth cell an EXTENSION, the tail running on down to G4
+[patterns.l1_state]
+glint = [
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 e Db5@0.60 s C5@0.62 s Bb4@0.60 s C5@0.66 s Db5@0.72 e Eb5@0.80 e",
+  "F5<-2%0.05!0.3@0.92 e. Eb5@0.80 e. C5@0.72 e Bb4@0.70 e Ab4@0.72 e G4@0.75 q",
+]
+
+# DROP 1, its second eight: EXACT REPETITION; the fourth cell the head's DIMINUTION, twice in 16ths, then the tail
+[patterns.l1_state_b]
+glint = [
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+  "Ab4@0.80 s F5<-2%0.05!0.3@0.95 e Eb5@0.74 s Ab4@0.80 s F5<-2%0.05!0.3@0.95 e Eb5@0.82 q C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+]
+
+# DROP 1, the answer's hint: TRUNCATION of the MIRROR to its first two notes, in bars 42 and 46
+[patterns.l2_hint]
+zap = [
+  "r w",
+  "C6@0.65 e r s Eb5@0.58 e r h r e.",
+  "r w",
+  "r w",
+  "r w",
+  "C6@0.70 e r s Eb5@0.62 e r h r e.",
+  "r w",
+  "r w",
+]
+
+# CALL AND ANSWER, the call: TRUNCATION (the leap and its step back), in the cell's first bar; the fourth cell its DIMINUTION, twice in 16ths
+[patterns.l1_call]
+glint = [
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s r q r s",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s r q r s",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s r q r s",
+  "r w",
+  "Ab4@0.80 s F5<-2%0.05!0.3@0.95 e Eb5@0.74 s Ab4@0.80 s F5<-2%0.05!0.3@0.95 e Eb5@0.82 q Eb5~ s r q",
+  "r w",
+]
+
+# CALL AND ANSWER, the answer: zap plays the motif's MIRROR (every interval turned over) an octave above, in the second bar
+[patterns.l2_ans]
+zap = [
+  "r w",
+  "C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.82 e C6@0.85 e",
+  "r w",
+  "C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.82 e C6@0.85 e",
+  "r w",
+  "C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.82 e C6@0.85 e",
+  "r w",
+  "C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.82 e C6@0.85 e",
+]
+
+# RHYTHMIC DISPLACEMENT BY A 16TH: the whole motif a 16th late, against the shuffled hats; the fourth cell in straight 8ths after the leap
+[patterns.l1_disp]
+glint = [
+  "r s Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 s",
+  "r w",
+  "r s Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 s",
+  "r w",
+  "r s Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 s",
+  "r w",
+  "Ab4@0.80 e F5<-2%0.05!0.3@0.95 q Eb5@0.82 e C5@0.62 e Bb4@0.80 e Ab4@0.70 q",
+  "r w",
+]
+
+# CALL AND ANSWER, the mirror DISPLACED BY A 16TH with it
+[patterns.l2_ansd]
+zap = [
+  "r w",
+  "r s C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.82 e C6@0.85 s",
+  "r w",
+  "r s C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.82 e C6@0.85 s",
+  "r w",
+  "r s C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.82 e C6@0.85 s",
+  "r w",
+  "r s C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.82 e C6@0.85 s",
+]
+
+# EXACT REPETITION, three cells; then at 71 the TRUNCATION alone, into the segue
+[patterns.l1_state2]
+glint = [
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s r q r s",
+  "r w",
+]
+
+# TRUNCATION of the answer: the mirror's climb alone (F5 A flat B flat C6), in each second bar
+[patterns.l2_climb]
+zap = [
+  "r w",
+  "r q. F5@0.81 e r e. Ab5@0.62 s Bb5@0.78 e C6@0.81 e",
+  "r w",
+  "r q. F5@0.81 e r e. Ab5@0.62 s Bb5@0.78 e C6@0.81 e",
+  "r w",
+  "r q. F5@0.81 e r e. Ab5@0.62 s Bb5@0.78 e C6@0.81 e",
+  "r w",
+  "r w",
+]
+
+# BREAKDOWN: AUGMENTATION, the motif four times as long on the epic pad's top voice, twice
+[patterns.top_aug]
+auratop = [
+  "Ab4@0.72 h. F5@0.85 q",
+  "F5~ h Eb5@0.74 h",
+  "Eb5~ h. C5@0.56 q",
+  "Bb4@0.72 h Ab4@0.63 h",
+  "Ab4@0.72 h. F5@0.85 q",
+  "F5~ h Eb5@0.74 h",
+  "Eb5~ h. C5@0.56 q",
+  "Bb4@0.72 h Ab4@0.63 h",
+]
+
+# BREAKDOWN: CALL AND ANSWER, augmented by two: the head over two bars
+[patterns.l1_augcall]
+glint = [
+  "Ab4@0.64 q. F5@0.76 q. Eb5@0.66 q",
+  "Eb5~ q. r h r e",
+  "r w",
+  "r w",
+  "Ab4@0.68 q. F5@0.81 q. Eb5@0.70 q",
+  "Eb5~ q. r h r e",
+  "r w",
+  "r w",
+]
+
+# BREAKDOWN: CALL AND ANSWER, augmented by two: zap answers above with the mirror's climb over the next two
+[patterns.l2_augans]
+zap = [
+  "r w",
+  "r w",
+  "F5@0.85 h F5~ e Ab5@0.7 e Bb5@0.85 q",
+  "C6@0.85 h. r q",
+  "r w",
+  "r w",
+  "F5@0.9 h F5~ e Ab5@0.72 e Bb5@0.88 q",
+  "C6@0.9 h. r q",
+]
+
+# BREAKDOWN, half-time: zap plays the mirror's head (C6, a 6th down, a step up) DISPLACED BY AN 8TH, 16ths 3, 6, 9
+[patterns.l2_hook]
+zap = [
+  "r w",
+  "r e C6@0.81 e r s Eb5@0.72 e r s F5@0.77 e r q.",
+  "r w",
+  "r e C6@0.81 e r s Eb5@0.72 e r s F5@0.77 e r q.",
+  "r w",
+  "r e C6@0.81 e r s Eb5@0.72 e r s F5@0.77 e r q.",
+  "r w",
+  "r e C6@0.81 e r s Eb5@0.72 e r s F5@0.77 e r q.",
+]
+
+# THE BUILD: TRUNCATION once a bar (97-100), then the head of the SEQUENCE TO C (101-102), the filter opening
+[patterns.l1_build]
+glint = [
+  "Ab4@0.56 e. F5@0.66 e. Eb5@0.57 q Eb5~ s r q r s",
+  "Ab4@0.60 e. F5@0.71 e. Eb5@0.61 q Eb5~ s r q r s",
+  "Ab4@0.64 e. F5@0.76 e. Eb5@0.66 q Eb5~ s r q r s",
+  "Ab4@0.68 e. F5@0.81 e. Eb5@0.70 q Eb5~ s r q r s",
+  "C5@0.72 e. G5@0.77 e. Ab5@0.85 q Ab5~ s r q r s",
+  "C5@0.72 e. G5@0.77 e. Ab5@0.85 q Ab5~ s r q r s",
+]
+
+# SEGUE 2: TRUNCATION over the fill
+[patterns.l1_seg2]
+glint = [
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s r q r s",
+  "r w",
+]
+
+# SEGUE 2: zap alone after the glitch, the mirror's head (TRUNCATION) entering on beat 3, staccato, its echoes thrown
+[patterns.l2_seg2]
+zap = [
+  "r w",
+  "r h C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e",
+]
+
+# DROP 2: SEQUENCE TO C, its contour changed (a 5th up, a step up to A flat 5, a 4th down, D flat leaning on C); the fourth cell its head's DIMINUTION
+[patterns.l1_seqc]
+glint = [
+  "C5@0.80 e. G5@0.86 e. Ab5<-2%0.05!0.3@0.95 q Ab5~ s Eb5@0.62 s Db5@0.80 e C5@0.72 e",
+  "r w",
+  "C5@0.80 e. G5@0.86 e. Ab5<-2%0.05!0.3@0.95 q Ab5~ s Eb5@0.62 s Db5@0.80 e C5@0.72 e",
+  "r w",
+  "C5@0.80 e. G5@0.86 e. Ab5<-2%0.05!0.3@0.95 q Ab5~ s Eb5@0.62 s Db5@0.80 e C5@0.72 e",
+  "r w",
+  "C5@0.80 s G5@0.86 e Ab5<-2%0.05!0.3@0.85 s C5@0.80 s G5@0.86 e Ab5<-2%0.05!0.3@0.95 q Eb5@0.62 s Db5@0.80 e C5@0.72 e",
+  "r w",
+]
+
+# DROP 2, its second eight: the SEQUENCE TO C; the fourth cell in a new rhythm, straight 8ths after the leap
+[patterns.l1_seqc2]
+glint = [
+  "C5@0.80 e. G5@0.86 e. Ab5<-2%0.05!0.3@0.95 q Ab5~ s Eb5@0.62 s Db5@0.80 e C5@0.72 e",
+  "r w",
+  "C5@0.80 e. G5@0.86 e. Ab5<-2%0.05!0.3@0.95 q Ab5~ s Eb5@0.62 s Db5@0.80 e C5@0.72 e",
+  "r w",
+  "C5@0.80 e. G5@0.86 e. Ab5<-2%0.05!0.3@0.95 q Ab5~ s Eb5@0.62 s Db5@0.80 e C5@0.72 e",
+  "r w",
+  "C5@0.80 e G5@0.86 q Ab5<-2%0.05!0.3@0.95 e Eb5@0.62 e Db5@0.80 e C5@0.72 q",
+  "r w",
+]
+
+# DROP 2: zap's syncopated answer in each second bar: the mirror's head DISPLACED BY AN 8TH (16ths 3, 6, 9), then its last two (B flat, C6) on 13 and 15
+[patterns.l2_sync]
+zap = [
+  "r w",
+  "r e C6@0.85 e r s Eb5@0.76 e r s F5@0.81 e r e Bb5@0.78 e C6@0.81 e",
+  "r w",
+  "r e C6@0.85 e r s Eb5@0.76 e r s F5@0.81 e r e Bb5@0.78 e C6@0.81 e",
+  "r w",
+  "r e C6@0.85 e r s Eb5@0.76 e r s F5@0.81 e r e Bb5@0.78 e C6@0.81 e",
+  "r w",
+  "r e C6@0.85 e r s Eb5@0.76 e r s F5@0.81 e r e Bb5@0.78 e C6@0.81 e",
+]
+
+# CALL AND ANSWER on the sequence: its head (C5 G5 A flat 5); the fourth cell its DIMINUTION
+[patterns.l1_callc]
+glint = [
+  "C5@0.80 e. G5@0.86 e. Ab5<-2%0.05!0.3@0.95 q Ab5~ s r q r s",
+  "r w",
+  "C5@0.80 e. G5@0.86 e. Ab5<-2%0.05!0.3@0.95 q Ab5~ s r q r s",
+  "r w",
+  "C5@0.80 e. G5@0.86 e. Ab5<-2%0.05!0.3@0.95 q Ab5~ s r q r s",
+  "r w",
+  "C5@0.80 s G5@0.86 e Ab5<-2%0.05!0.3@0.85 s C5@0.80 s G5@0.86 e Ab5<-2%0.05!0.3@0.95 q Ab5~ s r q",
+  "r w",
+]
+
+# CALL AND ANSWER on the sequence: zap's mirror TRUNCATED before its last note, left hanging on the leaning B flat
+[patterns.l2_ansc]
+zap = [
+  "r w",
+  "C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.85 e r e",
+  "r w",
+  "C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.85 e r e",
+  "r w",
+  "C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.85 e r e",
+  "r w",
+  "C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.85 e r e",
+]
+
+# INVERSION OF THE LAST INTERVAL on the sequence: D flat up to E flat, so each cell ends open, asking; the fourth cell in straight 8ths
+[patterns.l1_inv]
+glint = [
+  "C5@0.80 e. G5@0.86 e. Ab5<-2%0.05!0.3@0.95 q Ab5~ s Eb5@0.62 s Db5@0.80 e Eb5@0.80 e",
+  "r w",
+  "C5@0.80 e. G5@0.86 e. Ab5<-2%0.05!0.3@0.95 q Ab5~ s Eb5@0.62 s Db5@0.80 e Eb5@0.80 e",
+  "r w",
+  "C5@0.80 e. G5@0.86 e. Ab5<-2%0.05!0.3@0.95 q Ab5~ s Eb5@0.62 s Db5@0.80 e Eb5@0.80 e",
+  "r w",
+  "C5@0.80 e G5@0.86 q Ab5<-2%0.05!0.3@0.95 e Eb5@0.62 e Db5@0.80 e Eb5@0.80 q",
+  "r w",
+]
+
+# INVERSION OF THE LAST INTERVAL on the answer: the mirror closes down (B flat to A flat) where the call ended open
+[patterns.l2_inv]
+zap = [
+  "r w",
+  "C6@0.85 e r s Eb5@0.76 e r s F5@0.81 e r e. Ab5@0.62 s Bb5@0.78 e Ab5@0.76 e",
+  "r w",
+  "C6@0.85 e r s Eb5@0.76 e r s F5@0.81 e r e. Ab5@0.62 s Bb5@0.78 e Ab5@0.76 e",
+  "r w",
+  "C6@0.85 e r s Eb5@0.76 e r s F5@0.81 e r e. Ab5@0.62 s Bb5@0.78 e Ab5@0.76 e",
+  "r w",
+  "C6@0.85 e r s Eb5@0.76 e r s F5@0.81 e r e. Ab5@0.62 s Bb5@0.78 e Ab5@0.76 e",
+]
+
+# THE CLIMAX: SEQUENCE TO E FLAT in three cells, B flat 5 its high point; the fourth its contour lifted to C6, the glint's highest note
+[patterns.l1_climax]
+glint = [
+  "Eb5@0.85 e. Bb5<-3%0.07!0.35@1.00 e. Ab5@0.88 q Ab5~ s F5@0.66 s Db5@0.82 e Eb5@0.80 e",
+  "r w",
+  "Eb5@0.85 e. Bb5<-3%0.07!0.35@1.00 e. Ab5@0.88 q Ab5~ s F5@0.66 s Db5@0.82 e Eb5@0.80 e",
+  "r w",
+  "Eb5@0.85 e. Bb5<-3%0.07!0.35@1.00 e. Ab5@0.88 q Ab5~ s F5@0.66 s Db5@0.82 e Eb5@0.80 e",
+  "r w",
+  "Eb5@0.85 e. C6<-3%0.07!0.35@1.00 e. Bb5@0.90 q Bb5~ s Ab5@0.68 s F5@0.82 e Eb5@0.80 e",
+  "r w",
+]
+
+# THE CLIMAX: zap answers ABOVE it, the mirror from C6 and back up to C6, in each second bar
+[patterns.l2_climax]
+zap = [
+  "r w",
+  "C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.82 e C6@0.85 e",
+  "r w",
+  "C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.82 e C6@0.85 e",
+  "r w",
+  "C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.82 e C6@0.85 e",
+  "r w",
+  "C6@0.90 e r s Eb5@0.80 e r s F5@0.85 e r e. Ab5@0.65 s Bb5@0.82 e C6@0.85 e",
+]
+
+# THE CLIMAX: the epic pad's top voice doubling the high point, B flat 5 held each cell; C6 with the glint's in the fourth
+[patterns.top_cl]
+auratop = [
+  "r e. Bb5@0.85 h. Bb5~ s",
+  "Bb5~ w",
+  "r e. Bb5@0.85 h. Bb5~ s",
+  "Bb5~ w",
+  "r e. Bb5@0.85 h. Bb5~ s",
+  "Bb5~ w",
+  "r e. C6@0.9 h. C6~ s",
+  "Bb5@0.85 w",
+]
+
+# HOME: EXACT REPETITION of the motif, three cells; at 151 the TRUNCATION, into the tape stop
+[patterns.l1_home]
+glint = [
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s C5@0.62 s Bb4@0.80 e Ab4@0.70 e",
+  "r w",
+  "Ab4@0.80 e. F5<-2%0.05!0.3@0.95 e. Eb5@0.82 q Eb5~ s r q r s",
+  "r w",
+]
+
+# a riser over two bars
+[patterns.riser2]
+riser = [
+  "F4@0.8 w",
+  "F4~ w",
+]
+
+# a crash backwards into the next bar's downbeat
+[patterns.rcrash]
+rcrash = ".x"
+
+# a crash on the downbeat
+[patterns.crash]
+crash = "x"
+
+# the impact
+[patterns.impact]
+impact = "x"
+
+# GLITCH: the tail's last note resampled, stuttered in 32nds, stepping down the tail
+[patterns.ch_echo]
+chC = "C4@0.90 t C4@0.84 t C4@0.78 t Bb3@0.72 t Bb3@0.66 t Ab3@0.60 t Ab3@0.54 t G3@0.48 t r h."
+
+# GLITCH: the same stepping up, a question
+[patterns.ch_echo_up]
+chC = "C4@0.90 t C4@0.84 t Db4@0.78 t Db4@0.72 t Eb4@0.66 t Eb4@0.60 t F4@0.54 t G4@0.48 t r h."
+
+# GLITCH: the zap's tail resampled and played backwards over the bar's last two beats
+[patterns.ch_rev]
+chR = "r h C4@0.85 h"
+
+# SEGUE 1, the glitch: the fill's last beat resampled, stuttered in 16ths then 32nds, rising; the pad chop backwards into the epic pad
+[patterns.ch_seg1]
+chF = "C4@0.95 s C4@0.8 s D4@0.85 t D4@0.7 t Eb4@0.85 t Eb4@0.7 t F4@0.9 t F4@0.75 t G4@0.9 t Ab4@0.8 t C5@0.9 s r h r s"
+chPr = "r h C4@0.9 h"
+
+# SEGUE 2, the glitch: the fill's last beat resampled, stuttered and falling; the pad chop cut on 16ths over it
+[patterns.ch_seg2]
+chF = "C4@0.95 t C4@0.8 t C4@0.9 t Bb3@0.8 t Ab3@0.9 t Ab3@0.75 t F3@0.85 t F3@0.7 t Eb3@0.8 s C3@0.75 s C3@0.6 t C3@0.5 t r h r s"
+chP = "C4@0.8 s r s C4@0.7 s C4@0.6 s r s Eb4@0.7 s C4@0.6 s r h r s"
+
+# GLITCH: the pad chop in 16ths over the bar's last beat, stepping up the field
+[patterns.ch_pad]
+chP = "r h. C4@0.7 s Eb4@0.7 s G4@0.75 s C5@0.8 s"
+
+[arrangement]
+"1-8" = ["field_dark"]
+"1-32" = ["wind"]
+"9-16" = ["dr_top"]
+"9-24" = ["l1_hint"]
+"9-72" = ["field"]
+"17-24" = ["dr_half"]
+"17-32" = ["growl_only"]
+"24" = ["ch_rev"]
+"25-32" = ["dr_build1", "l1_hint2"]
+"31-32" = ["riser2"]
+"32" = ["rcrash", "ch_rev"]
+"33" = ["crash", "impact"]
+"33-40" = ["l1_state"]
+"33-48" = ["dr_d1a"]
+"33-72" = ["bass"]
+"41-48" = ["l1_state_b", "l2_hint"]
+"48" = ["ch_echo"]
+"49" = ["crash"]
+"49-56" = ["dr_d1b", "l1_call", "l2_ans"]
+"57-64" = ["dr_d1c", "l1_disp", "l2_ansd"]
+"65" = ["crash"]
+"65-70" = ["dr_d1d"]
+"65-72" = ["l1_state2", "l2_climb"]
+"71-72" = ["dr_seg1"]
+"72" = ["rcrash", "ch_seg1"]
+"73-80" = ["top_aug"]
+"73-96" = ["aurora"]
+"73-104" = ["wind"]
+"81-88" = ["l1_augcall", "l2_augans"]
+"81-104" = ["field"]
+"89-96" = ["dr_bdhalf", "l2_hook"]
+"89-104" = ["growl_only"]
+"97-102" = ["dr_build2", "l1_build"]
+"101-102" = ["riser2"]
+"103-104" = ["dr_seg2", "l1_seg2", "l2_seg2"]
+"104" = ["rcrash", "ch_seg2"]
+"105" = ["crash", "impact"]
+"105-112" = ["dr_d2a", "l1_seqc", "l2_sync"]
+"105-152" = ["bass"]
+"105-160" = ["field"]
+"113-120" = ["dr_d2a2", "l1_seqc2", "l2_sync"]
+"121" = ["crash"]
+"121-124" = ["dr_d2b"]
+"121-128" = ["l1_callc", "l2_ansc"]
+"125-126" = ["dr_d2half"]
+"127-128" = ["dr_d2back"]
+"128" = ["ch_echo_up"]
+"129-136" = ["dr_d2c", "l1_inv", "l2_inv"]
+"136" = ["rcrash"]
+"137" = ["crash", "impact"]
+"137-144" = ["dr_climax", "l1_climax", "l2_climax", "aurora_cl", "top_cl"]
+"143-144" = ["riser2"]
+"144" = ["ch_pad"]
+"145" = ["crash"]
+"145-152" = ["dr_home", "l1_home", "l2_ans"]
+"153-160" = ["dr_out1"]
+"153-168" = ["growl_only", "l1_hint"]
+"161-164" = ["dr_out2"]
+"161-168" = ["field_dark"]
+"161-176" = ["wind"]
+"168" = ["ch_pad"]
+"169-176" = ["field_end"]

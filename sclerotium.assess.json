@@ -1,0 +1,1183 @@
+{
+  "format": "daw-assess 1",
+  "against": "Scorb, 2004–2026",
+  "about": "Scorb's own tracks, from Scorby Snacks (2004) and the album Ipso Fvcto (2007) to Aecidium (2026): 30 s previews of 19 tracks.",
+  "references": [
+    "Scorby Snacks",
+    "Thundermental Redeux",
+    "Apophenia / Wobbly Matter",
+    "Angleterror",
+    "Pareidolia / Sol Invictus",
+    "Tower of Klorox",
+    "Aquiescence",
+    "P2P",
+    "Yodyssey",
+    "Pyrotechno",
+    "Stratagem",
+    "The Ploy",
+    "Fractalisman",
+    "Aentropy",
+    "Disturbulence",
+    "Aetherium",
+    "Antidots",
+    "Quagaars",
+    "Aecidium"
+  ],
+  "profile": {
+    "secs": 308.129,
+    "window": [
+      238.0,
+      12.0
+    ],
+    "bpm": 145.0,
+    "values": {
+      "air": -18.9,
+      "ambience": -16.5,
+      "correlation": 0.936,
+      "decay": null,
+      "evolution": 1.91,
+      "focus": 0.408,
+      "gaps_high": 28.9,
+      "gaps_low": 5.1,
+      "gaps_mid": 0.0,
+      "harmony": 0.03,
+      "hf_noise": 0.493,
+      "high": -14.7,
+      "himid": -8.2,
+      "loudness": -8.6,
+      "low": -3.1,
+      "lowmid": -8.6,
+      "micro_dyn": 4.3,
+      "mid": -9.0,
+      "motion": 3.13,
+      "onsets": 7.75,
+      "plr": 9.1,
+      "sub": -13.2,
+      "tempo": 145.0,
+      "tilt": -1.26,
+      "true_peak": 0.7,
+      "width_high": -11.3,
+      "width_low": -49.6,
+      "width_mid": -11.2
+    },
+    "tonal": [
+      -41.2,
+      -37.1,
+      -27.5,
+      -13.4,
+      -4.9,
+      -10.2,
+      -14.1,
+      -15.0,
+      -17.1,
+      -16.7,
+      -14.7,
+      -14.2,
+      -16.0,
+      -18.5,
+      -18.2,
+      -13.6,
+      -15.7,
+      -15.9,
+      -12.6,
+      -13.9,
+      -15.4,
+      -18.0,
+      -19.9,
+      -21.7,
+      -21.1,
+      -20.4,
+      -19.9,
+      -23.5,
+      -23.3,
+      -24.4
+    ]
+  },
+  "groups": [
+    {
+      "id": "master",
+      "title": "Loudness and dynamics"
+    },
+    {
+      "id": "tone",
+      "title": "Tonal balance"
+    },
+    {
+      "id": "stereo",
+      "title": "Stereo image"
+    },
+    {
+      "id": "groove",
+      "title": "Groove"
+    },
+    {
+      "id": "texture",
+      "title": "Sound design"
+    },
+    {
+      "id": "music",
+      "title": "Composition"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "loudness",
+      "group": "master",
+      "label": "Loudness",
+      "unit": "LUFS",
+      "about": "The integrated loudness (BS.1770) of the main section: set by the master's gain into its limiter.",
+      "low": "quieter",
+      "high": "louder",
+      "fine": "",
+      "value": -8.6,
+      "refs": {
+        "n": 19,
+        "min": -9.5,
+        "q1": -8.8,
+        "median": -8.2,
+        "q3": -7.9,
+        "max": -6.6
+      },
+      "verdict": "typical",
+      "delta": -0.4,
+      "outside": null,
+      "z": -0.6,
+      "concern": false
+    },
+    {
+      "id": "true_peak",
+      "group": "master",
+      "label": "True peak",
+      "unit": "dBTP",
+      "about": "The highest peak between samples over the whole track. Over −1 dBTP can clip once encoded.",
+      "low": "lower peaks",
+      "high": "hotter peaks",
+      "fine": "low",
+      "value": 0.7,
+      "refs": {
+        "n": 19,
+        "min": 0.0,
+        "q1": 0.3,
+        "median": 0.5,
+        "q3": 0.6,
+        "max": 2.5
+      },
+      "verdict": "range",
+      "delta": 0.2,
+      "outside": null,
+      "z": 0.9,
+      "concern": false
+    },
+    {
+      "id": "plr",
+      "group": "master",
+      "label": "Peak to loudness",
+      "unit": "dB",
+      "about": "The main section's true peak less its loudness: how hard the limiter and compressors hold the peaks down. Low is dense and squashed, high is open.",
+      "low": "more squashed",
+      "high": "more open",
+      "fine": "",
+      "value": 9.1,
+      "refs": {
+        "n": 19,
+        "min": 7.0,
+        "q1": 8.1,
+        "median": 8.6,
+        "q3": 9.4,
+        "max": 10.0
+      },
+      "verdict": "typical",
+      "delta": 0.5,
+      "outside": null,
+      "z": 0.52,
+      "concern": false
+    },
+    {
+      "id": "micro_dyn",
+      "group": "master",
+      "label": "Micro-dynamics",
+      "unit": "dB",
+      "about": "How far the level moves within a beat: the spread (10th to 90th percentile) of 25 ms K-weighted levels. Gates, ducking and short envelopes raise it; a hard limiter, pads and long tails lower it.",
+      "low": "flatter",
+      "high": "punchier",
+      "fine": "",
+      "value": 4.3,
+      "refs": {
+        "n": 19,
+        "min": 5.4,
+        "q1": 6.8,
+        "median": 8.4,
+        "q3": 9.6,
+        "max": 12.3
+      },
+      "verdict": "low",
+      "delta": -4.1,
+      "outside": -1.1,
+      "z": -1.98,
+      "concern": true
+    },
+    {
+      "id": "sub",
+      "group": "tone",
+      "label": "Sub, 18–45 Hz",
+      "unit": "dB",
+      "about": "The band's share of the main section's power (mid and side together), in dB: set by the level and EQ of what plays there.",
+      "low": "less sub",
+      "high": "more sub",
+      "fine": "",
+      "value": -13.2,
+      "refs": {
+        "n": 19,
+        "min": -24.7,
+        "q1": -16.3,
+        "median": -11.9,
+        "q3": -9.3,
+        "max": -7.2
+      },
+      "verdict": "typical",
+      "delta": -1.3,
+      "outside": null,
+      "z": -0.25,
+      "concern": false
+    },
+    {
+      "id": "low",
+      "group": "tone",
+      "label": "Lows, 45–112 Hz",
+      "unit": "dB",
+      "about": "The band's share of the main section's power (mid and side together), in dB: set by the level and EQ of what plays there.",
+      "low": "less low end",
+      "high": "more low end",
+      "fine": "",
+      "value": -3.1,
+      "refs": {
+        "n": 19,
+        "min": -3.4,
+        "q1": -2.3,
+        "median": -2.0,
+        "q3": -1.3,
+        "max": -1.1
+      },
+      "verdict": "range",
+      "delta": -1.1,
+      "outside": null,
+      "z": -1.48,
+      "concern": false
+    },
+    {
+      "id": "lowmid",
+      "group": "tone",
+      "label": "Low mids, 112–355 Hz",
+      "unit": "dB",
+      "about": "The band's share of the main section's power (mid and side together), in dB: set by the level and EQ of what plays there.",
+      "low": "thinner",
+      "high": "muddier",
+      "fine": "",
+      "value": -8.6,
+      "refs": {
+        "n": 19,
+        "min": -10.9,
+        "q1": -10.1,
+        "median": -9.3,
+        "q3": -8.5,
+        "max": -6.5
+      },
+      "verdict": "typical",
+      "delta": 0.7,
+      "outside": null,
+      "z": 0.59,
+      "concern": false
+    },
+    {
+      "id": "mid",
+      "group": "tone",
+      "label": "Mids, 355 Hz–1.1 kHz",
+      "unit": "dB",
+      "about": "The band's share of the main section's power (mid and side together), in dB: set by the level and EQ of what plays there.",
+      "low": "hollower",
+      "high": "boxier",
+      "fine": "",
+      "value": -9.0,
+      "refs": {
+        "n": 19,
+        "min": -14.7,
+        "q1": -13.4,
+        "median": -12.1,
+        "q3": -11.6,
+        "max": -6.0
+      },
+      "verdict": "range",
+      "delta": 3.1,
+      "outside": null,
+      "z": 2.32,
+      "concern": false
+    },
+    {
+      "id": "himid",
+      "group": "tone",
+      "label": "Upper mids, 1.1–3.5 kHz",
+      "unit": "dB",
+      "about": "The band's share of the main section's power (mid and side together), in dB: set by the level and EQ of what plays there.",
+      "low": "less present",
+      "high": "harsher",
+      "fine": "",
+      "value": -8.2,
+      "refs": {
+        "n": 19,
+        "min": -18.7,
+        "q1": -15.3,
+        "median": -13.7,
+        "q3": -12.4,
+        "max": -10.3
+      },
+      "verdict": "high",
+      "delta": 5.5,
+      "outside": 2.1,
+      "z": 2.56,
+      "concern": true
+    },
+    {
+      "id": "high",
+      "group": "tone",
+      "label": "Highs, 3.5–8.9 kHz",
+      "unit": "dB",
+      "about": "The band's share of the main section's power (mid and side together), in dB: set by the level and EQ of what plays there.",
+      "low": "duller",
+      "high": "brighter",
+      "fine": "",
+      "value": -14.7,
+      "refs": {
+        "n": 19,
+        "min": -25.3,
+        "q1": -18.5,
+        "median": -15.7,
+        "q3": -15.2,
+        "max": -12.6
+      },
+      "verdict": "range",
+      "delta": 1.0,
+      "outside": null,
+      "z": 0.41,
+      "concern": false
+    },
+    {
+      "id": "air",
+      "group": "tone",
+      "label": "Air, 8.9–18 kHz",
+      "unit": "dB",
+      "about": "The band's share of the main section's power (mid and side together), in dB: set by the level and EQ of what plays there.",
+      "low": "less air",
+      "high": "more air",
+      "fine": "",
+      "value": -18.9,
+      "refs": {
+        "n": 19,
+        "min": -35.5,
+        "q1": -23.7,
+        "median": -20.2,
+        "q3": -18.8,
+        "max": -15.9
+      },
+      "verdict": "typical",
+      "delta": 1.3,
+      "outside": null,
+      "z": 0.36,
+      "concern": false
+    },
+    {
+      "id": "tilt",
+      "group": "tone",
+      "label": "Tilt",
+      "unit": "dB/oct",
+      "about": "The slope of a line through the third-octave spectrum from 50 Hz to 10 kHz: how dark or bright the whole balance is.",
+      "low": "darker",
+      "high": "brighter",
+      "fine": "",
+      "value": -1.26,
+      "refs": {
+        "n": 19,
+        "min": -3.37,
+        "q1": -2.29,
+        "median": -1.97,
+        "q3": -1.66,
+        "max": -1.31
+      },
+      "verdict": "high",
+      "delta": 0.71,
+      "outside": 0.05,
+      "z": 1.52,
+      "concern": true
+    },
+    {
+      "id": "correlation",
+      "group": "stereo",
+      "label": "Correlation",
+      "unit": "",
+      "about": "Left against right over the main section: 1 is mono, 0 unrelated, below 0 out of phase.",
+      "low": "wider",
+      "high": "narrower",
+      "fine": "",
+      "value": 0.936,
+      "refs": {
+        "n": 19,
+        "min": 0.804,
+        "q1": 0.927,
+        "median": 0.94,
+        "q3": 0.97,
+        "max": 0.991
+      },
+      "verdict": "typical",
+      "delta": -0.004,
+      "outside": null,
+      "z": -0.13,
+      "concern": false
+    },
+    {
+      "id": "width_low",
+      "group": "stereo",
+      "label": "Width, lows",
+      "unit": "dB",
+      "about": "Side less mid below 112 Hz. The kick and bass belong in the middle, so this should be far down.",
+      "low": "narrower",
+      "high": "wider",
+      "fine": "low",
+      "value": -49.6,
+      "refs": {
+        "n": 19,
+        "min": -60.0,
+        "q1": -53.9,
+        "median": -51.6,
+        "q3": -43.1,
+        "max": -29.0
+      },
+      "verdict": "typical",
+      "delta": 2.0,
+      "outside": null,
+      "z": 0.25,
+      "concern": false
+    },
+    {
+      "id": "width_mid",
+      "group": "stereo",
+      "label": "Width, mids",
+      "unit": "dB",
+      "about": "Side less mid from 112 Hz to 1.8 kHz: chords, leads and their reverb.",
+      "low": "narrower",
+      "high": "wider",
+      "fine": "",
+      "value": -11.2,
+      "refs": {
+        "n": 19,
+        "min": -20.5,
+        "q1": -12.4,
+        "median": -9.0,
+        "q3": -7.4,
+        "max": -5.5
+      },
+      "verdict": "typical",
+      "delta": -2.2,
+      "outside": null,
+      "z": -0.59,
+      "concern": false
+    },
+    {
+      "id": "width_high",
+      "group": "stereo",
+      "label": "Width, highs",
+      "unit": "dB",
+      "about": "Side less mid from 1.8 to 18 kHz: hats, air, reverb and delay returns, wideners.",
+      "low": "narrower",
+      "high": "wider",
+      "fine": "",
+      "value": -11.3,
+      "refs": {
+        "n": 19,
+        "min": -17.6,
+        "q1": -10.5,
+        "median": -8.3,
+        "q3": -6.8,
+        "max": -4.4
+      },
+      "verdict": "range",
+      "delta": -3.0,
+      "outside": null,
+      "z": -1.09,
+      "concern": false
+    },
+    {
+      "id": "tempo",
+      "group": "groove",
+      "label": "Tempo",
+      "unit": "BPM",
+      "about": "The beat the bar-wise numbers use: a song's own, or for a recording its kick's (95 to 190 BPM, from how its rises in the lows line up a beat, two and four apart).",
+      "low": "slower",
+      "high": "faster",
+      "fine": "",
+      "value": 145.0,
+      "refs": {
+        "n": 19,
+        "min": 132.2,
+        "q1": 144.2,
+        "median": 145.1,
+        "q3": 146.9,
+        "max": 148.2
+      },
+      "verdict": "typical",
+      "delta": -0.1,
+      "outside": null,
+      "z": -0.05,
+      "concern": false
+    },
+    {
+      "id": "onsets",
+      "group": "groove",
+      "label": "Onsets",
+      "unit": "/s",
+      "about": "Attacks a second in the main section (peaks of the spectral flux): how busy the rhythm is.",
+      "low": "sparser",
+      "high": "busier",
+      "fine": "",
+      "value": 7.75,
+      "refs": {
+        "n": 19,
+        "min": 5.33,
+        "q1": 6.38,
+        "median": 7.08,
+        "q3": 7.96,
+        "max": 8.75
+      },
+      "verdict": "typical",
+      "delta": 0.67,
+      "outside": null,
+      "z": 0.57,
+      "concern": false
+    },
+    {
+      "id": "gaps_low",
+      "group": "groove",
+      "label": "Holes, lows",
+      "unit": "%",
+      "about": "The share of 5 ms frames whose 30–200 Hz level (mid) is over 20 dB under its loud level (95th percentile): the room the kick and bass leave each other.",
+      "low": "fewer holes",
+      "high": "more holes",
+      "fine": "",
+      "value": 5.1,
+      "refs": {
+        "n": 19,
+        "min": 1.3,
+        "q1": 4.5,
+        "median": 8.4,
+        "q3": 13.9,
+        "max": 33.7
+      },
+      "verdict": "typical",
+      "delta": -3.3,
+      "outside": null,
+      "z": -0.47,
+      "concern": false
+    },
+    {
+      "id": "gaps_mid",
+      "group": "groove",
+      "label": "Holes, mids",
+      "unit": "%",
+      "about": "The same for 300 Hz–3 kHz: gates and short notes open holes; pads, reverb and delay fill them.",
+      "low": "fewer holes",
+      "high": "more holes",
+      "fine": "",
+      "value": 0.0,
+      "refs": {
+        "n": 19,
+        "min": 0.0,
+        "q1": 0.0,
+        "median": 0.3,
+        "q3": 5.8,
+        "max": 29.5
+      },
+      "verdict": "typical",
+      "delta": -0.3,
+      "outside": null,
+      "z": -0.07,
+      "concern": false
+    },
+    {
+      "id": "gaps_high",
+      "group": "groove",
+      "label": "Holes, highs",
+      "unit": "%",
+      "about": "The same for 5–16 kHz: hats and noise against silence.",
+      "low": "fewer holes",
+      "high": "more holes",
+      "fine": "",
+      "value": 28.9,
+      "refs": {
+        "n": 19,
+        "min": 1.8,
+        "q1": 9.3,
+        "median": 15.3,
+        "q3": 23.4,
+        "max": 75.7
+      },
+      "verdict": "range",
+      "delta": 13.6,
+      "outside": null,
+      "z": 1.3,
+      "concern": false
+    },
+    {
+      "id": "decay",
+      "group": "texture",
+      "label": "Decay",
+      "unit": "ms",
+      "about": "How long 1–6 kHz takes to fall 20 dB after a hit, from the slope of each fall before the next hit, the median: the most frequent hits' envelopes and whatever rings after them.",
+      "low": "shorter",
+      "high": "longer",
+      "fine": "",
+      "value": null,
+      "refs": {
+        "n": 19,
+        "min": 19.0,
+        "q1": 69.0,
+        "median": 107.0,
+        "q3": 131.0,
+        "max": 164.0
+      },
+      "verdict": "unmeasured",
+      "delta": null,
+      "outside": null,
+      "z": null,
+      "concern": false
+    },
+    {
+      "id": "ambience",
+      "group": "texture",
+      "label": "Ambience",
+      "unit": "dB",
+      "about": "The side's quiet level in 1–6 kHz (its 25th percentile over 5 ms frames) under the mid's loud level (95th): the diffuse sound that stays between the hits, from reverb, stereo delays and wide pads. Low is dry.",
+      "low": "drier",
+      "high": "wetter",
+      "fine": "",
+      "value": -16.5,
+      "refs": {
+        "n": 19,
+        "min": -33.1,
+        "q1": -19.9,
+        "median": -14.6,
+        "q3": -12.6,
+        "max": -10.1
+      },
+      "verdict": "typical",
+      "delta": -1.9,
+      "outside": null,
+      "z": -0.35,
+      "concern": false
+    },
+    {
+      "id": "motion",
+      "group": "texture",
+      "label": "Motion",
+      "unit": "dB",
+      "about": "How much the spectrum changes in 20 ms: the mean change of six octave bands from 250 Hz to 16 kHz, the median over loud frames. Filter movement, modulation and cuts raise it.",
+      "low": "more static",
+      "high": "more motion",
+      "fine": "",
+      "value": 3.13,
+      "refs": {
+        "n": 19,
+        "min": 2.79,
+        "q1": 3.21,
+        "median": 3.57,
+        "q3": 3.79,
+        "max": 4.45
+      },
+      "verdict": "range",
+      "delta": -0.44,
+      "outside": null,
+      "z": -1.02,
+      "concern": false
+    },
+    {
+      "id": "hf_noise",
+      "group": "texture",
+      "label": "Noise in the highs",
+      "unit": "",
+      "about": "The flatness of 4–16 kHz (the median of 50 ms frames): 1 for noise, near 0 for tones. Hats, cymbals and noise sweeps raise it; bright synths lower it.",
+      "low": "more tonal",
+      "high": "noisier",
+      "fine": "",
+      "value": 0.493,
+      "refs": {
+        "n": 19,
+        "min": 0.0,
+        "q1": 0.441,
+        "median": 0.554,
+        "q3": 0.611,
+        "max": 0.702
+      },
+      "verdict": "typical",
+      "delta": -0.061,
+      "outside": null,
+      "z": -0.48,
+      "concern": false
+    },
+    {
+      "id": "evolution",
+      "group": "music",
+      "label": "Bar to bar",
+      "unit": "dB",
+      "about": "How much each bar differs from the one before, 16th by 16th and octave by octave: the mean change of the loud cells, against an exact loop's 0. Automation, variations, fills and new parts raise it.",
+      "low": "more repetitive",
+      "high": "more varied",
+      "fine": "",
+      "value": 1.91,
+      "refs": {
+        "n": 19,
+        "min": 0.69,
+        "q1": 1.3,
+        "median": 1.75,
+        "q3": 2.17,
+        "max": 4.34
+      },
+      "verdict": "typical",
+      "delta": 0.16,
+      "outside": null,
+      "z": 0.25,
+      "concern": false
+    },
+    {
+      "id": "harmony",
+      "group": "music",
+      "label": "Harmonic motion",
+      "unit": "",
+      "about": "How far the chroma moves from bar to bar (1 less the cosine of consecutive bars' chroma): 0 for a pedal on one note.",
+      "low": "more static",
+      "high": "more moving",
+      "fine": "",
+      "value": 0.03,
+      "refs": {
+        "n": 19,
+        "min": 0.001,
+        "q1": 0.004,
+        "median": 0.01,
+        "q3": 0.031,
+        "max": 0.114
+      },
+      "verdict": "typical",
+      "delta": 0.02,
+      "outside": null,
+      "z": 1.0,
+      "concern": false
+    },
+    {
+      "id": "focus",
+      "group": "music",
+      "label": "Tonal focus",
+      "unit": "",
+      "about": "The share of the main section's chroma on its three strongest pitch classes: high for a riff on a few notes over a root, lower for chromatic or noisy material.",
+      "low": "more chromatic",
+      "high": "more focused",
+      "fine": "",
+      "value": 0.408,
+      "refs": {
+        "n": 19,
+        "min": 0.349,
+        "q1": 0.392,
+        "median": 0.409,
+        "q3": 0.435,
+        "max": 0.454
+      },
+      "verdict": "typical",
+      "delta": -0.001,
+      "outside": null,
+      "z": -0.03,
+      "concern": false
+    }
+  ],
+  "tonal": [
+    {
+      "hz": 20.0,
+      "value": -41.2,
+      "refs": {
+        "n": 19,
+        "min": -51.1,
+        "q1": -44.9,
+        "median": -38.0,
+        "q3": -34.3,
+        "max": -24.2
+      }
+    },
+    {
+      "hz": 25.1,
+      "value": -37.1,
+      "refs": {
+        "n": 19,
+        "min": -46.3,
+        "q1": -37.4,
+        "median": -33.1,
+        "q3": -29.0,
+        "max": -23.3
+      }
+    },
+    {
+      "hz": 31.6,
+      "value": -27.5,
+      "refs": {
+        "n": 19,
+        "min": -34.0,
+        "q1": -25.9,
+        "median": -19.5,
+        "q3": -17.2,
+        "max": -11.1
+      }
+    },
+    {
+      "hz": 39.8,
+      "value": -13.4,
+      "refs": {
+        "n": 19,
+        "min": -25.3,
+        "q1": -16.8,
+        "median": -12.5,
+        "q3": -10.8,
+        "max": -8.1
+      }
+    },
+    {
+      "hz": 50.1,
+      "value": -4.9,
+      "refs": {
+        "n": 19,
+        "min": -13.3,
+        "q1": -9.6,
+        "median": -8.6,
+        "q3": -7.3,
+        "max": -6.0
+      }
+    },
+    {
+      "hz": 63.1,
+      "value": -10.2,
+      "refs": {
+        "n": 19,
+        "min": -8.6,
+        "q1": -7.2,
+        "median": -6.3,
+        "q3": -5.9,
+        "max": -4.5
+      }
+    },
+    {
+      "hz": 79.4,
+      "value": -14.1,
+      "refs": {
+        "n": 19,
+        "min": -10.9,
+        "q1": -8.2,
+        "median": -7.7,
+        "q3": -7.1,
+        "max": -5.2
+      }
+    },
+    {
+      "hz": 100.0,
+      "value": -15.0,
+      "refs": {
+        "n": 19,
+        "min": -14.0,
+        "q1": -11.2,
+        "median": -10.7,
+        "q3": -9.7,
+        "max": -7.5
+      }
+    },
+    {
+      "hz": 125.9,
+      "value": -17.1,
+      "refs": {
+        "n": 19,
+        "min": -17.2,
+        "q1": -13.6,
+        "median": -13.1,
+        "q3": -12.0,
+        "max": -11.4
+      }
+    },
+    {
+      "hz": 158.5,
+      "value": -16.7,
+      "refs": {
+        "n": 19,
+        "min": -18.5,
+        "q1": -17.2,
+        "median": -16.5,
+        "q3": -14.9,
+        "max": -12.0
+      }
+    },
+    {
+      "hz": 199.5,
+      "value": -14.7,
+      "refs": {
+        "n": 19,
+        "min": -20.0,
+        "q1": -19.0,
+        "median": -18.1,
+        "q3": -17.8,
+        "max": -11.6
+      }
+    },
+    {
+      "hz": 251.2,
+      "value": -14.2,
+      "refs": {
+        "n": 19,
+        "min": -22.4,
+        "q1": -20.4,
+        "median": -19.2,
+        "q3": -17.9,
+        "max": -12.6
+      }
+    },
+    {
+      "hz": 316.2,
+      "value": -16.0,
+      "refs": {
+        "n": 19,
+        "min": -24.3,
+        "q1": -22.2,
+        "median": -19.6,
+        "q3": -18.1,
+        "max": -14.3
+      }
+    },
+    {
+      "hz": 398.1,
+      "value": -18.5,
+      "refs": {
+        "n": 19,
+        "min": -23.8,
+        "q1": -20.8,
+        "median": -19.8,
+        "q3": -17.5,
+        "max": -14.6
+      }
+    },
+    {
+      "hz": 501.2,
+      "value": -18.2,
+      "refs": {
+        "n": 19,
+        "min": -24.2,
+        "q1": -20.5,
+        "median": -19.2,
+        "q3": -18.2,
+        "max": -12.7
+      }
+    },
+    {
+      "hz": 631.0,
+      "value": -13.6,
+      "refs": {
+        "n": 19,
+        "min": -22.0,
+        "q1": -21.6,
+        "median": -20.5,
+        "q3": -18.9,
+        "max": -11.6
+      }
+    },
+    {
+      "hz": 794.3,
+      "value": -15.7,
+      "refs": {
+        "n": 19,
+        "min": -24.5,
+        "q1": -21.0,
+        "median": -19.7,
+        "q3": -17.8,
+        "max": -12.8
+      }
+    },
+    {
+      "hz": 1000.0,
+      "value": -15.9,
+      "refs": {
+        "n": 19,
+        "min": -25.1,
+        "q1": -22.2,
+        "median": -19.6,
+        "q3": -18.9,
+        "max": -13.6
+      }
+    },
+    {
+      "hz": 1258.9,
+      "value": -12.6,
+      "refs": {
+        "n": 19,
+        "min": -23.8,
+        "q1": -21.0,
+        "median": -19.8,
+        "q3": -18.6,
+        "max": -13.8
+      }
+    },
+    {
+      "hz": 1584.9,
+      "value": -13.9,
+      "refs": {
+        "n": 19,
+        "min": -24.5,
+        "q1": -21.5,
+        "median": -19.8,
+        "q3": -18.6,
+        "max": -16.3
+      }
+    },
+    {
+      "hz": 1995.3,
+      "value": -15.4,
+      "refs": {
+        "n": 19,
+        "min": -26.5,
+        "q1": -22.4,
+        "median": -20.9,
+        "q3": -19.5,
+        "max": -17.1
+      }
+    },
+    {
+      "hz": 2511.9,
+      "value": -18.0,
+      "refs": {
+        "n": 19,
+        "min": -27.6,
+        "q1": -23.5,
+        "median": -22.0,
+        "q3": -20.1,
+        "max": -18.6
+      }
+    },
+    {
+      "hz": 3162.3,
+      "value": -19.9,
+      "refs": {
+        "n": 19,
+        "min": -31.8,
+        "q1": -24.2,
+        "median": -22.8,
+        "q3": -21.3,
+        "max": -19.0
+      }
+    },
+    {
+      "hz": 3981.1,
+      "value": -21.7,
+      "refs": {
+        "n": 19,
+        "min": -28.9,
+        "q1": -24.1,
+        "median": -22.1,
+        "q3": -21.2,
+        "max": -18.4
+      }
+    },
+    {
+      "hz": 5011.9,
+      "value": -21.1,
+      "refs": {
+        "n": 19,
+        "min": -30.9,
+        "q1": -25.0,
+        "median": -22.4,
+        "q3": -21.3,
+        "max": -18.7
+      }
+    },
+    {
+      "hz": 6309.6,
+      "value": -20.4,
+      "refs": {
+        "n": 19,
+        "min": -32.2,
+        "q1": -26.6,
+        "median": -21.8,
+        "q3": -20.9,
+        "max": -17.9
+      }
+    },
+    {
+      "hz": 7943.3,
+      "value": -19.9,
+      "refs": {
+        "n": 19,
+        "min": -35.6,
+        "q1": -25.8,
+        "median": -21.9,
+        "q3": -20.7,
+        "max": -17.7
+      }
+    },
+    {
+      "hz": 10000.0,
+      "value": -23.5,
+      "refs": {
+        "n": 19,
+        "min": -37.6,
+        "q1": -26.5,
+        "median": -22.4,
+        "q3": -21.9,
+        "max": -18.6
+      }
+    },
+    {
+      "hz": 12589.3,
+      "value": -23.3,
+      "refs": {
+        "n": 19,
+        "min": -40.6,
+        "q1": -29.1,
+        "median": -25.3,
+        "q3": -23.5,
+        "max": -20.6
+      }
+    },
+    {
+      "hz": 15848.9,
+      "value": -24.4,
+      "refs": {
+        "n": 19,
+        "min": -46.8,
+        "q1": -34.9,
+        "median": -29.9,
+        "q3": -27.7,
+        "max": -24.8
+      }
+    }
+  ],
+  "counts": {
+    "typical": 17,
+    "range": 7,
+    "low": 1,
+    "high": 2,
+    "unmeasured": 1,
+    "concerns": 3
+  },
+  "nearest": [
+    {
+      "title": "Fractalisman",
+      "from": "Fractal Syndrome, 2013",
+      "distance": 1.22
+    },
+    {
+      "title": "Disturbulence",
+      "from": "Discombobulations, 2018",
+      "distance": 1.23
+    },
+    {
+      "title": "Stratagem",
+      "from": "Abra Macabre, 2009",
+      "distance": 1.24
+    }
+  ]
+}

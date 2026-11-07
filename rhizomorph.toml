@@ -1,0 +1,966 @@
+# Rhizomorph: three and a half minutes of dark full-on psytrance, the first track made after Sporadic's verdict,
+# on the DAW's newer parts: every sound but the ride, the clap and the crash programmed with the synth (F33), a
+# sidechain keyed by the kick's sound (F32), automation moving the sounds themselves (F34), an atmosphere made
+# for the space (F25: wind, a granular cloud, reversed crashes) and spaces of the DAW's own (F26: halls whose
+# tails move, a shimmer, a freeze, a reverse reverb before each call, a tape echo). 145 BPM, on F.
+#
+# What it does that Sporadic didn't (songs/reviews/sporadic.toml):
+# - one idea for each section, developed: the call (two bars, rests between its notes, an octave dive, a scoop
+#   into the flat third, the sharp fourth leaning into the fifth, a bend down from the flat seventh) stated,
+#   varied (rising to a two-octave dive), answered (by the acid in its rhythm), then taken apart (its first
+#   gesture alone, again and again, into the echoes); the second drop answers it in B flat major (F, F, Bb, Bb)
+# - builds of 16 and 8 bars: the snare roll from quarters to 32nds, a riser pitched up an octave, the echoes'
+#   feedback running away, the mix thinning from below; the bass taken out, then the kick, then the halls frozen
+#   on the last chord and a moment's silence before the drop
+# - the bass gets out of the kick's way: a short kick (gone by 100 ms) and a sidechain keyed by its sound; the
+#   bass's pluck lengthening over each section, its 16ths stopping at the ends of phrases, a gallop in drop 2
+# - an atmosphere always there: wind through two wandering bands and a hiss, louder where the parts thin; the
+#   call far off an octave down in its own hall and a cloud of grains; chords in a huge shimmering hall
+# - fewer, longer sounds: open hats and a few closed ones, a sustained haze in the mids under the drops
+#
+#   1-8     the bed: wind, Fm7, Dbmaj7, Fm7 and Bbm9 in the shimmering hall, chirps far off, the call far off
+#   9-24    the groove: the kick, hats from 13, the bass from 13 (its filter opening), claps, the acid and the
+#           haze from 17, the call far off again from 21
+#   25-40   the first build: the call teased under a closed filter; from 33 the roll, the riser and the pad;
+#           the bass out from 35, the kick out from 39; the halls frozen in 40, then silence
+#   41-72   the first drop: the call stated, varied, answered by the acid, taken apart (41-56); then with a
+#           ride, the squeaks answering, the acid under it, the call running on into four bars (57-72)
+#   73-80   the break: no kick, Dbmaj7, Bbm9, Eb, Eb7, Fsus4, F; the call slowed down on a whistle
+#   81-88   the second build, into a freeze and a silence
+#   89-120  the second drop: the bass galloping on F, F, Bb, Bb, half time every 8th bar; the call answered in
+#           B flat major by the sync lead, which then doubles it an octave up (105-120)
+#   121-128 the groove thinning out, the call far off, a tape stop
+format = "daw-song 1"
+title = "Rhizomorph"
+publish = true
+tempo = 145
+meter = "4/4"
+seed = 41
+
+[instruments]
+kick = { synth = "kick", gain = 4, bus = "punch" }
+bass = { synth = "roll", gain = 1.5, bus = "bass" }
+hat = { synth = "hat", base = "F6", gain = 4, pan = 0.2, bus = "drums" }
+ohat = { synth = "ohat", base = "F6", gain = 2, pan = -0.1, bus = "drums" }
+ride = { sound = "ride", gain = -12, pan = 0.3, bus = "drums", cut = true, release = 0.3 }
+clap = { sound = "clap", gain = -10, bus = "drums" }
+crash = { sound = "crash", gain = -15, bus = "drums" }
+rcrash = { sound = "crash", gain = -13, bus = "drums", reverse = true }
+impact = { sound = "impact", gain = -10 }
+snare = { synth = "snare", base = "D3", bus = "roll" }
+fillsn = { synth = "snare", base = "D3", gain = -6, bus = "drums" }
+call = { synth = "call", gain = 3, bus = "call", glide = 0.05 }
+rip = { synth = "rip", bus = "call", gain = 1, glide = 0.05 }
+ripup = { synth = "rip", bus = "call", gain = -3, octave = 1, glide = 0.05 }
+farcall = { synth = "call", bus = "far", octave = -1, glide = 0.05 }
+acid = { synth = "acid", gain = -3.5, bus = "acid", glide = 0.06 }
+chirp = { synth = "chirp", bus = "squeak" }
+bloop = { synth = "bloop", bus = "squeak" }
+haze = { synth = "haze", gain = -3, bus = "pads" }
+pad = { synth = "pad", gain = -10, bus = "pads" }
+whistle = { synth = "whistle", gain = -6, bus = "whistle", glide = 0.2, vibrato = { depth = 0.25, rate = 5, delay = 0.4 } }
+wind = { synth = "wind", gain = 4, bus = "air" }
+air = { synth = "air", bus = "air", gain = -8 }
+riser = { synth = "riser", bus = "build" }
+fall = { synth = "fall", bus = "build" }
+
+# --- the drums ---------------------------------------------------------------------------------------------
+
+# a sine swept down from 2 kHz to the note in two falls, saturated, with a click of noise; held 45 ms and gone
+# by 95 ms, before the bass's first 16th (103 ms)
+[synths.kick]
+osc = [
+  { wave = "sine", to = "dry" },
+  { wave = "noise", level = -66 },
+]
+filter = { type = "high12", cutoff = 3000 }
+shape = { drive = 3 }
+level = -2.5
+env = [
+  { attack = 0.0006, hold = 0.045, decay = 0.05, curve = -1 },   # env1: the amp
+  { decay = 0.03, curve = 6 },                                    # env2: the click's sweep
+  { decay = 0.11, curve = 6 },                                    # env3: the body's
+  { decay = 0.008 },                                              # env4: the click
+]
+mod = [
+  ["env2", "pitch", 36],
+  ["env3", "pitch", 30],
+  ["env4", "osc2.level", 60],
+  ["env3", "level", 2.5],
+]
+
+# a closed hat: noise and two pulses a tritone and some cents apart, through a high band; each a little
+# different (its cutoff and level at random)
+[synths.hat]
+osc = [
+  { wave = "noise", level = -5 },
+  { wave = "pulse", width = 0.4, level = -6 },
+  { wave = "pulse", width = 0.4, semi = 6, detune = 31, level = -8 },
+  { wave = "pulse", width = 0.5, semi = 15, detune = -17, level = -9, fm = 1.5, fm_by = 2 },
+]
+filter = { type = "high24", cutoff = 7500, resonance = 0.25 }
+level = -12
+env = [{ attack = 0.0005, decay = 0.05, curve = 4, release = 0.01 }]
+mod = [["random", "filter.cutoff", 0.25], ["random", "level", 1.5], ["velocity", "level", 6]]
+
+# the open hat: the same, ringing for 200 ms
+[synths.ohat]
+osc = [
+  { wave = "noise", level = -5 },
+  { wave = "pulse", width = 0.4, level = -6 },
+  { wave = "pulse", width = 0.4, semi = 6, detune = 31, level = -8 },
+  { wave = "pulse", width = 0.5, semi = 15, detune = -17, level = -9, fm = 1.5, fm_by = 2 },
+]
+filter = { type = "high24", cutoff = 6500, resonance = 0.3 }
+level = -12
+env = [{ attack = 0.002, decay = 0.2, curve = 3, release = 0.02 }]
+mod = [["random", "filter.cutoff", 0.2], ["velocity", "level", 6]]
+
+# a snare: a triangle dropping into its note, and noise through a band
+[synths.snare]
+osc = [
+  { wave = "triangle", level = -4, to = "dry" },
+  { wave = "noise" },
+]
+filter = { type = "band12", cutoff = 3500, resonance = 0.3 }
+level = -8
+env = [
+  { attack = 0.0005, decay = 0.13, curve = 4, release = 0.02 },
+  { decay = 0.025, curve = 4 },
+]
+mod = [["env2", "pitch", 10], ["velocity", "level", 8], ["velocity", "filter.cutoff", 1]]
+
+# --- the bass ----------------------------------------------------------------------------------------------
+
+# two saws 14 cents apart through a lowpass following the note, plucked open, and a sine at the note past it,
+# all saturated; an accent opens it further, and each note a little differently
+[synths.roll]
+osc = [
+  { wave = "saw", detune = 7, level = -2.5 },
+  { wave = "saw", detune = -7, level = -2.5, phase = 0.37 },
+  { wave = "sine", level = -1.5, to = "dry" },
+]
+filter = { type = "low24", cutoff = 785, resonance = 0.3, drive = 4 }
+shape = { drive = 5 }
+env = [
+  { attack = 0.0015, decay = 0.1, curve = -2, release = 0.012 },   # env1: the amp
+  { decay = 0.09, curve = 2 },                                     # env2: the pluck, longer as sections go on
+]
+mod = [
+  ["note", "filter.cutoff", 1],
+  ["env2", "filter.cutoff", 3.6],
+  ["velocity", "filter.cutoff", 1.2],
+  ["random", "filter.cutoff", 0.15],
+  ["env2", "pitch", 0.3],
+]
+
+# --- the call and its answers ------------------------------------------------------------------------------
+
+# the call: two saws and a pulse through a vowel that opens and closes in each note ("wow"), folded at its
+# start, a sine an octave down for weight; long notes chatter in 16ths
+[synths.call]
+osc = [
+  { wave = "saw", detune = 7 },
+  { wave = "saw", detune = -7, phase = 0.4 },
+  { wave = "pulse", width = 0.25, octave = 1, level = -8 },
+  { wave = "sine", octave = -1, level = -10, to = "dry" },
+]
+filter = { type = "formant", vowel = 3.6, resonance = 0.5 }
+filter2 = { type = "low12", cutoff = 4500, resonance = 0.1 }
+shape = { drive = 6, fold = 2, mix = 0.4 }
+level = -4
+env = [
+  { attack = 0.003, decay = 0.4, sustain = 0.75, release = 0.06 },  # env1: the amp
+  { attack = 0.04, decay = 0.22, curve = 2 },                       # env2: the vowel
+  { decay = 0.08, curve = 4 },                                      # env3: the fold
+]
+lfo = [{ shape = "triangle", rate = "s", delay = 0.15, fade = 0.2 }]
+mod = [
+  ["env2", "filter.vowel", -3.6],
+  ["lfo1", "filter.vowel", 0.4],
+  ["velocity", "filter.cutoff", 0.5],
+  ["env3", "shape.fold", 6],
+  ["env3", "pitch", 0.5],
+]
+
+# the answer in drop 2, and its double an octave up: a saw hard-synced to one it can't hear, the sync's pitch
+# falling over each note so its harmonics sweep, and a vibrato in it; a third saw for body
+[synths.rip]
+osc = [
+  { wave = "saw", mute = true },
+  { wave = "saw", sync = true, semi = 12 },
+  { wave = "saw", detune = 9, level = -6 },
+]
+filter = { type = "low24", cutoff = 2500, resonance = 0.35, drive = 6 }
+shape = { drive = 4 }
+level = -10
+env = [
+  { attack = 0.004, decay = 0.3, sustain = 0.7, release = 0.05 },
+  { decay = 0.3, curve = 2 },
+]
+lfo = [{ shape = "sine", rate = 5.5, delay = 0.2, fade = 0.2 }]
+mod = [
+  ["env2", "osc2.pitch", 14],
+  ["lfo1", "osc2.pitch", 3],
+  ["env2", "filter.cutoff", 1.5],
+  ["note", "filter.cutoff", 0.5],
+]
+
+# the acid: a saw and a square through a resonant, driven lowpass, plucked open; accents open it and ring it
+[synths.acid]
+osc = [{ wave = "saw" }, { wave = "pulse", width = 0.5, level = -8, detune = 4 }]
+filter = { type = "low24", cutoff = 320, resonance = 0.72, drive = 8 }
+shape = { drive = 6, asym = 0.25 }
+level = -8
+env = [
+  { attack = 0.002, decay = 0.25, sustain = 0.6, release = 0.02 },
+  { decay = 0.14, curve = 3 },
+]
+mod = [
+  ["env2", "filter.cutoff", 3.2],
+  ["velocity", "filter.cutoff", 1.4],
+  ["note", "filter.cutoff", 0.4],
+  ["velocity", "filter.resonance", 0.12],
+]
+
+# a chirp: a sine moved by one at a ratio drawn for each note, falling an octave as its FM dies
+[synths.chirp]
+osc = [
+  { wave = "sine", octave = 1, semi = 7, mute = true },
+  { wave = "sine", fm = 2.5, fm_by = 1 },
+]
+filter = { type = "high12", cutoff = 300 }
+level = -8
+env = [
+  { attack = 0.002, decay = 0.16, curve = 3, release = 0.03 },
+  { decay = 0.09, curve = 3 },
+]
+mod = [
+  ["env2", "pitch", 12],
+  ["env2", "osc2.fm", 5],
+  ["random", "pitch", 2],
+  ["random", "osc1.pitch", 7],
+]
+
+# a bloop: rising a fifth, its FM wobbling
+[synths.bloop]
+osc = [
+  { wave = "sine", octave = 1, mute = true },
+  { wave = "sine", fm = 1.5, fm_by = 1 },
+  { wave = "triangle", octave = -1, level = -8 },
+]
+filter = { type = "low12", cutoff = 2500, resonance = 0.5 }
+level = -9
+env = [
+  { attack = 0.003, decay = 0.25, curve = 2, release = 0.05 },
+  { attack = 0.12, attack_curve = -2 },
+]
+lfo = [{ shape = "sine", rate = 14 }]
+mod = [
+  ["env2", "pitch", 7],
+  ["lfo1", "osc2.fm", 2],
+  ["lfo1", "pitch", 0.4],
+  ["env1", "filter.cutoff", 1.5],
+]
+
+# --- the mids and the space --------------------------------------------------------------------------------
+
+# the haze under the drops: four saws spread wide and a breath of noise through a resonant band that wanders
+[synths.haze]
+osc = [
+  { wave = "saw", unison = { voices = 4, detune = 22, spread = 0.5 } },
+  { wave = "noise", level = -14 },
+]
+filter = { type = "band12", cutoff = 900, resonance = 0.45 }
+level = -10
+env = [{ attack = 0.8, release = 1.5 }]
+lfo = [
+  { shape = "smooth", rate = "w", free = true },
+  { shape = "triangle", rate = "2w", free = true },
+]
+mod = [["lfo1", "filter.cutoff", 1.2], ["lfo2", "filter.resonance", 0.2], ["lfo2", "pan", 0.3]]
+
+# the chords: five saws, a pulse an octave up and a sine an octave down, slowly opening and closing
+[synths.pad]
+osc = [
+  { wave = "saw", unison = { voices = 5, detune = 16, spread = 0.9 } },
+  { wave = "pulse", width = 0.35, octave = 1, level = -10, unison = { voices = 3, detune = 10, spread = 0.9 } },
+  { wave = "sine", octave = -1, level = -10 },
+]
+filter = { type = "low12", cutoff = 1100, resonance = 0.15 }
+level = -12
+env = [{ attack = 1.5, release = 3 }]
+lfo = [{ shape = "smooth", rate = "4w", free = true }]
+mod = [["lfo1", "filter.cutoff", 0.7]]
+
+# the break's whistle: a sine and a triangle, and breath through a band at the note
+[synths.whistle]
+osc = [
+  { wave = "sine", to = "dry" },
+  { wave = "triangle", octave = 1, level = -16, to = "dry" },
+  { wave = "noise", level = -8 },
+]
+filter = { type = "band12", cutoff = 262, resonance = 0.7 }
+level = -8
+env = [{ attack = 0.08, decay = 0.4, sustain = 0.8, release = 0.4 }]
+mod = [["note", "filter.cutoff", 1]]
+
+# wind: noise through two resonant bands side by side, each wandering on a random LFO, the gusts panning
+[synths.wind]
+osc = [{ wave = "noise" }]
+filter = { type = "band12", cutoff = 450, resonance = 0.75 }
+filter2 = { type = "band12", cutoff = 1300, resonance = 0.6 }
+filters = "parallel"
+level = -8
+env = [{ attack = 3, release = 4 }]
+lfo = [
+  { shape = "smooth", rate = "w", free = true },
+  { shape = "smooth", rate = "h.", free = true },
+]
+mod = [
+  ["lfo1", "filter.cutoff", 1.3],
+  ["lfo2", "filter2.cutoff", 1.1],
+  ["lfo1", "pan", 0.5],
+  ["lfo2", "level", 4],
+]
+
+# a hiss at the top, breathing
+[synths.air]
+osc = [{ wave = "noise" }]
+filter = { type = "high12", cutoff = 7000 }
+level = -20
+env = [{ attack = 2, release = 4 }]
+lfo = [{ shape = "smooth", rate = "2w", free = true }]
+mod = [["lfo1", "level", 6]]
+
+# noise and a wide saw up a bandpass, both rising over the whole note
+[synths.riser]
+osc = [
+  { wave = "noise" },
+  { wave = "saw", octave = -1, level = -10, unison = { voices = 5, detune = 30, spread = 0.8 } },
+]
+filter = { type = "band12", cutoff = 300, resonance = 0.5 }
+level = -10
+env = [
+  { attack = "note", attack_curve = -3, release = 0.05 },
+  { attack = "note", attack_curve = -2 },
+]
+mod = [["env2", "filter.cutoff", 5], ["env2", "pitch", 12]]
+
+# the same falling over its note
+[synths.fall]
+osc = [
+  { wave = "noise" },
+  { wave = "saw", level = -12, unison = { voices = 5, detune = 30, spread = 0.8 } },
+]
+filter = { type = "band12", cutoff = 300, resonance = 0.5 }
+level = -12
+env = [
+  { decay = "note", curve = 3 },
+  { decay = "note", curve = 2 },
+]
+mod = [["env2", "filter.cutoff", 5], ["env2", "pitch", 12]]
+
+# --- the returns -------------------------------------------------------------------------------------------
+
+[buses.room]                    # a small room for the drums
+hall = { size = 0.6, decay = 0.8, damp = 0.45, predelay = 0.004, early = 0.9, highpass = 300, width = 0.5, wet = 1, dry = 0 }
+eq = [{ hz = 450, gain = -3, q = 0.8 }, { type = "highshelf", hz = 6000, gain = -3 }]
+sidechain = { by = "kick", threshold = -10, ratio = 2, release = 0.1 }
+
+[buses.hall]                    # the leads' hall: long in the bed and the break, short in the drops
+hall = { size = 1.8, decay = 3.5, damp = 0.5, predelay = 0.025, mod = 0.4, highpass = 400, width = 0.8, wet = 1, dry = 0 }
+eq = [{ hz = 2800, gain = -2.5, q = 0.9 }, { type = "highshelf", hz = 5000, gain = -4 }]
+stereo = { cross = [400], width = [0, 1.15] }
+sidechain = { by = "kick", threshold = -12, ratio = 3, release = 0.15 }
+
+[buses.space]                   # the atmosphere's: huge, shimmering, frozen at the builds' ends
+hall = { size = 3.5, decay = 9, damp = 0.35, predelay = 0.05, early = 0.3, mod = 0.6, highpass = 450, shimmer = 0.25, width = 0.8, wet = 1, dry = 0 }
+eq = [{ hz = 2800, gain = -3, q = 0.8 }, { type = "highshelf", hz = 4500, gain = -4 }]
+stereo = { cross = [450], width = [0, 1.25] }
+sidechain = { by = "kick", threshold = -15, ratio = 2, release = 0.25 }
+
+[buses.echo]                    # a tape echo of dotted 8ths, wavering, each repeat darker; all wet
+tape = { time = "e.", feedback = 0.45, wow = 0.35, flutter = 0.12, drive = 6, tone = 3000, lowcut = 300, wet = 1, dry = 0 }
+stereo = { cross = [400], width = [0, 1.2] }
+sidechain = { by = "kick", threshold = -12, ratio = 3, release = 0.12 }
+send = { hall = 0.25 }
+
+[buses.cloud]                   # grains of what is sent, some an octave or a fifth off, some backwards
+filter = { highpass = 300 }
+grains = { size = 0.09, density = 24, spread = 1.5, intervals = [0, 0, 12, 7, -12], pitch = 0.05, reverse = 0.35, feedback = 0.45, wet = 1 }
+send = { space = 0.5 }
+
+# --- the low end: in the middle, dry, out of the kick's way ------------------------------------------------
+
+# the kick: its start sharpened, then clipped, so it holds less peak for its weight
+[buses.punch]
+transient = { attack = 3, length = 0.01 }
+drive = { type = "clip", gain = 3, level = -3 }
+
+# the bass: its pluck sharpened and its tail dried, through tape; its low mids out from under the call and
+# the haze, its fundamental up
+[buses.bass]
+transient = { attack = 3, sustain = -3, length = 0.012 }
+drive = { type = "tape", gain = 5, level = -3, asym = 0.15 }
+eq = [{ hz = 90, gain = 2, q = 0.9 }, { hz = 320, gain = -3.5, q = 1.1 }]
+width = { steps = [0] }
+sidechain = { by = "kick", threshold = -35, ratio = 8, knee = 6, attack = 0.0005, release = 0.012 }
+
+# --- the rest ----------------------------------------------------------------------------------------------
+
+[buses.drums]                   # hats, ride, claps, crashes, fills: snappier, less boxy
+transient = { attack = 5, sustain = -3, length = 0.008 }
+filter = { highpass = 180 }
+eq = [{ hz = 500, gain = -3, q = 1 }]
+sidechain = { by = "kick", threshold = -8, ratio = 2, release = 0.08 }
+send = { room = 0.25, hall = 0.06 }
+
+[buses.roll]                    # the builds' snare roll
+filter = { highpass = 200 }
+send = { hall = 0.35, echo = 0.2 }
+
+# the call: saturated, compressed, slowly flanged and doubled; a reverse reverb leading into each note; its
+# lowpass closed in the builds' teases
+[buses.call]
+transient = { attack = 4, length = 0.015 }
+drive = { type = "fold", gain = 2, level = -3, mix = 0.4 }
+filter = { highpass = 220, lowpass = 12000, q = 0 }
+eq = [{ hz = 450, gain = -2.5, q = 1 }, { hz = 2800, gain = 2, q = 0.9 }]
+compressor = { threshold = -20, ratio = 3, attack = 0.004, release = 0.1 }
+multiband = { depth = 0.35, output = -4 }
+flanger = { delay = 0.003, depth = 0.002, rate = 0.08, feedback = 0.3, wet = 0.15 }
+doubler = { delay = 0.011, depth = 0.0015, rate = 0.25, wet = 0.3 }
+swell = { size = 1.2, decay = 0.8, wet = 0.35 }
+sidechain = { by = "kick", threshold = -10, ratio = 2.5, release = 0.09 }
+send = { echo = 0.2, hall = 0.35, cloud = 0.1 }
+
+[buses.far]                     # the call far off: dark, mostly its own long hall, and grains of it
+filter = { highpass = 200, lowpass = 1400, q = 0 }
+hall = { size = 3, decay = 6, damp = 0.5, predelay = 0.06, mod = 0.6, wet = 1, dry = 0.25 }
+send = { cloud = 0.6, echo = 0.2 }
+
+[buses.acid]                    # to the left and right by 8ths; clipped, leant; out of the call's presence
+drive = { type = "clip", gain = 8, level = -8, asym = 0.2 }
+filter = { highpass = 120 }
+eq = [{ hz = 280, gain = -3, q = 0.8 }, { hz = 2800, gain = -1.5, q = 1.2 }]
+autopan = { steps = [-0.2, 0.15], step = "e", smooth = 0.02 }
+sidechain = { by = "kick", threshold = -12, ratio = 3, release = 0.08 }
+send = { echo = 0.25, hall = 0.15 }
+
+[buses.squeak]                  # thrown about each 16th, into the echoes and the cloud
+filter = { highpass = 400 }
+autopan = { steps = [-0.5, 0.4, -0.2, 0.6, -0.6, 0.2], step = "s" }
+sidechain = { by = "kick", threshold = -10, ratio = 2.5, release = 0.1 }
+send = { echo = 0.4, hall = 0.3, cloud = 0.3 }
+
+[buses.pads]                    # the haze and the chords, behind: darker, wide above the low mids, into the space
+filter = { highpass = 150 }
+eq = [{ hz = 300, gain = -3, q = 0.8 }, { hz = 2600, gain = -4, q = 0.7 }, { type = "highshelf", hz = 7000, gain = -3 }]
+stereo = { cross = [300], width = [0.3, 1.3] }
+chorus = { delay = 0.018, depth = 0.004, rate = 0.15, wet = 0.3 }
+sidechain = { by = "kick", threshold = -15, ratio = 3, release = 0.18 }
+send = { space = 0.5 }
+
+[buses.whistle]
+doubler = { delay = 0.013, depth = 0.002, rate = 0.2, wet = 0.5 }
+send = { space = 0.8, echo = 0.35, cloud = 0.3 }
+
+[buses.air]                     # wind and hiss: louder where the parts thin
+filter = { highpass = 150 }
+send = { space = 0.35 }
+
+[buses.build]                   # the risers and falls, pitched up over the builds' ends
+pitch = {}
+filter = { highpass = 150 }
+send = { hall = 0.4, echo = 0.15 }
+
+# --- the master, in stages: a little saturation, a slow compressor, then the limiter -----------------------
+
+[master]
+drive = { gain = 2, level = -2 }
+filter = { highpass = 25 }
+stereo = { cross = [110], width = [0, 1] }
+compressor = { threshold = -12, knee = 8, ratio = 1.6, attack = 0.03, release = 0.2 }
+limiter = { ceiling = -0.3, release = 0.1 }
+loudness = -8.8
+
+[master.stutter.bars]
+"40" = "xxxx xxxx xxxx xx.."
+"56" = "xxxx xxxx xxxx rrRR"
+"64" = "xxxx xxxx xxxx <<<<"
+"72" = "xxxx xxxx vvvv vvvv"
+"88" = "xxxx xxxx xxxx xx.."
+"104" = "xxxx xxxx xxxx rrRR"
+"112" = "xxxx xxxx xxxx <<<<"
+"120" = "xxxx xxxx xxxx rrrr"
+"128" = "xxxx xxxx vvvv vvvv"
+
+[automation]
+# the builds: the mix thinning from below, the risers pitched up, the roll louder and higher, the echoes running
+# away, then the halls frozen on what rings and the chords cut, and a moment's silence (the master's stutter)
+"master.filter.highpass" = [[33, 25], [39.9, 450, "exp"], [40, 25, "step"], [81, 25], [87.9, 500, "exp"], [88, 25, "step"]]
+"build.pitch.shift" = [[35, 0], [39.95, 12, "exp"], [40, 0, "step"], [83, 0], [87.95, 12, "exp"], [88, 0, "step"]]
+"instruments.snare.level" = [[33, -26], [39.9, -8], [81, -26], [87.9, -8]]
+"instruments.snare.pitch" = [[33, 0], [40, 7], [40.01, 0, "step"], [81, 0], [88, 7]]
+"echo.tape.feedback" = [
+  [1, 0.5], [9, 0.45], [33, 0.45], [39.95, 1.1, "exp"], [40, 0.3, "step"], [41, 0.45],
+  [53, 0.45], [56, 0.8], [57, 0.45, "step"], [69, 0.45], [72, 0.9], [73, 0.55, "step"],
+  [81, 0.55], [87.95, 1.1, "exp"], [88, 0.3, "step"], [89, 0.45],
+  [101, 0.45], [104, 0.8], [105, 0.45, "step"], [117, 0.45], [120, 0.8], [121, 0.5, "step"],
+]
+"echo.tape.time" = [[71, 0.3103], [72.95, 0.62, "s"], [73, 0.3103, "step"], [127, 0.3103], [128.95, 0.9, "s"]]
+"space.hall.freeze" = [[39.99, 0], [40, 1], [40.99, 1], [41, 0], [87.99, 0], [88, 1], [88.99, 1], [89, 0]]
+"hall.hall.freeze" = [[39.99, 0], [40, 1], [40.99, 1], [41, 0], [87.99, 0], [88, 1], [88.99, 1], [89, 0]]
+# the drops the loudest of it: the bed, the groove and the builds under them, the last bars back down
+"pads.level" = [[1, -3], [25, -3], [39.9, 0], [40, -40], [40.95, -40], [41, 0], [87.9, 0], [88, -40], [88.95, -40], [89, 0]]
+"space.level" = [[1, -3], [33, -3], [39.9, 0], [120.99, 0], [121, -3, "step"]]
+"bass.level" = [[1, -2.5], [33, -2.5], [40, 0], [88.99, 0], [89, 1, "step"], [120.99, 1], [121, -2.5, "step"]]
+"acid.level" = [[1, -3], [33, -3], [40, 0]]
+"drums.level" = [[1, -1.5], [33, -1.5], [41, 0, "step"]]
+"punch.level" = [[1, -1.5], [38, -1.5], [41, 0, "step"], [120.99, 0], [121, -1.5, "step"]]
+# the spaces: long in the bed and the break, short in the drops; the break's shimmering higher
+"hall.hall.decay" = [[1, 3.5], [40.9, 3.5], [41, 2.2], [72.9, 2.2], [73, 5], [88.9, 5], [89, 2.2], [120.9, 2.2], [121, 3.5]]
+"space.hall.shimmer" = [[1, 0.25], [73, 0.25], [79, 0.6], [87, 0.6], [89, 0.25, "step"]]
+"air.level" = [[1, 0], [9, -2], [24, -2], [25, -4], [40, 0], [41, -6, "step"], [72, -6], [73, 0, "step"], [88, 0], [89, -6, "step"], [120, -6], [121, -3, "step"], [128, 0]]
+"call.level" = [[1, 1.5], [88.99, 1.5], [89, 2.5, "step"], [120.99, 2.5], [121, 1.5, "step"]]
+# the call under a closed lowpass in the builds' teases, opening into each drop
+"call.filter.lowpass" = [[25, 600], [32, 1500], [33, 900], [39.9, 6000, "exp"], [40, 18000, "step"], [80.99, 18000], [81, 700], [87.9, 6000, "exp"], [88, 18000, "step"]]
+# the call's taken-apart bars into the cloud
+"call.send.cloud" = [[1, 0.1], [52.99, 0.1], [53, 0.5], [56.99, 0.5], [57, 0.1], [68.99, 0.1], [69, 0.5], [72.99, 0.5], [73, 0.1], [100.99, 0.1], [101, 0.5], [104.99, 0.5], [105, 0.1], [116.99, 0.1], [117, 0.5], [120.99, 0.5], [121, 0.1]]
+# the bass: its filter opening as it comes in, its pluck lengthening over each section
+"instruments.bass.filter.cutoff" = [[13, 300], [20, 785, "s"]]
+"instruments.bass.env2.decay" = [
+  [13, 0.05], [24, 0.1], [25, 0.08], [34, 0.12], [41, 0.08, "step"], [56, 0.12], [57, 0.09, "step"], [72, 0.13],
+  [89, 0.09, "step"], [104, 0.12], [105, 0.09, "step"], [120, 0.13], [121, 0.08, "step"],
+]
+# the acid opening and ringing more over the groove and the build, and again under each drop's second half
+"instruments.acid.filter.cutoff" = [[17, 180], [32, 700, "s"], [41, 1300, "step"], [56, 2200], [57, 500, "step"], [72, 1400], [97, 350, "step"], [104, 900]]
+"instruments.acid.filter.resonance" = [[17, 0.6], [32, 0.88], [41, 0.75, "step"], [57, 0.65, "step"], [72, 0.85], [97, 0.7, "step"], [104, 0.85]]
+"instruments.acid.env2.decay" = [[17, 0.07], [32, 0.3, "s"], [41, 0.14, "step"]]
+# the haze brighter under the first drop, where no lead holds the upper mids
+"instruments.haze.filter.cutoff" = [[40.9, 900], [41, 2000, "step"], [72.9, 2000], [73, 900, "step"]]
+# the chords opening over the bed, the builds and the break
+"instruments.pad.filter.cutoff" = [[1, 500], [8, 1600, "s"], [33, 400, "step"], [39.9, 3000, "exp"], [73, 600, "step"], [80, 2200, "s"], [81, 900, "step"], [87.9, 3500, "exp"], [121, 700, "step"], [128, 1400]]
+# echo throws on the call's last gesture
+"call.send.echo" = [
+  [1, 0.2], [42.6, 0.2], [42.62, 0.9], [42.92, 0.9],
+  [42.95, 0.2], [46.6, 0.2], [46.62, 0.9], [46.92, 0.9],
+  [46.95, 0.2], [50.6, 0.2], [50.62, 0.9], [50.92, 0.9],
+  [50.95, 0.2], [55.6, 0.2], [55.62, 0.9], [55.92, 0.9],
+  [55.95, 0.2], [58.6, 0.2], [58.62, 0.9], [58.92, 0.9],
+  [58.95, 0.2], [62.6, 0.2], [62.62, 0.9], [62.92, 0.9],
+  [62.95, 0.2], [68.6, 0.2], [68.62, 0.9], [68.92, 0.9],
+  [68.95, 0.2], [71.6, 0.2], [71.62, 0.9], [71.92, 0.9],
+  [71.95, 0.2], [90.6, 0.2], [90.62, 0.9], [90.92, 0.9],
+  [90.95, 0.2], [94.6, 0.2], [94.62, 0.9], [94.92, 0.9],
+  [94.95, 0.2], [98.6, 0.2], [98.62, 0.9], [98.92, 0.9],
+  [98.95, 0.2], [103.6, 0.2], [103.62, 0.9], [103.92, 0.9],
+  [103.95, 0.2], [106.6, 0.2], [106.62, 0.9], [106.92, 0.9],
+  [106.95, 0.2], [110.6, 0.2], [110.62, 0.9], [110.92, 0.9],
+  [110.95, 0.2], [114.6, 0.2], [114.62, 0.9], [114.92, 0.9],
+  [114.95, 0.2], [119.6, 0.2], [119.62, 0.9], [119.92, 0.9],
+  [119.95, 0.2],
+]
+
+# --- the bed -----------------------------------------------------------------------------------------------
+
+[patterns.bed]                  # wind and hiss, all through, each note eight bars, overlapping the next
+wind = ["F4 w", "F4~ w", "F4~ w", "F4~ w", "F4~ w", "F4~ w", "F4~ w", "F4~ w"]
+air = ["F4 w", "F4~ w", "F4~ w", "F4~ w", "F4~ w", "F4~ w", "F4~ w", "F4~ w"]
+
+[patterns.intropad]             # Fm7, Dbmaj7, Fm7, Bbm9
+pad = [
+  "F2+C3+Ab3+Eb4 w", "F2+C3+Ab3+Eb4~ w", "Db3+F3+Ab3+C4 w", "Db3+F3+Ab3+C4~ w",
+  "F2+C3+Ab3+Eb4 w", "F2+C3+Ab3+Eb4~ w", "Bb2+Db3+F3+C4 w", "Bb2+Db3+F3+C4~ w",
+]
+
+[patterns.sqfar]                # chirps far off, now and then
+chirp = ["r h F6?0.7 q r q", "r w", "r w", "r q. C6 e r h"]
+bloop = ["r w", "r h. Ab5 q", "r w", "r w"]
+
+# the call far off, an octave down: F, its octave diving back, Ab scooped into, B leaning into C; then F twice,
+# Eb bent down, Db, C, and Ab diving an octave
+[patterns.far]
+farcall = [
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+  "r w",
+  "r w",
+]
+
+# --- drums -------------------------------------------------------------------------------------------------
+
+[patterns.kick]                 # four on the floor; the 8th bar leaves its last beat to a fill
+kick = "F1 q F1 F1 F1"
+"kick@8" = "F1 q F1 F1 r"
+"fillsn@8" = ".... .... .... x.xX"
+
+[patterns.kick2]                # the second drop: every 8th bar in half time
+kick = "F1 q F1 F1 F1"
+"kick@8" = "F1 h F1"
+
+[patterns.kickonly]             # the builds' kick, with no fills
+kick = "F1 q F1 F1 F1"
+
+[patterns.ohats]
+ohat = "..x. ..x. ..x. ..x."
+
+[patterns.hats]                 # open hats off the beat, a few closed ones, some left to chance
+ohat = "..x. ..x. ..x. ..x."
+hat = ".x.? .x.. .x.? .x.X"
+
+[patterns.hatsR]                # the drops' second halves: a ride over the open hat
+ride = "..X. ..x. ..X. ..x."
+ohat = "..x. .... ..x. ...."
+hat = ".x.? .x.. .x.? .x.X"
+
+[patterns.claps]
+clap = ".... x... .... x..."
+
+[patterns.hit]                  # a drop's first beat
+crash = "x... .... .... ...."
+impact = "x... .... .... ...."
+
+[patterns.crash1]
+crash = "x... .... .... ...."
+
+[patterns.rc]                   # a reversed crash swelling into the next bar
+rcrash = "r h C4 h"
+
+[patterns.roll1]                # quarters, 8ths, 16ths, 32nds, then nothing: the freeze
+snare = [
+  "x... x... x... x...",
+  "x... x... x... x...",
+  "x.x. x.x. x.x. x.x.",
+  "x.x. x.x. x.x. x.x.",
+  "xxxx xxxx xxxx xxxx",
+  "xxxx xxxx xxxx xxxx",
+  "xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxX",
+  "....",
+]
+
+# --- the bass ----------------------------------------------------------------------------------------------
+
+[patterns.roll]                 # kick, bass, bass, bass on F: an octave pop every 4th bar, a beat's stop every 8th
+bass = "r s F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7"
+"bass@4" = "r s F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F2@0.95 F1@0.7"
+"bass@8" = "r s F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r q"
+
+[patterns.drop1]                # the first drop: F, turning through Ab and Bb every 4th bar, stopping every 8th
+bass = [
+  "r s F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7",
+  "r s F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F2@0.95 F1@0.7",
+  "r s F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7",
+  "r s F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r Ab1 Ab1@0.95 Ab1@0.7 r Bb1 Ab1@0.95 Eb1@0.7",
+]
+"bass@2" = [
+  "r s F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7",
+  "r s F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F2@0.95 F1@0.7",
+  "r s F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7",
+  "r s F1 F1@0.95 F1@0.7 r F1 F1@0.95 F1@0.7 r Ab1 Ab1@0.95 Ab1@0.7 r q",
+]
+
+[patterns.drop2]                # the second drop: a gallop (kick, rest, bass, bass) on F, F, Bb, Bb; half time every 8th bar
+bass = [
+  "r e F1 s F1@0.7 r e F1 s F1@0.7 r e F1 s F1@0.7 r e F1 s F1@0.7",
+  "r e F1 s F1@0.7 r e F1 s F1@0.7 r e F1 s F1@0.7 r e F2 s F1@0.7",
+  "r e Bb1 s Bb1@0.7 r e Bb1 s Bb1@0.7 r e Bb1 s Bb1@0.7 r e Bb1 s Bb1@0.7",
+  "r e Bb1 s Bb1@0.7 r e Bb1 s Bb1@0.7 r e Bb1 s Bb1@0.7 r e C2 s Bb1@0.7",
+]
+"bass@2" = [
+  "r e F1 s F1@0.7 r e F1 s F1@0.7 r e F1 s F1@0.7 r e F1 s F1@0.7",
+  "r e F1 s F1@0.7 r e F1 s F1@0.7 r e F1 s F1@0.7 r e F2 s F1@0.7",
+  "r e Bb1 s Bb1@0.7 r e Bb1 s Bb1@0.7 r e Bb1 s Bb1@0.7 r e Bb1 s Bb1@0.7",
+  "r e Bb1 s Bb1@0.7 r q r e Bb1 s Bb1@0.7 r q",
+]
+
+# --- the acid and the haze ---------------------------------------------------------------------------------
+
+[patterns.acidline]             # low, with gaps, sliding up its octave, the sharp fourth and the flat sixth leaning in
+acid = [
+  "F2 s F2 r F3~@1 r F2 Ab2@1 r e F2 s C3~ e B2 s r F2 r",
+  "F2 s r Eb3~ F3~@1 r F2 F2 r Ab2@1 r C3 Db3~ C3 e r s F3@1 s",
+]
+
+[patterns.hazeA]                # F, C and Eb, held
+haze = ["F3+C4+Eb4 w", "F3+C4+Eb4~ w", "F3+C4+Eb4~ w", "F3+C4+Eb4~ w"]
+
+[patterns.hazeB]                # F, then B flat major
+haze = ["F3+C4+Eb4 w", "F3+C4+Eb4~ w", "F3+Bb3+D4 w", "F3+Bb3+D4~ w"]
+
+# --- the builds --------------------------------------------------------------------------------------------
+
+[patterns.tease1]               # the call's first bar alone, under a closed lowpass, then the whole call
+call = [
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "r w",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+]
+
+[patterns.tease2]               # then only its first gesture, faster and faster
+call = [
+  "F4 e. F5>-12 s r h.",
+  "F4 e. F5>-12 s r e F4 e. F5>-12 s r q.",
+  "F4 s F4 F4 F4 F5>-12 e r e F4 s F4 F5>-24 q.",
+  "F4 s F4 F4 F4 F5>-12 e r e F4 s F4 F5>-24 q.",
+]
+
+[patterns.buildpad]             # F minor with its 9th, swelling, cut for the freeze
+pad = [
+  "F3+Ab3+C4+G4 w", "F3+Ab3+C4+G4~ w", "F3+Ab3+C4+G4~ w", "F3+Ab3+C4+G4~ w",
+  "F3+Ab3+C4+G4~ w", "F3+Ab3+C4+G4~ w", "F3+Ab3+C4+G4~ w", "r w",
+]
+
+[patterns.riser]                # seven bars rising, into the freeze
+riser = ["C4 w", "C4~ w", "C4~ w", "C4~ w", "C4~ w", "C4~ w", "C4~ w", "r w"]
+
+[patterns.fall]
+fall = ["C5 w", "C5~ w"]
+
+# --- the first drop ----------------------------------------------------------------------------------------
+# The call stated (41-44), varied, rising to a two-octave dive (45-48), answered by the acid in its rhythm
+# (49-52), and taken apart (53-56); then again with the squeaks answering (57-60, 61-64), running on into a
+# second phrase a fifth up and back down to F (65-68), and taken apart into the break (69-72).
+
+[patterns.callA]
+call = [
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s F5 s G5 s Ab5>-24 q r e",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r h.",
+  "F4 e. F5>-12 s r e F4 e. F5>-12 s r q.",
+  "F4 s F4 F4 F4 F5>-12 e r e F4 s F4 F5>-24 q.",
+  "r w",
+]
+acid = [
+  "r w", "r w",
+  "r e F3 s F3 Ab3~ e r s C4 e. B3~ e C4 s r e.",
+  "r h F3 s r s Eb3 e r q",
+  "r w", "r w",
+  "r e F3 s F3 Ab3~ e r s Eb4 e. C4~ e Ab3 s r e.",
+  "F3 s r F4>-12 e r s Eb3 s F3 e r h",
+  "r w", "r w",
+  "r e F3 s F3 Ab3~ e r s C4 e. B3~ e C4 s r e.",
+  "F3 s r F4>-12 e r s Eb3 s F3 e Ab3 s r e C4~ e Ab3 e r s",
+  "r w", "r w", "r w", "r w",
+]
+
+[patterns.callA2]
+call = [
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s F5 s G5 s Ab5>-24 q r e",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+  "C5 e. C6>-12 s r e Eb5<-3 e r s F#5 s G5 q r e",
+  "F5 s F5 r e Eb5>-3 e. r s C5 s Ab4 s F4>-24 q r e",
+  "F4 e. F5>-12 s r h.",
+  "F4 e. F5>-12 s r e F4 e. F5>-12 s r q.",
+  "F4 s F4 F4 F4 F5>-12 e r e F4 s F4 F5>-24 q.",
+  "r w",
+]
+chirp = [
+  "r w", "r w",
+  "r e F6 s r q r s C6 s r e. r q",
+  "Eb6 s r s r s r s B5 s r e. r h",
+  "r w", "r w",
+  "r e F6 s r q r s C6 s r e. r q",
+  "r q Ab6 s r s r e r h",
+  "r w", "r w", "r w", "r w", "r w", "r w", "r w", "r w",
+]
+bloop = [
+  "r w", "r w",
+  "r q r s Ab5 s r h r e",
+  "r s F5 s r h r s C6 s r q",
+  "r w", "r w",
+  "r q r s Ab5 s r h r e",
+  "r h r s Eb6 s r q r e",
+  "r w", "r w", "r w", "r w", "r w", "r w", "r w", "r w",
+]
+
+# --- the break ---------------------------------------------------------------------------------------------
+
+[patterns.break]                # Dbmaj7, Bbm9, Eb, Eb7, Fsus4, F; the call at half speed on the whistle
+pad = [
+  "Db3+F3+Ab3+C4 w", "Db3+F3+Ab3+C4~ w", "Bb2+Db3+F3+Ab3+C4 w", "Bb2+Db3+F3+Ab3+C4~ w",
+  "Eb3+G3+Bb3 w", "Eb3+G3+Bb3+Db4 w", "F3+Bb3+C4 w", "F3+A3+C4 w",
+]
+whistle = [
+  "F4 q. F5>-12 e r q Ab4<-3 q",
+  "r e B4 e C5 h r q",
+  "F4 e F4 e r q Eb5>-3 q. r e",
+  "Db5 e C5 e Ab4>-12 h r q",
+  "r q Bb4 q. C5 e Eb5>-2 q",
+  "Db5 h. C5 q",
+  "C5 h Bb4 h",
+  "A4 w",
+]
+chirp = ["r w", "r h F6?0.6 q r q", "r w", "r w", "r w", "r q. C6 e r h", "r w", "r w"]
+
+[patterns.build2]               # the second build: the chord, the riser, the roll, the call teased
+pad = [
+  "F3+Ab3+C4+G4 w", "F3+Ab3+C4+G4~ w", "F3+Ab3+C4+G4~ w", "F3+Ab3+C4+G4~ w",
+  "F3+Ab3+C4+G4~ w", "F3+Ab3+C4+G4~ w", "F3+Ab3+C4+G4~ w", "r w",
+]
+call = [
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+  "F4 e. F5>-12 s r e F4 e. F5>-12 s r q.",
+  "F4 s F4 F4 F4 F5>-12 e r e F4 s F4 F5>-24 q.",
+  "F4 s F4 F4 F4 F5>-12 e r e F4 s F4 F5>-24 q.",
+  "r w",
+]
+
+# --- the second drop ---------------------------------------------------------------------------------------
+# The call over F, answered over B flat major by the sync lead (89-104); then the sync lead doubling the call an
+# octave up, the call taking the answer itself (105-120).
+
+[patterns.callB]
+call = [
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s F5 s G5 s Ab5>-24 q r e",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r h.",
+  "F4 e. F5>-12 s r e F4 e. F5>-12 s r q.",
+  "F4 s F4 F4 F4 F5>-12 e r e F4 s F4 F5>-24 q.",
+  "r w",
+]
+rip = [
+  "r w", "r w",
+  "r e D5 s F5 r s Bb5>-2 e. A5 s r e F5 e D5 s r e",
+  "C5 e. D5~ s r e F5 q Eb5>-1 e r q",
+  "r w", "r w",
+  "r e D5 s F5 r s Bb5>-2 e. A5 s r e F5 e D5 s r e",
+  "C5 e. D5~ s r e F5 q G5>-12 e r q",
+  "r w", "r w",
+  "r e D5 s F5 r s Bb5>-2 e. A5 s r e F5 e D5 s r e",
+  "C5 e. D5~ s r e F5 q Eb5>-1 e r q",
+  "r w", "r w", "r w", "r w",
+]
+
+[patterns.callB2]
+call = [
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s F5 s G5 s Ab5>-24 q r e",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+  "r e D5 s F5 r s Bb5>-2 e. A5 s r e F5 e D5 s r e",
+  "C5 e. D5~ s r e F5 q G5>-12 e r q",
+  "F4 e. F5>-12 s r h.",
+  "F4 e. F5>-12 s r e F4 e. F5>-12 s r q.",
+  "F4 s F4 F4 F4 F5>-12 e r e F4 s F4 F5>-24 q.",
+  "r w",
+]
+ripup = [
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s F5 s G5 s Ab5>-24 q r e",
+  "r w",
+  "r w",
+  "F4 e. F5>-12 s r e Ab4<-3 e r s B4 s C5 q r e",
+  "F4 s F4 r e Eb5>-3 e. r s Db5 s C5 s Ab4>-12 q r e",
+  "r e D5 s F5 r s Bb5>-2 e. A5 s r e F5 e D5 s r e",
+  "C5 e. D5~ s r e F5 q G5>-12 e r q",
+  "r w", "r w", "r w", "r w",
+]
+rip = [
+  "r w", "r w",
+  "r e D5 s F5 r s Bb5>-2 e. A5 s r e F5 e D5 s r e",
+  "C5 e. D5~ s r e F5 q Eb5>-1 e r q",
+  "r w", "r w",
+  "r e D5 s F5 r s Bb5>-2 e. A5 s r e F5 e D5 s r e",
+  "C5 e. D5~ s r e F5 q G5>-12 e r q",
+  "r w", "r w", "r w", "r w", "r w", "r w", "r w", "r w",
+]
+chirp = [
+  "r w", "r w", "r w", "r w", "r w", "r w", "r w", "r w", "r w", "r w", "r w", "r w",
+  "r h r s F6 s r e r q",
+  "r e. C6 s r h r q",
+  "r w",
+  "r q Ab6 s r s r e r s Eb6 s r q.",
+]
+
+# --- arrangement -------------------------------------------------------------------------------------------
+
+[arrangement]
+"1-128" = ["bed"]
+"1-8" = ["intropad", "sqfar"]
+"5-8" = ["far"]
+"8" = ["rc"]
+"9-24" = ["kick"]
+"9-12" = ["ohats"]
+"13-24" = ["hats", "roll"]
+"17-24" = ["claps", "acidline", "hazeA"]
+"21-24" = ["far"]
+"25-38" = ["kickonly"]
+"25-34" = ["roll"]
+"25-32" = ["hats", "claps", "acidline", "hazeA", "tease1"]
+"33-36" = ["ohats"]
+"33-40" = ["roll1", "riser", "buildpad"]
+"35-38" = ["tease2"]
+"41-72" = ["kick", "drop1", "claps", "hazeA"]
+"41-56" = ["callA", "hats"]
+"57-72" = ["callA2", "hatsR"]
+"61-68" = ["acidline"]
+"41" = ["hit"]
+"49" = ["crash1"]
+"57" = ["crash1"]
+"65" = ["crash1"]
+"72" = ["rc"]
+"73-74" = ["fall"]
+"73-80" = ["break"]
+"81-88" = ["build2", "roll1", "riser"]
+"85-86" = ["kickonly"]
+"89-120" = ["kick2", "drop2", "claps", "hazeB"]
+"89-104" = ["callB", "hats"]
+"105-120" = ["callB2", "hatsR"]
+"97-104" = ["acidline"]
+"89" = ["hit"]
+"97" = ["crash1"]
+"105" = ["crash1"]
+"113" = ["crash1"]
+"120" = ["rc"]
+"121-127" = ["kickonly"]
+"121-124" = ["roll", "far"]
+"121-126" = ["hats"]
+"121-128" = ["intropad", "sqfar"]

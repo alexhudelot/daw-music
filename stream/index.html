@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>daw stream</title>
+<meta name="description" content="Electronic music synthesised in your browser while you hear it, steered by you: house, techno, drum and bass, garage, breakbeat, IDM and more.">
+<style>
+  :root { --bg: #101214; --fg: #e7e5df; --dim: #9a9c9f; --line: #2b2e32; --accent: #d9b76a; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--fg);
+         font: 16px/1.45 system-ui, sans-serif; display: flex; align-items: center; justify-content: center;
+         padding-block: 24px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  main { width: min(440px, 100%); display: grid; gap: 20px; }
+  h1 { font-size: 26px; margin: 0; }
+  p { margin: 0; }
+  a { color: var(--accent); }
+  button { font: inherit; color: var(--fg); background: transparent; border: 1px solid var(--line);
+           border-radius: 6px; padding: 12px 16px; cursor: pointer; }
+  button:hover, button:focus-visible { border-color: var(--accent); }
+  button:disabled { color: var(--dim); cursor: default; border-color: var(--line); }
+  #start { width: 100%; padding: 28px; font-size: 20px; }
+  .note { color: var(--dim); font-size: 14px; }
+  #live { display: grid; gap: 20px; }
+  #where { color: var(--dim); font-size: 14px; display: flex; justify-content: space-between; gap: 12px; font-variant-numeric: tabular-nums; }
+  #question { min-height: 148px; }
+  #q-text { font-size: 22px; margin: 0 0 12px; }
+  #answers { display: flex; flex-wrap: wrap; gap: 8px; }
+  #q-bar { height: 2px; background: var(--accent); margin-top: 12px; width: 100%; transform-origin: left; }
+  #tag { min-height: 24px; color: var(--accent); font-size: 14px; }
+  #landing { min-height: 22px; color: var(--dim); font-size: 14px; }
+  #skip { width: 100%; }
+  #load { min-height: 22px; color: var(--dim); font-size: 14px; }
+  #steer { display: grid; gap: 10px; }
+  .pairs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pairs button, .regions button { padding: 10px 8px; font-size: 15px; }
+  .regions { display: flex; flex-wrap: wrap; gap: 6px; }
+  .regions button { flex: 1 1 auto; }
+  .regions button.here { border-color: var(--accent); color: var(--accent); }
+  button.pressed { background: #2a2618; border-color: var(--accent); }
+  #dials { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; align-items: center; font-size: 13px; color: var(--dim); }
+  .dial { position: relative; height: 6px; background: var(--line); border-radius: 3px; }
+  .dial .now { position: absolute; inset: 0 auto 0 0; background: #6d6553; border-radius: 3px; transition: width .6s; }
+  .dial .to { position: absolute; top: -3px; width: 2px; height: 12px; background: var(--accent); transition: left .6s; }
+  h2 { font-size: 13px; font-weight: 600; color: var(--dim); margin: 6px 0 0; text-transform: uppercase; letter-spacing: .06em; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <div id="intro" style="display:grid;gap:12px">
+    <h1>daw stream</h1>
+    <p>Electronic music synthesised in your browser while you hear it, one short phrase at a time: house, techno, drum and bass, UK garage, breakbeat, IDM, dub techno, downtempo, ambient, prog and psytrance. Pick a style or steer it, and it asks you a question now and then; what you choose changes what it writes next.</p>
+    <button id="start">Tap to start</button>
+    <p id="load" role="status"></p>
+    <p class="note">A proof of concept. Nothing is recorded or sent anywhere, and what it learns stays in this browser. A slower device gets simpler music, or a held pad while it catches up. <a href="../">The music page</a></p>
+  </div>
+  <div id="live" hidden>
+    <p id="paused" class="note" hidden>Sound is paused by the browser. Tap anywhere to resume.</p>
+    <div id="where"><span id="region">&nbsp;</span><span id="bar">&nbsp;</span></div>
+    <div id="question" aria-live="polite">
+      <div id="q-box" hidden>
+        <p id="q-text"></p>
+        <div id="answers"></div>
+        <div id="q-bar"></div>
+      </div>
+    </div>
+    <div id="tag" aria-live="polite"></div>
+    <div id="landing"></div>
+    <button id="skip">Not this</button>
+    <section id="steer" aria-label="Steer the music">
+      <h2>Steer</h2>
+      <div class="pairs" id="pairs"></div>
+      <h2>Go to</h2>
+      <div class="regions" id="regions"></div>
+      <h2>Where it is, and where it's heading</h2>
+      <div id="dials"></div>
+    </section>
+    <p id="stopped" role="alert" hidden></p>
+    <p id="slow" class="note" hidden>This device is struggling to keep up, so you may hear a held pad between phrases.</p>
+  </div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const KEY = "daw-stream-learner";
+const stored = () => { try { return localStorage.getItem(KEY) || ""; } catch { return ""; } };
+const store = (v) => { try { localStorage.setItem(KEY, v); } catch { /* it just won't remember */ } };
+let ctx, player, filter, duck, worker;
+let played = 0, underruns = 0, sampleBase = 0;
+const phrases = [];
+let question = null, questionEnds = 0, landing = null, shown = null;
+const stats = { phrases: 0, holds: 0, tiers: [0, 0, 0], rtf: [], dropped: [] };
+window.dawStreamStats = () => ({ ...stats, played, underruns, ctx: ctx && ctx.state });
+
+function acknowledge(depth) {
+  const t = ctx.currentTime;
+  filter.frequency.cancelScheduledValues(t);
+  filter.frequency.setTargetAtTime(depth, t, 0.03);
+  filter.frequency.setTargetAtTime(20000, t + 0.7, 0.5);
+  duck.gain.cancelScheduledValues(t);
+  duck.gain.setTargetAtTime(0.75, t, 0.03);
+  duck.gain.setTargetAtTime(1, t + 0.7, 0.4);
+}
+
+function showQuestion(q) {
+  question = q;
+  questionEnds = performance.now() + q.left * 1000;
+  $("q-text").textContent = q.text;
+  const box = $("answers");
+  box.textContent = "";
+  for (const a of q.answers) {
+    const b = document.createElement("button");
+    b.textContent = a.label;
+    b.onclick = () => {
+      acknowledge(900);
+      worker.postMessage({ vote: [q.id, a.id] });
+      hideQuestion();
+    };
+    box.appendChild(b);
+  }
+  $("q-box").hidden = false;
+}
+
+function hideQuestion() {
+  question = null;
+  $("q-box").hidden = true;
+}
+
+function onEvent(e) {
+  switch (e.type) {
+    case "loaded":
+      $("load").textContent = "Composing the first phrase. This can take a few seconds.";
+      break;
+    case "phrase":
+      phrases.push(e);
+      if (phrases.length > 16) phrases.shift();
+      stats.phrases++;
+      stats.memory_mb = e.memory_mb;
+      stats.tiers[e.tier]++;
+      stats.rtf.push(e.rtf);
+      if (stats.rtf.length > 64) stats.rtf.shift();
+      stats.dropped.push((e.dropped || []).length);
+      if (stats.dropped.length > 64) stats.dropped.shift();
+      if (stats.phrases === 1) {
+        $("intro").hidden = true;
+        $("live").hidden = false;
+        $("paused").hidden = ctx.state === "running";
+      }
+      break;
+    case "hold":
+      stats.holds++;
+      if (e.in_a_row >= 2) $("slow").hidden = false;
+      break;
+    case "question":
+      showQuestion(e);
+      break;
+    case "dismissed":
+      hideQuestion();
+      break;
+    case "answered":
+      // a tag lists the settings it moved, then where the music is heading; a listener only needs the heading
+      {
+        const to = e.tag.includes("→") ? e.tag.split("→").pop().trim() : "";
+        const by = e.steer && (PAIRS.concat(REGIONS).find(([id]) => id === e.steer) || [])[1];
+        $("tag").textContent = by ? `${by}${to ? `, heading for ${to}` : ""}` : to ? `Heading for ${to}` : e.tag;
+      }
+      landing = e.landing;
+      break;
+    case "learner":
+      store(e.json);
+      break;
+    case "unsupported":
+      $("load").textContent = "This browser can't run the stream: it needs WebAssembly with SIMD and AudioWorklet.";
+      break;
+    case "network":
+      $("load").textContent = "The synthesiser didn't download. Check the connection and reload the page.";
+      break;
+    case "trap":
+      if (e.restarts > 5) stopped("The stream stopped after repeated errors. Reload the page to try again.");
+      break;
+    default:
+      break;
+  }
+}
+
+// The listener's own controls, always there. Each lands in the next phrase not yet made, and the music stays
+// where it was steered for a while instead of drifting off.
+const PAIRS = [["darker", "Darker"], ["brighter", "Brighter"], ["harder", "Harder"], ["softer", "Softer"],
+  ["twist", "Twistier"], ["straight", "Straighter"], ["acid", "More acid"], ["smooth", "Less acid"],
+  ["deep", "Deeper"], ["dry", "Drier"], ["build", "Build up"], ["drop", "Break down"]];
+const REGIONS = [["go-house", "House", "house"], ["go-techno", "Techno", "techno"],
+  ["go-dnb", "Drum & bass", "drum and bass"], ["go-garage", "UK garage", "UK garage"],
+  ["go-breaks", "Breakbeat", "breakbeat"], ["go-idm", "IDM", "IDM"], ["go-dub", "Dub techno", "dub techno"],
+  ["go-downtempo", "Downtempo", "downtempo"], ["go-ambient", "Ambient", "ambient"], ["go-prog", "Prog", "prog"],
+  ["go-psy", "Psytrance", "psytrance"]];
+const DIALS = [["dark", "dark"], ["dens", "density"], ["sync", "twist"], ["acid", "acid"], ["space", "depth"], ["grit", "grit"]];
+
+function steer(id, button) {
+  if (!worker) return;
+  acknowledge(1400);
+  worker.postMessage({ steer: id });
+  button.classList.add("pressed");
+  setTimeout(() => button.classList.remove("pressed"), 600);
+}
+
+function controls() {
+  for (const [id, label] of PAIRS) {
+    const b = document.createElement("button");
+    b.textContent = label;
+    b.onclick = () => steer(id, b);
+    $("pairs").appendChild(b);
+  }
+  for (const [id, label, name] of REGIONS) {
+    const b = document.createElement("button");
+    b.textContent = label;
+    b.dataset.region = name;
+    b.onclick = () => steer(id, b);
+    $("regions").appendChild(b);
+  }
+  for (const [k, label] of DIALS) {
+    const name = document.createElement("span");
+    name.textContent = label;
+    const d = document.createElement("div");
+    d.className = "dial";
+    d.innerHTML = '<div class="now"></div><div class="to"></div>';
+    d.id = `dial-${k}`;
+    $("dials").append(name, d);
+  }
+}
+
+function dials(e) {
+  if (!e.params || !e.target) return;
+  for (const [k] of DIALS) {
+    const d = $(`dial-${k}`);
+    d.querySelector(".now").style.width = `${Math.round(e.params[k] * 100)}%`;
+    d.querySelector(".to").style.left = `calc(${Math.round(e.target[k] * 100)}% - 1px)`;
+  }
+  for (const b of $("regions").children) b.classList.toggle("here", b.dataset.region === e.heading);
+}
+
+function stopped(text) {
+  $("load").textContent = text;
+  $("stopped").textContent = text;
+  $("stopped").hidden = false;
+}
+
+function draw() {
+  let cur = null;
+  for (const p of phrases) if (p.start <= played) cur = p;
+  if (cur && cur !== shown) {
+    shown = cur;
+    dials(cur);
+  }
+  if (cur) {
+    const bar = Math.min(cur.bars, Math.floor((played - cur.start) / (cur.body / cur.bars)) + 1);
+    $("region").textContent = `${cur.region} · ${cur.tempo} BPM`;
+    $("bar").textContent = `${cur.section}, bar ${bar} of ${cur.bars}`;
+  }
+  if (question) {
+    const left = (questionEnds - performance.now()) / 1000;
+    $("q-bar").style.transform = `scaleX(${Math.max(0, left / 15)})`;
+    if (left <= 0) hideQuestion();
+  }
+  if (landing !== null && cur) {
+    const bars = Math.ceil((landing - played) / (cur.body / cur.bars));
+    if (bars > 0) $("landing").textContent = `landing in ${bars} bar${bars === 1 ? "" : "s"}`;
+    else { $("landing").textContent = ""; landing = null; }
+  }
+  requestAnimationFrame(draw);
+}
+
+// Safari only lets audio start inside a tap, and may suspend it later (a call, the screen locking): the next tap
+// anywhere starts it again.
+function wake() {
+  if (ctx && ctx.state !== "running" && ctx.state !== "closed") ctx.resume().catch(() => {});
+}
+
+async function begin() {
+  $("start").disabled = true;
+  $("load").textContent = "Loading the synthesiser.";
+  try {
+    ctx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 48000, latencyHint: "playback" });
+    const resumed = ctx.resume(); // still inside the tap
+    ctx.onstatechange = () => {
+      $("paused").hidden = ctx.state === "running" || !$("intro").hidden;
+    };
+    document.addEventListener("pointerdown", wake);
+    document.addEventListener("visibilitychange", wake);
+    await ctx.audioWorklet.addModule("worklet.js");
+    player = new AudioWorkletNode(ctx, "stream-player", { numberOfInputs: 0, outputChannelCount: [2] });
+    filter = ctx.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.value = 20000;
+    filter.Q.value = 0.7;
+    duck = ctx.createGain();
+    player.connect(filter).connect(duck).connect(ctx.destination);
+    await Promise.race([resumed, new Promise((ok) => setTimeout(ok, 1000))]);
+  } catch (err) {
+    onEvent({ type: "unsupported", error: String(err) });
+    return;
+  }
+  worker = new Worker("worker.js");
+  worker.onerror = (e) => stopped(`The stream stopped (${e.message || "worker error"}). Reload the page to try again.`);
+  player.port.onmessage = (e) => {
+    played = e.data.played;
+    underruns = e.data.underruns;
+    worker.postMessage({ played });
+  };
+  worker.onmessage = (m) => {
+    if (m.data.audio) player.port.postMessage(m.data.audio, [m.data.audio.buffer]);
+    if (m.data.event) onEvent(m.data.event);
+  };
+  worker.postMessage({ start: true, learner: stored() });
+  requestAnimationFrame(draw);
+}
+
+controls();
+$("start").onclick = begin;
+$("skip").onclick = () => {
+  acknowledge(500);
+  worker.postMessage({ skip: true });
+};
+</script>
+</body>
+</html>
